@@ -19,6 +19,9 @@ namespace Shuvi.Classes.Data.User
         public UserImageData? Banner { get; set; } = null;
         public UserBages Bages { get; set; } = UserBages.None;
 
+        public List<UserImageData> Avatars { get; set; } = new();
+        public List<UserImageData> Banners { get; set; } = new();
+
         public int Gold { get; set; } = 0;
         public int Dispoints { get; set; } = 0;
         public Dictionary<ObjectId, int> Inventory { get; set; } = new();

@@ -3,7 +3,7 @@ using Shuvi.Enums.Image;
 
 namespace Shuvi.Classes.Data.User
 {
-    public class UserImageData
+    public sealed class UserImageData
     {
         public ObjectId? Id { get; set; } = null;
         public ImageType Type { get; set; } = ImageType.Custom;

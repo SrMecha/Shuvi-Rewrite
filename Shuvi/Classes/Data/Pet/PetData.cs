@@ -1,6 +1,6 @@
 ﻿namespace Shuvi.Classes.Data.Pet
 {
-    public class PetData
+    public sealed class PetData
     {
     }
 }
