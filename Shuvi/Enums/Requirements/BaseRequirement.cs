@@ -1,6 +1,6 @@
 ﻿namespace Shuvi.Enums.Requirements
 {
-    public enum BaseRequirements
+    public enum BaseRequirement
     {
         Strength,
         Agility,

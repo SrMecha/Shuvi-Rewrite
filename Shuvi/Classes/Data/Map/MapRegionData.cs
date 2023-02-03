@@ -1,11 +1,12 @@
-﻿using Shuvi.Enums.Rating;
+﻿using Shuvi.Enums.Localization;
+using Shuvi.Enums.Rating;
 
 namespace Shuvi.Classes.Data.Map
 {
     public sealed class MapRegionData
     {
-        public string Name { get; set; } = "NoNameProvided";
-        public string Description { get; set; } = "NoDescriptionProvided";
+        public Dictionary<Language, string> Name { get; set; } = new();
+        public Dictionary<Language, string> Description { get; set; } = new();
         public Rank NeededRank { get; set; } = Rank.E;
         public Rank RecomendedRank { get; set; } = Rank.E;
         public List<MapLocationData> Locations { get; set; } = new();

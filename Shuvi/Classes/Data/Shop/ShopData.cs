@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using Shuvi.Enums.Shop;
+using Shuvi.Enums.Localization;
 
 namespace Shuvi.Classes.Data.Shop
 {
@@ -9,8 +10,8 @@ namespace Shuvi.Classes.Data.Shop
         [BsonId]
         public ObjectId Id { get; set; } = ObjectId.Empty;
         public ShopType Type { get; set; } = ShopType.Simple;
-        public string Name { get; set; } = "NoNameProvided";
-        public string Description { get; set; } = "NoDescriptionProvided";
+        public Dictionary<Language, string> Name { get; set; } = new();
+        public Dictionary<Language, string> Description { get; set; } = new();
         public List<ShopProductData> UserSale { get; set; } = new();
         public List<ShopProductData> UserBuy { get; set; } = new();
     }

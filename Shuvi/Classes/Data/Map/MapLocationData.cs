@@ -1,13 +1,14 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Classes.Data.Drop;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.Rating;
 
 namespace Shuvi.Classes.Data.Map
 {
     public sealed class MapLocationData
     {
-        public string Name { get; set; } = "NoNameProvided";
-        public string Description { get; set; } = "NoDescriptionProvided";
+        public Dictionary<Language, string> Name { get; set; } = new();
+        public Dictionary<Language, string> Description { get; set; } = new();
         public Rank RecomendedRank { get; set; } = Rank.E;
         public Dictionary<ObjectId, int> Enemies { get; set; } = new();
         public List<EveryDropData> MineDrop { get; set; } = new();

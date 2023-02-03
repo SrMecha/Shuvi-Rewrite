@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using Shuvi.Enums.Rating;
 using Shuvi.Classes.Data.ActionChances;
 using Shuvi.Classes.Data.Drop;
+using Shuvi.Enums.Localization;
 
 namespace Shuvi.Classes.Data.Enemy
 {
@@ -10,8 +11,8 @@ namespace Shuvi.Classes.Data.Enemy
     {
         [BsonId]
         public ObjectId Id { get; set; } = ObjectId.Empty;
-        public string Name { get; set; } = "NoNameProvided";
-        public string Description { get; set; } = "NoDescriptionProvided";
+        public Dictionary<Language, string> Name { get; set; } = new();
+        public Dictionary<Language, string> Description { get; set; } = new();
         public Rank Rank { get; set; } = Rank.E;
         public int RatingGet { get; set; } = 1;
         public int UpgradePoints { get; set; } = 5;
