@@ -1,7 +1,7 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using Shuvi.Enums.Shop;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using Shuvi.Enums.Localization;
+using Shuvi.Enums.Shop;
 
 namespace Shuvi.Classes.Data.Shop
 {
