@@ -1,6 +1,6 @@
-﻿namespace Shuvi.Classes.Data.ActionChances
+﻿namespace Shuvi.Classes.Data.Actions
 {
-    public sealed class ActionChancesData
+    public sealed class FightActionsData
     {
         public int LightAttack { get; set; } = 2;
         public int HeavyAttack { get; set; } = 2;

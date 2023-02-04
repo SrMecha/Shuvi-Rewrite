@@ -2,7 +2,7 @@
 {
     public enum ImageType
     {
-        Custom,
-        Stored
+        Avatar,
+        Banner
     }
 }

@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Shuvi.Classes.Data.ActionChances;
+using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Settings;
 using Shuvi.Enums.User;
 
@@ -34,7 +34,7 @@ namespace Shuvi.Classes.Data.User
         public UserProfession Profession { get; set; } = UserProfession.NoProfession;
 
         public string? Spell { get; set; } = null;
-        public ActionChancesData ActionChances { get; set; } = new();
+        public FightActionsData ActionChances { get; set; } = new();
 
         public ObjectId? Weapon { get; set; } = null;
         public ObjectId? Helmet { get; set; } = null;

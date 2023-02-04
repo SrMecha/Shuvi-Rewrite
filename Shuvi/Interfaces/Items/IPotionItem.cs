@@ -1,9 +1,9 @@
-﻿using Shuvi.Interfaces.Characteristics;
+﻿using Shuvi.Enums.Characteristic;
 
 namespace Shuvi.Interfaces.Items
 {
     public interface IPotionItem : IItem
     {
-        public IDynamicCharacteristics PotionRecover { get; init; }
+        public Dictionary<DynamicCharacteristic, int> PotionRecover { get; init; }
     }
 }

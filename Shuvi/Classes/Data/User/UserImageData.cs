@@ -5,8 +5,7 @@ namespace Shuvi.Classes.Data.User
 {
     public sealed class UserImageData
     {
-        public ObjectId? Id { get; set; } = null;
-        public ImageType Type { get; set; } = ImageType.Custom;
-        public string? Name { get; set; } = null;
+        public ObjectId Id { get; set; } = ObjectId.Empty;
+        public ImageType Type { get; set; } = ImageType.Avatar;
     }
 }

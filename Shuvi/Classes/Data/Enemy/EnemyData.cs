@@ -1,9 +1,9 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using Shuvi.Enums.Rating;
-using Shuvi.Classes.Data.ActionChances;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Drop;
 using Shuvi.Enums.Localization;
+using Shuvi.Enums.Rating;
 
 namespace Shuvi.Classes.Data.Enemy
 {
@@ -16,7 +16,7 @@ namespace Shuvi.Classes.Data.Enemy
         public Rank Rank { get; set; } = Rank.E;
         public int RatingGet { get; set; } = 1;
         public int UpgradePoints { get; set; } = 5;
-        public ActionChancesData ActionChances { get; set; } = new();
+        public FightActionsData ActionChances { get; set; } = new();
         public string? SpellName { get; set; } = null;
         public int Strength { get; set; } = 1;
         public int Agility { get; set; } = 1;
