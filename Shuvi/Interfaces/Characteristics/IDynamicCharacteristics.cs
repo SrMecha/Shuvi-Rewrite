@@ -2,8 +2,8 @@
 {
     public interface IDynamicCharacteristics
     {
-        public TCharacteristic Health { get; }
-        public TCharacteristic Mana { get; }
-        public TCharacteristic Energy { get; }
+        public IDynamicCharacteristic Health { get; }
+        public IDynamicCharacteristic Mana { get; }
+        public IDynamicCharacteristic Energy { get; }
     }
 }

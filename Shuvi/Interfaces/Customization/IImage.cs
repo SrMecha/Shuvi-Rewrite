@@ -9,5 +9,6 @@ namespace Shuvi.Interfaces.Customization
         public ObjectId Id { get; }
         public ILocalizedInfo Info { get; }
         public ImageType Type { get; }
+        public string URL { get; }
     }
 }

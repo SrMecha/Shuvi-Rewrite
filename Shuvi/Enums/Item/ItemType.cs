@@ -9,6 +9,7 @@
         Leggings,
         Boots,
         Potion,
-        Chest
+        Chest,
+        Amulet
     }
 }

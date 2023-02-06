@@ -26,7 +26,7 @@ namespace Shuvi.Classes.Data.User
         public int Dispoints { get; set; } = 0;
         public Dictionary<ObjectId, int> Inventory { get; set; } = new();
 
-        public UserPetData? Pet { get; set; } = null;
+        public ObjectId? Pet { get; set; } = null;
         public ulong? MasterId { get; set; } = null;
 
         public UserRace Race { get; set; } = UserRace.ExMachina;
