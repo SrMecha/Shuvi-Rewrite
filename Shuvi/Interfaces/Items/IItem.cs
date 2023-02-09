@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Enums.Item;
 using Shuvi.Enums.Rating;
+using Shuvi.Interfaces.Craft;
 using Shuvi.Interfaces.Localization;
 
 namespace Shuvi.Interfaces.Items
@@ -14,5 +15,6 @@ namespace Shuvi.Interfaces.Items
         public bool CanTrade { get; init; }
         public bool CanLoose { get; init; }
         public int Max { get; init; }
+        public IItemCraft? Craft { get; init; }
     }
 }
