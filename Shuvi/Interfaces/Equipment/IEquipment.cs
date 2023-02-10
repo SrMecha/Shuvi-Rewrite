@@ -1,5 +1,5 @@
 ﻿using MongoDB.Bson;
-using Shuvi.Interfaces.Characteristics;
+using Shuvi.Interfaces.Characteristics.Static;
 using Shuvi.Interfaces.Items;
 
 namespace Shuvi.Interfaces.Equipment

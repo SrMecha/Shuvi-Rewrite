@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Interfaces.Characteristics;
+using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Equipment;
 
 namespace Shuvi.Interfaces.Pet
@@ -9,7 +10,7 @@ namespace Shuvi.Interfaces.Pet
         public ObjectId Id { get; }
         public string Name { get; }
         public ObjectId? ParentId { get; }
-        public IAllCharacteristics Characteristics { get; }
+        public IEntityCharacteristics<IRestorableCharacteristic> Characteristics { get; }
         public IPetEquipment Equipment { get; }
     }
 }

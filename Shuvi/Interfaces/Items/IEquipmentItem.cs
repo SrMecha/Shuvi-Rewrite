@@ -1,4 +1,4 @@
-﻿using Shuvi.Interfaces.Characteristics;
+﻿using Shuvi.Interfaces.Characteristics.Static;
 using Shuvi.Interfaces.Requirements;
 
 namespace Shuvi.Interfaces.Items

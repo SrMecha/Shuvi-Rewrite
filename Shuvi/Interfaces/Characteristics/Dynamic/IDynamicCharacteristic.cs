@@ -1,4 +1,4 @@
-﻿namespace Shuvi.Interfaces.Characteristics
+﻿namespace Shuvi.Interfaces.Characteristics.Dynamic
 {
     public interface IDynamicCharacteristic
     {

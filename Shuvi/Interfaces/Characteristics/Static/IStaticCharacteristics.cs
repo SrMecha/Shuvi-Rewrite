@@ -1,6 +1,6 @@
 ﻿using Shuvi.Enums.Characteristic;
 
-namespace Shuvi.Interfaces.Characteristics
+namespace Shuvi.Interfaces.Characteristics.Static
 {
     public interface IStaticCharacteristics
     {
