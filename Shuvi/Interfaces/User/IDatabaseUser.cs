@@ -6,6 +6,7 @@ using Shuvi.Interfaces.Equipment;
 using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Map;
 using Shuvi.Interfaces.Pet;
+using Shuvi.Interfaces.Premium;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Statistics;
 
@@ -16,6 +17,7 @@ namespace Shuvi.Interfaces.User
         public ulong Id { get; init; }
         public IUserRating Rating { get; }
         public IUserCustomization Customization { get; }
+        public IUserPremium Premium { get; }
         public IUserUpgradePoints UpgradePoints { get; }
         public IUserWallet Wallet { get; }
         public IUserSpellInfo Spell { get; }

@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Settings;
+using Shuvi.Enums.Premium;
 using Shuvi.Enums.User;
 
 namespace Shuvi.Classes.Data.User
@@ -18,6 +19,11 @@ namespace Shuvi.Classes.Data.User
         public UserImageData? Avatar { get; set; } = null;
         public UserImageData? Banner { get; set; } = null;
         public UserBages Bages { get; set; } = UserBages.None;
+
+        public PremiumType Premium { get; set; } = PremiumType.None;
+        public PremiumAbilities PremiumAbilities { get; set; } = PremiumAbilities.None;
+        public long PremiumExpires { get; set; } = 0;
+        public int MoneyDonated { get; set; } = 0;
 
         public List<UserImageData> Avatars { get; set; } = new();
         public List<UserImageData> Banners { get; set; } = new();
