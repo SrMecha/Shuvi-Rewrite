@@ -10,6 +10,7 @@
         Boots,
         Potion,
         Chest,
-        Amulet
+        Amulet,
+        Recipe
     }
 }

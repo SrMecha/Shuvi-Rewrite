@@ -15,6 +15,5 @@ namespace Shuvi.Interfaces.Items
         public bool CanTrade { get; init; }
         public bool CanLoose { get; init; }
         public int Max { get; init; }
-        public IItemCraft? Craft { get; init; }
     }
 }
