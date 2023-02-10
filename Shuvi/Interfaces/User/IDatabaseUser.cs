@@ -18,7 +18,7 @@ namespace Shuvi.Interfaces.User
         public IUserCustomization Customization { get; }
         public IUserUpgradePoints UpgradePoints { get; }
         public IUserWallet Wallet { get; }
-        public ISpellInfo Spell { get; }
+        public IUserSpellInfo Spell { get; }
         public UserRace Race { get; }
         public UserProfession Profession { get; }
         public UserBreed Breed { get; }
