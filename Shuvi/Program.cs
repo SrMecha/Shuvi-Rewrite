@@ -1,9 +1,11 @@
-﻿using MongoDB.Bson;
-
-namespace Shuvi
+﻿namespace Shuvi
 {
-    class Pogramm
+    public class Pogramm
     {
+        public static void Main()
+        {
+
+        }
     }
 }
 
