@@ -8,12 +8,12 @@ namespace Shuvi.Interfaces.Customization
 {
     public interface IUserCustomization
     {
-        public Color Color { get; set; }
-        public IImage Avatar { get; set; }
-        public IImage Banner { get; set; }
-        public List<UserImageData> Avatars { get; set; }
-        public List<UserImageData> Banners { get; set; }
-        public UserBages Bages { get; set; }
+        public Color Color { get; }
+        public IImage? Avatar { get; }
+        public IImage? Banner { get; }
+        public List<IImage> Avatars { get; }
+        public List<IImage> Banners { get; }
+        public UserBages Bages { get; }
 
         public void AddImage(ImageType type, ObjectId id);
         public void RemoveImage(ImageType type, ObjectId id);

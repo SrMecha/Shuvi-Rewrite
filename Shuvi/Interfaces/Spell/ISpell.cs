@@ -1,4 +1,5 @@
-﻿using Shuvi.Interfaces.Combat;
+﻿using Shuvi.Enums.Localization;
+using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Requirements;
 using Shuvi.Interfaces.Status;
@@ -12,7 +13,7 @@ namespace Shuvi.Interfaces.Spell
         public int Cost { get; }
 
         public bool CanCast(ICombatEntity player);
-        protected IActionResult OnCast(ICombatEntity player, ICombatEntity target);
-        public IActionResult Cast(ICombatEntity player, ICombatEntity target);
+        protected IActionResult OnCast(ICombatEntity player, ICombatEntity target, Language lang);
+        public IActionResult Cast(ICombatEntity player, ICombatEntity target, Language lang);
     }
 }

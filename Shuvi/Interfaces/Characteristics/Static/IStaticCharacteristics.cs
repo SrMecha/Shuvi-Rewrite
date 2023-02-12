@@ -11,8 +11,8 @@ namespace Shuvi.Interfaces.Characteristics.Static
         public int Endurance { get; }
 
         public void Add(IStaticCharacteristics characteristics);
-        public void Add(StaticCharacteristic characteristics, int amount);
+        public void Add(StaticCharacteristic characteristic, int amount);
         public void Reduce(IStaticCharacteristics characteristics);
-        public void Reduce(StaticCharacteristic characteristics, int amount);
+        public void Reduce(StaticCharacteristic characteristic, int amount);
     }
 }

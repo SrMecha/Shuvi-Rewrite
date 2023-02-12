@@ -17,7 +17,7 @@ namespace Shuvi.Services.StaticServices.Localization
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = false, 
-                Delimiter = "^"
+                Delimiter = ";"
             };
             using (var reader = new StreamReader(Path.GetFullPath("../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language/{fileName}"))
             using (var csv = new CsvReader(reader, config))

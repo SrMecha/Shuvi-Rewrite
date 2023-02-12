@@ -4,8 +4,8 @@ namespace Shuvi.Interfaces.Status
 {
     public interface IRatingResult : IActionResult
     {
-        public bool IsRankChanged { get; init; }
-        public Rank RankBefore { get; init; }
-        public Rank RankAfter { get; init; }
+        public bool IsRankChanged { get; }
+        public Rank RankBefore { get; }
+        public Rank RankAfter { get; }
     }
 }

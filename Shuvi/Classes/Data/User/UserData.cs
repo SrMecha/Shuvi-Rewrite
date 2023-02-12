@@ -16,17 +16,15 @@ namespace Shuvi.Classes.Data.User
         public int Rating { get; set; } = 0;
 
         public uint Color { get; set; } = UserSettings.StandartColor;
-        public UserImageData? Avatar { get; set; } = null;
-        public UserImageData? Banner { get; set; } = null;
+        public ObjectId? Avatar { get; set; } = null;
+        public ObjectId? Banner { get; set; } = null;
         public UserBages Bages { get; set; } = UserBages.None;
 
-        public PremiumType Premium { get; set; } = PremiumType.None;
         public PremiumAbilities PremiumAbilities { get; set; } = PremiumAbilities.None;
         public long PremiumExpires { get; set; } = 0;
         public int MoneyDonated { get; set; } = 0;
 
-        public List<UserImageData> Avatars { get; set; } = new();
-        public List<UserImageData> Banners { get; set; } = new();
+        public List<ObjectId> Images { get; set; } = new();
 
         public int Gold { get; set; } = 0;
         public int Dispoints { get; set; } = 0;

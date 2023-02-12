@@ -3,8 +3,8 @@
     [Flags]
     public enum PremiumAbilities
     {
-        None = 0b0000000000000,
-        ChangeColor = 0b0000000000001,
-        InventorySort = 0b0000000000010
+        None = 0,
+        ChangeColor = 1 << 0,
+        InventorySort = 1 << 1
     }
 }
