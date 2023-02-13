@@ -1,4 +1,5 @@
 ﻿using Shuvi.Enums.Rating;
+using Shuvi.Enums.Requirements;
 using System.Runtime.CompilerServices;
 
 namespace Shuvi.Classes.Extensions
@@ -19,6 +20,20 @@ namespace Shuvi.Classes.Extensions
                 Rank.SS => nameof(Rank.SS),
                 Rank.SSS => nameof(Rank.SSS),
                 _ => "Error"
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetLowerName(this BaseRequirement target)
+        {
+            return target switch
+            {
+                BaseRequirement.Strength => "strength",
+                BaseRequirement.Agility => "agility",
+                BaseRequirement.Luck => "luck",
+                BaseRequirement.Intellect => "intellect",
+                BaseRequirement.Endurance => "endurance",
+                BaseRequirement.Rank => "rank",
+                _ => string.Empty
             };
         }
     }

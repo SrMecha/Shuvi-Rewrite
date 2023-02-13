@@ -11,6 +11,8 @@ namespace Shuvi.Services.StaticServices.Localization
         public static void Init()
         {
             InitFile("status.csv", "status");
+            InitFile("spells.csv", "spells");
+            InitFile("names.csv", "names");
         }
         private static void InitFile(string fileName, string partName)
         {

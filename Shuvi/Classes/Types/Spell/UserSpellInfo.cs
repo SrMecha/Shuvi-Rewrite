@@ -1,4 +1,5 @@
-﻿using Shuvi.Classes.Types.Localization;
+﻿using Shuvi.Classes.Factories.Spell;
+using Shuvi.Classes.Types.Localization;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Spell;
 
@@ -22,7 +23,7 @@ namespace Shuvi.Classes.Types.Spell
         }
         public ISpell GetSpell()
         {
-
+            return SpellFactory.GetSpell(_spellName ?? string.Empty);
         }
     }
 }

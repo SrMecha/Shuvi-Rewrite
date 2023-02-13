@@ -6,6 +6,7 @@
         Agility,
         Luck,
         Intellect,
-        Endurance
+        Endurance,
+        Rank
     }
 }

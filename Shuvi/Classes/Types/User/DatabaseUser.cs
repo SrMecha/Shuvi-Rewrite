@@ -5,6 +5,7 @@ using Shuvi.Classes.Types.Characteristics.Dynamic;
 using Shuvi.Classes.Types.Characteristics.Static;
 using Shuvi.Classes.Types.Customization;
 using Shuvi.Classes.Types.Premium;
+using Shuvi.Classes.Types.Spell;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.Actions;
@@ -54,6 +55,11 @@ namespace Shuvi.Classes.Types.User
                 data.EnergyRegenTime);
             UpgradePoints = new UserUpgradePoints(Rating, Characteristic);
             Wallet = new UserWallet(data.Gold, data.Dispoints);
+            Spell = new UserSpellInfo(data.Spell);
+            Race = data.Race;
+            Profession = data.Profession;
+            Breed = data.Breed;
+
         }
     }
 }
