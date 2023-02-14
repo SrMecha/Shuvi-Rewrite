@@ -10,7 +10,8 @@ namespace Shuvi.Interfaces.Pet
     {
         public ObjectId Id { get; }
         public string Name { get; }
-        public ObjectId? ParentId { get; }
+        public IPetMasterInfo Master { get; }
+        public IPetParentInfo Parent { get; }
         public IEntityCharacteristics<IRestorableCharacteristic> Characteristics { get; }
         public IPetEquipment Equipment { get; }
         public IPetStatistics Statistics { get; }

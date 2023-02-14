@@ -1,5 +1,6 @@
 ﻿using Shuvi.Enums.Rating;
 using Shuvi.Enums.Requirements;
+using Shuvi.Enums.User;
 using System.Runtime.CompilerServices;
 
 namespace Shuvi.Classes.Extensions
@@ -34,6 +35,15 @@ namespace Shuvi.Classes.Extensions
                 BaseRequirement.Endurance => "endurance",
                 BaseRequirement.Rank => "rank",
                 _ => string.Empty
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static Array GetRaceBreeds(this UserRace target)
+        {
+            return target switch
+            {
+                UserRace.Beastmen => new UserBreed[] { UserBreed.Werewolf },
+                _ => new UserBreed[] { UserBreed.NoBreed }
             };
         }
     }

@@ -8,7 +8,7 @@ namespace Shuvi.Classes.Data.Pet
     {
         [BsonId]
         public ObjectId Id { get; set; } = ObjectId.Empty;
-        public ObjectId MasterId { get; set; } = ObjectId.Empty;
+        public ulong MasterId { get; set; } = 0;
         public string Name { get; set; } = string.Empty;
         public ObjectId? ParentId { get; set; } = ObjectId.Empty;
 
