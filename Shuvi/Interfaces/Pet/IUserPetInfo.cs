@@ -6,6 +6,6 @@ namespace Shuvi.Interfaces.Pet
     {
         public ObjectId? Id { get; }
         public bool HavePet { get; }
-        public Task<IPet> GetPet();
+        public Task<IDatabasePet?> GetPet();
     }
 }
