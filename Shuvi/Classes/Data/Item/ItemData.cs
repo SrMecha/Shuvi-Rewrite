@@ -26,5 +26,6 @@ namespace Shuvi.Classes.Data.Item
         public Dictionary<DynamicCharacteristic, int>? PotionRecover { get; set; } = null;
         public CraftData? Craft { get; set; } = null;
         public ChestDropData? ChestDrop { get; set; } = null;
+        public WeaponSettingsData? WeaponSettings { get; set; } = null;
     }
 }

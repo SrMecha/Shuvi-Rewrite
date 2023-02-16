@@ -27,6 +27,11 @@ namespace Shuvi.Classes.Types.Characteristics.Static
             Intellect = characteristics.Intellect;
             Endurance = characteristics.Endurance;
         }
+        public StaticCharacteristics(Dictionary<StaticCharacteristic, int> characteristics)
+        {
+            foreach (var (characteristic, amount) in characteristics)
+                Add(characteristic, amount);
+        }
         public void Add(IStaticCharacteristics characteristics)
         {
             Strength += characteristics.Strength;

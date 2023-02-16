@@ -1,10 +1,9 @@
-﻿using Shuvi.Interfaces.Inventory;
-using Shuvi.Interfaces.User;
+﻿using Shuvi.Interfaces.Drop;
 
 namespace Shuvi.Interfaces.Items
 {
-    public interface IChestItem
+    public interface IChestItem : IItem
     {
-        public IDropInventory GetDrop(IDatabaseUser user);
+        public IChestDrop Drop { get; init; }
     }
 }
