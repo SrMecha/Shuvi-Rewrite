@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Items;
+using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Classes.Types.Inventory
 {
@@ -16,27 +17,33 @@ namespace Shuvi.Classes.Types.Inventory
         }
         public TItem GetItem<TItem>(ObjectId id) where TItem : IItem
         {
-            throw new NotImplementedException();
+            return ItemDatabase.GetItem<TItem>(id);
         }
         public IItem GetItem(ObjectId id)
         {
-            throw new NotImplementedException();
+            return ItemDatabase.GetItem(id);
         }
         public int GetItemAmount(ObjectId id)
         {
-            throw new NotImplementedException();
+            return _items.GetValueOrDefault(id, 0);
         }
         public IItem GetItemAt(int index)
         {
-            throw new NotImplementedException();
+            return ItemDatabase.GetItem(_items.ElementAt(index).Key);
         }
         public IEnumerable<(TItem, int)> GetItems<TItem>() where TItem : IItem
         {
-            throw new NotImplementedException();
+            foreach (var (id, amount) in _items)
+                yield return (GetItem<TItem>(id), amount);
+        }
+        public IEnumerable<(IItem, int)> GetItems()
+        {
+            foreach (var (id, amount) in _items)
+                yield return (GetItem(id), amount);
         }
         public IEnumerable<ObjectId> GetItemsId()
         {
-            throw new NotImplementedException();
+            return _items.Keys;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Shuvi.Enums.Rating;
+﻿using Shuvi.Enums.Money;
+using Shuvi.Enums.Rating;
 using Shuvi.Enums.Requirements;
 using Shuvi.Enums.User;
 using System.Runtime.CompilerServices;
@@ -34,6 +35,16 @@ namespace Shuvi.Classes.Extensions
                 BaseRequirement.Intellect => "intellect",
                 BaseRequirement.Endurance => "endurance",
                 BaseRequirement.Rank => "rank",
+                _ => string.Empty
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetLowerName(this MoneyType target)
+        {
+            return target switch
+            {
+                MoneyType.Gold => "gold",
+                MoneyType.Dispoints => "dispoints",
                 _ => string.Empty
             };
         }

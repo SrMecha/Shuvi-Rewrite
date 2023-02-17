@@ -25,6 +25,6 @@ namespace Shuvi.Classes.Data.Enemy
         public int Endurance { get; set; } = 1;
         public int Mana { get; set; } = 10;
         public int Health { get; set; } = 100;
-        public DropItemData Drop { get; set; } = new();
+        public List<DropItemData> Drop { get; set; } = new();
     }
 }

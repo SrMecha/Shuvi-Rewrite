@@ -1,8 +1,9 @@
-﻿namespace Shuvi.Interfaces.Drop
+﻿using Shuvi.Interfaces.Inventory;
+
+namespace Shuvi.Interfaces.Drop
 {
-    public interface IChestDrop
+    public interface IChestDrop : IItemsDrop
     {
         public IDropMoney Money { get; }
-        public List<IDropItem> Items { get; }
     }
 }

@@ -5,26 +5,24 @@ using Shuvi.Interfaces.Inventory;
 
 namespace Shuvi.Classes.Types.Drop
 {
-    public sealed class ChestDrop : ItemsDrop, IChestDrop
+    public class ItemsDrop : IItemsDrop
     {
-        public IDropMoney Money { get; private set; }
+        public List<IDropItem> Items { get; protected set; } = new();
 
-        public ChestDrop(IDropMoney moneyDrop, List<IDropItem> items) : base(items)
+        public ItemsDrop(List<IDropItem> items)
         {
-            Money = moneyDrop;
+            Items = items;
         }
-        public ChestDrop(ChestDropData data)
+        public ItemsDrop(List<DropItemData> data)
         {
-            Money = new DropMoney(data.Money);
-            foreach (var itemData in data.Items)
-                Items.Add(new DropItem(itemData));
+            foreach (var dropData in data)
+                Items.Add(new DropItem(dropData));
         }
-        public override IDropInventory GetDrop(int luck)
+        public ItemsDrop() { }
+        public virtual IDropInventory GetDrop(int luck)
         {
             var result = new DropInventory();
             var random = new Random();
-            foreach (var (moneyType, amount) in Money)
-                result.AddMoney(moneyType, random.Next(amount.Min, amount.Max + 1));
             foreach (var item in Items)
             {
                 result.AddItem(item.Id, item.Min);

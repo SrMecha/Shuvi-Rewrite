@@ -1,5 +1,4 @@
-﻿using Shuvi.Interfaces.Inventory;
-using Shuvi.Interfaces.User;
+﻿using Shuvi.Interfaces.Drop;
 
 namespace Shuvi.Interfaces.Combat
 {
@@ -7,7 +6,6 @@ namespace Shuvi.Interfaces.Combat
     {
         public int RatingGet { get; }
         public string PictureUrl { get; }
-
-        public IDropInventory GetDrop(IDatabaseUser user);
+        public IItemsDrop Drop { get; }
     }
 }
