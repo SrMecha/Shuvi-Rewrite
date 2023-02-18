@@ -12,7 +12,7 @@
         public void AddEnemyKilled(int amount = 1);
         public void AddDeathCount(int amount = 1);
         public void AddDungeonComplite(int amount = 1);
-        public void UpdateMaxRating(int amount);
-        public void UpdateLiveTime();
+        public void SetMaxRating(int amount);
+        public void RecordLiveTime();
     }
 }

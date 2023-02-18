@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
 
 namespace Shuvi.Classes.Data.Pet
@@ -26,6 +27,6 @@ namespace Shuvi.Classes.Data.Pet
         public long ManaRegenTime { get; set; } = 1;
         public long HealthRegenTime { get; set; } = 1;
 
-        public long TamedAt { get; set; } = 1;
+        public PetStatisticsData Statistics { get; set; } = new();
     }
 }

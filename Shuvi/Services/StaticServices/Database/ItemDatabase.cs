@@ -12,9 +12,9 @@ namespace Shuvi.Services.StaticServices.Database
         private static IMongoCollection<ItemData>? _collection;
         private static Dictionary<ObjectId, IItem> _cache = new();
 
-        public static void Init(IMongoCollection<ItemData> itemCollection)
+        public static void Init(IMongoCollection<ItemData> collection)
         {
-            _collection = itemCollection;
+            _collection = collection;
             LoadAllItems();
         }
         private static void LoadAllItems()

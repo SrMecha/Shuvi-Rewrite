@@ -6,9 +6,8 @@ namespace Shuvi.Classes.Types.Characteristics.Dynamic
     {
         public int Now { get; protected set; }
 
-        public NotRestorableCharacteristic(int max, int now)
+        public NotRestorableCharacteristic(int max, int now) : base(max)
         {
-            Max = max;
             Now = now;
         }
         public void Add(int amount)

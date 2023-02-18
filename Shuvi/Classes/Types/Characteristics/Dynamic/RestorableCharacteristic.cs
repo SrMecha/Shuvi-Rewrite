@@ -7,9 +7,8 @@ namespace Shuvi.Classes.Types.Characteristics.Dynamic
         public long RegenTime { get; protected set; }
         protected int _pointRegenTime;
 
-        public RestorableCharacteristic(int max, long regenTime, int pointRegenTime)
+        public RestorableCharacteristic(int max, long regenTime, int pointRegenTime) : base(max)
         {
-            Max = max;
             RegenTime = regenTime;
             _pointRegenTime = pointRegenTime;
         }

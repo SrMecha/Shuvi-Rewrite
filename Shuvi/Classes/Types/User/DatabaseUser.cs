@@ -1,11 +1,17 @@
 ﻿using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Settings;
+using Shuvi.Classes.Types.Actions;
 using Shuvi.Classes.Types.Characteristics;
 using Shuvi.Classes.Types.Characteristics.Dynamic;
 using Shuvi.Classes.Types.Characteristics.Static;
 using Shuvi.Classes.Types.Customization;
+using Shuvi.Classes.Types.Equipment;
+using Shuvi.Classes.Types.Inventory;
+using Shuvi.Classes.Types.Map;
+using Shuvi.Classes.Types.Pet;
 using Shuvi.Classes.Types.Premium;
 using Shuvi.Classes.Types.Spell;
+using Shuvi.Classes.Types.Statistics;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.Actions;
@@ -59,7 +65,17 @@ namespace Shuvi.Classes.Types.User
             Race = data.Race;
             Profession = data.Profession;
             Breed = data.Breed;
-
+            Pet = new UserPetInfo(data.Pet);
+            Inventory = new UserInventory(data.Inventory);
+            ActionChances = new UserFightActions(data.ActionChances);
+            Equipment = new UserEquipment(data.Weapon, data.Helmet, data.Armor, data.Leggings, data.Boots);
+            Characteristic = new UserCharacteristics(
+                new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),
+                new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
+                new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime),
+                data.EnergyRegenTime);
+            Statistics = new UserStatistics(data.Statistics);
+            Location = new UserLocation(data.RegionId, data.LocationId);
         }
     }
 }

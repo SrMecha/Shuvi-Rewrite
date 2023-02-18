@@ -8,6 +8,6 @@ namespace Shuvi.Interfaces.Pet
         public ObjectId? ParentId { get; }
         public bool HaveParent { get; }
 
-        public IDatabaseEnemy GetParent();
+        public IDatabaseEnemy? GetParent();
     }
 }

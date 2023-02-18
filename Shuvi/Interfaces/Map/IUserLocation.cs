@@ -6,7 +6,7 @@
         public int RegionId { get; }
         public IMapLocation GetLocation();
         public IMapRegion GetRegion();
-        public void SetLocation(int index);
-        public void SetRegion(int index);
+        public void SetLocation(int locationId);
+        public void SetRegion(int regionId, int locationId = 0);
     }
 }

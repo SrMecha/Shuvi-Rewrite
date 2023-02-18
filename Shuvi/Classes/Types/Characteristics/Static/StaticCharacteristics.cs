@@ -11,6 +11,7 @@ namespace Shuvi.Classes.Types.Characteristics.Static
         public int Intellect { get; private set; } = 1;
         public int Endurance { get; private set; } = 1;
 
+        public StaticCharacteristics() { }
         public StaticCharacteristics(int strength, int agility, int luck, int intellect, int endurance)
         {
             Strength = strength;

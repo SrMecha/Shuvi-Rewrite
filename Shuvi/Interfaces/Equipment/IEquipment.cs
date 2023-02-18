@@ -8,6 +8,6 @@ namespace Shuvi.Interfaces.Equipment
     {
         public IStaticCharacteristics GetBonuses();
         public IEnumerable<ObjectId?> GetIds();
-        public IEnumerable<IItem?> GetItems();
+        public IEnumerable<IEquipmentItem?> GetEquipments();
     }
 }

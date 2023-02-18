@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using Shuvi.Classes.Data.Pet;
 using Shuvi.Classes.Types.Cache;
+using Shuvi.Classes.Types.Pet;
 using Shuvi.Interfaces.Pet;
 
 namespace Shuvi.Services.StaticServices.Database
@@ -22,13 +23,14 @@ namespace Shuvi.Services.StaticServices.Database
             try
             {
                 var data = await _collection.Find(new BsonDocument { { "_id", id } }).SingleAsync();
-                var pet = new
-                _cache.TryAdd(data.Id, data);
+                pet = new DatabasePet(data);
+                _cache.TryAdd(data.Id, pet);
             }
             catch (InvalidOperationException)
             {
-                await AddUser(id);
+                return null;
             }
+            return null;
         } 
     }
 }

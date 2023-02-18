@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Shuvi.Classes.Data.Actions;
+using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
 using Shuvi.Enums.Premium;
 using Shuvi.Enums.User;
@@ -38,7 +39,7 @@ namespace Shuvi.Classes.Data.User
         public UserProfession Profession { get; set; } = UserProfession.NoProfession;
 
         public string? Spell { get; set; } = null;
-        public FightActionsData ActionChances { get; set; } = new();
+        public UserFightActionsData ActionChances { get; set; } = new();
 
         public ObjectId? Weapon { get; set; } = null;
         public ObjectId? Helmet { get; set; } = null;
@@ -59,12 +60,7 @@ namespace Shuvi.Classes.Data.User
         public long HealthRegenTime { get; set; } = 1;
         public long EnergyRegenTime { get; set; } = 1;
 
-        public long CreatedAt { get; set; } = 1;
-        public long LiveTime { get; set; } = 1;
-        public int DeathCount { get; set; } = 0;
-        public int DungeonComplite { get; set; } = 0;
-        public int EnemyKilled { get; set; } = 0;
-        public int MaxRating { get; set; } = 0;
+        public UserStatisticsData Statistics { get; set; } = new();
 
         public int LocationId { get; set; } = 0;
         public int RegionId { get; set; } = 0;

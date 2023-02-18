@@ -1,20 +1,24 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Interfaces.Enemy;
 using Shuvi.Interfaces.Pet;
+using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Classes.Types.Pet
 {
     public class PetParentInfo : IPetParentInfo
     {
         public ObjectId? ParentId { get; private set; }
-        public bool HaveParent
-        {
-            get { return ParentId is not null; }
-        }
+        public bool HaveParent => ParentId is not null;
 
-        public IDatabaseEnemy GetParent()
+        public PetParentInfo(ObjectId? parentId)
         {
-            throw new NotImplementedException();
+            ParentId = parentId;
+        }
+        public IDatabaseEnemy? GetParent()
+        {
+            if (!HaveParent)
+                return null;
+            return EnemyDatabase.GetEnemy((ObjectId)ParentId!);
         }
     }
 }
