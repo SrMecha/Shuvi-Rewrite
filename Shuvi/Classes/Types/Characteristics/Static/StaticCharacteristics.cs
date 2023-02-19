@@ -5,11 +5,11 @@ namespace Shuvi.Classes.Types.Characteristics.Static
 {
     public class StaticCharacteristics : IStaticCharacteristics
     {
-        public int Strength { get; private set; } = 1;
-        public int Agility { get; private set; } = 1;
-        public int Luck { get; private set; } = 1;
-        public int Intellect { get; private set; } = 1;
-        public int Endurance { get; private set; } = 1;
+        public int Strength { get; protected set; } = 1;
+        public int Agility { get; protected set; } = 1;
+        public int Luck { get; protected set; } = 1;
+        public int Intellect { get; protected set; } = 1;
+        public int Endurance { get; protected set; } = 1;
 
         public StaticCharacteristics() { }
         public StaticCharacteristics(int strength, int agility, int luck, int intellect, int endurance)

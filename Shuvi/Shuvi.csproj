@@ -20,7 +20,6 @@
     <Folder Include="Modules\SlashCommands\" />
     <Folder Include="Modules\TextCommands\" />
     <Folder Include="Services\DiscordServices\" />
-    <Folder Include="Services\StaticServices\Map\" />
     <Folder Include="Services\Сonfigurator\" />
   </ItemGroup>
 

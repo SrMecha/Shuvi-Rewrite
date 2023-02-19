@@ -28,7 +28,7 @@ namespace Shuvi.Classes.Types.Enemy
         public int UpgradePoints { get; private set; }
         public IFightActions ActionChances { get; private set; }
         public ISpellInfo Spell { get; private set; }
-        public IEntityCharacteristics<IDynamicCharacteristic> Characteristics { get; private set; }
+        public IBonusesCharacteristics Characteristics { get; private set; }
         public IItemsDrop Drop { get; private set; }
 
         public DatabaseEnemy(EnemyData data)
@@ -40,9 +40,8 @@ namespace Shuvi.Classes.Types.Enemy
             UpgradePoints = data.UpgradePoints;
             ActionChances = new FightActions(data.ActionChances);
             Spell = new SpellInfo(data.SpellName);
-            Characteristics = new EntityCharacteristics<IDynamicCharacteristic>(
-                data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance,
-                new DynamicCharacteristic(data.Health), new DynamicCharacteristic(data.Mana));
+            Characteristics = new BonusesCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, 
+                data.Endurance, data.Health, data.Mana);
             Drop = new ItemsDrop(data.Drop);
         }
     }

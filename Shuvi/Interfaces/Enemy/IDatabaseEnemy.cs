@@ -2,7 +2,6 @@
 using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
-using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Drop;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Spell;
@@ -18,7 +17,7 @@ namespace Shuvi.Interfaces.Enemy
         public int UpgradePoints { get; }
         public IFightActions ActionChances { get; }
         public ISpellInfo Spell { get; }
-        public IEntityCharacteristics<IDynamicCharacteristic> Characteristics { get; }
+        public IBonusesCharacteristics Characteristics { get; }
         public IItemsDrop Drop { get; }
     }
 }

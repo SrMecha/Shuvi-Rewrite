@@ -12,10 +12,10 @@ namespace Shuvi.Classes.Types.Inventory
     {
         private Dictionary<MoneyType, int> _money;
 
-        public DropInventory()
+        public DropInventory() : base(new())
         {
+            _money = new();
         }
-
         public DropInventory(Dictionary<ObjectId, int> items, Dictionary<MoneyType, int> money) : base(items)
         {
             _money = money;
