@@ -31,5 +31,13 @@ namespace Shuvi.Classes.Types.Spell.SpellList
             player.Characteristics.Mana.Reduce(Cost);
             return OnCast(player, target, lang);
         }
+        public virtual IActionResult Update(Language lang)
+        {
+            return new ActionResult(string.Empty);
+        }
+        public virtual ISpell CreateCopy()
+        {
+            return (ISpell)MemberwiseClone();
+        }
     }
 }

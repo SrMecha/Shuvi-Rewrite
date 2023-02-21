@@ -15,5 +15,7 @@ namespace Shuvi.Interfaces.Spell
         public bool CanCast(ICombatEntity player);
         protected IActionResult OnCast(ICombatEntity player, ICombatEntity target, Language lang);
         public IActionResult Cast(ICombatEntity player, ICombatEntity target, Language lang);
+        public IActionResult Update(Language lang);
+        public ISpell CreateCopy();
     }
 }

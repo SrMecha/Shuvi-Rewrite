@@ -5,14 +5,18 @@ namespace Shuvi.Classes.Factories.Spell
 {
     public static class SpellFactory
     {
-        private static Dictionary<string, ISpell> _spells = new()
+        private static IReadOnlyDictionary<string, ISpell>? _spells;
+
+        public static void SetDictionary(IReadOnlyDictionary<string, ISpell> spells)
         {
-            { "void", new VoidSpell() }
-        };
+            _spells = spells;
+        }
 
         public static ISpell GetSpell(string spellName)
         {
-            return _spells.GetValueOrDefault(spellName, new VoidSpell());
+            if (_spells!.TryGetValue(spellName, out var result))
+                return result.CreateCopy();
+            return new VoidSpell();
         }
     }
 }
