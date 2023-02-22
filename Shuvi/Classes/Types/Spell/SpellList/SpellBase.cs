@@ -14,7 +14,7 @@ namespace Shuvi.Classes.Types.Spell.SpellList
     public class SpellBase : ISpell
     {
 
-        public ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells");
+        public ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells", "none");
         public IBaseRequirements Requirements { get; } = new BaseRequirements();
         public int Cost { get; } = 0;
 
@@ -24,7 +24,7 @@ namespace Shuvi.Classes.Types.Spell.SpellList
         }
         public virtual IActionResult OnCast(ICombatEntity player, ICombatEntity target, Language lang)
         {
-            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("spell/voidCast"), player.Name));
+            return new ActionResult(string.Format(LocalizationService.Get("spells").Get(lang).Get("none/cast"), player.Name));
         }
         public IActionResult Cast(ICombatEntity player, ICombatEntity target, Language lang)
         {
