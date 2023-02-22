@@ -1,5 +1,7 @@
-﻿using Shuvi.Interfaces.Combat;
+﻿using Shuvi.Enums.Localization;
+using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Localization;
+using Shuvi.Interfaces.Requirements;
 using Shuvi.Interfaces.Status;
 
 namespace Shuvi.Interfaces.Skill
@@ -7,12 +9,12 @@ namespace Shuvi.Interfaces.Skill
     public interface ISkill
     {
         public ILocalizedInfo Info { get; }
-        public bool CanUse { get; }
+        public IBaseRequirements Requirements { get; }
+        public int UsesLeft { get; }
 
-        public string GetStatus(ICombatEntity owner);
-        protected IActionResult OnSkillUse(ICombatEntity owner, ICombatEntity target);
-        public IActionResult UseSkill(ICombatEntity owner, ICombatEntity target);
-        public void Update(ICombatEntity owner);
-        
+        public bool CanUse(ICombatEntity owner);
+        public IActionResult UseSkill(ICombatEntity owner, ICombatEntity target, Language lang);
+        public IActionResult? Update(ICombatEntity owner, Language lang);
+        public ISkill CreateCopy();
     }
 }
