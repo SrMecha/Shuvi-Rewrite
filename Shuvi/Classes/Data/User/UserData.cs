@@ -39,6 +39,7 @@ namespace Shuvi.Classes.Data.User
         public UserProfession Profession { get; set; } = UserProfession.NoProfession;
 
         public string? Spell { get; set; } = null;
+        public string? Skill { get; set; } = null;
         public UserFightActionsData ActionChances { get; set; } = new();
 
         public ObjectId? Weapon { get; set; } = null;
