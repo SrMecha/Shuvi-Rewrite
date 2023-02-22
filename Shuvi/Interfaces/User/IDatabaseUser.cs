@@ -7,6 +7,7 @@ using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Map;
 using Shuvi.Interfaces.Pet;
 using Shuvi.Interfaces.Premium;
+using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Statistics;
 
@@ -21,6 +22,7 @@ namespace Shuvi.Interfaces.User
         public IUserUpgradePoints UpgradePoints { get; }
         public IUserWallet Wallet { get; }
         public IUserSpellInfo Spell { get; }
+        public IUserSkillInfo Skill { get; }
         public UserRace Race { get; }
         public UserProfession Profession { get; }
         public UserBreed Breed { get; }

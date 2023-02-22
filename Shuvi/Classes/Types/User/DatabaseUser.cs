@@ -10,6 +10,7 @@ using Shuvi.Classes.Types.Inventory;
 using Shuvi.Classes.Types.Map;
 using Shuvi.Classes.Types.Pet;
 using Shuvi.Classes.Types.Premium;
+using Shuvi.Classes.Types.Skill;
 using Shuvi.Classes.Types.Spell;
 using Shuvi.Classes.Types.Statistics;
 using Shuvi.Enums.Localization;
@@ -22,6 +23,7 @@ using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Map;
 using Shuvi.Interfaces.Pet;
 using Shuvi.Interfaces.Premium;
+using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Statistics;
 using Shuvi.Interfaces.User;
@@ -37,6 +39,7 @@ namespace Shuvi.Classes.Types.User
         public IUserUpgradePoints UpgradePoints { get; private set; }
         public IUserWallet Wallet { get; private set; }
         public IUserSpellInfo Spell { get; private set; }
+        public IUserSkillInfo Skill { get; private set; }
         public UserRace Race { get; private set; }
         public UserProfession Profession { get; private set; }
         public UserBreed Breed { get; private set; }
@@ -62,6 +65,7 @@ namespace Shuvi.Classes.Types.User
             UpgradePoints = new UserUpgradePoints(Rating, Characteristic);
             Wallet = new UserWallet(data.Gold, data.Dispoints);
             Spell = new UserSpellInfo(data.Spell);
+            Skill = new UserSkillInfo(data.Skill);
             Race = data.Race;
             Profession = data.Profession;
             Breed = data.Breed;
