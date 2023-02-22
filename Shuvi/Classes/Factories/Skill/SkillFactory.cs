@@ -12,7 +12,7 @@ namespace Shuvi.Classes.Factories.Skill
             _skills = skills;
         }
 
-        public static ISkill GetSpell(string skillName)
+        public static ISkill GetSkill(string skillName)
         {
             if (_skills!.TryGetValue(skillName, out var result))
                 return result.CreateCopy();
