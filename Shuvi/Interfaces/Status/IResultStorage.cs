@@ -6,6 +6,7 @@
 
         public string GetDescriptions();
         public void Add(IActionResult? result);
+        public void Add(IResultStorage storage);
         public void Clear();
     }
 }

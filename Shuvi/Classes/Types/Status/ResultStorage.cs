@@ -12,6 +12,10 @@ namespace Shuvi.Classes.Types.Status
             if (result is not null)
                 Results.Add(result);
         }
+        public void Add(IResultStorage storage)
+        {
+            Results.AddRange(storage.Results);
+        }
         public void Clear()
         {
             Results.Clear();
