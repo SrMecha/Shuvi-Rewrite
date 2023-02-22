@@ -8,6 +8,7 @@ using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.Status;
 using Shuvi.Interfaces.User;
+using Shuvi.Enums.Actions;
 
 namespace Shuvi.Classes.Types.Combat
 {
@@ -27,6 +28,19 @@ namespace Shuvi.Classes.Types.Combat
             Skill = user.Skill.GetSkill();
             Actions = user.ActionChances;
             Inventory = new DropInventory();
+        }
+        public override IActionResult RandomAction(ICombatEntity target, Language lang)
+        {
+            return Actions.GetRandomAction() switch
+            {
+                FightAction.LightAttack => DealLightDamage(target, lang),
+                FightAction.HeavyAttack => DealHeavyDamage(target, lang),
+                FightAction.Dodge => PreparingForDodge(target, lang),
+                FightAction.Defense => PreparingForDefense(target, lang),
+                FightAction.Spell => Spell.CanCast(this) ? CastSpell(target, lang) : DealLightDamage(target, lang),
+                FightAction.Skill => Skill.CanUse(this) ? UseSkill(target, lang) : DealLightDamage(target, lang),
+                _ => DealLightDamage(target, lang),
+            };
         }
         public IActionResult UseSkill(ICombatEntity target, Language lang)
         {
