@@ -139,7 +139,7 @@ namespace Shuvi.Classes.Types.Combat
                 FightAction.HeavyAttack => DealHeavyDamage(target, lang),
                 FightAction.Dodge => PreparingForDodge(target, lang),
                 FightAction.Defense => PreparingForDefense(target, lang),
-                FightAction.Spell => CastSpell(target, lang),
+                FightAction.Spell => Spell.CanCast(this) ? CastSpell(target, lang) : DealLightDamage(target, lang),
                 _ => DealLightDamage(target, lang),
             };
         }
