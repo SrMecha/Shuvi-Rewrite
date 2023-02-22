@@ -9,7 +9,7 @@ namespace Shuvi.Classes.Types.Skill
     {
         protected string? _skillName;
 
-        public ILocalizedInfo Info { get; }
+        public ILocalizedInfo Info { get; protected set; }
 
         public SkillInfo(string? skillName)
         {
