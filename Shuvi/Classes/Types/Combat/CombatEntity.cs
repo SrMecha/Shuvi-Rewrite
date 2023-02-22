@@ -29,7 +29,7 @@ namespace Shuvi.Classes.Types.Combat
         public Rank Rank { get; protected set; }
         public IEntityCharacteristics<INotRestorableCharacteristic> Characteristics { get; protected set; }
         public ISpell Spell { get; protected set; }
-        public IBonusesCharacteristics EffectBonuses { get; }
+        public IBonusesCharacteristics EffectBonuses { get; protected set; }
         public IEffects Effects { get; protected set; }
         public virtual IFightActions Actions { get; protected set; }
 
@@ -159,11 +159,14 @@ namespace Shuvi.Classes.Types.Combat
         {
             Characteristics.Mana.Add(amount);
         }
-        public void Update()
+        public virtual IResultStorage Update(Language lang)
         {
             _isPreparingForDefense = false;
             _isPreparingForDodge = false;
-            Effects.UpdateAll(this);
+            EffectBonuses = Effects.UpdateAll(this);
+            var result = new ResultStorage();
+            result.Add(Spell.Update(lang));
+            return result;
         }
     }
 }

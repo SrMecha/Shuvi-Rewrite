@@ -35,6 +35,6 @@ namespace Shuvi.Interfaces.Combat
         public void ReduceHealth(int amount);
         public void RestoreMana(int amount);
         public void ReduceMana(int amount);
-        public void Update();
+        public IResultStorage Update(Language lang);
     }
 }
