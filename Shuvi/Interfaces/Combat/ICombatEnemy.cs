@@ -5,7 +5,6 @@ namespace Shuvi.Interfaces.Combat
     public interface ICombatEnemy : ICombatEntity
     {
         public int RatingGet { get; }
-        public string PictureUrl { get; }
         public IItemsDrop Drop { get; }
     }
 }
