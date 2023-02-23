@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Characteristics;
 using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Equipment;
@@ -12,6 +13,7 @@ namespace Shuvi.Interfaces.Pet
         public string Name { get; }
         public IPetMasterInfo Master { get; }
         public IPetParentInfo Parent { get; }
+        public Rank Rank { get; }
         public IEntityCharacteristics<IRestorableCharacteristic> Characteristics { get; }
         public IPetEquipment Equipment { get; }
         public IPetStatistics Statistics { get; }

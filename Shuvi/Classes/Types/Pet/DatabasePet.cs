@@ -10,6 +10,7 @@ using Shuvi.Classes.Types.Characteristics.Dynamic;
 using Shuvi.Classes.Settings;
 using Shuvi.Classes.Types.Equipment;
 using Shuvi.Classes.Types.Statistics;
+using Shuvi.Enums.Rating;
 
 namespace Shuvi.Classes.Types.Pet
 {
@@ -19,6 +20,7 @@ namespace Shuvi.Classes.Types.Pet
         public string Name { get; private set; }
         public IPetMasterInfo Master { get; private set; }
         public IPetParentInfo Parent { get; private set; }
+        public Rank Rank { get; private set; }
         public IEntityCharacteristics<IRestorableCharacteristic> Characteristics { get; private set; }
         public IPetEquipment Equipment { get; private set; }
         public IPetStatistics Statistics { get; private set; }
@@ -27,6 +29,7 @@ namespace Shuvi.Classes.Types.Pet
         {
             Id = data.Id;
             Name = data.Name;
+            Rank = data.Rank;
             Master = new PetMasterInfo(data.MasterId);
             Parent = new PetParentInfo(data.ParentId);
             Characteristics = new EntityCharacteristics<IRestorableCharacteristic>(

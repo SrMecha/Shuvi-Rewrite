@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
+using Shuvi.Enums.Rating;
 
 namespace Shuvi.Classes.Data.Pet
 {
@@ -12,6 +13,8 @@ namespace Shuvi.Classes.Data.Pet
         public ulong MasterId { get; set; } = 0;
         public string Name { get; set; } = string.Empty;
         public ObjectId? ParentId { get; set; } = ObjectId.Empty;
+
+        public Rank Rank { get; set; } = Rank.E;
 
         public int Strength { get; set; } = 1;
         public int Agility { get; set; } = 1;
