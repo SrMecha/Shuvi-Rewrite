@@ -16,7 +16,7 @@ namespace Shuvi.Interfaces.Pet
         public IPetMasterInfo Master { get; }
         public IPetParentInfo Parent { get; }
         public Rank Rank { get; }
-        public IUserSpellInfo Spell { get; }
+        public IChangableSpellInfo Spell { get; }
         public IFightActions ActionChances { get; }
         public IEntityCharacteristics<IRestorableCharacteristic> Characteristics { get; }
         public IPetEquipment Equipment { get; }

@@ -3,10 +3,10 @@ using Shuvi.Interfaces.Spell;
 
 namespace Shuvi.Classes.Types.Spell
 {
-    public class UserSpellInfo : SpellInfo, IUserSpellInfo
+    public class ChangableSpellInfo : SpellInfo, IChangableSpellInfo
     {
 
-        public UserSpellInfo(string? spellName) : base(spellName) { }
+        public ChangableSpellInfo(string? spellName) : base(spellName) { }
         public void SetSpell(string? spellName)
         {
             _spellName = spellName;

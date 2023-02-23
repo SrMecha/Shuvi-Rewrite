@@ -28,7 +28,7 @@ namespace Shuvi.Classes.Types.Pet
         public IEntityCharacteristics<IRestorableCharacteristic> Characteristics { get; private set; }
         public IPetEquipment Equipment { get; private set; }
         public IPetStatistics Statistics { get; private set; }
-        public IUserSpellInfo Spell { get; private set; }
+        public IChangableSpellInfo Spell { get; private set; }
         public IFightActions ActionChances { get; private set; }
 
         public DatabasePet(PetData data)
@@ -36,7 +36,7 @@ namespace Shuvi.Classes.Types.Pet
             Id = data.Id;
             Name = data.Name;
             Rank = data.Rank;
-            Spell = new UserSpellInfo(data.Spell);
+            Spell = new ChangableSpellInfo(data.Spell);
             ActionChances = new FightActions(data.ActionChances);
             Master = new PetMasterInfo(data.MasterId);
             Parent = new PetParentInfo(data.ParentId);
