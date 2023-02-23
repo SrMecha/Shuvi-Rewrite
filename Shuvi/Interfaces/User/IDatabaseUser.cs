@@ -30,7 +30,7 @@ namespace Shuvi.Interfaces.User
         public IUserInventory Inventory { get; }
         public IUserFightActions ActionChances { get; }
         public IUserEquipment Equipment { get; }
-        public IUserCharacteristics Characteristic { get; }
+        public IUserCharacteristics Characteristics { get; }
         public IUserStatistics Statistics { get; }
         public IUserLocation Location { get; }
     }

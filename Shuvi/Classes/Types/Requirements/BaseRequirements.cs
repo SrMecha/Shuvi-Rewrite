@@ -44,11 +44,11 @@ namespace Shuvi.Classes.Types.Requirements
         {
             return requirement switch
             {
-                BaseRequirement.Strength => user.Characteristic.Strength >= amount,
-                BaseRequirement.Agility => user.Characteristic.Agility >= amount,
-                BaseRequirement.Luck => user.Characteristic.Luck >= amount,
-                BaseRequirement.Intellect => user.Characteristic.Intellect >= amount,
-                BaseRequirement.Endurance => user.Characteristic.Endurance >= amount,
+                BaseRequirement.Strength => user.Characteristics.Strength >= amount,
+                BaseRequirement.Agility => user.Characteristics.Agility >= amount,
+                BaseRequirement.Luck => user.Characteristics.Luck >= amount,
+                BaseRequirement.Intellect => user.Characteristics.Intellect >= amount,
+                BaseRequirement.Endurance => user.Characteristics.Endurance >= amount,
                 BaseRequirement.Rank => (int)user.Rating.Rank >= amount,
                 _ => false
             };

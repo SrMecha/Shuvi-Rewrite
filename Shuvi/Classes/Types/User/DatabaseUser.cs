@@ -47,7 +47,7 @@ namespace Shuvi.Classes.Types.User
         public IUserInventory Inventory { get; private set; }
         public IUserFightActions ActionChances { get; private set; }
         public IUserEquipment Equipment { get; private set; }
-        public IUserCharacteristics Characteristic { get; private set; }
+        public IUserCharacteristics Characteristics { get; private set; }
         public IUserStatistics Statistics { get; private set; }
         public IUserLocation Location { get; private set; }
     
@@ -57,12 +57,12 @@ namespace Shuvi.Classes.Types.User
             Rating = new UserRating(data.Rating, lang);
             Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Bages);
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
-            Characteristic = new UserCharacteristics(
+            Characteristics = new UserCharacteristics(
                 new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),
                 new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
                 new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime),
                 data.EnergyRegenTime);
-            UpgradePoints = new UserUpgradePoints(Rating, Characteristic);
+            UpgradePoints = new UserUpgradePoints(Rating, Characteristics);
             Wallet = new UserWallet(data.Gold, data.Dispoints);
             Spell = new UserSpellInfo(data.Spell);
             Skill = new UserSkillInfo(data.Skill);
@@ -73,7 +73,7 @@ namespace Shuvi.Classes.Types.User
             Inventory = new UserInventory(data.Inventory);
             ActionChances = new UserFightActions(data.ActionChances);
             Equipment = new UserEquipment(data.Weapon, data.Helmet, data.Armor, data.Leggings, data.Boots);
-            Characteristic = new UserCharacteristics(
+            Characteristics = new UserCharacteristics(
                 new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),
                 new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
                 new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime),

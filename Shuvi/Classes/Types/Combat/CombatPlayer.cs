@@ -21,9 +21,9 @@ namespace Shuvi.Classes.Types.Combat
         {
             Name = name;
             Rank = user.Rating.Rank;
-            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>(user.Characteristic,
-                new NotRestorableCharacteristic(user.Characteristic.Health.GetCurrent(), user.Characteristic.Health.GetCurrent()),
-                new NotRestorableCharacteristic(user.Characteristic.Mana.GetCurrent(), user.Characteristic.Mana.GetCurrent()));
+            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>(user.Characteristics,
+                new NotRestorableCharacteristic(user.Characteristics.Health.GetCurrent(), user.Characteristics.Health.GetCurrent()),
+                new NotRestorableCharacteristic(user.Characteristics.Mana.GetCurrent(), user.Characteristics.Mana.GetCurrent()));
             Spell = user.Spell.GetSpell();
             Skill = user.Skill.GetSkill();
             Actions = user.ActionChances;
