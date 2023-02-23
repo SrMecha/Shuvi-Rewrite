@@ -39,7 +39,7 @@ namespace Shuvi.Classes.Types.User
         public IUserUpgradePoints UpgradePoints { get; private set; }
         public IUserWallet Wallet { get; private set; }
         public IChangableSpellInfo Spell { get; private set; }
-        public IUserSkillInfo Skill { get; private set; }
+        public IChangableSkillInfo Skill { get; private set; }
         public UserRace Race { get; private set; }
         public UserProfession Profession { get; private set; }
         public UserBreed Breed { get; private set; }
@@ -65,7 +65,7 @@ namespace Shuvi.Classes.Types.User
             UpgradePoints = new UserUpgradePoints(Rating, Characteristics);
             Wallet = new UserWallet(data.Gold, data.Dispoints);
             Spell = new ChangableSpellInfo(data.Spell);
-            Skill = new UserSkillInfo(data.Skill);
+            Skill = new ChangableSkillInfo(data.Skill);
             Race = data.Race;
             Profession = data.Profession;
             Breed = data.Breed;

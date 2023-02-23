@@ -1,6 +1,6 @@
 ﻿namespace Shuvi.Interfaces.Skill
 {
-    public interface IUserSkillInfo : ISkillInfo
+    public interface IChangableSkillInfo : ISkillInfo
     {
         public void SetSkill(string? skillName);
     }

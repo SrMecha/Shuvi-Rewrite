@@ -4,9 +4,9 @@ using Shuvi.Interfaces.Skill;
 
 namespace Shuvi.Classes.Types.Skill
 {
-    public class UserSkillInfo : SkillInfo, IUserSkillInfo
+    public class ChangableSkillInfo : SkillInfo, IChangableSkillInfo
     {
-        public UserSkillInfo(string? skillName) : base(skillName) { }
+        public ChangableSkillInfo(string? skillName) : base(skillName) { }
         public void SetSkill(string? skillName)
         {
             _skillName = skillName;
