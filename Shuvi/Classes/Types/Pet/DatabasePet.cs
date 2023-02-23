@@ -11,6 +11,10 @@ using Shuvi.Classes.Settings;
 using Shuvi.Classes.Types.Equipment;
 using Shuvi.Classes.Types.Statistics;
 using Shuvi.Enums.Rating;
+using Shuvi.Interfaces.Spell;
+using Shuvi.Interfaces.Actions;
+using Shuvi.Classes.Types.Spell;
+using Shuvi.Classes.Types.Actions;
 
 namespace Shuvi.Classes.Types.Pet
 {
@@ -24,12 +28,16 @@ namespace Shuvi.Classes.Types.Pet
         public IEntityCharacteristics<IRestorableCharacteristic> Characteristics { get; private set; }
         public IPetEquipment Equipment { get; private set; }
         public IPetStatistics Statistics { get; private set; }
+        public IUserSpellInfo Spell { get; private set; }
+        public IFightActions ActionChances { get; private set; }
 
         public DatabasePet(PetData data)
         {
             Id = data.Id;
             Name = data.Name;
             Rank = data.Rank;
+            Spell = new UserSpellInfo(data.Spell);
+            ActionChances = new FightActions(data.ActionChances);
             Master = new PetMasterInfo(data.MasterId);
             Parent = new PetParentInfo(data.ParentId);
             Characteristics = new EntityCharacteristics<IRestorableCharacteristic>(

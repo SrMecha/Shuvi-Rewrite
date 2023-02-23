@@ -1,8 +1,10 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
 using Shuvi.Enums.Rating;
+using Shuvi.Interfaces.Spell;
 
 namespace Shuvi.Classes.Data.Pet
 {
@@ -21,6 +23,9 @@ namespace Shuvi.Classes.Data.Pet
         public int Luck { get; set; } = 1;
         public int Intellect { get; set; } = 1;
         public int Endurance { get; set; } = 1;
+
+        public string? Spell { get; set; } = null;
+        public FightActionsData ActionChances { get; set; } = new();
 
         public ObjectId? Amulet { get; set; } = null;
 
