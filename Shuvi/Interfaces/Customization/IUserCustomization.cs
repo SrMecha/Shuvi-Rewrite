@@ -1,6 +1,5 @@
 ﻿using Discord;
 using MongoDB.Bson;
-using Shuvi.Classes.Data.User;
 using Shuvi.Enums.Image;
 using Shuvi.Enums.User;
 
