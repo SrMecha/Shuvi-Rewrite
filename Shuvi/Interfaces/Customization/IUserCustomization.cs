@@ -16,6 +16,7 @@ namespace Shuvi.Interfaces.Customization
 
         public void AddImage(ImageType type, ObjectId id);
         public void AddImages(Dictionary<ImageType, ObjectId> images);
+        public void AddImages(Dictionary<ImageType, List<ObjectId>> images);
         public void RemoveImage(ImageType type, ObjectId id);
         public void SetImage(ImageType type, ObjectId id);
         public void SetColor(uint hex);

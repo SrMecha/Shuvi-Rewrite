@@ -101,5 +101,11 @@ namespace Shuvi.Classes.Types.Customization
             foreach (var (type, id) in images)
                 AddImage(type, id);
         }
+        public void AddImages(Dictionary<ImageType, List<ObjectId>> images)
+        {
+            foreach (var (type, ids) in images)
+                foreach (var id in ids)
+                    AddImage(type, id);
+        }
     }
 }
