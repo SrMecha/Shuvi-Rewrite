@@ -9,6 +9,8 @@ namespace Shuvi.Classes.Types.Customization
 {
     public class UserCustomization : IUserCustomization
     {
+        protected List<ObjectId> _imagesCache;
+
         public Color Color { get; private set; }
         public IImage? Avatar { get; private set; }
         public IImage? Banner { get; private set; }
@@ -21,6 +23,7 @@ namespace Shuvi.Classes.Types.Customization
             Color = new Color(color);
             Avatar = avatarId is null ? null : ImageDatabase.GetImage((ObjectId)avatarId);
             Banner = bannerId is null ? null : ImageDatabase.GetImage((ObjectId)bannerId);
+            _imagesCache = images;
             InitImages(images);
             Bages = bages;
         }
@@ -66,6 +69,7 @@ namespace Shuvi.Classes.Types.Customization
         }
         public void AddImage(ImageType type, ObjectId id)
         {
+            _imagesCache.Add(id);
             switch (type)
             {
                 case ImageType.Avatar:
@@ -78,6 +82,7 @@ namespace Shuvi.Classes.Types.Customization
         }
         public void RemoveImage(ImageType type, ObjectId id)
         {
+            _imagesCache.Remove(id);
             switch (type)
             {
                 case ImageType.Avatar:
@@ -106,6 +111,10 @@ namespace Shuvi.Classes.Types.Customization
             foreach (var (type, ids) in images)
                 foreach (var id in ids)
                     AddImage(type, id);
+        }
+        public List<ObjectId> GetImagesCache()
+        {
+            return _imagesCache;
         }
     }
 }

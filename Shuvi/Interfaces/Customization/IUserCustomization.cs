@@ -24,5 +24,6 @@ namespace Shuvi.Interfaces.Customization
         public void RemoveBage(UserBages bage);
         public IEnumerable<IImage> GetBanners();
         public IEnumerable<IImage> GetAvatars();
+        public List<ObjectId> GetImagesCache();
     }
 }
