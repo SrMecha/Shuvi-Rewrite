@@ -15,6 +15,7 @@ namespace Shuvi.Interfaces.Customization
         public UserBages Bages { get; }
 
         public void AddImage(ImageType type, ObjectId id);
+        public void AddImages(Dictionary<ImageType, ObjectId> images);
         public void RemoveImage(ImageType type, ObjectId id);
         public void SetImage(ImageType type, ObjectId id);
         public void SetColor(uint hex);

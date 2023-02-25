@@ -4,7 +4,6 @@ using Shuvi.Enums.Image;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.Customization;
 using Shuvi.Services.StaticServices.Database;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Shuvi.Classes.Types.Customization
 {
@@ -96,6 +95,11 @@ namespace Shuvi.Classes.Types.Customization
         public IEnumerable<IImage> GetBanners()
         {
             return Banners.AsEnumerable();
+        }
+        public void AddImages(Dictionary<ImageType, ObjectId> images)
+        {
+            foreach (var (type, id) in images)
+                AddImage(type, id);
         }
     }
 }
