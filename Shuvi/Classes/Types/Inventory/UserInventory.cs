@@ -17,5 +17,9 @@ namespace Shuvi.Classes.Types.Inventory
                     _items.Remove(item.Id);
             }
         }
+        public Dictionary<ObjectId, int> GetItemsCache()
+        {
+            return _items;
+        }
     }
 }
