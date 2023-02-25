@@ -1,12 +1,17 @@
-﻿using Shuvi.Classes.Data.Shop;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using Shuvi.Classes.Data.Shop;
+using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Types.Localization;
 using Shuvi.Classes.Types.Shop.Parts;
 using Shuvi.Classes.Types.Shop.Products;
+using Shuvi.Enums.Image;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Shop;
 using Shuvi.Interfaces.Shop.Parts;
 using Shuvi.Interfaces.Shop.Products;
 using Shuvi.Interfaces.User;
+using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Classes.Types.Shop
 {
@@ -46,7 +51,14 @@ namespace Shuvi.Classes.Types.Shop
         }
         public async Task Confirm(IDatabaseUser user)
         {
-            throw new NotImplementedException();
+            user.Inventory.AddItems(ShopBasket.Items);
+            user.Customization.AddImages(ShopBasket.Customization);
+            user.Wallet.Add(ShopBasket.Wallet);
+            await UserDatabase.UpdateUser(user.Id, new UpdateDefinitionBuilder<UserData>()
+                .Set(x => x.Inventory, user.Inventory.GetItemsCache())
+                .Set(x => x.Images, user.Customization.GetImagesCache())
+                .Inc(x => x.Gold, ShopBasket.Wallet.Gold)
+                .Inc(x => x.Dispoints, ShopBasket.Wallet.Dispoints));
         }
     }
 }
