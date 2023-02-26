@@ -9,7 +9,7 @@ namespace Shuvi.Classes.Types.Characteristics
     {
         public IRestorableCharacteristic Energy { get; private set; }
 
-        public UserCharacteristics(IStaticCharacteristics characteristics, IRestorableCharacteristic health, 
+        public UserCharacteristics(IStaticCharacteristics characteristics, IRestorableCharacteristic health,
             IRestorableCharacteristic mana, long energyRegenTime)
             : base(characteristics, health, mana)
         {

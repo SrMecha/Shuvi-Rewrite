@@ -1,21 +1,21 @@
-﻿using Shuvi.Enums.Rating;
-using Shuvi.Interfaces.Characteristics.Dynamic;
+﻿using Shuvi.Classes.Factories.Spell;
+using Shuvi.Classes.Settings;
+using Shuvi.Classes.Types.Actions;
+using Shuvi.Classes.Types.Characteristics;
+using Shuvi.Classes.Types.Characteristics.Dynamic;
+using Shuvi.Classes.Types.Effect;
+using Shuvi.Classes.Types.Status;
+using Shuvi.Enums.Actions;
+using Shuvi.Enums.Localization;
+using Shuvi.Enums.Rating;
+using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
+using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Effect;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Status;
-using Shuvi.Classes.Types.Characteristics;
-using Shuvi.Classes.Types.Characteristics.Dynamic;
-using Shuvi.Classes.Factories.Spell;
-using Shuvi.Classes.Types.Effect;
-using Shuvi.Classes.Settings;
-using Shuvi.Enums.Localization;
-using Shuvi.Classes.Types.Status;
 using Shuvi.Services.StaticServices.Localization;
-using Shuvi.Classes.Types.Actions;
-using Shuvi.Interfaces.Actions;
-using Shuvi.Enums.Actions;
 
 namespace Shuvi.Classes.Types.Combat
 {
@@ -39,7 +39,7 @@ namespace Shuvi.Classes.Types.Combat
         {
             Name = string.Empty;
             Rank = Rank.E;
-            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>(1, 1, 1, 1, 1, 
+            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>(1, 1, 1, 1, 1,
                 new NotRestorableCharacteristic(1, 1), new NotRestorableCharacteristic(1, 1));
             Spell = SpellFactory.GetSpell(string.Empty);
             EffectBonuses = new BonusesCharacteristics();

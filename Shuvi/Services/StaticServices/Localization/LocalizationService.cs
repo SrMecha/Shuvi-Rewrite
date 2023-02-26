@@ -10,15 +10,17 @@ namespace Shuvi.Services.StaticServices.Localization
 
         public static void Init()
         {
-            InitFile("status.csv", "status");
-            InitFile("spells.csv", "spells");
-            InitFile("names.csv", "names");
+            var directory = new DirectoryInfo(Path.GetFullPath("../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language");
+            foreach (var file in directory.GetFiles("*.csv"))
+            {
+                InitFile(file.Name, file.Name[..^4]);
+            }
         }
         private static void InitFile(string fileName, string partName)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                HasHeaderRecord = false, 
+                HasHeaderRecord = false,
                 Delimiter = ";"
             };
             using (var reader = new StreamReader(Path.GetFullPath("../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language/{fileName}"))
@@ -35,8 +37,8 @@ namespace Shuvi.Services.StaticServices.Localization
                     {
                         if (fileResult.Count < i)
                             fileResult.Add(new());
-                        fileResult[i-1].Add(key, value!);
-                    }  
+                        fileResult[i - 1].TryAdd(key, value!);
+                    }
                 }
                 _langs.Add(partName, new(fileResult));
             }

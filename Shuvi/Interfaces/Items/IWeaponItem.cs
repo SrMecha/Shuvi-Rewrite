@@ -1,6 +1,4 @@
-﻿using Shuvi.Interfaces.Combat;
-using Shuvi.Interfaces.Items.Weapon;
-using Shuvi.Interfaces.Status;
+﻿using Shuvi.Interfaces.Items.Weapon;
 
 namespace Shuvi.Interfaces.Items
 {

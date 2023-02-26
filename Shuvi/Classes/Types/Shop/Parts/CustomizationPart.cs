@@ -1,5 +1,4 @@
 ﻿using Shuvi.Enums.Image;
-using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.Customization;
 using Shuvi.Interfaces.Shop;
 using Shuvi.Interfaces.Shop.Parts;

@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.Enemy;
 
 namespace Shuvi.Interfaces.Rate

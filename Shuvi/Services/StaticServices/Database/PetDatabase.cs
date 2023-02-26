@@ -31,6 +31,6 @@ namespace Shuvi.Services.StaticServices.Database
                 return null;
             }
             return null;
-        } 
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Shuvi.Classes.Types.Statistics
         public int EnemyKilled { get; private set; }
         public int MaxRating { get; private set; }
 
-        public UserStatistics(long createdAt, long liveTime, int deathCount, int dungeonComplite, int enemyKilled, int maxRating) 
+        public UserStatistics(long createdAt, long liveTime, int deathCount, int dungeonComplite, int enemyKilled, int maxRating)
         {
             CreatedAt = createdAt;
             LiveTime = liveTime;

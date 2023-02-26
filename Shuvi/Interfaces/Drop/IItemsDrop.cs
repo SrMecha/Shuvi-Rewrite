@@ -1,5 +1,4 @@
 ﻿using Shuvi.Interfaces.Inventory;
-using Shuvi.Interfaces.Items;
 
 namespace Shuvi.Interfaces.Drop
 {

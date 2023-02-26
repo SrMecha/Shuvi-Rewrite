@@ -1,20 +1,20 @@
 ﻿using MongoDB.Bson;
-using Shuvi.Interfaces.Characteristics.Dynamic;
-using Shuvi.Interfaces.Characteristics;
-using Shuvi.Interfaces.Equipment;
-using Shuvi.Interfaces.Pet;
 using Shuvi.Classes.Data.Pet;
-using Shuvi.Interfaces.Statistics;
+using Shuvi.Classes.Settings;
+using Shuvi.Classes.Types.Actions;
 using Shuvi.Classes.Types.Characteristics;
 using Shuvi.Classes.Types.Characteristics.Dynamic;
-using Shuvi.Classes.Settings;
 using Shuvi.Classes.Types.Equipment;
+using Shuvi.Classes.Types.Spell;
 using Shuvi.Classes.Types.Statistics;
 using Shuvi.Enums.Rating;
-using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Actions;
-using Shuvi.Classes.Types.Spell;
-using Shuvi.Classes.Types.Actions;
+using Shuvi.Interfaces.Characteristics;
+using Shuvi.Interfaces.Characteristics.Dynamic;
+using Shuvi.Interfaces.Equipment;
+using Shuvi.Interfaces.Pet;
+using Shuvi.Interfaces.Spell;
+using Shuvi.Interfaces.Statistics;
 
 namespace Shuvi.Classes.Types.Pet
 {
@@ -41,7 +41,7 @@ namespace Shuvi.Classes.Types.Pet
             Master = new PetMasterInfo(data.MasterId);
             Parent = new PetParentInfo(data.ParentId);
             Characteristics = new EntityCharacteristics<IRestorableCharacteristic>(
-                data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance, 
+                data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance,
                 new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
                 new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime));
             Equipment = new PetEquipment(data.Amulet);

@@ -9,7 +9,7 @@ namespace Shuvi.Classes.Types.Item
     {
         public IWeaponSettings WeaponSettings { get; init; }
 
-        public WeaponItem(ItemData data) : base(data) 
+        public WeaponItem(ItemData data) : base(data)
         {
             WeaponSettings = new WeaponSettings(data.WeaponSettings ?? new());
         }

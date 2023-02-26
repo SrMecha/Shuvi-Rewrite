@@ -1,5 +1,4 @@
-﻿using Discord;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using Shuvi.Classes.Extensions;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.Money;
@@ -30,7 +29,7 @@ namespace Shuvi.Classes.Types.Inventory
         public string GetDropInfo(Language lang)
         {
             var result = new List<string>();
-            foreach(var (moneyType, amount) in _money)
+            foreach (var (moneyType, amount) in _money)
                 result.Add($"+ {amount} {EmojiService.Get(moneyType.GetLowerName())}");
             foreach (var (item, amount) in GetItems())
                 result.Add($"+{amount} {item.Info.GetName(lang)}");

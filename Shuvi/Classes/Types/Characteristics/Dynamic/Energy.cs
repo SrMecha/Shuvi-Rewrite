@@ -8,7 +8,7 @@ namespace Shuvi.Classes.Types.Characteristics.Dynamic
     {
         protected IStaticCharacteristics _characteristics;
 
-        public Energy(IStaticCharacteristics characteristics, long regenTime) 
+        public Energy(IStaticCharacteristics characteristics, long regenTime)
             : base(1, regenTime, UserSettings.EnergyPointRegenTime)
         {
             _characteristics = characteristics;

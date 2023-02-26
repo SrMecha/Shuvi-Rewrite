@@ -50,7 +50,7 @@ namespace Shuvi.Classes.Types.User
         public IUserCharacteristics Characteristics { get; private set; }
         public IUserStatistics Statistics { get; private set; }
         public IUserLocation Location { get; private set; }
-    
+
         public DatabaseUser(UserData data, Language lang = Language.Eng)
         {
             Id = data.Id;

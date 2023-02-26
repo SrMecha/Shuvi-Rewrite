@@ -2,8 +2,6 @@
 using Shuvi.Classes.Types.Inventory;
 using Shuvi.Interfaces.Drop;
 using Shuvi.Interfaces.Inventory;
-using Shuvi.Interfaces.Items;
-using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Classes.Types.Drop
 {

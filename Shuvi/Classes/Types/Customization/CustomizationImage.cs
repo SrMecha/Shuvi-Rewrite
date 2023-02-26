@@ -23,7 +23,7 @@ namespace Shuvi.Classes.Types.Customization
             Type = ImageType.Avatar;
             URL = ImageSettings.ImageNotFoundURL;
         }
-        public CustomizationImage(ImageData data) 
+        public CustomizationImage(ImageData data)
         {
             Id = data.Id;
             Info = new LocalizedInfo(data.Name);

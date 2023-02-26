@@ -1,5 +1,4 @@
 ﻿using Shuvi.Classes.Types.Localization;
-using Shuvi.Classes.Types.Spell.SpellList;
 using Shuvi.Interfaces.Skill;
 
 namespace Shuvi.Classes.Types.Skill

@@ -1,5 +1,4 @@
-﻿using Shuvi.Enums.Localization;
-using Shuvi.Interfaces.Inventory;
+﻿using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Shop;
 using Shuvi.Interfaces.Shop.Parts;
 using Shuvi.Interfaces.Shop.Products;
@@ -8,7 +7,7 @@ namespace Shuvi.Classes.Types.Shop.Parts
 {
     public class ItemSellingPart : Part<IItemProduct>, IItemSellingPart
     {
-        public ItemSellingPart(IShopBasket basket, List<IItemProduct> products) 
+        public ItemSellingPart(IShopBasket basket, List<IItemProduct> products)
             : base(basket, products)
         {
 

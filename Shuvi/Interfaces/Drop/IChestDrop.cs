@@ -1,6 +1,4 @@
-﻿using Shuvi.Interfaces.Inventory;
-
-namespace Shuvi.Interfaces.Drop
+﻿namespace Shuvi.Interfaces.Drop
 {
     public interface IChestDrop : IItemsDrop
     {

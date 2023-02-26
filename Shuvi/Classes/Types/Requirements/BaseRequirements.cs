@@ -1,5 +1,4 @@
-﻿using Discord;
-using Shuvi.Classes.Extensions;
+﻿using Shuvi.Classes.Extensions;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.Requirements;
 using Shuvi.Interfaces.Requirements;
@@ -13,7 +12,7 @@ namespace Shuvi.Classes.Types.Requirements
     {
         protected Dictionary<BaseRequirement, int> _requirements = new();
 
-        public BaseRequirements(Dictionary<BaseRequirement, int> requirements) 
+        public BaseRequirements(Dictionary<BaseRequirement, int> requirements)
         {
             _requirements = requirements;
         }

@@ -14,7 +14,7 @@ namespace Shuvi.Classes.Types.User
 
         public int Points { get; private set; }
         public Rank Rank { get; private set; }
-    
+
         public UserRating(int rating, Language lang = Language.Eng)
         {
             _language = lang;
@@ -30,13 +30,13 @@ namespace Shuvi.Classes.Types.User
             Rank = GetRank(Points);
             if (rankBefore < Rank)
                 return new RatingResult(
-                    rankBefore, 
-                    Rank, 
+                    rankBefore,
+                    Rank,
                     string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/earnUp"), amount, Rank.GetString())
                     );
             return new RatingResult(
-                rankBefore, 
-                Rank, 
+                rankBefore,
+                Rank,
                 string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/earn"), amount)
                 );
         }

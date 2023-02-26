@@ -10,6 +10,8 @@ namespace Shuvi.Services.StaticServices.Logs
 
         public static void Init(LogsData data, DiscordShardedClient client)
         {
+            if (_serverLogsChannel is not null || _userLogsChannel is not null)
+                return;
             _serverLogsChannel = client.GetChannel(data.ServerLogChannelId) as SocketTextChannel;
             _userLogsChannel = client.GetChannel(data.UserLogChannelId) as SocketTextChannel;
         }

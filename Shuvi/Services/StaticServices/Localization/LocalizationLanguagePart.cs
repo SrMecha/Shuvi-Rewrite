@@ -17,7 +17,7 @@ namespace Shuvi.Services.StaticServices.Localization
         }
         public LocalizationLanguagePart()
         {
-            
+
         }
         public LocalizationKeyPart Get(Language lang)
         {

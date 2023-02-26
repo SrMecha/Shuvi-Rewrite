@@ -1,5 +1,4 @@
 ﻿using Shuvi.Interfaces.Characteristics;
-using Shuvi.Interfaces.Characteristics.Static;
 using Shuvi.Interfaces.Combat;
 
 namespace Shuvi.Interfaces.Effect

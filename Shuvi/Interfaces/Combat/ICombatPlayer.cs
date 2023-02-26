@@ -1,7 +1,6 @@
 ﻿using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Skill;
-using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Status;
 
 namespace Shuvi.Interfaces.Combat

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using Shuvi.Interfaces.User;
+﻿using Shuvi.Interfaces.User;
 
 namespace Shuvi.Interfaces.Pet
 {

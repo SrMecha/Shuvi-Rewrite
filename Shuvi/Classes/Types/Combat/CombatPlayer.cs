@@ -1,6 +1,7 @@
-﻿using Shuvi.Classes.Types.Characteristics.Dynamic;
-using Shuvi.Classes.Types.Characteristics;
+﻿using Shuvi.Classes.Types.Characteristics;
+using Shuvi.Classes.Types.Characteristics.Dynamic;
 using Shuvi.Classes.Types.Inventory;
+using Shuvi.Enums.Actions;
 using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Combat;
@@ -8,7 +9,6 @@ using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.Status;
 using Shuvi.Interfaces.User;
-using Shuvi.Enums.Actions;
 
 namespace Shuvi.Classes.Types.Combat
 {
@@ -17,7 +17,7 @@ namespace Shuvi.Classes.Types.Combat
         public ISkill Skill { get; private set; }
         public IDropInventory Inventory { get; private set; }
 
-        public CombatPlayer(IDatabaseUser user, string name) 
+        public CombatPlayer(IDatabaseUser user, string name)
         {
             Name = name;
             Rank = user.Rating.Rank;
@@ -48,7 +48,7 @@ namespace Shuvi.Classes.Types.Combat
         }
         public override IResultStorage Update(Language lang)
         {
-            var result =  base.Update(lang);
+            var result = base.Update(lang);
             result.Add(Skill.Update(this, lang));
             return result;
         }

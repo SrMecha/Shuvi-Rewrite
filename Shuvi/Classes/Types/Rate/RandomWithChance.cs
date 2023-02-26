@@ -3,7 +3,7 @@
 namespace Shuvi.Classes.Types.Rate
 {
     public class RandomWithChance<T> : IRandomWithChance<T>
-        where T: notnull
+        where T : notnull
     {
         protected readonly Dictionary<T, int> _items = new();
 
@@ -15,7 +15,7 @@ namespace Shuvi.Classes.Types.Rate
         {
             var now = 0;
             var need = new Random().Next(0, _items.Values.Sum() + 1);
-            foreach(var (item, chance) in _items)
+            foreach (var (item, chance) in _items)
             {
                 now += chance;
                 if (now <= need)

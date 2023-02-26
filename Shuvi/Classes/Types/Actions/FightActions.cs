@@ -27,7 +27,7 @@ namespace Shuvi.Classes.Types.Actions
         {
             var now = 0;
             var need = new Random().Next(0, _all + 1);
-            foreach(var(action, chance) in GetChances())
+            foreach (var (action, chance) in GetChances())
             {
                 now += chance;
                 if (now <= need)

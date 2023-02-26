@@ -9,7 +9,7 @@ namespace Shuvi.Classes.Types.Map
     {
         public LocalizedInfo Info { get; init; }
         public Rank NeededRank { get; init; }
-        public Rank RecomendedRank{ get; init; }
+        public Rank RecomendedRank { get; init; }
         public List<IMapLocation> Locations { get; init; }
         public string PictureURL { get; init; }
 

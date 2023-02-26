@@ -2,7 +2,6 @@
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
 using Shuvi.Enums.User;
-using System.Diagnostics;
 
 namespace Shuvi.Classes.Factories.User
 {
@@ -29,8 +28,9 @@ namespace Shuvi.Classes.Factories.User
                 ManaRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
                 HealthRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
                 EnergyRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
-                Statistics = new UserStatisticsData { 
-                    CreatedAt = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds() ,
+                Statistics = new UserStatisticsData
+                {
+                    CreatedAt = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
                     LiveTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds()
                 }
             };

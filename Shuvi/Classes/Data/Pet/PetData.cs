@@ -4,7 +4,6 @@ using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
 using Shuvi.Enums.Rating;
-using Shuvi.Interfaces.Spell;
 
 namespace Shuvi.Classes.Data.Pet
 {

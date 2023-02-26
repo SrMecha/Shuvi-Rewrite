@@ -2,6 +2,6 @@
 {
     public interface ICombatPet : ICombatEntity
     {
-        
+
     }
 }

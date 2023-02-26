@@ -1,10 +1,9 @@
-﻿using Discord;
-using Shuvi.Interfaces.Cache;
+﻿using Shuvi.Interfaces.Cache;
 
 namespace Shuvi.Classes.Types.Cache
 {
     public class TemporaryCache<TId, TItem> : ITemporaryCache<TId, TItem>
-        where TId: notnull
+        where TId : notnull
     {
         private readonly int _deleteCacheAfter = 600;
         private readonly Dictionary<TId, TItem> _itemCache = new();

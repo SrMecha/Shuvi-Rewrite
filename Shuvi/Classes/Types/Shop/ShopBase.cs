@@ -1,11 +1,9 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Shuvi.Classes.Data.Shop;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Types.Localization;
 using Shuvi.Classes.Types.Shop.Parts;
 using Shuvi.Classes.Types.Shop.Products;
-using Shuvi.Enums.Image;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Shop;
 using Shuvi.Interfaces.Shop.Parts;
@@ -30,7 +28,8 @@ namespace Shuvi.Classes.Types.Shop
             Selling = new ItemSellingPart(ShopBasket, ConfigureItemProducts(data.UserSale));
             Purchasing = new ItemPurchasingPart(ShopBasket, ConfigureItemProducts(data.UserBuy));
             Customization = new CustomizationPart(ShopBasket, ConfigureCustomizationProducts(data.Customization));
-;        }
+            ;
+        }
         private List<IItemProduct> ConfigureItemProducts(List<ShopProductData> data)
         {
             var result = new List<IItemProduct>();

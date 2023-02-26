@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Enums.Item;
 using Shuvi.Enums.Rating;
-using Shuvi.Interfaces.Craft;
 using Shuvi.Interfaces.Localization;
 
 namespace Shuvi.Interfaces.Items

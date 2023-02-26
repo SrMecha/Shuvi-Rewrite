@@ -20,7 +20,7 @@ namespace Shuvi.Classes.Types.Shop
         {
             Wallet = new UserWallet();
             Items = new();
-            Customization = new() 
+            Customization = new()
             {
                 {ImageType.Avatar, new() },
                 {ImageType.Banner, new() }

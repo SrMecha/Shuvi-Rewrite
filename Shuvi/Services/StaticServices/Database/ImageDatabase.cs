@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using Shuvi.Classes.Data.Customization;
-using Shuvi.Classes.Data.Item;
 using Shuvi.Classes.Factories.Image;
 using Shuvi.Classes.Types.Customization;
 using Shuvi.Interfaces.Customization;

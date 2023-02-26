@@ -1,5 +1,5 @@
-﻿using Shuvi.Classes.Types.Characteristics.Dynamic;
-using Shuvi.Classes.Types.Characteristics;
+﻿using Shuvi.Classes.Types.Characteristics;
+using Shuvi.Classes.Types.Characteristics.Dynamic;
 using Shuvi.Classes.Types.Pet;
 using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Combat;

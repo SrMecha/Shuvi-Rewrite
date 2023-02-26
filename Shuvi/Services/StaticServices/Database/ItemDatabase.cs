@@ -28,7 +28,7 @@ namespace Shuvi.Services.StaticServices.Database
         {
             return _cache.GetValueOrDefault(id, new SimpleItem(new()));
         }
-        public static TItem GetItem<TItem>(ObjectId id) where TItem: IItem
+        public static TItem GetItem<TItem>(ObjectId id) where TItem : IItem
         {
             return (TItem)_cache.GetValueOrDefault(id, new SimpleItem(new()));
         }

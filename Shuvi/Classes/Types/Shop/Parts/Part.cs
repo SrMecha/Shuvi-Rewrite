@@ -1,6 +1,4 @@
-﻿using Discord;
-using Shuvi.Enums.Localization;
-using Shuvi.Interfaces.Shop;
+﻿using Shuvi.Interfaces.Shop;
 using Shuvi.Interfaces.Shop.Parts;
 using Shuvi.Interfaces.Shop.Products;
 

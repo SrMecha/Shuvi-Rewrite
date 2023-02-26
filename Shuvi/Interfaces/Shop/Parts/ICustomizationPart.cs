@@ -1,5 +1,4 @@
 ﻿using Shuvi.Interfaces.Customization;
-using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Shop.Products;
 using Shuvi.Interfaces.User;
 

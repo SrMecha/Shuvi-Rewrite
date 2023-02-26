@@ -6,7 +6,7 @@ namespace Shuvi.Classes.Types.Status
     {
         public string Description { get; private set; }
 
-        public ActionResult(string description) 
+        public ActionResult(string description)
         {
             Description = description;
         }

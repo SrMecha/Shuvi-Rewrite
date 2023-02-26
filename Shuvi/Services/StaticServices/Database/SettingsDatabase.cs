@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using Shuvi.Classes.Data.Map;
 using Shuvi.Classes.Data.Settings;
 
 namespace Shuvi.Services.StaticServices.Database
@@ -13,9 +14,9 @@ namespace Shuvi.Services.StaticServices.Database
         {
             _collection = collection;
         }
-        public static LogsData LoadLogsData()
+        public static async Task<LogsData> LoadLogsData()
         {
-            return BsonSerializer.Deserialize<LogsData>(_collection.Find(new BsonDocument { { "_id", "Logs" } }).Single());
+            return BsonSerializer.Deserialize<LogsData>(await _collection.Find(new BsonDocument { { "_id", "Logs" } }).SingleAsync());
         }
         public static AdminsData LoadAdminsData()
         {
@@ -32,6 +33,10 @@ namespace Shuvi.Services.StaticServices.Database
         public static async Task UpdateBotInfo(UpdateDefinition<BotInfoData> updateConfig)
         {
             await _collection!.UpdateOneAsync(new BsonDocument { { "_id", "Info" } }, updateConfig.ToBsonDocument());
+        }
+        public static WorldMapData LoadMap()
+        {
+            return BsonSerializer.Deserialize<WorldMapData>(_collection.Find(new BsonDocument { { "_id", "Map" } }).Single());
         }
     }
 }

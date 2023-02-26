@@ -2,20 +2,16 @@
 using Shuvi.Classes.Data.Enemy;
 using Shuvi.Classes.Types.Actions;
 using Shuvi.Classes.Types.Characteristics;
-using Shuvi.Classes.Types.Characteristics.Dynamic;
 using Shuvi.Classes.Types.Drop;
 using Shuvi.Classes.Types.Localization;
 using Shuvi.Classes.Types.Spell;
-using Shuvi.Enums.Actions;
 using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
-using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Drop;
 using Shuvi.Interfaces.Enemy;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Spell;
-using ZstdSharp.Unsafe;
 
 namespace Shuvi.Classes.Types.Enemy
 {
@@ -40,7 +36,7 @@ namespace Shuvi.Classes.Types.Enemy
             UpgradePoints = data.UpgradePoints;
             ActionChances = new FightActions(data.ActionChances);
             Spell = new SpellInfo(data.SpellName);
-            Characteristics = new BonusesCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, 
+            Characteristics = new BonusesCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect,
                 data.Endurance, data.Health, data.Mana);
             Drop = new ItemsDrop(data.Drop);
         }

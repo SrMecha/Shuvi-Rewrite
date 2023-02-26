@@ -1,10 +1,8 @@
-﻿using Discord;
-using Shuvi.Enums.Localization;
-using Shuvi.Interfaces.Shop.Products;
+﻿using Shuvi.Interfaces.Shop.Products;
 
 namespace Shuvi.Interfaces.Shop.Parts
 {
-    public interface IPart<TProduct> where TProduct: IProduct
+    public interface IPart<TProduct> where TProduct : IProduct
     {
         public TProduct GetProduct(int itemIndex);
         public TProduct GetProduct(int page, int arrowIndex);

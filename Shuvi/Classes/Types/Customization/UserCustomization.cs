@@ -18,7 +18,7 @@ namespace Shuvi.Classes.Types.Customization
         public List<IImage> Banners { get; private set; } = new();
         public UserBages Bages { get; private set; }
 
-        public UserCustomization(uint color, ObjectId? avatarId, ObjectId? bannerId, List<ObjectId> images, UserBages bages) 
+        public UserCustomization(uint color, ObjectId? avatarId, ObjectId? bannerId, List<ObjectId> images, UserBages bages)
         {
             Color = new Color(color);
             Avatar = avatarId is null ? null : ImageDatabase.GetImage((ObjectId)avatarId);

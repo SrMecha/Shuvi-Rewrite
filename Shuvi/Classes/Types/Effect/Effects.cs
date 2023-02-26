@@ -9,7 +9,7 @@ namespace Shuvi.Classes.Types.Effect
     {
         public List<IEffect> All { get; private set; }
 
-        public Effects() 
+        public Effects()
         {
             All = new();
         }
