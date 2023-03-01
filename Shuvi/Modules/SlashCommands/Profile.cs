@@ -2,10 +2,11 @@
 using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using Shuvi.Classes.Types.Interaction;
 
 namespace Shuvi.Modules.SlashCommands
 {
-    public class ProfileCommandModule : InteractionModuleBase<ShardedInteractionContext>
+    public class ProfileCommandModule : InteractionModuleBase<CustomInteractionContext>
     {
         private readonly DiscordShardedClient _client;
 

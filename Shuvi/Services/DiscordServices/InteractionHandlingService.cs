@@ -2,6 +2,7 @@
 using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using Shuvi.Classes.Types.Interaction;
 
 namespace Shuvi.Services.DiscordServices
 {
@@ -34,7 +35,7 @@ namespace Shuvi.Services.DiscordServices
         {
             _ = Task.Run(async () =>
             {
-                var context = new ShardedInteractionContext(_client, interaction);
+                var context = new CustomInteractionContext(_client, interaction);
                 await _service.ExecuteCommandAsync(context, _provider);
             });
             await Task.CompletedTask;
