@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.Premium;
 using Shuvi.Enums.User;
 
@@ -19,7 +20,8 @@ namespace Shuvi.Classes.Data.User
         public uint Color { get; set; } = UserSettings.StandartColor;
         public ObjectId? Avatar { get; set; } = null;
         public ObjectId? Banner { get; set; } = null;
-        public UserBages Bages { get; set; } = UserBages.None;
+        public UserBadges Bages { get; set; } = UserBadges.None;
+        public Language Language { get; set; }
 
         public PremiumAbilities PremiumAbilities { get; set; } = PremiumAbilities.None;
         public long PremiumExpires { get; set; } = 0;
@@ -35,7 +37,7 @@ namespace Shuvi.Classes.Data.User
         public ulong? MasterId { get; set; } = null;
 
         public UserRace Race { get; set; } = UserRace.ExMachina;
-        public UserBreed Breed { get; set; } = UserBreed.NoBreed;
+        public UserSubrace Subrace { get; set; } = UserSubrace.NoSubrace;
         public UserProfession Profession { get; set; } = UserProfession.NoProfession;
 
         public string? Spell { get; set; } = null;

@@ -14,6 +14,7 @@ using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Services.StaticServices.Database;
 using Shuvi.Services.StaticServices.Emoji;
+using Shuvi.Services.StaticServices.Info;
 using Shuvi.Services.StaticServices.Localization;
 using Shuvi.Services.StaticServices.Logs;
 using Shuvi.Services.StaticServices.Map;
@@ -37,6 +38,7 @@ namespace Shuvi.Services.Сonfigurator
             EmojiService.Init();
             LocalizationService.Init();
             WorldMap.Init(SettingsDatabase.LoadMap());
+            BotInfoService.Init(SettingsDatabase.LoadBotInfoData());
             ConfigureSpells();
             ConfigureSkills();
         }

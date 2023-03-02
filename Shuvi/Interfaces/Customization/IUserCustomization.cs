@@ -12,7 +12,7 @@ namespace Shuvi.Interfaces.Customization
         public IImage? Banner { get; }
         public List<IImage> Avatars { get; }
         public List<IImage> Banners { get; }
-        public UserBages Bages { get; }
+        public UserBadges Badges { get; }
 
         public void AddImage(ImageType type, ObjectId id);
         public void AddImages(Dictionary<ImageType, ObjectId> images);
@@ -20,8 +20,8 @@ namespace Shuvi.Interfaces.Customization
         public void RemoveImage(ImageType type, ObjectId id);
         public void SetImage(ImageType type, ObjectId id);
         public void SetColor(uint hex);
-        public void AddBage(UserBages bage);
-        public void RemoveBage(UserBages bage);
+        public void AddBadge(UserBadges bage);
+        public void RemoveBadge(UserBadges bage);
         public IEnumerable<IImage> GetBanners();
         public IEnumerable<IImage> GetAvatars();
         public List<ObjectId> GetImagesCache();

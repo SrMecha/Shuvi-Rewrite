@@ -1,6 +1,7 @@
 ﻿using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.User;
 
 namespace Shuvi.Classes.Factories.User
@@ -12,19 +13,20 @@ namespace Shuvi.Classes.Factories.User
             var values = Enum.GetValues(typeof(UserRace));
             return (UserRace?)values.GetValue(new Random().Next(values.Length)) ?? UserRace.ExMachina;
         }
-        public static UserBreed GenerateRandomUserBreed(UserRace race)
+        public static UserSubrace GenerateRandomUserBreed(UserRace race)
         {
             var races = race.GetRaceBreeds();
-            return (UserBreed?)races.GetValue(new Random().Next(races.Length)) ?? UserBreed.NoBreed;
+            return (UserSubrace?)races.GetValue(new Random().Next(races.Length)) ?? UserSubrace.NoSubrace;
         }
-        public static UserData CreateUser(ulong id)
+        public static UserData CreateUser(ulong id, Language lang)
         {
             var race = GenerateRandomUserRace();
             return new UserData
             {
                 Id = id,
+                Language = lang,
                 Race = race,
-                Breed = GenerateRandomUserBreed(race),
+                Subrace = GenerateRandomUserBreed(race),
                 ManaRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
                 HealthRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
                 EnergyRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),

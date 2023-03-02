@@ -16,16 +16,16 @@ namespace Shuvi.Classes.Types.Customization
         public IImage? Banner { get; private set; }
         public List<IImage> Avatars { get; private set; } = new();
         public List<IImage> Banners { get; private set; } = new();
-        public UserBages Bages { get; private set; }
+        public UserBadges Badges { get; private set; }
 
-        public UserCustomization(uint color, ObjectId? avatarId, ObjectId? bannerId, List<ObjectId> images, UserBages bages)
+        public UserCustomization(uint color, ObjectId? avatarId, ObjectId? bannerId, List<ObjectId> images, UserBadges bages)
         {
             Color = new Color(color);
             Avatar = avatarId is null ? null : ImageDatabase.GetImage((ObjectId)avatarId);
             Banner = bannerId is null ? null : ImageDatabase.GetImage((ObjectId)bannerId);
             _imagesCache = images;
             InitImages(images);
-            Bages = bages;
+            Badges = bages;
         }
         protected void InitImages(List<ObjectId> images)
         {
@@ -47,13 +47,13 @@ namespace Shuvi.Classes.Types.Customization
         {
             Color = new Color(hex);
         }
-        public void AddBage(UserBages bage)
+        public void AddBadge(UserBadges bage)
         {
-            Bages |= bage;
+            Badges |= bage;
         }
-        public void RemoveBage(UserBages bage)
+        public void RemoveBadge(UserBadges bage)
         {
-            Bages &= bage;
+            Badges &= bage;
         }
         public void SetImage(ImageType type, ObjectId id)
         {

@@ -35,6 +35,7 @@ namespace Shuvi.Classes.Types.User
         public ulong Id { get; init; }
         public IUserRating Rating { get; private set; }
         public IUserCustomization Customization { get; private set; }
+        public Language Language { get; set; }
         public IUserPremium Premium { get; private set; }
         public IUserUpgradePoints UpgradePoints { get; private set; }
         public IUserWallet Wallet { get; private set; }
@@ -42,7 +43,7 @@ namespace Shuvi.Classes.Types.User
         public IChangableSkillInfo Skill { get; private set; }
         public UserRace Race { get; private set; }
         public UserProfession Profession { get; private set; }
-        public UserBreed Breed { get; private set; }
+        public UserSubrace Subrace { get; private set; }
         public IUserPetInfo Pet { get; private set; }
         public IUserInventory Inventory { get; private set; }
         public IUserFightActions ActionChances { get; private set; }
@@ -56,6 +57,7 @@ namespace Shuvi.Classes.Types.User
             Id = data.Id;
             Rating = new UserRating(data.Rating, lang);
             Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Bages);
+            Language = data.Language;
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
             Characteristics = new UserCharacteristics(
                 new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),
@@ -68,7 +70,7 @@ namespace Shuvi.Classes.Types.User
             Skill = new ChangableSkillInfo(data.Skill);
             Race = data.Race;
             Profession = data.Profession;
-            Breed = data.Breed;
+            Subrace = data.Subrace;
             Pet = new UserPetInfo(data.Pet);
             Inventory = new UserInventory(data.Inventory);
             ActionChances = new UserFightActions(data.ActionChances);

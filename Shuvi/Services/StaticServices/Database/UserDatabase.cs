@@ -4,6 +4,7 @@ using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Factories.User;
 using Shuvi.Classes.Types.Cache;
 using Shuvi.Classes.Types.User;
+using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.User;
 
 namespace Shuvi.Services.StaticServices.Database
@@ -17,9 +18,9 @@ namespace Shuvi.Services.StaticServices.Database
         {
             _collection = collection;
         }
-        public static async Task<IDatabaseUser> AddUser(ulong id)
+        public static async Task<IDatabaseUser> AddUser(ulong id, Language lang)
         {
-            var data = UserFactory.CreateUser(id);
+            var data = UserFactory.CreateUser(id, lang);
             await _collection!.InsertOneAsync(data);
             var user = new DatabaseUser(data);
             _cache.TryAdd(user.Id, user);

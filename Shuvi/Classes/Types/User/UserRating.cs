@@ -32,7 +32,7 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/earnUp"), amount, Rank.GetString())
+                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/earnUp"), amount, Rank.GetName())
                     );
             return new RatingResult(
                 rankBefore,
@@ -49,7 +49,7 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/earnUp"), amount, Rank.GetString())
+                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/earnUp"), amount, Rank.GetName())
                     );
             return new RatingResult(
                 rankBefore,
@@ -80,7 +80,7 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/lostDown"), amount, Rank.GetString())
+                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/lostDown"), amount, Rank.GetName())
                     );
             return new RatingResult(
                 rankBefore,
@@ -97,7 +97,7 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/setChange"), amount, Rank.GetString())
+                    string.Format(LocalizationService.Get("status").Get(_language).Get("raiting/setChange"), amount, Rank.GetName())
                     );
             return new RatingResult(
                 rankBefore,

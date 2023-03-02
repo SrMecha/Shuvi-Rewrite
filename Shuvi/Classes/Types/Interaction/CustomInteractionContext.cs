@@ -15,10 +15,10 @@ namespace Shuvi.Classes.Types.Interaction
             LastInteraction = interaction;
             CurrentMessage = null;
         }
-        public async Task<SocketMessageComponent?> TryWaitForButtonInteraction(IUserMessage? message = null, ulong? userId = null)
+        public async Task<SocketMessageComponent?> WaitForButton(IUserMessage? message = null, ulong? userId = null)
         {
             CurrentMessage ??= await LastInteraction.GetOriginalResponseAsync();
-            var result =  await Client.WaitForButtonInteraction(message ?? CurrentMessage, userId ?? User.Id);
+            var result = await Client.WaitForButtonInteraction(message ?? CurrentMessage, userId ?? User.Id);
             LastInteraction = result;
             return result;
         }

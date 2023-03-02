@@ -11,7 +11,7 @@ namespace Shuvi.Classes.Types.Equipment
     {
         public virtual IStaticCharacteristics GetBonuses()
         {
-            var result = new StaticCharacteristics();
+            var result = new StaticCharacteristics(0, 0, 0, 0, 0);
             foreach (var item in GetEquipments())
                 if (item is not null)
                     result.Add(item.Bonuses);

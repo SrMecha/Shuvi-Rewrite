@@ -14,5 +14,9 @@
         public static int ManaPerUpPoint { get; } = 3;
         public static int RatingPerUpdgradePoint { get; } = 5;
         public static int EndurancePerEnergy { get; } = 10;
+
+        public static int EnergyDisplayMax { get; } = 5;
+        public static int HealthDisplayMax { get; } = 5;
+        public static int ManaDisplayMax { get; } = 5;
     }
 }

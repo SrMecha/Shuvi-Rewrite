@@ -24,7 +24,8 @@ namespace Shuvi.Services.StaticServices.Emoji
                 { "magicFull", "<:magic_full:1050772671002071160>" },
                 { "magicEmpty", "<:magic_empty:1050772733828530218>" },
                 { "lineMiddle", "<:LineMiddle:1062300869808369726>" },
-                { "lineEnd", "<:LineEnd:1062300873113468938>" }
+                { "lineEnd", "<:LineEnd:1062300873113468938>" },
+                { "badgeBugHunter", "<:gold_coins:1066321458441236562>" }
             };
             foreach (var (emoteKey, emoteCode) in emotesBase)
                 if (Emote.TryParse(emoteCode, out var emote))

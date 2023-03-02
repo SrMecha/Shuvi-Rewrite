@@ -1,4 +1,5 @@
-﻿using Shuvi.Enums.User;
+﻿using Shuvi.Enums.Localization;
+using Shuvi.Enums.User;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
 using Shuvi.Interfaces.Customization;
@@ -18,6 +19,7 @@ namespace Shuvi.Interfaces.User
         public ulong Id { get; init; }
         public IUserRating Rating { get; }
         public IUserCustomization Customization { get; }
+        public Language Language { get; set; }
         public IUserPremium Premium { get; }
         public IUserUpgradePoints UpgradePoints { get; }
         public IUserWallet Wallet { get; }
@@ -25,7 +27,7 @@ namespace Shuvi.Interfaces.User
         public IChangableSkillInfo Skill { get; }
         public UserRace Race { get; }
         public UserProfession Profession { get; }
-        public UserBreed Breed { get; }
+        public UserSubrace Subrace { get; }
         public IUserPetInfo Pet { get; }
         public IUserInventory Inventory { get; }
         public IUserFightActions ActionChances { get; }

@@ -1,8 +1,8 @@
 ﻿namespace Shuvi.Enums.User
 {
-    public enum UserBreed
+    public enum UserSubrace
     {
-        NoBreed,
+        NoSubrace,
         Werewolf
     }
 }

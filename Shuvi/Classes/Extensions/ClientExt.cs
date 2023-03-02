@@ -4,7 +4,7 @@ using Discord;
 
 namespace Shuvi.Classes.Extensions
 {
-    public static class ClientExtension
+    public static class ClientExt
     {
         public static async Task<SocketMessageComponent> WaitForButtonInteraction(this DiscordShardedClient client, IUserMessage message, ulong userId)
         {
