@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Shuvi.Enums.Characteristic;
+using Shuvi.Enums.Localization;
+using System.Runtime.CompilerServices;
 
 namespace Shuvi.Classes.Extensions
 {
@@ -49,6 +51,16 @@ namespace Shuvi.Classes.Extensions
                     for (var j = 0; j < value.Length; j++)
                         span[i + j] = value[j];
             });
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static Language AsLanguage(this string target)
+        {
+            return target switch
+            {
+                "ru" => Language.Ru,
+                "uk" => Language.Ru,
+                _ => Language.Eng
+            };
         }
     }
 }

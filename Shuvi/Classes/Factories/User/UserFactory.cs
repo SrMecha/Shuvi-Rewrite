@@ -18,13 +18,12 @@ namespace Shuvi.Classes.Factories.User
             var races = race.GetRaceBreeds();
             return (UserSubrace?)races.GetValue(new Random().Next(races.Length)) ?? UserSubrace.NoSubrace;
         }
-        public static UserData CreateUser(ulong id, Language lang)
+        public static UserData CreateUser(ulong id)
         {
             var race = GenerateRandomUserRace();
             return new UserData
             {
                 Id = id,
-                Language = lang,
                 Race = race,
                 Subrace = GenerateRandomUserBreed(race),
                 ManaRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),

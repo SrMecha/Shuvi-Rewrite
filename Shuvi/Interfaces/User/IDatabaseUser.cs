@@ -19,7 +19,6 @@ namespace Shuvi.Interfaces.User
         public ulong Id { get; init; }
         public IUserRating Rating { get; }
         public IUserCustomization Customization { get; }
-        public Language Language { get; set; }
         public IUserPremium Premium { get; }
         public IUserUpgradePoints UpgradePoints { get; }
         public IUserWallet Wallet { get; }

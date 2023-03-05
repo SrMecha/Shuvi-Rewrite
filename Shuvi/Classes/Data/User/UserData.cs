@@ -21,7 +21,6 @@ namespace Shuvi.Classes.Data.User
         public ObjectId? Avatar { get; set; } = null;
         public ObjectId? Banner { get; set; } = null;
         public UserBadges Bages { get; set; } = UserBadges.None;
-        public Language Language { get; set; }
 
         public PremiumAbilities PremiumAbilities { get; set; } = PremiumAbilities.None;
         public long PremiumExpires { get; set; } = 0;

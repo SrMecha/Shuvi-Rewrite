@@ -1,8 +1,14 @@
-embed/profile/author;;Профиль
-embed/profile/rank;;Ранг: {0}
-embed/profile/rating;;**Рейтинг:** {0}
-embed/profile/race;;**Раса:** {0}
-embed/profile/profession;;**Профессия:** {0}
-embed/profile/subrace;;**Подраса:** {0}
-embed/profile/characteristics;;Характеристики:
-;;
+embed/profile/author;Profile;Профиль
+embed/profile/rank;Rank: {0};Ранг: {0}
+embed/profile/rating;**Rating:** {0};**Рейтинг:** {0}
+embed/profile/race;**Race:** {0};**Раса:** {0}
+embed/profile/profession;**Profession:** {0};**Профессия:** {0}
+embed/profile/subrace;**Subrace:** {0};**Подраса:** {0}
+embed/profile/characteristics;Characteristics:;Характеристики:
+embed/profile/recover;Recover;Востановится
+select/view/name;;Просмотр профиля.
+select/view/option/equipment;;Экипировка
+select/view/option/location;;Местоположение
+select/view/option/statistics;;Статистика
+select/view/option/pet;;Питомец
+error/accountNotFound;;Данный пользователь не имеет персонажа для просмотра.

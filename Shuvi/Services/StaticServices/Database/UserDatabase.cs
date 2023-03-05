@@ -18,9 +18,9 @@ namespace Shuvi.Services.StaticServices.Database
         {
             _collection = collection;
         }
-        public static async Task<IDatabaseUser> AddUser(ulong id, Language lang)
+        public static async Task<IDatabaseUser> AddUser(ulong id)
         {
-            var data = UserFactory.CreateUser(id, lang);
+            var data = UserFactory.CreateUser(id);
             await _collection!.InsertOneAsync(data);
             var user = new DatabaseUser(data);
             _cache.TryAdd(user.Id, user);

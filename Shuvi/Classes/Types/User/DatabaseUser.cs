@@ -35,7 +35,6 @@ namespace Shuvi.Classes.Types.User
         public ulong Id { get; init; }
         public IUserRating Rating { get; private set; }
         public IUserCustomization Customization { get; private set; }
-        public Language Language { get; set; }
         public IUserPremium Premium { get; private set; }
         public IUserUpgradePoints UpgradePoints { get; private set; }
         public IUserWallet Wallet { get; private set; }
@@ -57,7 +56,6 @@ namespace Shuvi.Classes.Types.User
             Id = data.Id;
             Rating = new UserRating(data.Rating, lang);
             Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Bages);
-            Language = data.Language;
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
             Characteristics = new UserCharacteristics(
                 new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),

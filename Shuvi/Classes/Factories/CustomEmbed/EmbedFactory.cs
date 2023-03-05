@@ -1,12 +1,15 @@
 ﻿using Discord;
 using Shuvi.Classes.Settings;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.Premium;
 using Shuvi.Interfaces.User;
+using Shuvi.Services.StaticServices.Localization;
 
 namespace Shuvi.Classes.Factories.CustomEmbed
 {
     public static class EmbedFactory
     {
+        private static readonly LocalizationLanguagePart _errorLocalization = LocalizationService.Get("errorPart");
         public static EmbedBuilder CreateUserEmbed(IUser discordUser)
         {
             return new EmbedBuilder()
@@ -23,6 +26,13 @@ namespace Shuvi.Classes.Factories.CustomEmbed
             if (withBanner && dbUser.Customization.Banner is not null)
                 result.WithThumbnailUrl(dbUser.Customization.Banner.URL);
             return result;
+        }
+        public static Embed CreateErrorEmbed(string description, Language lang)
+        {
+            return new EmbedBuilder()
+                .WithAuthor(_errorLocalization.Get(lang).Get("embed/error/author"))
+                .WithDescription(description)
+                .Build();
         }
     }
 }
