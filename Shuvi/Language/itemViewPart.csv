@@ -1,0 +1,13 @@
+embed/view/author;;Просмотр предмета
+embed/view/name;;**Название:** {0}
+embed/view/type;;**Тип:** {0}
+embed/view/rank;;**Ранг:** {0}
+embed/view/max;;**Максимум в инвентаре:** {0}
+embed/view/have;;**У вас есть:** {0}
+embed/view/description;;**Описание:**
+embed/view/canTrade;;Можно обменять
+embed/view/canNotTrade;;Нельзя обменять
+embed/view/infinity;;бесконечно
+embed/view/canLoose;;Теряется при смерти
+embed/view/canNotLoose;;Не теряется при смерти
+btn/exit;;Выйти

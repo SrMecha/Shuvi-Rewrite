@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Shuvi.Enums.Item;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.Money;
 using Shuvi.Enums.Rating;
@@ -111,6 +112,24 @@ namespace Shuvi.Classes.Extensions
                 UserProfession.Prufer => "prufer",
                 UserProfession.Kampfer => "kampfer",
                 _ => "none"
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetLowerName(this ItemType target)
+        {
+            return target switch
+            {
+                ItemType.Simple => "simple",
+                ItemType.Weapon => "weapon",
+                ItemType.Helmet => "helmet",
+                ItemType.Armor => "armor",
+                ItemType.Leggings => "leggings",
+                ItemType.Boots => "boots",
+                ItemType.Potion => "potion",
+                ItemType.Chest => "chest",
+                ItemType.Amulet => "amulet",
+                ItemType.Recipe => "recipe",
+                _ => "none",
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]

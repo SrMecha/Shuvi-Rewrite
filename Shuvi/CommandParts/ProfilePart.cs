@@ -1,4 +1,5 @@
 ﻿using Discord;
+using MongoDB.Bson;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Settings;
@@ -75,6 +76,25 @@ namespace Shuvi.CommandParts
                     .WithSelectMenu("view", viewOptions, profileLocalization.Get("select/view/name"))
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
+                await context.LastInteraction.TryDeferAsync();
+                var interaction = await context.WaitForButton();
+                if (interaction is null)
+                {
+                    await context.CurrentMessage!.RemoveButtonsAsync();
+                    return;
+                }
+                switch (interaction.Data.CustomId)
+                {
+                    case "view":
+                        switch (interaction.Data.Values.First())
+                        {
+                            case "":
+                                break;
+                        }
+                        break;
+                    default:
+                        return;
+                }
             }
         }
         private static string GetBadges(UserBadges badges)

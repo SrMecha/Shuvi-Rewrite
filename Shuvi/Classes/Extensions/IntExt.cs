@@ -6,5 +6,9 @@
         {
             return bonus == 0 ? target.ToString() : bonus > 0 ? $"{target} | +{bonus}" : $"{target} | {bonus}";
         }
+        public static bool IsInfinity(this int target)
+        {
+            return target == -1;
+        }
     }
 }

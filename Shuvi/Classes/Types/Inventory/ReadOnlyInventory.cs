@@ -27,6 +27,10 @@ namespace Shuvi.Classes.Types.Inventory
         {
             return _items.GetValueOrDefault(id, 0);
         }
+        public int GetItemAmountAt(int index)
+        {
+            return _items.ElementAt(index).Value;
+        }
         public IItem GetItemAt(int index)
         {
             return ItemDatabase.GetItem(_items.ElementAt(index).Key);

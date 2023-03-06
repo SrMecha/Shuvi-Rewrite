@@ -18,3 +18,14 @@ subrace/werewolf;Warewolf;Оборотень
 profession/none;None;Нету
 profession/prufer;Prüfer;Разведчик
 profession/kampfer;Kämpfer;Боевик
+itemType/simple;;Предмет
+itemType/weapon;;Оружие
+itemType/helmet;;Шлем
+itemType/armor;;Броня
+itemType/leggings;;Поножи
+itemType/boots;;Ботинки
+itemType/potion;;Зелье
+itemType/chest;;Сундук
+itemType/amulet;;Амулет
+itemType/recipe;;Рецепт
+itemType/none;;Не указан

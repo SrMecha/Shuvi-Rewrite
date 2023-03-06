@@ -10,6 +10,7 @@ namespace Shuvi.Interfaces.Inventory
         public TItem GetItem<TItem>(ObjectId id) where TItem : IItem;
         public IItem GetItem(ObjectId id);
         public int GetItemAmount(ObjectId id);
+        public int GetItemAmountAt(int index);
         public IItem GetItemAt(int index);
         public IEnumerable<(TItem, int)> GetItems<TItem>() where TItem : IItem;
         public IEnumerable<(IItem, int)> GetItems();
