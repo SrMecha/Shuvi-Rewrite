@@ -7,6 +7,7 @@ namespace Shuvi.Interfaces.Inventory
     {
         public int Count { get; }
 
+        public bool HaveItem(ObjectId id, int amount = 1);
         public TItem GetItem<TItem>(ObjectId id) where TItem : IItem;
         public IItem GetItem(ObjectId id);
         public int GetItemAmount(ObjectId id);

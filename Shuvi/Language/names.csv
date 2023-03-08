@@ -29,3 +29,4 @@ itemType/chest;;Сундук
 itemType/amulet;;Амулет
 itemType/recipe;;Рецепт
 itemType/none;;Не указан
+notHave;;Нету

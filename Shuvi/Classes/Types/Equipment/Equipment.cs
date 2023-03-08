@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Classes.Types.Characteristics.Static;
+using Shuvi.Enums.Item;
 using Shuvi.Interfaces.Characteristics.Static;
 using Shuvi.Interfaces.Equipment;
 using Shuvi.Interfaces.Items;
@@ -20,6 +21,14 @@ namespace Shuvi.Classes.Types.Equipment
         public virtual IEnumerable<ObjectId?> GetIds()
         {
             return Enumerable.Empty<ObjectId?>();
+        }
+        public virtual void SetEquipment(ItemType type, ObjectId? id)
+        {
+
+        }
+        public virtual ObjectId? GetEquipmentId(ItemType equipment)
+        {
+            return null;
         }
         public virtual IEnumerable<IEquipmentItem?> GetEquipments()
         {

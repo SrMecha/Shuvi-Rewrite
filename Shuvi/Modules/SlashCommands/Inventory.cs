@@ -27,7 +27,8 @@ namespace Shuvi.Modules.SlashCommands
                 return;
             }
             await InventoryPart.Start(Context, dbUser!);
-            await DeleteOriginalResponseAsync();
+            if (Context.LastInteraction is not null)
+                await DeleteOriginalResponseAsync();
         }
     }
 }

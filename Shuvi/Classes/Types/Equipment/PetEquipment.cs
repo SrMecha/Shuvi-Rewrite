@@ -1,5 +1,8 @@
-﻿using MongoDB.Bson;
+﻿using DnsClient;
+using MongoDB.Bson;
+using Shuvi.Enums.Item;
 using Shuvi.Interfaces.Equipment;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Shuvi.Classes.Types.Equipment
 {
@@ -14,6 +17,23 @@ namespace Shuvi.Classes.Types.Equipment
         public override IEnumerable<ObjectId?> GetIds()
         {
             yield return Amulet;
+        }
+        public override void SetEquipment(ItemType type, ObjectId? id)
+        {
+            switch (type)
+            {
+                case ItemType.Amulet:
+                    Amulet = id;
+                    return;
+            }
+        }
+        public override ObjectId? GetEquipmentId(ItemType equipment)
+        {
+            return equipment switch
+            {
+                ItemType.Amulet => Amulet,
+                _ => null
+            };
         }
     }
 }

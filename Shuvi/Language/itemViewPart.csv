@@ -11,3 +11,12 @@ embed/view/infinity;;бесконечно
 embed/view/canLoose;;Теряется при смерти
 embed/view/canNotLoose;;Не теряется при смерти
 btn/exit;;Выйти
+embed/view/bonuses;;**Бонусы:**
+embed/view/requirements;;**Требования:**
+embed/view/notHave;;Нету.
+btn/equip;;Надеть
+embed/view/equipped;;Надето
+error/notHaveItem;;У вас нету данного предмета.
+embed/view/itemEquipped;;Предмет успешно надет.
+btn/use;;Использовать
+embed/view/potionUsed;;Зелье успешно использовано.

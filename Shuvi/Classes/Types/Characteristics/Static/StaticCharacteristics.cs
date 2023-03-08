@@ -91,5 +91,13 @@ namespace Shuvi.Classes.Types.Characteristics.Static
                     break;
             }
         }
+        public IEnumerator<(StaticCharacteristic, int)> GetEnumerator()
+        {
+            yield return (StaticCharacteristic.Strength, Strength);
+            yield return (StaticCharacteristic.Agility, Agility);
+            yield return (StaticCharacteristic.Luck, Luck);
+            yield return (StaticCharacteristic.Intellect, Intellect);
+            yield return (StaticCharacteristic.Endurance, Endurance);
+        }
     }
 }

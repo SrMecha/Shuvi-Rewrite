@@ -15,6 +15,10 @@ namespace Shuvi.Classes.Types.Inventory
         {
             _items = items;
         }
+        public bool HaveItem(ObjectId id, int amount = 1)
+        {
+            return _items.GetValueOrDefault(id, 0) >= amount;
+        }
         public TItem GetItem<TItem>(ObjectId id) where TItem : IItem
         {
             return ItemDatabase.GetItem<TItem>(id);

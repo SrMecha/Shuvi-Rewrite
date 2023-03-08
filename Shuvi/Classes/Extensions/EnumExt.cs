@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Shuvi.Enums.Characteristic;
 using Shuvi.Enums.Item;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.Money;
@@ -61,6 +62,30 @@ namespace Shuvi.Classes.Extensions
                 BaseRequirement.Intellect => "intellect",
                 BaseRequirement.Endurance => "endurance",
                 BaseRequirement.Rank => "rank",
+                _ => string.Empty
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetLowerName(this DynamicCharacteristic target)
+        {
+            return target switch
+            {
+                DynamicCharacteristic.Health => "health",
+                DynamicCharacteristic.Energy => "energy",
+                DynamicCharacteristic.Mana => "mana",
+                _ => string.Empty
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetLowerName(this StaticCharacteristic target)
+        {
+            return target switch
+            {
+                StaticCharacteristic.Strength => "strength",
+                StaticCharacteristic.Agility => "agility",
+                StaticCharacteristic.Luck => "luck",
+                StaticCharacteristic.Intellect => "intellect",
+                StaticCharacteristic.Endurance => "endurance",
                 _ => string.Empty
             };
         }

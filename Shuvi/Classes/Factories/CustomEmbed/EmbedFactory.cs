@@ -32,6 +32,14 @@ namespace Shuvi.Classes.Factories.CustomEmbed
             return new EmbedBuilder()
                 .WithAuthor(_errorLocalization.Get(lang).Get("embed/error/author"))
                 .WithDescription(description)
+                .WithColor(Color.Red)
+                .Build();
+        }
+        public static Embed CreateInfoEmbed(string description)
+        {
+            return new EmbedBuilder()
+                .WithDescription(description)
+                .WithColor(Color.Blue)
                 .Build();
         }
     }

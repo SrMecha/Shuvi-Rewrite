@@ -32,5 +32,9 @@ namespace Shuvi.Services.StaticServices.Database
             }
             return null;
         }
+        public static async Task UpdatePet(ObjectId id, UpdateDefinition<PetData> updateConfig)
+        {
+            await _collection!.UpdateOneAsync(new BsonDocument { { "_id", id } }, updateConfig);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Shuvi.CommandParts
         public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser)
         {
             var haveItems = true;
-            var maxPage = dbUser.Inventory.Count / 10;
+            var maxPage = (dbUser.Inventory.Count + 9) / 10;
             if (maxPage < 1)
             {
                 haveItems = false;

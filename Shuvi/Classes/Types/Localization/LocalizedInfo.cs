@@ -20,7 +20,7 @@ namespace Shuvi.Classes.Types.Localization
         }
         public string GetName(Language lang)
         {
-            return _descriptions.GetValueOrDefault(lang, "NoNameProvided");
+            return _names.GetValueOrDefault(lang, "NoNameProvided");
         }
         public string GetDescription(Language lang)
         {
