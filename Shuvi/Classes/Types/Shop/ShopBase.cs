@@ -54,7 +54,7 @@ namespace Shuvi.Classes.Types.Shop
             user.Customization.AddImages(ShopBasket.Customization);
             user.Wallet.Add(ShopBasket.Wallet);
             await UserDatabase.UpdateUser(user.Id, new UpdateDefinitionBuilder<UserData>()
-                .Set(x => x.Inventory, user.Inventory.GetItemsCache())
+                .Set(x => x.Inventory, user.Inventory.GetItemsDictionary())
                 .Set(x => x.Images, user.Customization.GetImagesCache())
                 .Inc(x => x.Gold, ShopBasket.Wallet.Gold)
                 .Inc(x => x.Dispoints, ShopBasket.Wallet.Dispoints));

@@ -26,6 +26,13 @@ namespace Shuvi.Classes.Types.Inventory
             else
                 _money.Add(type, amount);
         }
+        public void AddInventory(IDropInventory drop)
+        {
+            foreach (var (item, amount) in drop.GetItems())
+                AddItem(item.Id, amount);
+            foreach (var (type, amount) in drop.GetMoney())
+                AddMoney(type, amount);
+        }
         public string GetDropInfo(Language lang)
         {
             var result = new List<string>();
@@ -38,6 +45,10 @@ namespace Shuvi.Classes.Types.Inventory
         public IEnumerable<KeyValuePair<MoneyType, int>> GetMoney()
         {
             return _money.AsEnumerable();
+        }
+        public Dictionary<MoneyType, int> GetMoneyDictionary()
+        {
+            return _money;
         }
     }
 }

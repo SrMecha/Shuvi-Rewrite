@@ -12,5 +12,6 @@ namespace Shuvi.Interfaces.Craft
         public IReadOnlyInventory Items { get; }
 
         public IItem GetCraftedItem();
+        public int GetMaxCraft(IReadOnlyInventory inventory);
     }
 }

@@ -9,6 +9,7 @@ namespace Shuvi.Interfaces.User
 
         public void Add(MoneyType type, int amount);
         public void Add(IUserWallet wallet);
+        public void Add(Dictionary<MoneyType, int> money);
         public void Reduce(MoneyType type, int amount);
         public void Set(MoneyType type, int amount);
         public int Get(MoneyType type);

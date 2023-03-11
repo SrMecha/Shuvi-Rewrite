@@ -1,5 +1,4 @@
-﻿using Discord.Rest;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Enums.Localization;
 
@@ -19,9 +18,9 @@ namespace Shuvi.Classes.Extensions
         {
             await interaction.RespondAsync(embed: EmbedFactory.CreateErrorEmbed(description, lang), ephemeral: true);
         }
-        public static async Task SendInfo(this SocketInteraction interaction, string description)
+        public static async Task SendInfo(this SocketInteraction interaction, string description, string title = "")
         {
-            await interaction.RespondAsync(embed: EmbedFactory.CreateInfoEmbed(description), ephemeral: true);
+            await interaction.RespondAsync(embed: EmbedFactory.CreateInfoEmbed(description, title), ephemeral: true);
         }
     }
 }

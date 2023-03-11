@@ -53,5 +53,9 @@ namespace Shuvi.Classes.Types.Inventory
         {
             return _items.Keys;
         }
+        public Dictionary<ObjectId, int> GetItemsDictionary()
+        {
+            return _items;
+        }
     }
 }

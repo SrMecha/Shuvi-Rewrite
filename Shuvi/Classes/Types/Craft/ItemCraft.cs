@@ -26,5 +26,16 @@ namespace Shuvi.Classes.Types.Craft
         {
             return ItemDatabase.GetItem(CraftedItemId);
         }
+        public int GetMaxCraft(IReadOnlyInventory inventory)
+        {
+            var max = int.MaxValue;
+            foreach ( var (itemId, amount) in Items.GetItemsDictionary())
+            {
+                var currentAmount = inventory.GetItemAmount(itemId) / amount;
+                if (currentAmount < max)
+                    max = currentAmount;
+            }
+            return max;
+        }
     }
 }

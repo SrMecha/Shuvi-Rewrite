@@ -26,6 +26,11 @@ namespace Shuvi.Classes.Types.User
                     break;
             }
         }
+        public void Add(Dictionary<MoneyType, int> money)
+        {
+            foreach (var (type, amount) in money)
+                Add(type, amount);
+        }
         public void Add(IUserWallet wallet)
         {
             Gold += wallet.Gold;

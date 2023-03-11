@@ -20,3 +20,10 @@ error/notHaveItem;;У вас нету данного предмета.
 embed/view/itemEquipped;;Предмет успешно надет.
 btn/use;;Использовать
 embed/view/potionUsed;;Зелье успешно использовано.
+embed/view/damageMult;;**Множитель урона:** {0}
+embed/view/features;;**Особенности:**
+embed/view/chances;;**Шансы:**
+embed/view/received;;Вы получили:
+embed/view/neededItems;;**Рецепт:**
+btn/viewItem;;Посмотреть предмет
+embed/view/craftedItem;;**Вы получите:** {0}

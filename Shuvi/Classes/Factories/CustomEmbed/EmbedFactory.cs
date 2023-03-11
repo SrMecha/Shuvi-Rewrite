@@ -42,5 +42,13 @@ namespace Shuvi.Classes.Factories.CustomEmbed
                 .WithColor(Color.Blue)
                 .Build();
         }
+        public static Embed CreateInfoEmbed(string description, string title)
+        {
+            return new EmbedBuilder()
+                .WithAuthor(title)
+                .WithDescription(description)
+                .WithColor(Color.Blue)
+                .Build();
+        }
     }
 }

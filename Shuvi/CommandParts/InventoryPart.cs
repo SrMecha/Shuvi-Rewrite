@@ -59,7 +59,7 @@ namespace Shuvi.CommandParts
                         pageNow++;
                         break;
                     case "choose":
-                        await ItemViewPart.Start(context, dbUser, new ObjectId(interaction.Data.Values.First()));
+                        await ItemViewPart.Start(context, dbUser, new ObjectId(interaction.Data.Values.First()), true);
                         break;
                     default:
                         return;
