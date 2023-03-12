@@ -73,7 +73,7 @@ namespace Shuvi.CommandParts
             {
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                     .WithAuthor(equipmentLocalization.Get("embed/view/equipment").Format(pet.Name))
-                    .WithDescription(GetEquipmentInfo(dbUser.Equipment, context.Language))
+                    .WithDescription(GetEquipmentInfo(pet.Equipment, context.Language))
                     .Build();
                 MessageComponent components;
                 if (canEdit)
