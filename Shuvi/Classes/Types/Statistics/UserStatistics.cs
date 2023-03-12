@@ -1,5 +1,7 @@
-﻿using Shuvi.Classes.Data.Statistics;
+﻿using MongoDB.Bson;
+using Shuvi.Classes.Data.Statistics;
 using Shuvi.Interfaces.Statistics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Shuvi.Classes.Types.Statistics
 {
@@ -9,16 +11,18 @@ namespace Shuvi.Classes.Types.Statistics
         public long LiveTime { get; private set; }
         public int DeathCount { get; private set; }
         public int DungeonComplite { get; private set; }
-        public int EnemyKilled { get; private set; }
+        public int TotalEnemyKilled { get; private set; }
+        public Dictionary<ObjectId, int> EnemyKills { get; private set; }
         public int MaxRating { get; private set; }
 
-        public UserStatistics(long createdAt, long liveTime, int deathCount, int dungeonComplite, int enemyKilled, int maxRating)
+        public UserStatistics(long createdAt, long liveTime, int deathCount, int dungeonComplite, Dictionary<ObjectId, int> enemyKills, int maxRating)
         {
             CreatedAt = createdAt;
             LiveTime = liveTime;
             DeathCount = deathCount;
             DungeonComplite = dungeonComplite;
-            EnemyKilled = enemyKilled;
+            EnemyKills = enemyKills;
+            TotalEnemyKilled = enemyKills.Values.Sum();
             MaxRating = maxRating;
         }
         public UserStatistics(UserStatisticsData data)
@@ -27,12 +31,9 @@ namespace Shuvi.Classes.Types.Statistics
             LiveTime = data.LiveTime;
             DeathCount = data.DeathCount;
             DungeonComplite = data.DungeonComplite;
-            EnemyKilled = data.EnemyKilled;
+            EnemyKills = data.EnemyKills;
+            TotalEnemyKilled = data.EnemyKills.Values.Sum();
             MaxRating = data.MaxRating;
-        }
-        public void AddEnemyKilled(int amount = 1)
-        {
-            EnemyKilled += amount;
         }
         public void AddDeathCount(int amount = 1)
         {
@@ -49,6 +50,17 @@ namespace Shuvi.Classes.Types.Statistics
         public void RecordLiveTime()
         {
             LiveTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+        }
+        public void AddEnemyKilled(ObjectId enemyId, int amount = 1)
+        {
+            if (EnemyKills.ContainsKey(enemyId))
+                EnemyKills[enemyId] += amount;
+            else
+                EnemyKills[enemyId] = amount;
+        }
+        public int GetEnemyKills(ObjectId enemyId)
+        {
+            return EnemyKills.GetValueOrDefault(enemyId, 0);
         }
     }
 }
