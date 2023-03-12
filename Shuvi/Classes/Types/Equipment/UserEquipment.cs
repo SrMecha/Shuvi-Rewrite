@@ -28,6 +28,14 @@ namespace Shuvi.Classes.Types.Equipment
             yield return Leggings;
             yield return Boots;
         }
+        public override IEnumerable<(ItemType, ObjectId?)> GetIdsWithType()
+        {
+            yield return (ItemType.Weapon, Weapon);
+            yield return (ItemType.Helmet, Helmet);
+            yield return (ItemType.Armor, Armor);
+            yield return (ItemType.Leggings, Leggings);
+            yield return (ItemType.Boots, Boots);
+        }
         public override void SetEquipment(ItemType type, ObjectId? id)
         {
             switch (type)

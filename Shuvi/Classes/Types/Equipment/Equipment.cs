@@ -22,6 +22,10 @@ namespace Shuvi.Classes.Types.Equipment
         {
             return Enumerable.Empty<ObjectId?>();
         }
+        public virtual IEnumerable<(ItemType, ObjectId?)> GetIdsWithType()
+        {
+            return Enumerable.Empty<(ItemType, ObjectId?)>();
+        }
         public virtual void SetEquipment(ItemType type, ObjectId? id)
         {
 
@@ -34,6 +38,11 @@ namespace Shuvi.Classes.Types.Equipment
         {
             foreach (var id in GetIds())
                 yield return id is null ? null : ItemDatabase.GetItem<IEquipmentItem>((ObjectId)id);
+        }
+        public virtual IEnumerable<(ItemType, IEquipmentItem?)> GetEquipmentsWithType()
+        {
+            foreach (var (type, id) in GetIdsWithType())
+                yield return id is null ? (type, null) : (type, ItemDatabase.GetItem<IEquipmentItem>((ObjectId)id));
         }
     }
 }

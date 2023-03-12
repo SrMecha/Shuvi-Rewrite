@@ -1,0 +1,7 @@
+embed/view/equipment;;Экипировка {0}
+embed/view/notHave;;Нету
+select/view/name;;Снять экипировку.
+btn/exit;;Выйти
+embed/view/itemUnequipped;;Предмет был успешно снят.
+;;
+;;

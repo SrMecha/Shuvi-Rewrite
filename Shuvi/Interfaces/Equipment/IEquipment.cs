@@ -9,8 +9,10 @@ namespace Shuvi.Interfaces.Equipment
     {
         public IStaticCharacteristics GetBonuses();
         public IEnumerable<ObjectId?> GetIds();
+        public IEnumerable<(ItemType, ObjectId?)> GetIdsWithType();
         public void SetEquipment(ItemType type, ObjectId? id);
         public ObjectId? GetEquipmentId(ItemType equipment);
         public IEnumerable<IEquipmentItem?> GetEquipments();
+        public IEnumerable<(ItemType, IEquipmentItem?)> GetEquipmentsWithType();
     }
 }

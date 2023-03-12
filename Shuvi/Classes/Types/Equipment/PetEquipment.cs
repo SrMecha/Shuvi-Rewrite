@@ -18,6 +18,10 @@ namespace Shuvi.Classes.Types.Equipment
         {
             yield return Amulet;
         }
+        public override IEnumerable<(ItemType, ObjectId?)> GetIdsWithType()
+        {
+            yield return (ItemType.Amulet, Amulet);
+        }
         public override void SetEquipment(ItemType type, ObjectId? id)
         {
             switch (type)
