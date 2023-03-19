@@ -8,7 +8,7 @@ namespace Shuvi.Classes.Extensions
     public static class DictionaryExt
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetItemsNeededInfo(this Dictionary<ObjectId, int> items, Dictionary<ObjectId, int> otherItems Language lang)
+        public static string GetItemsNeededInfo(this Dictionary<ObjectId, int> items, Dictionary<ObjectId, int> otherItems, Language lang)
         {
             var result = new List<string>();
             foreach (var (itemId, amount) in items)

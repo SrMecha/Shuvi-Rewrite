@@ -1,0 +1,10 @@
+none/name;;Без магии
+none/description;; 
+fire/name;;Магия огня
+fire/description;;
+water/name;;Магия воды
+water/description;;
+wind/name;;Магия ветра
+wind/description;;
+earth/name;;Магия земли
+earth/description;;

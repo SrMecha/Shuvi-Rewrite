@@ -1,4 +1,5 @@
 ﻿using Shuvi.Enums.Localization;
+using Shuvi.Enums.Magic;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Requirements;
@@ -9,6 +10,7 @@ namespace Shuvi.Interfaces.Spell
     public interface ISpell
     {
         public ILocalizedInfo Info { get; }
+        public MagicType MagicType { get; }
         public IBaseRequirements Requirements { get; }
         public int Cost { get; }
 

@@ -5,6 +5,7 @@ using Shuvi.Interfaces.Characteristics;
 using Shuvi.Interfaces.Customization;
 using Shuvi.Interfaces.Equipment;
 using Shuvi.Interfaces.Inventory;
+using Shuvi.Interfaces.Magic;
 using Shuvi.Interfaces.Map;
 using Shuvi.Interfaces.Pet;
 using Shuvi.Interfaces.Premium;
@@ -22,6 +23,7 @@ namespace Shuvi.Interfaces.User
         public IUserPremium Premium { get; }
         public IUserUpgradePoints UpgradePoints { get; }
         public IUserWallet Wallet { get; }
+        public IMagicInfo MagicInfo { get; }
         public IChangableSpellInfo Spell { get; }
         public IChangableSkillInfo Skill { get; }
         public UserRace Race { get; }

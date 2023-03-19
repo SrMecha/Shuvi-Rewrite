@@ -2,6 +2,7 @@
 using Shuvi.Enums.Characteristic;
 using Shuvi.Enums.Item;
 using Shuvi.Enums.Localization;
+using Shuvi.Enums.Magic;
 using Shuvi.Enums.Money;
 using Shuvi.Enums.Rating;
 using Shuvi.Enums.Requirements;
@@ -74,6 +75,19 @@ namespace Shuvi.Classes.Extensions
                 DynamicCharacteristic.Energy => "energy",
                 DynamicCharacteristic.Mana => "mana",
                 _ => string.Empty
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetLowerName(this MagicType target)
+        {
+            return target switch
+            {
+                MagicType.None => "none",
+                MagicType.Fire => "fire",
+                MagicType.Water => "water",
+                MagicType.Wind => "wind",
+                MagicType.Earth => "earth",
+                _ => "none"
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]

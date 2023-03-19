@@ -12,3 +12,9 @@ select/view/option/location;;Местоположение
 select/view/option/statistics;;Статистика
 select/view/option/pet;;Питомец
 error/accountNotFound;;Данный пользователь не имеет персонажа для просмотра.
+select/view/option/inventory;;Инвентарь
+select/edit/name;;Настройки персонажа.
+select/edit/option/upgrade;;Улучшение
+select/edit/option/customization;;Кастомизация
+select/edit/option/fightSettings;;Настройки сражения
+select/edit/option/premium;;Премиум

@@ -7,6 +7,7 @@ using Shuvi.Classes.Types.Characteristics.Static;
 using Shuvi.Classes.Types.Customization;
 using Shuvi.Classes.Types.Equipment;
 using Shuvi.Classes.Types.Inventory;
+using Shuvi.Classes.Types.Magic;
 using Shuvi.Classes.Types.Map;
 using Shuvi.Classes.Types.Pet;
 using Shuvi.Classes.Types.Premium;
@@ -20,6 +21,7 @@ using Shuvi.Interfaces.Characteristics;
 using Shuvi.Interfaces.Customization;
 using Shuvi.Interfaces.Equipment;
 using Shuvi.Interfaces.Inventory;
+using Shuvi.Interfaces.Magic;
 using Shuvi.Interfaces.Map;
 using Shuvi.Interfaces.Pet;
 using Shuvi.Interfaces.Premium;
@@ -38,6 +40,7 @@ namespace Shuvi.Classes.Types.User
         public IUserPremium Premium { get; private set; }
         public IUserUpgradePoints UpgradePoints { get; private set; }
         public IUserWallet Wallet { get; private set; }
+        public IMagicInfo MagicInfo { get; private set; }
         public IChangableSpellInfo Spell { get; private set; }
         public IChangableSkillInfo Skill { get; private set; }
         public UserRace Race { get; private set; }
@@ -64,6 +67,7 @@ namespace Shuvi.Classes.Types.User
                 data.EnergyRegenTime);
             UpgradePoints = new UserUpgradePoints(Rating, Characteristics);
             Wallet = new UserWallet(data.Gold, data.Dispoints);
+            MagicInfo = new MagicInfo(data.MagicType);
             Spell = new ChangableSpellInfo(data.Spell);
             Skill = new ChangableSkillInfo(data.Skill);
             Race = data.Race;

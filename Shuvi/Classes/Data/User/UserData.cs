@@ -4,6 +4,7 @@ using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
 using Shuvi.Enums.Localization;
+using Shuvi.Enums.Magic;
 using Shuvi.Enums.Premium;
 using Shuvi.Enums.User;
 
@@ -39,6 +40,7 @@ namespace Shuvi.Classes.Data.User
         public UserSubrace Subrace { get; set; } = UserSubrace.NoSubrace;
         public UserProfession Profession { get; set; } = UserProfession.NoProfession;
 
+        public MagicType MagicType { get; set; } = MagicType.None;
         public string? Spell { get; set; } = null;
         public string? Skill { get; set; } = null;
         public UserFightActionsData ActionChances { get; set; } = new();

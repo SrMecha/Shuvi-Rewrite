@@ -2,6 +2,7 @@
 using Shuvi.Classes.Types.Requirements;
 using Shuvi.Classes.Types.Status;
 using Shuvi.Enums.Localization;
+using Shuvi.Enums.Magic;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Requirements;
@@ -15,6 +16,7 @@ namespace Shuvi.Classes.Types.Spell.SpellList
     {
 
         public ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells", "none");
+        public MagicType MagicType { get; } = MagicType.None;
         public IBaseRequirements Requirements { get; } = new BaseRequirements();
         public int Cost { get; } = 0;
 

@@ -36,7 +36,7 @@ namespace Shuvi.Modules.SlashCommands
                 await Context.SendError(localization.Get("error/accountNotFound"), Context.Language);
                 return;
             }
-            await ProfilePart.Start(Context, dbUser!, isOwnProfile);
+            await UserProfilePart.Start(Context, dbUser!, isOwnProfile);
         }
     }
 }

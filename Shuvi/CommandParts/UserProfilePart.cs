@@ -1,5 +1,4 @@
 ﻿using Discord;
-using MongoDB.Bson;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Settings;
@@ -12,7 +11,7 @@ using Shuvi.Services.StaticServices.Localization;
 
 namespace Shuvi.CommandParts
 {
-    public static class ProfilePart
+    public static class UserProfilePart
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("profilePart");
 
@@ -65,16 +64,43 @@ namespace Shuvi.CommandParts
                     $"{(dbUser.Characteristics.Mana.GetRemainingRegenTime() == 0 ? "" :
                     $"[{profileLocalization.Get("embed/profile/recover")} <t:{dbUser.Characteristics.Mana.RegenTime}:R>]")}")
                     .Build();
-                var viewOptions = new List<SelectMenuOptionBuilder>()
+                MessageComponent components;
+                if (canEdit)
                 {
-                    new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/equipment"), "equipment"),
-                    new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/location"), "location"),
-                    new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/statistics"), "statistics"),
-                    new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
-                };
-                var components = new ComponentBuilder()
-                    .WithSelectMenu("view", viewOptions, profileLocalization.Get("select/view/name"))
-                    .Build();
+
+                    var viewOptions = new List<SelectMenuOptionBuilder>()
+                    {
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/equipment"), "equipment"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/location"), "location"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/equipment"), "inventory"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/statistics"), "statistics"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
+                    };
+                    var editOptions = new List<SelectMenuOptionBuilder>()
+                    {
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/upgrade"), "upgrade"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/customization"), "customization"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/fightSettings"), "fightSettings"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/premium"), "premium")
+                    };
+                    components = new ComponentBuilder()
+                        .WithSelectMenu("view", viewOptions, profileLocalization.Get("select/view/name"))
+                        .WithSelectMenu("edit", editOptions, profileLocalization.Get("select/edit/name"))
+                        .Build();
+                }
+                else
+                {
+                    var viewOptions = new List<SelectMenuOptionBuilder>()
+                    {
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/equipment"), "equipment"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/location"), "location"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/statistics"), "statistics"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
+                    };
+                    components = new ComponentBuilder()
+                        .WithSelectMenu("view", viewOptions, profileLocalization.Get("select/view/name"))
+                        .Build();
+                }
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
                 var interaction = await context.WaitForButton();
