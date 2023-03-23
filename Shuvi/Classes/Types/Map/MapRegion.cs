@@ -34,9 +34,9 @@ namespace Shuvi.Classes.Types.Map
         }
         public IMapLocation GetLocation(int index)
         {
-            if (Locations.Count >= index)
-                return new MapLocation(new());
-            return Locations[index];
+            if (Locations.Count > index)
+                return Locations[index];
+            return new MapLocation(new());
         }
     }
 }

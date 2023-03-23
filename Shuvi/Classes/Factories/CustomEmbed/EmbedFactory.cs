@@ -20,7 +20,7 @@ namespace Shuvi.Classes.Factories.CustomEmbed
         {
             var result = new EmbedBuilder()
                 .WithColor(dbUser.Premium.HaveAbility(PremiumAbilities.ChangeColor) ? dbUser.Customization.Color : CustomizationSettings.StandartColor)
-                .WithFooter($"{discordUser.Username}#{discordUser.Discriminator} | {discordUser.Id}");
+                .WithFooter($"{discordUser.Username}#{discordUser.Discriminator} | {discordUser.Id}", discordUser.GetAvatarUrl());
             if (withAvatar && dbUser.Customization.Avatar is not null)
                 result.WithThumbnailUrl(dbUser.Customization.Avatar.URL);
             if (withBanner && dbUser.Customization.Banner is not null)
@@ -30,7 +30,7 @@ namespace Shuvi.Classes.Factories.CustomEmbed
         public static Embed CreateErrorEmbed(string description, Language lang)
         {
             return new EmbedBuilder()
-                .WithAuthor(_errorLocalization.Get(lang).Get("embed/error/author"))
+                .WithAuthor(_errorLocalization.Get(lang).Get("embed/error"))
                 .WithDescription(description)
                 .WithColor(Color.Red)
                 .Build();

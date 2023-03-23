@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
 using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
@@ -31,6 +32,7 @@ namespace Shuvi.Classes.Data.User
 
         public int Gold { get; set; } = 0;
         public int Dispoints { get; set; } = 0;
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<ObjectId, int> Inventory { get; set; } = new();
 
         public ObjectId? Pet { get; set; } = null;

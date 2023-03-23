@@ -72,7 +72,7 @@ namespace Shuvi.CommandParts
                     {
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/equipment"), "equipment"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/location"), "location"),
-                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/equipment"), "inventory"),
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/inventory"), "inventory"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/statistics"), "statistics"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
                     };
@@ -114,7 +114,17 @@ namespace Shuvi.CommandParts
                     case "view":
                         switch (interaction.Data.Values.First())
                         {
-                            case "":
+                            case "equipment":
+                                await EquipmentViewPart.Start(context, dbUser, canEdit);
+                                break;
+                            case "location":
+                                await LocationViewPart.Start(context, dbUser);
+                                break;
+                            case "statistics":
+                                await StatisticsViewPart.Start(context, dbUser);
+                                break;
+                            case "inventory":
+                                await InventoryPart.Start(context, dbUser, canEdit);
                                 break;
                         }
                         break;

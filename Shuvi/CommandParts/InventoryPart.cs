@@ -14,7 +14,7 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("inventoryPart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, bool canInteract = true)
         {
             var haveItems = true;
             var maxPage = (dbUser.Inventory.Count + 9) / 10;
@@ -59,7 +59,7 @@ namespace Shuvi.CommandParts
                         pageNow++;
                         break;
                     case "choose":
-                        await ItemViewPart.Start(context, dbUser, new ObjectId(interaction.Data.Values.First()), true);
+                        await ItemViewPart.Start(context, dbUser, new ObjectId(interaction.Data.Values.First()), canInteract);
                         break;
                     default:
                         return;

@@ -29,11 +29,17 @@ namespace Shuvi.Classes.Types.Interaction
         }
         public async Task SendError(Embed embed)
         {
-            await LastInteraction.RespondAsync(embed: embed, ephemeral: true);
+            if (!LastInteraction.HasResponded)
+                await LastInteraction.RespondAsync(embed: embed, ephemeral: true);
+            else
+                await Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; });
         }
         public async Task SendError(string description, Language lang)
         {
-            await LastInteraction.RespondAsync(embed: EmbedFactory.CreateErrorEmbed(description, lang), ephemeral: true);
+            if (!LastInteraction.HasResponded)
+                await LastInteraction.RespondAsync(embed: EmbedFactory.CreateErrorEmbed(description, lang), ephemeral: true);
+            else
+                await Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = EmbedFactory.CreateErrorEmbed(description, lang); });
         }
     }
 }

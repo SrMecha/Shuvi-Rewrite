@@ -2,6 +2,7 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using Shuvi.Services.StaticServices.Check;
 using System.Reflection;
 
 namespace Shuvi.Services.DiscordServices
@@ -51,7 +52,8 @@ namespace Shuvi.Services.DiscordServices
             // Perform the execution of the command. In this method,
             // the command service will perform precondition and parsing check
             // then execute the command if one is matched.
-            await _commands.ExecuteAsync(context, argPos, _services);
+            if (UserCheckService.isAdmin(context.User.Id))
+                await _commands.ExecuteAsync(context, argPos, _services);
             // Note that normally a result will be returned by this format, but here
             // we will handle the result in CommandExecutedAsync,
         }
@@ -67,7 +69,7 @@ namespace Shuvi.Services.DiscordServices
                 return;
 
             // the command failed, let's notify the user that something happened.
-            await context.Channel.SendMessageAsync($"error: {result}");
+            await context.Channel.SendMessageAsync($"error: {result.ErrorReason}");
         }
     }
 }

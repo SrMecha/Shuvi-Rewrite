@@ -2,6 +2,7 @@
 using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Items;
 using Shuvi.Services.StaticServices.Database;
+using System.Linq;
 
 namespace Shuvi.Classes.Types.Inventory
 {
@@ -56,6 +57,10 @@ namespace Shuvi.Classes.Types.Inventory
         public Dictionary<ObjectId, int> GetItemsDictionary()
         {
             return _items;
+        }
+        public Dictionary<string, int> GetDictionaryToSave()
+        {
+            return _items.ToDictionary(x => x.Key.ToString(), x => x.Value);
         }
     }
 }

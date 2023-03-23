@@ -19,9 +19,9 @@ namespace Shuvi.CommandParts
                 var statisticsLocalization = _localizationPart.Get(context.Language);
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                     .WithAuthor(statisticsLocalization.Get("embed/view/author").Format(context.User.Username))
-                    .WithDescription($"**{statisticsLocalization.Get("embed/view/maxRating")}:** {dbUser.Statistics.MaxRating}" +
-                    $"**{statisticsLocalization.Get("embed/view/enemyKilled")}:** {dbUser.Statistics.TotalEnemyKilled}" +
-                    $"**{statisticsLocalization.Get("embed/view/dungeonComplite")}:** {dbUser.Statistics.DungeonComplite}" +
+                    .WithDescription($"**{statisticsLocalization.Get("embed/view/maxRating")}:** {dbUser.Statistics.MaxRating}\n" +
+                    $"**{statisticsLocalization.Get("embed/view/enemyKilled")}:** {dbUser.Statistics.TotalEnemyKilled}\n" +
+                    $"**{statisticsLocalization.Get("embed/view/dungeonComplite")}:** {dbUser.Statistics.DungeonComplite}\n" +
                     $"**{statisticsLocalization.Get("embed/view/deaths")}:** {dbUser.Statistics.DeathCount}\n\n" +
                     $"{(dbUser.Statistics.DeathCount < 1 ? string.Empty : $"**{statisticsLocalization.Get("embed/view/lastDeath")}:** " +
                     $"<t:{dbUser.Statistics.LiveTime}:R>\n\n")}" +

@@ -55,7 +55,7 @@ namespace Shuvi.CommandParts
                     case "exit":
                         return;
                     default:
-                        var type = (ItemType)int.Parse(interaction.Data.CustomId);
+                        var type = (ItemType)int.Parse(interaction.Data.Values.First());
                         dbUser.Equipment.SetEquipment(type, null);
                         await UserDatabase.UpdateUser(dbUser.Id,
                             new UpdateDefinitionBuilder<UserData>().Set(nameof(type), BsonNull.Value));

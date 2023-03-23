@@ -23,9 +23,9 @@ namespace Shuvi.Services.StaticServices.Map
         }
         public static IMapRegion GetRegion(int index)
         {
-            if (Regions.Count >= index)
-                return new MapRegion(new());
-            return Regions[index];
+            if (Regions.Count > index)
+                return Regions[index];
+            return new MapRegion(new());
         }
     }
 }

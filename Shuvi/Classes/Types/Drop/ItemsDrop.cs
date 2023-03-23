@@ -29,7 +29,7 @@ namespace Shuvi.Classes.Types.Drop
             {
                 result.AddItem(item.Id, item.Min);
                 for (int i = 0; i < item.Max - item.Min; i++)
-                    if (item.Chance + (luck / 0.1f) < +random.Next(0, 1001) * 0.1f)
+                    if (item.Chance + (luck * 0.1f) >= +random.Next(0, 10001) * 0.01f)
                         result.AddItem(item.Id);
             }
             return result;
@@ -38,8 +38,8 @@ namespace Shuvi.Classes.Types.Drop
         {
             var result = new List<string>();
             foreach (var item in Items)
-                result.Add($"{ItemDatabase.GetItem(item.Id).Info.GetName(lang)} {(item.Min == item.Max ? $"{item.Min}x" : $"{item.Min} - {item.Max}x")}" +
-                    $"{item.Chance + (luck / 0.1f)}%");
+                result.Add($"{ItemDatabase.GetItem(item.Id).Info.GetName(lang)} | {(item.Min == item.Max ? $"x{item.Min}" : $"x{item.Min}-{item.Max}")} |" +
+                    $" {item.Chance + (luck * 0.1f)}%");
             return string.Join("\n", result);
         }
     }

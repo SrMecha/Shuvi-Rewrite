@@ -17,5 +17,6 @@ namespace Shuvi.Interfaces.Inventory
         public IEnumerable<(IItem, int)> GetItems();
         public IEnumerable<ObjectId> GetItemsId();
         public Dictionary<ObjectId, int> GetItemsDictionary();
+        public Dictionary<string, int> GetDictionaryToSave();
     }
 }

@@ -398,11 +398,13 @@ namespace Shuvi.CommandParts
                         return;
                     case "1" or "2" or "5":
                         var drop = new DropInventory();
-                        for (int i = 0; i < int.Parse(interaction.Data.CustomId); i++)
+                        var amount = int.Parse(interaction.Data.CustomId);
+                        for (int i = 0; i < amount; i++)
                         {
                             drop.AddInventory(item.Drop.GetDrop(dbUser.Characteristics.Luck));
                         }
                         dbUser.AddDrop(drop);
+                        dbUser.Inventory.RemoveItem(itemId, amount);
                         await UserDatabase.UpdateUser(dbUser.Id, new UpdateDefinitionBuilder<UserData>()
                             .Set(x => x.Gold, dbUser.Wallet.Gold)
                             .Set(x => x.Dispoints, dbUser.Wallet.Dispoints)

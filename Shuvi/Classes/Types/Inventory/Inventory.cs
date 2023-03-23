@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Interfaces.Inventory;
+using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Classes.Types.Inventory
 {
@@ -13,6 +14,9 @@ namespace Shuvi.Classes.Types.Inventory
         {
             if (amount <= 0)
                 return;
+            var max = ItemDatabase.GetItem(id).Max;
+            if (_items.GetValueOrDefault(id, 0) + amount > max && max != -1)
+                amount = max - _items.GetValueOrDefault(id, 0);
             if (_items.ContainsKey(id))
                 _items[id] += amount;
             else
