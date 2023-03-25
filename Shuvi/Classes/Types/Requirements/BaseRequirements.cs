@@ -31,7 +31,7 @@ namespace Shuvi.Classes.Types.Requirements
         {
             var result = new List<string>();
             foreach (var (requirement, amount) in _requirements)
-                result.Add($"{(IsMeetRequirement(requirement, amount, user) ? EmojiService.Get("goodMark") : EmojiService.Get("goodMark"))}" +
+                result.Add($"{(IsMeetRequirement(requirement, amount, user) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))}" +
                     $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} >{amount}");
             return string.Join("\n", result);
         }
@@ -39,7 +39,7 @@ namespace Shuvi.Classes.Types.Requirements
         {
             var result = new List<string>();
             foreach (var (requirement, amount) in _requirements)
-                result.Add($"{(IsMeetRequirement(requirement, amount, pet) ? EmojiService.Get("goodMark") : EmojiService.Get("goodMark"))}" +
+                result.Add($"{(IsMeetRequirement(requirement, amount, pet) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))}" +
                     $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} >{amount}");
             return string.Join("\n", result);
         }
