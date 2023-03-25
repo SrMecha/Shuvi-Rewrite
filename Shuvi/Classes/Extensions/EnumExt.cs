@@ -181,6 +181,24 @@ namespace Shuvi.Classes.Extensions
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetNameOf(this ItemType target)
+        {
+            return target switch
+            {
+                ItemType.Simple => nameof(ItemType.Simple),
+                ItemType.Weapon => nameof(ItemType.Weapon),
+                ItemType.Helmet => nameof(ItemType.Helmet),
+                ItemType.Armor => nameof(ItemType.Armor),
+                ItemType.Leggings => nameof(ItemType.Leggings),
+                ItemType.Boots => nameof(ItemType.Boots),
+                ItemType.Potion => nameof(ItemType.Potion),
+                ItemType.Chest => nameof(ItemType.Chest),
+                ItemType.Amulet => nameof(ItemType.Amulet),
+                ItemType.Recipe => nameof(ItemType.Recipe),
+                _ => "none",
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         public static IEmote GetEmoji(this Language target)
         {
             return target switch

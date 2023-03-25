@@ -40,7 +40,8 @@ namespace Shuvi.Classes.Types.Equipment
         {
             switch (type)
             {
-                case ItemType.Amulet:
+
+                case ItemType.Weapon:
                     Weapon = id;
                     return;
                 case ItemType.Helmet:

@@ -153,7 +153,7 @@ namespace Shuvi.CommandParts
                         }
                         dbUser.Equipment.SetEquipment(item.Type, item.Id);
                         await UserDatabase.UpdateUser(dbUser.Id, 
-                            new UpdateDefinitionBuilder<UserData>().Set(nameof(item.Type), item.Id));
+                            new UpdateDefinitionBuilder<UserData>().Set(item.Type.GetNameOf(), item.Id));
                         await interaction.SendInfo(viewLocalization.Get("embed/view/itemEquipped"));
                         break;
                     default:
@@ -218,7 +218,7 @@ namespace Shuvi.CommandParts
                         }
                         dbUser.Equipment.SetEquipment(item.Type, item.Id);
                         await UserDatabase.UpdateUser(dbUser.Id,
-                            new UpdateDefinitionBuilder<UserData>().Set(nameof(item.Type), item.Id));
+                            new UpdateDefinitionBuilder<UserData>().Set(item.Type.GetNameOf(), item.Id));
                         await interaction.SendInfo(viewLocalization.Get("embed/view/itemEquipped"));
                         break;
                     default:
@@ -285,7 +285,7 @@ namespace Shuvi.CommandParts
                         }
                         pet!.Equipment.SetEquipment(item.Type, item.Id);
                         await PetDatabase.UpdatePet(pet!.Id,
-                            new UpdateDefinitionBuilder<PetData>().Set(nameof(item.Type), item.Id));
+                            new UpdateDefinitionBuilder<PetData>().Set(item.Type.GetNameOf(), item.Id));
                         await interaction.SendInfo(viewLocalization.Get("embed/view/itemEquipped"));
                         break;
                     default:
