@@ -469,7 +469,7 @@ namespace Shuvi.CommandParts
                     case "exit":
                         return;
                     case "viewItem":
-                        await Start(context, dbUser, item.Id, false);
+                        await Start(context, dbUser, item.Craft.GetCraftedItem().Id, false);
                         break;
                     default:
                         var craftAmount = int.Parse(interaction.Data.CustomId);
