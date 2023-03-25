@@ -445,10 +445,10 @@ namespace Shuvi.CommandParts
                 MessageComponent components;
                 if (canInteract)
                     components = new ComponentBuilder()
-                        .WithButton("x1", "1", ButtonStyle.Success, disabled: !dbUser.Inventory.HaveItem(item.Id, 1) || isMeetRequirements, row: 0)
-                        .WithButton("x2", "2", ButtonStyle.Success, disabled: !dbUser.Inventory.HaveItem(item.Id, 2) || isMeetRequirements, row: 0)
-                        .WithButton("x5", "5", ButtonStyle.Success, disabled: !dbUser.Inventory.HaveItem(item.Id, 5) || isMeetRequirements, row: 0)
-                        .WithButton($"MAX x{maxCanCraft}", $"+{maxCanCraft}", ButtonStyle.Success, disabled: maxCanCraft < 1 || isMeetRequirements, row: 0)
+                        .WithButton("x1", "1", ButtonStyle.Success, disabled: !(maxCanCraft >= 1 && isMeetRequirements), row: 0)
+                        .WithButton("x2", "2", ButtonStyle.Success, disabled: !(maxCanCraft >= 2 && isMeetRequirements), row: 0)
+                        .WithButton("x5", "5", ButtonStyle.Success, disabled: !(maxCanCraft >= 5 && isMeetRequirements), row: 0)
+                        .WithButton($"MAX x{maxCanCraft}", $"+{maxCanCraft}", ButtonStyle.Success, disabled: !(maxCanCraft > 0 && isMeetRequirements), row: 0)
                         .WithButton(viewLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 1)
                         .WithButton(viewLocalization.Get("btn/viewItem"), "viewItem", ButtonStyle.Primary, row: 1)
                         .Build();
