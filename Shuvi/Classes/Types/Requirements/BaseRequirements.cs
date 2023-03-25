@@ -22,7 +22,7 @@ namespace Shuvi.Classes.Types.Requirements
         {
             var result = new List<string>();
             foreach (var (requirement, amount) in _requirements)
-                result.Add($"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} >{amount}");
+                result.Add($"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} >{requirement.Format(amount)}");
             if (result.Count < 1)
                 return LocalizationService.Get("names").Get(lang).Get("notHave");
             return string.Join("\n", result);
