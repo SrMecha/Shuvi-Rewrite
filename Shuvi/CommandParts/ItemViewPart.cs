@@ -436,7 +436,7 @@ namespace Shuvi.CommandParts
                     $"{viewLocalization.Get("embed/view/description")}\n{item.Info.GetDescription(context.Language)}\n" +
                     $"{(item.CanTrade ? viewLocalization.Get("embed/view/canTrade") : viewLocalization.Get("embed/view/canNotTrade"))}\n" +
                     $"{(item.CanLoose ? viewLocalization.Get("embed/view/canLoose") : viewLocalization.Get("embed/view/canNotLoose"))}\n\n" +
-                    $"{viewLocalization.Get("embed/view/requirements")}\n{item.Craft.Requirements.GetRequirementsInfo(context.Language)}\n\n" +
+                    $"{viewLocalization.Get("embed/view/requirements")}\n{item.Craft.Requirements.GetRequirementsInfo(context.Language, dbUser)}\n\n" +
                     $"{viewLocalization.Get("embed/view/neededItems")}\n" +
                     $"{item.Craft.Items.GetItemsDictionary().GetItemsNeededInfo(dbUser.Inventory.GetItemsDictionary(), context.Language)}\n" +
                     $"{viewLocalization.Get("embed/view/craftedItem").Format(item.Craft.GetCraftedItem().Info.GetName(context.Language))}")
