@@ -67,6 +67,15 @@ namespace Shuvi.Classes.Extensions
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string Format(this BaseRequirement target, int amount)
+        {
+            return target switch
+            {
+                BaseRequirement.Rank => ((Rank)amount).GetName(),
+                _ => amount.ToString()
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         public static string GetLowerName(this DynamicCharacteristic target)
         {
             return target switch
