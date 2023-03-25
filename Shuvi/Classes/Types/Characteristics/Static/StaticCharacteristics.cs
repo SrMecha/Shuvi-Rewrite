@@ -30,6 +30,11 @@ namespace Shuvi.Classes.Types.Characteristics.Static
         }
         public StaticCharacteristics(Dictionary<StaticCharacteristic, int> characteristics)
         {
+            Strength = 0;
+            Agility = 0;
+            Luck = 0;
+            Intellect = 0;
+            Endurance = 0;
             foreach (var (characteristic, amount) in characteristics)
                 Add(characteristic, amount);
         }
