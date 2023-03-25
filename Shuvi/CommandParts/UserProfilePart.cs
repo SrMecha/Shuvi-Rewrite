@@ -43,7 +43,7 @@ namespace Shuvi.CommandParts
                     $"**{namesLocalization.Get("endurance")}:** {dbUser.Characteristics.Endurance.WithBonus(equipmentBonuses.Endurance)}",
                     true)
                     .AddField("** **",
-                    $"**{namesLocalization.Get("enegry")}:** " +
+                    $"**{namesLocalization.Get("energy")}:** " +
                     $"[{GetEmojiBar(EmojiService.Get("energyFull"), EmojiService.Get("energyEmpty"), dbUser.Characteristics.Energy.GetCurrent(),
                     dbUser.Characteristics.Energy.Max, UserSettings.EnergyDisplayMax)}] " +
                     $"{dbUser.Characteristics.Energy.GetCurrent()}/{dbUser.Characteristics.Energy.Max}\n" +
