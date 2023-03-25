@@ -33,6 +33,8 @@ namespace Shuvi.Classes.Types.Requirements
             foreach (var (requirement, amount) in _requirements)
                 result.Add($"{(IsMeetRequirement(requirement, amount, user) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))} " +
                     $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
+            if (result.Count < 1)
+                return LocalizationService.Get("names").Get(lang).Get("notHave");
             return string.Join("\n", result);
         }
         public string GetRequirementsInfo(Language lang, IDatabasePet pet)
@@ -41,6 +43,8 @@ namespace Shuvi.Classes.Types.Requirements
             foreach (var (requirement, amount) in _requirements)
                 result.Add($"{(IsMeetRequirement(requirement, amount, pet) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))} " +
                     $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
+            if (result.Count < 1)
+                return LocalizationService.Get("names").Get(lang).Get("notHave");
             return string.Join("\n", result);
         }
         public bool IsMeetRequirements(IDatabaseUser user)
