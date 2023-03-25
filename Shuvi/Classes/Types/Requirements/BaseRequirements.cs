@@ -22,7 +22,7 @@ namespace Shuvi.Classes.Types.Requirements
         {
             var result = new List<string>();
             foreach (var (requirement, amount) in _requirements)
-                result.Add($"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} >{requirement.Format(amount)}");
+                result.Add($"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
             if (result.Count < 1)
                 return LocalizationService.Get("names").Get(lang).Get("notHave");
             return string.Join("\n", result);
@@ -31,16 +31,16 @@ namespace Shuvi.Classes.Types.Requirements
         {
             var result = new List<string>();
             foreach (var (requirement, amount) in _requirements)
-                result.Add($"{(IsMeetRequirement(requirement, amount, user) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))}" +
-                    $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} >{requirement.Format(amount)}");
+                result.Add($"{(IsMeetRequirement(requirement, amount, user) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))} " +
+                    $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
             return string.Join("\n", result);
         }
         public string GetRequirementsInfo(Language lang, IDatabasePet pet)
         {
             var result = new List<string>();
             foreach (var (requirement, amount) in _requirements)
-                result.Add($"{(IsMeetRequirement(requirement, amount, pet) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))}" +
-                    $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} >{requirement.Format(amount)}");
+                result.Add($"{(IsMeetRequirement(requirement, amount, pet) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))} " +
+                    $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
             return string.Join("\n", result);
         }
         public bool IsMeetRequirements(IDatabaseUser user)
