@@ -10,6 +10,8 @@ namespace Shuvi.Interfaces.Actions
         public int Defense { get; set; }
         public int Spell { get; set; }
 
+        public void SetAction(FightAction action, int rate);
+        public int GetAction(FightAction action);
         public FightAction GetRandomAction();
     }
 }

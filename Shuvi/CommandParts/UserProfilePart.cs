@@ -128,6 +128,20 @@ namespace Shuvi.CommandParts
                                 break;
                         }
                         break;
+                    case "edit":
+                        switch (interaction.Data.Values.First())
+                        {
+                            case "upgrade":
+                                break;
+                            case "customization":
+                                break;
+                            case "fightSettings":
+                                await FightSettingsPart.Start(context, dbUser);
+                                break;
+                            case "premium":
+                                break;
+                        }
+                        break;
                     default:
                         return;
                 }

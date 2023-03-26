@@ -1,4 +1,5 @@
-﻿using Shuvi.Classes.Factories.Spell;
+﻿using Shuvi.Classes.Data.Actions;
+using Shuvi.Classes.Factories.Spell;
 using Shuvi.Classes.Settings;
 using Shuvi.Classes.Types.Actions;
 using Shuvi.Classes.Types.Characteristics;
@@ -44,7 +45,7 @@ namespace Shuvi.Classes.Types.Combat
             Spell = SpellFactory.GetSpell(string.Empty);
             EffectBonuses = new BonusesCharacteristics();
             Effects = new Effects();
-            Actions = new FightActions(new());
+            Actions = new FightActions(new FightActionsData());
         }
         public int BlockDamage(float damage)
         {

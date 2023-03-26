@@ -23,6 +23,15 @@ namespace Shuvi.Classes.Types.Actions
             Spell = data.Spell;
             _all = LightAttack + HeavyAttack + Dodge + Defense + Spell;
         }
+        public FightActions(IFightActions actions)
+        {
+            LightAttack = actions.LightAttack;
+            HeavyAttack = actions.HeavyAttack;
+            Dodge = actions.Dodge;
+            Defense = actions.Defense;
+            Spell = actions.Spell;
+            _all = CalculateAll();
+        }
         public FightAction GetRandomAction()
         {
             var now = 0;
@@ -35,6 +44,10 @@ namespace Shuvi.Classes.Types.Actions
             }
             return FightAction.LightAttack;
         }
+        protected virtual int CalculateAll()
+        {
+            return LightAttack + HeavyAttack + Dodge + Defense + Spell;
+        }
         public virtual IEnumerable<(FightAction, int)> GetChances()
         {
             yield return (FightAction.LightAttack, LightAttack);
@@ -42,6 +55,39 @@ namespace Shuvi.Classes.Types.Actions
             yield return (FightAction.Dodge, Dodge);
             yield return (FightAction.Defense, Defense);
             yield return (FightAction.Spell, Spell);
+        }
+        public virtual void SetAction(FightAction action, int rate)
+        {
+            switch (action)
+            {
+                case FightAction.LightAttack:
+                    LightAttack = rate;
+                    break;
+                case FightAction.HeavyAttack:
+                    HeavyAttack = rate;
+                    break;
+                case FightAction.Dodge:
+                    Dodge = rate;
+                    break;
+                case FightAction.Defense:
+                    Defense = rate;
+                    break;
+                case FightAction.Spell:
+                    Spell = rate;
+                    break;
+            }
+        }
+        public virtual int GetAction(FightAction action)
+        {
+            return action switch
+            {
+                FightAction.LightAttack => LightAttack,
+                FightAction.HeavyAttack => HeavyAttack,
+                FightAction.Dodge => Dodge,
+                FightAction.Defense => Defense,
+                FightAction.Spell => Spell,
+                _ => 0
+            };
         }
     }
 }

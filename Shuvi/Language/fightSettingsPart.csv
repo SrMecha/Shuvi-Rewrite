@@ -1,0 +1,25 @@
+embed/settings/author;;Настройки сражения
+embed/settings/desc/user;;Если во время боя Вы не успеете сделать свой ход, то он будет сделан за Вас на основе настроек ниже.
+embed/use/lightAttack;;Использовать лёгкую атаку: {0}
+embed/use/heavyAttack;;Использовать тяжёлую атаку: {0}
+embed/use/dodge;;Использовать уклонение: {0}
+embed/use/defense;;Использовать защиту: {0}
+embed/use/spell;;Использовать заклинание: {0}
+embed/use/skill;;Использовать способность: {0}
+select/action/name;;Выберите действие.
+select/action/option/lightAttack;;Лёгкая атака
+select/action/option/heavyAttack;;Тяжёлая атака
+select/action/option/dodge;;Уклонение
+select/action/option/defense;;Защита
+select/action/option/spell;;Заклинание
+select/action/option/skill;;Способность
+select/rate/name;;Выберите частоту использования.
+select/rate/desc;;Коэффициент использования: x{0}
+rate/0;;Никогда
+rate/1;;Редко
+rate/2;;Иногда
+rate/3;;Часто
+rate/4;;Очень часто
+btn/save;;Сохранить
+btn/exit;;Выйти
+btn/reset;;Сбросить
