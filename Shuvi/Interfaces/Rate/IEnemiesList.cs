@@ -8,5 +8,6 @@ namespace Shuvi.Interfaces.Rate
         public IEnumerable<(IDatabaseEnemy, float)> GetChances();
         public IDatabaseEnemy GetEnemy(ObjectId id);
         public IEnumerable<IDatabaseEnemy> GetEnemies();
+        public bool HaveEnemies();
     }
 }

@@ -4,6 +4,8 @@ namespace Shuvi.Interfaces.Characteristics
 {
     public interface IUserCharacteristics : IEntityCharacteristics<IRestorableCharacteristic>
     {
-        public IRestorableCharacteristic Energy { get; }
+        public IEnergy Energy { get; }
+
+        public bool HaveEnergy(int amount);
     }
 }

@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Enums.Localization;
-using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
 
 namespace Shuvi.Classes.Types.Interaction
 {

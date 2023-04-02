@@ -16,7 +16,8 @@ namespace Shuvi.Classes.Types.Characteristics.Dynamic
         }
         public int GetMax(int endurance)
         {
-            return UserSettings.StandartEnergy + (endurance / UserSettings.EndurancePerEnergy);
+            Max = UserSettings.StandartEnergy + (endurance / UserSettings.EndurancePerEnergy);
+            return Max;
         }
     }
 }

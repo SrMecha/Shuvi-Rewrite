@@ -14,7 +14,7 @@
         }
         public string Get(string key)
         {
-            return Keys.GetValueOrDefault(key, "NoLocalizationProvided");
+            return Keys.GetValueOrDefault(key, key);
         }
     }
 }

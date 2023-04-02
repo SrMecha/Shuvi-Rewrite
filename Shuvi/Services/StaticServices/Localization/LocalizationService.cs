@@ -37,7 +37,7 @@ namespace Shuvi.Services.StaticServices.Localization
                     {
                         if (fileResult.Count < i)
                             fileResult.Add(new());
-                        fileResult[i - 1].TryAdd(key, value!);
+                        fileResult[i - 1].TryAdd(key, value![..].Replace("\\n", "\n"));
                     }
                 }
                 _langs.Add(partName, new(fileResult));

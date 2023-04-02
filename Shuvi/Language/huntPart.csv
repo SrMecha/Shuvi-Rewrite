@@ -1,0 +1,26 @@
+embed/search/author;;Охота
+embed/search/meet;;Вы встретили {0}!
+embed/search/energyRemaining;;**Энергии осталось:** {0}/{1}
+embed/search/info;;Информация:
+embed/search/rank;;**Ранг:** 「{0}」
+btn/attack;;Напасть
+btn/leave;;Прекратить охоту
+btn/retry;;Поискать другого противника
+btn/tame;;Приручить
+error/dontHaveEnergy;;У вас не хватает энергии.
+error/alreadyUse;;Вы уже используете данную команду.
+error/dontHaveEnemies;;Кажется, в этой локации не на кого поохотиться. Попробуйте поискать врагов в другой локации.\n\nКарта мира: `/map`\nПерейти в локацию: `/travel`
+embed/search/spell;;**Заклинание:** {0}
+embed/search/characteristicsUnknown;;Характеристики противника неизвестны.
+embed/search/unknown;;Неизвестно
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;

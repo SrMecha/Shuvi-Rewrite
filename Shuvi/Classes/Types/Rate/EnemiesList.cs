@@ -23,5 +23,9 @@ namespace Shuvi.Classes.Types.Rate
         {
             return EnemyDatabase.GetEnemy(id);
         }
+        public bool HaveEnemies()
+        {
+            return _items.Count > 0;
+        }
     }
 }
