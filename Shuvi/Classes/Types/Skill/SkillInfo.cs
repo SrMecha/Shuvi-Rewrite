@@ -20,5 +20,9 @@ namespace Shuvi.Classes.Types.Skill
         {
             return SkillFactory.GetSkill(_skillName ?? string.Empty);
         }
+        public bool HaveSkill()
+        {
+            return _skillName is not null;
+        }
     }
 }

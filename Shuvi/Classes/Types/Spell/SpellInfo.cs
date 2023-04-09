@@ -25,5 +25,9 @@ namespace Shuvi.Classes.Types.Spell
         {
             return SpellFactory.GetSpell(_spellName ?? string.Empty);
         }
+        public bool HaveSpell()
+        {
+            return _spellName is not null;
+        }
     }
 }

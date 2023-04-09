@@ -7,5 +7,6 @@ namespace Shuvi.Interfaces.Skill
         public ILocalizedInfo Info { get; }
 
         public ISkill GetSkill();
+        public bool HaveSkill();
     }
 }

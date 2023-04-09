@@ -10,5 +10,6 @@ namespace Shuvi.Interfaces.Spell
         public IMagicInfo MagicInfo { get; }
 
         public ISpell GetSpell();
+        public bool HaveSpell();
     }
 }

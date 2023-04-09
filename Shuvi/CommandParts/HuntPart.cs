@@ -41,7 +41,7 @@ namespace Shuvi.CommandParts
                     $"**{namesLocalization.Get("agility")}:** {combatEnemy.Characteristics.Agility}\n" +
                     $"**{namesLocalization.Get("luck")}:** {combatEnemy.Characteristics.Luck}\n" +
                     $"**{namesLocalization.Get("intellect")}:** {combatEnemy.Characteristics.Intellect}\n" +
-                    $"**{namesLocalization.Get("endurance")}:** {combatEnemy.Characteristics.Endurance}" +
+                    $"**{namesLocalization.Get("endurance")}:** {combatEnemy.Characteristics.Endurance}\n" +
                     $"**{namesLocalization.Get("health")}:** {combatEnemy.Characteristics.Health.Max}/{combatEnemy.Characteristics.Health.Max}\n" +
                     $"**{namesLocalization.Get("mana")}:** {combatEnemy.Characteristics.Mana.Max}/{combatEnemy.Characteristics.Mana.Max}" :
                     huntLocalization.Get("embed/search/characteristicsUnknown"),
@@ -49,7 +49,8 @@ namespace Shuvi.CommandParts
                     .AddField(huntLocalization.Get("embed/search/info"),
                     $"{huntLocalization.Get("embed/search/rank").Format(enemy.Rank.ToString())}\n" +
                     $"{(canViewSpell ? huntLocalization.Get("embed/search/spell").Format(enemy.Spell.Info.GetName(context.Language)) : 
-                    huntLocalization.Get("embed/search/unknown"))}")
+                    huntLocalization.Get("embed/search/unknown"))}",
+                    true)
                     .Build();
                 var components = new ComponentBuilder()
                     .WithButton(huntLocalization.Get("btn/attack"), "attack", ButtonStyle.Danger, row: 0)
