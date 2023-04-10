@@ -16,5 +16,6 @@ namespace Shuvi.Interfaces.Skill
         public IActionResult UseSkill(ICombatEntity owner, ICombatEntity target, Language lang);
         public IActionResult? Update(ICombatEntity owner, Language lang);
         public ISkill CreateCopy();
+        public bool HaveSkill();
     }
 }

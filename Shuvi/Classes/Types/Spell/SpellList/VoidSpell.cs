@@ -8,5 +8,10 @@ namespace Shuvi.Classes.Types.Spell.SpellList
         {
             return false;
         }
+
+        public override bool HaveSpell()
+        {
+            return false;
+        }
     }
 }

@@ -5,7 +5,7 @@ using Shuvi.Interfaces.Status;
 
 namespace Shuvi.Interfaces.Combat
 {
-    public interface ICombatPlayer
+    public interface ICombatPlayer : ICombatEntity
     {
         public ISkill Skill { get; }
         public IDropInventory Inventory { get; }

@@ -41,5 +41,9 @@ namespace Shuvi.Classes.Types.Spell.SpellList
         {
             return (ISpell)MemberwiseClone();
         }
+        public virtual bool HaveSpell()
+        {
+            return true;
+        }
     }
 }

@@ -8,5 +8,9 @@ namespace Shuvi.Classes.Types.Skill.SkillList
         {
             return false;
         }
+        public override bool HaveSkill()
+        {
+            return false;
+        }
     }
 }

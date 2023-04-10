@@ -5,10 +5,10 @@ embed/battle/skill;;**Способность:** {0}
 embed/battle/spell;;**Заклинание:** {0}
 embed/battle/spellCost;;**Стоимость:** {0}{1}
 embed/battle/skillUsesLeft;;**Использований осталось:** {0}
-;;
-;;
-;;
-;;
+btn/lightAttack;;Лёгкая атака
+btn/heavyAttack;;Тяжёлая атака
+btn/dodge;;Уворот
+btn/defense;;Защита
 ;;
 ;;
 ;;

@@ -38,5 +38,9 @@ namespace Shuvi.Classes.Types.Skill.SkillList
         {
             return null;
         }
+        public virtual bool HaveSkill()
+        {
+            return true;
+        }
     }
 }
