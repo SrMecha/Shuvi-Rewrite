@@ -1,5 +1,5 @@
 status/battleStart;;Сражение началось!
-embed/battle/singlePVE/author;;Охота | Ход №{0}
+embed/battle/author/singlePVE;;Охота | Ход №{0}
 embed/battle/info;;Дополнительно
 embed/battle/skill;;**Способность:** {0}
 embed/battle/spell;;**Заклинание:** {0}
@@ -9,18 +9,9 @@ btn/lightAttack;;Лёгкая атака
 btn/heavyAttack;;Тяжёлая атака
 btn/dodge;;Уворот
 btn/defense;;Защита
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
-;;
+status/battleDraw;;\nВремя на сражение истекло. Ничья.
+status/battleWin;;\n__Победа!__\n**Добыча:**
+embed/battle/author/singlePVE/win;;Охота | Ход №{0} | Победа
+embed/battle/author/singlePVE/loose;;Охота | Ход №{0} | Поражение
+embed/battle/author/singlePVE/draw;;Охота | Ход №{0} | Ничья
+status/battleLoose;;Вы были убиты противником **{0}**.

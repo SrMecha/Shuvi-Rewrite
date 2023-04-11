@@ -1,6 +1,8 @@
-﻿using MongoDB.Bson;
+﻿using DnsClient;
+using MongoDB.Bson;
 using Shuvi.Enums.Item;
 using Shuvi.Interfaces.Equipment;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Shuvi.Classes.Types.Equipment
 {
@@ -69,6 +71,14 @@ namespace Shuvi.Classes.Types.Equipment
                 ItemType.Boots => Boots,
                 _ => null
             };
+        }
+        public override void RemoveAllEquipment()
+        {
+            Weapon = null;
+            Helmet = null;
+            Armor = null;
+            Leggings = null;
+            Boots = null;
         }
     }
 }

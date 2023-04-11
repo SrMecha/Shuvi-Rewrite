@@ -16,6 +16,7 @@ namespace Shuvi.Interfaces.Statistics
         public void AddDeathCount(int amount = 1);
         public void AddDungeonComplite(int amount = 1);
         public void SetMaxRating(int amount);
+        public void UpdateMaxRating(int amount);
         public void RecordLiveTime();
         public int GetEnemyKills(ObjectId enemyId);
     }

@@ -27,6 +27,11 @@ namespace Shuvi.Classes.Types.Inventory
             foreach (var (id, amount) in items)
                 AddItem(id, amount);
         }
+        public void AddItems(IReadOnlyInventory inventory)
+        {
+            foreach (var (id, amount) in inventory.GetItemsDictionary())
+                AddItem(id, amount);
+        }
         public void RemoveItem(ObjectId id, int amount = 1)
         {
             if (amount <= 0)

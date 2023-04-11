@@ -14,6 +14,7 @@ namespace Shuvi.Classes.Types.Spell
 
         public ILocalizedInfo Info { get; protected set; }
         public IMagicInfo MagicInfo { get; protected set; }
+        public string? SpellId { get { return _spellName; } }
 
         public SpellInfo(string? spellName, MagicType magicType = MagicType.None)
         {

@@ -8,6 +8,7 @@ namespace Shuvi.Interfaces.Spell
     {
         public ILocalizedInfo Info { get; }
         public IMagicInfo MagicInfo { get; }
+        public string? SpellId { get; }
 
         public ISpell GetSpell();
         public bool HaveSpell();

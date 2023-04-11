@@ -54,7 +54,7 @@ namespace Shuvi.CommandParts
                     .Build();
                 var components = new ComponentBuilder()
                     .WithButton(huntLocalization.Get("btn/attack"), "attack", ButtonStyle.Danger, row: 0)
-                    .WithButton(huntLocalization.Get("btn/tame"), "tame", ButtonStyle.Success, row: 0)
+                    //.WithButton(huntLocalization.Get("btn/tame"), "tame", ButtonStyle.Success, row: 0)
                     .WithButton(huntLocalization.Get("btn/retry"), "retry", ButtonStyle.Secondary, 
                     disabled: !dbUser.Characteristics.HaveEnergy(HuntEnergyCost), row: 1)
                     .WithButton(huntLocalization.Get("btn/leave"), "leave", ButtonStyle.Secondary, row: 2)
@@ -70,15 +70,21 @@ namespace Shuvi.CommandParts
                 switch (interaction.Data.CustomId)
                 {
                     case "attack":
-
+                        await PlayerVersusEnemyPart.Start(context, dbUser, enemy);
                         return;
                     case "tame":
-
                         return;
                     case "retry":
                         break;
                     case "leave":
-
+                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
+                            .WithDescription(huntLocalization.Get("embed/leave/desc"))
+                            .Build();
+                        await context.Interaction.ModifyOriginalResponseAsync(msg => { 
+                            msg.Embed = embed; 
+                            msg.Components = new ComponentBuilder().Build(); 
+                        });
+                        await context.LastInteraction.TryDeferAsync();
                         return;
                 }
             }

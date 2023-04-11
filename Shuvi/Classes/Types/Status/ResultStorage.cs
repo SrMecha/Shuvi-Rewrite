@@ -22,7 +22,7 @@ namespace Shuvi.Classes.Types.Status
         }
         public string GetDescriptions()
         {
-            return string.Join("\n", Results);
+            return string.Join("\n", Results.Select(x => x.Description));
         }
     }
 }

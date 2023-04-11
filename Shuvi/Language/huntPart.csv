@@ -13,6 +13,7 @@ error/dontHaveEnemies;;Кажется, в этой локации не на ко
 embed/search/spell;;**Заклинание:** {0}
 embed/search/characteristicsUnknown;;Характеристики противника неизвестны.
 embed/search/unknown;;Неизвестно
+embed/leave/desc;;Вы прекратили охоту.
 ;;
 ;;
 ;;

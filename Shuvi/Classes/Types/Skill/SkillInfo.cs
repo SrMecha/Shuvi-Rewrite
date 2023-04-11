@@ -11,6 +11,8 @@ namespace Shuvi.Classes.Types.Skill
 
         public ILocalizedInfo Info { get; protected set; }
 
+        public string? SkillId { get { return _skillName; } }
+
         public SkillInfo(string? skillName)
         {
             _skillName = skillName;

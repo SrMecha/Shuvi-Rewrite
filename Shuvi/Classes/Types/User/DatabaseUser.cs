@@ -85,5 +85,17 @@ namespace Shuvi.Classes.Types.User
             Statistics = new UserStatistics(data.Statistics);
             Location = new UserLocation(data.RegionId, data.LocationId);
         }
+        public void SetRace(UserRace race)
+        {
+            Race = race;
+        }
+        public void SetProfession(UserProfession profession)
+        {
+            Profession = profession;
+        }
+        public void SetSubrace(UserSubrace subrace)
+        {
+            Subrace = subrace;
+        }
     }
 }

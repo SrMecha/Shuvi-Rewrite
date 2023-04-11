@@ -47,6 +47,11 @@ namespace Shuvi.Classes.Types.Statistics
         {
             MaxRating = amount;
         }
+        public void UpdateMaxRating(int currentRating)
+        {
+            if (MaxRating < currentRating)
+                MaxRating = currentRating;
+        }
         public void RecordLiveTime()
         {
             LiveTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();

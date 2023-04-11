@@ -14,5 +14,6 @@ namespace Shuvi.Interfaces.Equipment
         public ObjectId? GetEquipmentId(ItemType equipment);
         public IEnumerable<IEquipmentItem?> GetEquipments();
         public IEnumerable<(ItemType, IEquipmentItem?)> GetEquipmentsWithType();
+        public void RemoveAllEquipment();
     }
 }

@@ -5,11 +5,11 @@ namespace Shuvi.Classes.Types.Characteristics.Static
 {
     public class StaticCharacteristics : IStaticCharacteristics
     {
-        public int Strength { get; protected set; } = 1;
-        public int Agility { get; protected set; } = 1;
-        public int Luck { get; protected set; } = 1;
-        public int Intellect { get; protected set; } = 1;
-        public int Endurance { get; protected set; } = 1;
+        public int Strength { get; protected set; } = 0;
+        public int Agility { get; protected set; } = 0;
+        public int Luck { get; protected set; } = 0;
+        public int Intellect { get; protected set; } = 0;
+        public int Endurance { get; protected set; } = 0;
 
         public StaticCharacteristics() { }
         public StaticCharacteristics(int strength, int agility, int luck, int intellect, int endurance)
@@ -30,11 +30,6 @@ namespace Shuvi.Classes.Types.Characteristics.Static
         }
         public StaticCharacteristics(Dictionary<StaticCharacteristic, int> characteristics)
         {
-            Strength = 0;
-            Agility = 0;
-            Luck = 0;
-            Intellect = 0;
-            Endurance = 0;
             foreach (var (characteristic, amount) in characteristics)
                 Add(characteristic, amount);
         }
@@ -103,6 +98,14 @@ namespace Shuvi.Classes.Types.Characteristics.Static
             yield return (StaticCharacteristic.Luck, Luck);
             yield return (StaticCharacteristic.Intellect, Intellect);
             yield return (StaticCharacteristic.Endurance, Endurance);
+        }
+        public void Set(int strength, int agility, int luck, int intellect, int endurance)
+        {
+            Strength = strength;
+            Agility = agility;
+            Luck = luck;
+            Intellect = intellect;
+            Endurance = endurance;
         }
     }
 }

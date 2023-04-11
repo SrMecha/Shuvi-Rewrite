@@ -44,5 +44,9 @@ namespace Shuvi.Classes.Types.Equipment
             foreach (var (type, id) in GetIdsWithType())
                 yield return id is null ? (type, null) : (type, ItemDatabase.GetItem<IEquipmentItem>((ObjectId)id));
         }
+        public virtual void RemoveAllEquipment()
+        {
+            
+        }
     }
 }

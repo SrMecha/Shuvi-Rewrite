@@ -9,6 +9,7 @@ namespace Shuvi.Classes.Factories.CustomEmbed
 {
     public static class EmbedFactory
     {
+        private static readonly Color _errorColor = new Color(197, 67, 43);
         private static readonly LocalizationLanguagePart _errorLocalization = LocalizationService.Get("errorPart");
         public static EmbedBuilder CreateUserEmbed(IUser discordUser)
         {
@@ -32,7 +33,7 @@ namespace Shuvi.Classes.Factories.CustomEmbed
             return new EmbedBuilder()
                 .WithAuthor(_errorLocalization.Get(lang).Get("embed/error"))
                 .WithDescription(description)
-                .WithColor(Color.Red)
+                .WithColor(_errorColor)
                 .Build();
         }
         public static Embed CreateInfoEmbed(string description)

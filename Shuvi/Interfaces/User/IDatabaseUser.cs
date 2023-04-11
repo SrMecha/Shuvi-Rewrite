@@ -36,5 +36,9 @@ namespace Shuvi.Interfaces.User
         public IUserCharacteristics Characteristics { get; }
         public IUserStatistics Statistics { get; }
         public IUserLocation Location { get; }
+
+        public void SetRace(UserRace race);
+        public void SetProfession(UserProfession profession);
+        public void SetSubrace(UserSubrace subrace);
     }
 }
