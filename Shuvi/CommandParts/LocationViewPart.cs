@@ -12,14 +12,14 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("locationViewPart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user)
         {
             var locationLocalization = _localizationPart.Get(context.Language);
             WorldMap.Regions.ElementAt(0);
             while (context.LastInteraction is not null)
             {
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(locationLocalization.Get("embed/view/author").Format(context.User.Username))
+                    .WithAuthor(locationLocalization.Get("embed/view/author").Format(user.Username))
                     .WithDescription($"**{locationLocalization.Get("embed/view/region")}:** " +
                     $"{dbUser.Location.GetRegion().Info.GetName(context.Language)}\n" +
                     $"**{locationLocalization.Get("embed/view/location")}:** " +

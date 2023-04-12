@@ -12,13 +12,13 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("statisticsViewPart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user)
         {
             while (context.LastInteraction is not null)
             {
                 var statisticsLocalization = _localizationPart.Get(context.Language);
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(statisticsLocalization.Get("embed/view/author").Format(context.User.Username))
+                    .WithAuthor(statisticsLocalization.Get("embed/view/author").Format(user.Username))
                     .WithDescription($"**{statisticsLocalization.Get("embed/view/maxRating")}:** {dbUser.Statistics.MaxRating}\n" +
                     $"**{statisticsLocalization.Get("embed/view/enemyKilled")}:** {dbUser.Statistics.TotalEnemyKilled}\n" +
                     $"**{statisticsLocalization.Get("embed/view/dungeonComplite")}:** {dbUser.Statistics.DungeonComplite}\n" +

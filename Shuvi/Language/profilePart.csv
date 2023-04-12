@@ -1,4 +1,4 @@
-embed/profile/author;Profile;Профиль
+embed/profile/author;{0}`s profile;Профиль {0}
 embed/profile/rank;Rank: {0};Ранг: {0}
 embed/profile/rating;**Rating:** {0};**Рейтинг:** {0}
 embed/profile/race;**Race:** {0};**Раса:** {0}

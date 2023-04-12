@@ -9,7 +9,6 @@ using Shuvi.Classes.Types.Interaction;
 using Shuvi.Enums.Item;
 using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.Equipment;
-using Shuvi.Interfaces.Items;
 using Shuvi.Interfaces.Pet;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
@@ -21,14 +20,14 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("equipmentViewPart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, bool canEdit = false)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user, bool canEdit = false)
         {
             var equipmentLocalization = _localizationPart.Get(context.Language);
             var namesLocalization = LocalizationService.Get("names").Get(context.Language);
             while (context.LastInteraction is not null)
             {
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(equipmentLocalization.Get("embed/view/equipment").Format(context.User.Username))
+                    .WithAuthor(equipmentLocalization.Get("embed/view/equipment").Format(user.Username))
                     .WithDescription(GetEquipmentInfo(dbUser.Equipment, context.Language))
                     .Build();
                 MessageComponent components;

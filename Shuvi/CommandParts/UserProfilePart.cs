@@ -15,7 +15,7 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("profilePart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, bool canEdit = false)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user, bool canEdit = false)
         {
             while (context.LastInteraction is not null)
             {
@@ -23,7 +23,7 @@ namespace Shuvi.CommandParts
                 var namesLocalization = LocalizationService.Get("names").Get(context.Language);
                 var equipmentBonuses = dbUser.Equipment.GetBonuses();
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(profileLocalization.Get("embed/profile/author"))
+                    .WithAuthor(profileLocalization.Get("embed/profile/author").Format(user.Username))
                     .WithDescription(GetBadges(dbUser.Customization.Badges))
                     .AddField(profileLocalization.Get("embed/profile/rank").Format(dbUser.Rating.Rank.GetName()),
                     $"{profileLocalization.Get("embed/profile/rating").Format($"{dbUser.Rating.Points}" +
@@ -74,7 +74,7 @@ namespace Shuvi.CommandParts
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/location"), "location"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/inventory"), "inventory"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/statistics"), "statistics"),
-                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
+                        //new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
                     };
                     var editOptions = new List<SelectMenuOptionBuilder>()
                     {
@@ -95,7 +95,7 @@ namespace Shuvi.CommandParts
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/equipment"), "equipment"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/location"), "location"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/statistics"), "statistics"),
-                        new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
+                        //new SelectMenuOptionBuilder(profileLocalization.Get("select/view/option/pet"), "pet")
                     };
                     components = new ComponentBuilder()
                         .WithSelectMenu("view", viewOptions, profileLocalization.Get("select/view/name"))
@@ -115,16 +115,16 @@ namespace Shuvi.CommandParts
                         switch (interaction.Data.Values.First())
                         {
                             case "equipment":
-                                await EquipmentViewPart.Start(context, dbUser, canEdit);
+                                await EquipmentViewPart.Start(context, dbUser, user, canEdit);
                                 break;
                             case "location":
-                                await LocationViewPart.Start(context, dbUser);
+                                await LocationViewPart.Start(context, dbUser, user);
                                 break;
                             case "statistics":
-                                await StatisticsViewPart.Start(context, dbUser);
+                                await StatisticsViewPart.Start(context, dbUser, user);
                                 break;
                             case "inventory":
-                                await InventoryPart.Start(context, dbUser, canEdit);
+                                await InventoryPart.Start(context, dbUser, user, canEdit);
                                 break;
                         }
                         break;

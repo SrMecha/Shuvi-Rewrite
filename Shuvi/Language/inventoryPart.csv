@@ -1,4 +1,4 @@
-embed/view/author;;Ваши предметы:
+embed/view/author;;Инвентарь {0}:
 embed/view/page;;Страница {0}/{1}
 btn/exit;;Выйти
 select/view/name;;Выберите предмет для просмотра.

@@ -14,7 +14,7 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("inventoryPart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, bool canInteract = true)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user, bool canInteract = true)
         {
             var haveItems = true;
             var maxPage = (dbUser.Inventory.Count + 9) / 10;
@@ -29,7 +29,7 @@ namespace Shuvi.CommandParts
             while (context.LastInteraction is not null)
             {
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(inventoryLocalization.Get("embed/view/author"))
+                    .WithAuthor(inventoryLocalization.Get("embed/view/author").Format(user.Username))
                     .WithDescription(GetItemsInfo(dbUser.Inventory, pageNow, context.Language))
                     .WithFooter(inventoryLocalization.Get("embed/view/page").Format(pageNow + 1, maxPage))
                     .Build();
