@@ -54,10 +54,10 @@ namespace Shuvi.Classes.Types.User
         public IUserStatistics Statistics { get; private set; }
         public IUserLocation Location { get; private set; }
 
-        public DatabaseUser(UserData data, Language lang = Language.Eng)
+        public DatabaseUser(UserData data)
         {
             Id = data.Id;
-            Rating = new UserRating(data.Rating, lang);
+            Rating = new UserRating(data.Rating);
             Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Bages);
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
             Characteristics = new UserCharacteristics(

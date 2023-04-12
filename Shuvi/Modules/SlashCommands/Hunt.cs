@@ -1,7 +1,6 @@
 ﻿using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.CommandParts;
@@ -59,6 +58,7 @@ namespace Shuvi.Modules.SlashCommands
             catch
             {
                 UserCheckService.RemoveUserFromCommand(TrackedCommand.Hunt, dbUser.Id);
+                throw;
             }
         }
     }

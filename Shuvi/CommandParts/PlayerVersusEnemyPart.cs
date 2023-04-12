@@ -3,7 +3,9 @@ using MongoDB.Driver;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
+using Shuvi.Classes.Types.Characteristics;
 using Shuvi.Classes.Types.Combat;
+using Shuvi.Classes.Types.Effect.EffectList;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.Classes.Types.Status;
 using Shuvi.Interfaces.Combat;
@@ -159,7 +161,7 @@ namespace Shuvi.CommandParts
             dbUser.Characteristics.Health.Reduce(dbUser.Characteristics.Health.GetCurrent() - player.Characteristics.Health.Now);
             dbUser.Characteristics.Mana.Reduce(dbUser.Characteristics.Mana.GetCurrent() - player.Characteristics.Mana.Now);
             dbUser.Statistics.AddEnemyKilled(dbEnemy.Id, 1);
-            status.Add(dbUser.Rating.AddPoints(enemy.RatingGet, enemy.Rank));
+            status.Add(dbUser.Rating.AddPoints(enemy.RatingGet, enemy.Rank, context.Language));
             dbUser.Statistics.UpdateMaxRating(dbUser.Rating.Points);
             status.Add(new ActionResult(battleLocalization.Get("status/battleWin")));
             status.Add(new ActionResult(drop.GetDropInfo(context.Language)));

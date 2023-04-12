@@ -26,7 +26,7 @@ namespace Shuvi.CommandParts
                 .WithDescription($"__{deadReason}__\n{deadLocalization.Get("embed/dead/desc")}")
                 .WithColor(new Color(0, 0, 0))
                 .Build();
-            dbUser.Rating.SetPoints(dbUser.Rating.Points/2);
+            dbUser.Rating.SetPoints(dbUser.Rating.Points/2, context.Language);
             dbUser.Characteristics.Mana.Add(9999);
             dbUser.Characteristics.Energy.Add(9999);
             dbUser.Characteristics.Health.Add(9999);
@@ -74,7 +74,7 @@ namespace Shuvi.CommandParts
                 .Set(x => x.Statistics.DeathCount, dbUser.Statistics.DeathCount)
                 .Set(x => x.RegionId, dbUser.Location.RegionId)
                 .Set(x => x.LocationId, dbUser.Location.LocationId));
-            await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
+            await context.CurrentMessage.ReplyAsync(embed: embed);
             await context.LastInteraction.TryDeferAsync();
         }
     }
