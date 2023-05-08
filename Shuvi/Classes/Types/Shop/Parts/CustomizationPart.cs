@@ -24,8 +24,9 @@ namespace Shuvi.Classes.Types.Shop.Parts
                 return false;
             var product = GetProduct(page, arrowIndex);
             var image = product.GetImage();
-            return product.Type == ImageType.Avatar ? userCustomization.Avatars.Contains(image) : userCustomization.Banners.Contains(image)
-                && _basket.HaveCustomization(product) && wallet.Get(product.MoneyType) + _basket.Wallet.Get(product.MoneyType) >= product.Price;
+            return (product.Type == ImageType.Avatar ? !userCustomization.Avatars.Contains(image) : !userCustomization.Banners.Contains(image))
+                && !_basket.HaveCustomization(product) 
+                && wallet.Get(product.MoneyType) + _basket.Wallet.Get(product.MoneyType) >= product.Price;
         }
     }
 }

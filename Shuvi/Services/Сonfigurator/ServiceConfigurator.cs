@@ -5,6 +5,7 @@ using Shuvi.Classes.Data.Customization;
 using Shuvi.Classes.Data.Enemy;
 using Shuvi.Classes.Data.Item;
 using Shuvi.Classes.Data.Pet;
+using Shuvi.Classes.Data.Shop;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Factories.Skill;
 using Shuvi.Classes.Factories.Spell;
@@ -26,7 +27,11 @@ namespace Shuvi.Services.Сonfigurator
 {
     public static class ServiceConfigurator
     {
+#if DEBUG
         private const string _databaseName = "ShuviTest";
+#else
+        private const string _databaseName = "Shuvi";
+#endif
         public static void Configure()
         {
             var mongoKey = GetEnviroment("MongoKey");
@@ -57,6 +62,7 @@ namespace Shuvi.Services.Сonfigurator
             PetDatabase.Init(_mongoClient.GetDatabase(_databaseName).GetCollection<PetData>("Pets"));
             SettingsDatabase.Init(_mongoClient.GetDatabase(_databaseName).GetCollection<BsonDocument>("Settings"));
             UserDatabase.Init(_mongoClient.GetDatabase(_databaseName).GetCollection<UserData>("Users"));
+            ShopDatabase.Init(_mongoClient.GetDatabase(_databaseName).GetCollection<ShopData>("Shops"));
         }
         private static void ConfigureSpells()
         {

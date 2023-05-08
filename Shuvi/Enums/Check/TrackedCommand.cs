@@ -2,6 +2,8 @@
 {
     public enum TrackedCommand
     {
-        Hunt
+        Hunt,
+        Shop,
+        Upgrade
     }
 }

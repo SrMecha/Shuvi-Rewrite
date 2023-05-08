@@ -1,0 +1,21 @@
+error/alreadyUse;;Вы уже используете данную команду.
+error/dontHaveShops;;Кажется, в этой локации нет магазинов. Попробуйте поискать их в другой локации.\n\nКарта мира: `/map`\nПерейти в локацию: `/travel`
+embed/choose/desc;;Выберите магазин, в который желаете зайти.
+select/choose/name;;Выберите магазин.
+btn/exit;;Выйти
+select/category/name;;Выберите раздел.
+category/purchasing;;Покупка
+category/selling;;Продажа
+category/customization;;Кастомизация
+embed/shop;;Магазин:
+embed/basket;;Корзина:
+embed/page;;Страница {0}/{1}
+select/item/name;;Выберите предмет.
+btn/info;;Инфо
+btn/exit;;Выйти
+embed/confirm/results;;Итоги:
+btn/clear;;Сбросить
+btn/confirm;;Подтвердить
+embed/exit/author;;Вы покинули магазин.
+btn/buy;;Купить
+embed/basket/empty;;Пусто.

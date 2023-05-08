@@ -60,12 +60,12 @@ namespace Shuvi.Classes.Types.Shop
                 Items[product.Id] = -amount * product.Amount;
             Wallet.Add(product.MoneyType, product.Price * amount);
         }
-        public IEnumerator<(IItem, int)> GetItems()
+        public IEnumerable<(IItem, int)> GetItems()
         {
             foreach (var (id, amount) in Items)
                 yield return (ItemDatabase.GetItem(id), amount);
         }
-        public IEnumerator<IImage> GetCustomizations()
+        public IEnumerable<IImage> GetCustomizations()
         {
             foreach (var list in Customization.Values)
                 foreach (var id in list)

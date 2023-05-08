@@ -19,7 +19,7 @@ namespace Shuvi.Interfaces.Shop
         public void SellItem(IItemProduct product, int amount);
         public int GetItemAmount(IItemProduct product);
         public void Clear();
-        public IEnumerator<(IItem, int)> GetItems();
-        public IEnumerator<IImage> GetCustomizations();
+        public IEnumerable<(IItem, int)> GetItems();
+        public IEnumerable<IImage> GetCustomizations();
     }
 }
