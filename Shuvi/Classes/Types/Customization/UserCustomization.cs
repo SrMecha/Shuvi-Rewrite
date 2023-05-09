@@ -55,15 +55,15 @@ namespace Shuvi.Classes.Types.Customization
         {
             Badges &= bage;
         }
-        public void SetImage(ImageType type, ObjectId id)
+        public void SetImage(ImageType type, ObjectId? id)
         {
             switch (type)
             {
                 case ImageType.Avatar:
-                    Avatar = ImageDatabase.GetImage(id);
+                    Avatar = id is null ? null : ImageDatabase.GetImage((ObjectId)id);
                     break;
                 case ImageType.Banner:
-                    Banner = ImageDatabase.GetImage(id);
+                    Banner = id is null ? null : ImageDatabase.GetImage((ObjectId)id);
                     break;
             }
         }

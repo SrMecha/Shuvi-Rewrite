@@ -134,6 +134,7 @@ namespace Shuvi.CommandParts
                             case "upgrade":
                                 break;
                             case "customization":
+                                await CustomizationPart.Start(context, dbUser);
                                 break;
                             case "fightSettings":
                                 await FightSettingsPart.Start(context, dbUser);

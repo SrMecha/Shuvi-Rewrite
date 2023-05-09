@@ -25,7 +25,7 @@ namespace Shuvi.Classes.Factories.CustomEmbed
             if (withAvatar && dbUser.Customization.Avatar is not null)
                 result.WithThumbnailUrl(dbUser.Customization.Avatar.URL);
             if (withBanner && dbUser.Customization.Banner is not null)
-                result.WithThumbnailUrl(dbUser.Customization.Banner.URL);
+                result.WithImageUrl(dbUser.Customization.Banner.URL);
             return result;
         }
         public static Embed CreateErrorEmbed(string description, Language lang)

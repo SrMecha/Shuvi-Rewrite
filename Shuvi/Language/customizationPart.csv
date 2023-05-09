@@ -1,0 +1,18 @@
+embed/author/single;;Кастомизация
+category/banner;;Баннер
+category/avatar;;Аватар
+list/empty;;Пусто.
+embed/page;;Страница {0}/{1}
+select/name/avatar;;Выберите аватар.
+select/name/banner;;Выберите баннер.
+btn/choose;;Выбрать
+btn/remove/avatar;;Убрать аватар
+btn/exit;;Выйти
+btn/remove/banner;;Убрать баннер
+embed/desc/avatar;;Выберите желаемый аватар.\nТекущий: {0}
+embed/desc/banner;;Выберите желаемый баннер.\nТекущий: {0}
+embed/dontHave;;Нету
+btn/back;;Назад
+embed/author/withUser;;Кастомизация {0}
+embed/current/avatar;;Текущий аватар: {0}
+embed/current/banner;;Текущий баннер: {0}
