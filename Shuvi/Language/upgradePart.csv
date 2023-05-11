@@ -1,0 +1,7 @@
+embed/upgrade/author;;Улучшение
+embed/upgrade/desc;;Осталось очков улучшения: {0}
+select/name;;Выберите характеристику.
+btn/exit;;Выйти
+btn/reset;;Сбросить
+btn/confirm;;Подтвердить
+embed/upgradeEnd/author;;Улучшение закончено

@@ -11,18 +11,18 @@ using Shuvi.Services.StaticServices.Localization;
 
 namespace Shuvi.Modules.SlashCommands
 {
-    public class HuntCommandModule : InteractionModuleBase<CustomInteractionContext>
+    public class UpgradeCommandModule : InteractionModuleBase<CustomInteractionContext>
     {
         private readonly LocalizationLanguagePart _errorPart = LocalizationService.Get("errorPart");
         private readonly DiscordShardedClient _client;
 
-        public HuntCommandModule(IServiceProvider provider)
+        public UpgradeCommandModule(IServiceProvider provider)
         {
             _client = provider.GetRequiredService<DiscordShardedClient>();
         }
 
-        [SlashCommand("hunt", "Охота на монстров.")]
-        public async Task HuntCommandAsync()
+        [SlashCommand("upgrade", "Повысить свои характеристики.")]
+        public async Task UpgradeCommandAsync()
         {
             await DeferAsync();
             var dbUser = await UserDatabase.TryGetUser(Context.User.Id);
@@ -32,32 +32,20 @@ namespace Shuvi.Modules.SlashCommands
                 return;
             }
             var errorLocalization = _errorPart.Get(Context.Language);
-            if (!dbUser.Characteristics.HaveEnergy(HuntPart.HuntEnergyCost))
-            {
-                await Context.SendError(errorLocalization.Get("dontHaveEnergy"), Context.Language);
-                return;
-            }
-            if (UserCheckService.IsUseCommand(TrackedCommand.Hunt, dbUser.Id))
+            if (UserCheckService.IsUseCommand(TrackedCommand.Upgrade, dbUser.Id))
             {
                 await Context.SendError(errorLocalization.Get("alreadyUseCommand"), Context.Language);
                 return;
             }
-            if (!dbUser.Location.GetLocation().Enemies.HaveEnemies())
-            {
-                await Context.Interaction.ModifyOriginalResponseAsync(msg => { 
-                    msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(errorLocalization.Get("dontHaveEnemies")).Build(); 
-                });
-                return;
-            }
             try
             {
-                UserCheckService.AddUserToCommand(TrackedCommand.Hunt, dbUser.Id);
-                await HuntPart.Start(Context, dbUser);
-                UserCheckService.RemoveUserFromCommand(TrackedCommand.Hunt, dbUser.Id);
+                UserCheckService.AddUserToCommand(TrackedCommand.Upgrade, dbUser.Id);
+                await UpgradePart.Start(Context, dbUser, true);
+                UserCheckService.RemoveUserFromCommand(TrackedCommand.Upgrade, dbUser.Id);
             }
             catch
             {
-                UserCheckService.RemoveUserFromCommand(TrackedCommand.Hunt, dbUser.Id);
+                UserCheckService.RemoveUserFromCommand(TrackedCommand.Upgrade, dbUser.Id);
                 throw;
             }
         }

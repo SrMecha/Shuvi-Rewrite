@@ -13,7 +13,7 @@ namespace Shuvi.Modules.SlashCommands
 {
     public class ShopCommandModule : InteractionModuleBase<CustomInteractionContext>
     {
-        private readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("shopPart");
+        private readonly LocalizationLanguagePart _errorPart = LocalizationService.Get("errorPart");
         private readonly DiscordShardedClient _client;
 
         public ShopCommandModule(IServiceProvider provider)
@@ -31,16 +31,16 @@ namespace Shuvi.Modules.SlashCommands
                 await AccountCreatePart.Start(Context);
                 return;
             }
-            var shopLocalization = _localizationPart.Get(Context.Language);
+            var errorLocalization = _errorPart.Get(Context.Language);
             if (UserCheckService.IsUseCommand(TrackedCommand.Shop, dbUser.Id))
             {
-                await Context.SendError(shopLocalization.Get("error/alreadyUse"), Context.Language);
+                await Context.SendError(errorLocalization.Get("alreadyUseCommand"), Context.Language);
                 return;
             }
             if (dbUser.Location.GetLocation().Shops.Count < 1)
             {
                 await Context.Interaction.ModifyOriginalResponseAsync(msg => {
-                    msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(shopLocalization.Get("error/dontHaveShops")).Build();
+                    msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(errorLocalization.Get("dontHaveShops")).Build();
                 });
                 return;
             }

@@ -8,5 +8,7 @@ namespace Shuvi.Interfaces.Characteristics
     {
         public TDynamic Health { get; }
         public TDynamic Mana { get; }
+
+        public void Add(IBonusesCharacteristics characteristics);
     }
 }

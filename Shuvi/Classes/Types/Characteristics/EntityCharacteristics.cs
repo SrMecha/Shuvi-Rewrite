@@ -23,5 +23,16 @@ namespace Shuvi.Classes.Types.Characteristics
             Health = health;
             Mana = mana;
         }
+
+        public void Add(IBonusesCharacteristics characteristics)
+        {
+            Strength += characteristics.Strength;
+            Agility += characteristics.Agility;
+            Luck += characteristics.Luck;
+            Intellect += characteristics.Intellect;
+            Endurance += characteristics.Endurance;
+            Health.SetMax(Health.Max + characteristics.Health);
+            Mana.SetMax(Mana.Max + characteristics.Mana);
+        }
     }
 }

@@ -3,9 +3,11 @@ using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Settings;
 using Shuvi.Classes.Types.Interaction;
+using Shuvi.Enums.Check;
 using Shuvi.Enums.Rating;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.User;
+using Shuvi.Services.StaticServices.Check;
 using Shuvi.Services.StaticServices.Emoji;
 using Shuvi.Services.StaticServices.Localization;
 
@@ -17,6 +19,7 @@ namespace Shuvi.CommandParts
 
         public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user, bool canEdit = false)
         {
+            var errorLocalization = LocalizationService.Get("errorPart").Get(context.Language);
             while (context.LastInteraction is not null)
             {
                 var profileLocalization = _localizationPart.Get(context.Language);
@@ -132,6 +135,22 @@ namespace Shuvi.CommandParts
                         switch (interaction.Data.Values.First())
                         {
                             case "upgrade":
+                                if (UserCheckService.IsUseCommand(TrackedCommand.Upgrade, dbUser.Id))
+                                {
+                                    await context.SendError(errorLocalization.Get("alreadyUseCommand"), context.Language);
+                                    return;
+                                }
+                                try
+                                {
+                                    UserCheckService.AddUserToCommand(TrackedCommand.Upgrade, dbUser.Id);
+                                    await UpgradePart.Start(context, dbUser, false);
+                                    UserCheckService.RemoveUserFromCommand(TrackedCommand.Upgrade, dbUser.Id);
+                                }
+                                catch
+                                {
+                                    UserCheckService.RemoveUserFromCommand(TrackedCommand.Upgrade, dbUser.Id);
+                                    throw;
+                                }
                                 break;
                             case "customization":
                                 await CustomizationPart.Start(context, dbUser);
