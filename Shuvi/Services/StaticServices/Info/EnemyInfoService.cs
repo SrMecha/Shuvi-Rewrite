@@ -5,6 +5,10 @@ namespace Shuvi.Services.StaticServices.Info
 {
     public static class EnemyInfoService
     {
+        public static bool CanViewEnemy(IDatabaseUser user, IDatabaseEnemy enemy)
+        {
+            return user.Statistics.GetEnemyKills(enemy.Id) > 0;
+        }
         public static bool CanViewEnemyCharacteristics(IDatabaseUser user, IDatabaseEnemy enemy)
         {
             return (user.Characteristics.Intellect + user.Equipment.GetBonuses().Intellect) * (user.Statistics.GetEnemyKills(enemy.Id) + 1) >=
