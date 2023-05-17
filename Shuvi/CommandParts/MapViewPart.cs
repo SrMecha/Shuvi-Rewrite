@@ -1,4 +1,5 @@
 ﻿using Discord;
+using MongoDB.Bson;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Types.Interaction;
@@ -51,7 +52,7 @@ namespace Shuvi.CommandParts
             {
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                     .WithAuthor($"{mapLocalization.Get("world/name")} | {region.Info.GetName(context.Language)}")
-                    .WithDescription($"{region.Info.GetDescription(context.Language)}\n\n" +
+                    .WithDescription($"{region.Info.GetDescription(context.Language)}\n" +
                     $"{mapLocalization.Get("embed/region/requiredRank").Format(region.NeededRank.GetName())}\n" +
                     $"{mapLocalization.Get("embed/recommendedRank").Format(region.RecomendedRank.GetName())}")
                     .AddField(mapLocalization.Get("embed/region/locations"),
@@ -84,21 +85,31 @@ namespace Shuvi.CommandParts
         public static async Task ViewLocationPart(CustomInteractionContext context, IDatabaseUser dbUser, IMapRegion region, IMapLocation location)
         {
             var mapLocalization = _localizationPart.Get(context.Language);
+            var options = GetEnemyOptions(dbUser, location, context.Language);
+            var canViewEnemies = options.Count > 0;
+            if (!canViewEnemies)
+                options.Add(new("EMPTY", "empty"));
             var category = "main";
             while (true)
             {
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                     .WithAuthor($"{region.Info.GetName(context.Language)} | {location.Info.GetName(context.Language)}")
-                    .WithDescription($"{location.Info.GetDescription(context.Language)}" +
+                    .WithDescription($"{location.Info.GetDescription(context.Language)}\n" +
                     $"{mapLocalization.Get("embed/recommendedRank").Format(location.RecomendedRank.GetName())}")
                     .AddCategoryFields(category, dbUser, location, context.Language)
                     .WithImageUrl(location.PictureURL)
                     .Build();
-                var components = new ComponentBuilder()
-                    .WithSelectMenu("location", locationOptions, mapLocalization.Get("select/location/name"), row: 0)
-                    .WithButton(mapLocalization.Get("btn/back"), "back", ButtonStyle.Danger, row: 1)
-                    .Build();
-                await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
+                var componentBuilder = new ComponentBuilder()
+                    .WithButton(mapLocalization.Get("btn/main"), "main", ButtonStyle.Success, disabled: category == "main", row: 0)
+                    .WithButton(mapLocalization.Get("btn/enemies"), "enemies", ButtonStyle.Success, disabled: category == "enemies", row: 0)
+                    .WithButton(mapLocalization.Get("btn/resources"), "resources", ButtonStyle.Success, disabled: category == "resources", row: 0);
+                if (category == "enemies" && canViewEnemies)
+                {
+                    componentBuilder.WithSelectMenu("select", options, mapLocalization.Get("select/enemies/name"), row: 1);
+                }
+
+                componentBuilder.WithButton(mapLocalization.Get("btn/back"), "back", ButtonStyle.Danger, row: 2);
+                await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = componentBuilder.Build(); });
                 await context.LastInteraction.TryDeferAsync();
                 var interaction = await context.WaitForButton();
                 if (interaction is null)
@@ -108,11 +119,14 @@ namespace Shuvi.CommandParts
                 }
                 switch (interaction.Data.CustomId)
                 {
-                    case "location":
-                        await ViewLocationPart(context, dbUser, region.GetLocation(int.Parse(interaction.Data.Values.First())));
-                        break;
                     case "back":
                         return;
+                    case "select":
+                        await EnemyViewPart.Start(context, dbUser, EnemyDatabase.GetEnemy(new ObjectId(interaction.Data.Values.First())));
+                        break;
+                    default:
+                        category = interaction.Data.CustomId;
+                        break;
                 }
             }
         }
@@ -131,7 +145,7 @@ namespace Shuvi.CommandParts
                 "enemies" => embedBuilder.AddField(localization.Get("embed/location/enemies"),
                     $"```{GetEnemiesString(dbUser, location, lang)}```",
                     true),
-                "mine" => embedBuilder.AddField(localization.Get("embed/location/mine"),
+                "resources" => embedBuilder.AddField(localization.Get("embed/location/mine"),
                     $"```{GetMineString(location, lang)}```",
                     true),
                 _ => embedBuilder
@@ -189,7 +203,7 @@ namespace Shuvi.CommandParts
             var result = new List<string>();
             foreach (var (enemy, chance) in location.Enemies.GetChances())
             {
-                result.Add($"· {(EnemyInfoService.CanViewEnemy(dbUser, enemy) ? enemy.Info.GetName(lang) : "???")} [{chance}%]");
+                result.Add($"· {(EnemyInfoService.CanViewEnemy(dbUser, enemy) ? enemy.Info.GetName(lang) : "???")} [{chance.ToString("F2")}%]");
             }
             return result.Count < 1 ? _localizationPart.Get(lang).Get("dontHave") : string.Join("\n", result);
         }
@@ -202,6 +216,15 @@ namespace Shuvi.CommandParts
         public static string GetMineString(IMapLocation location, Language lang)
         {
             return _localizationPart.Get(lang).Get("inDevelopment");
+        }
+
+        public static List<SelectMenuOptionBuilder> GetEnemyOptions(IDatabaseUser dbUser, IMapLocation location, Language lang)
+        {
+            var result = new List<SelectMenuOptionBuilder>();
+            foreach (var enemy in location.Enemies.GetEnemies())
+                if (EnemyInfoService.CanViewEnemy(dbUser, enemy))
+                    result.Add(new(enemy.Info.GetName(lang), enemy.Id.ToString()));
+            return result;
         }
     }
 }

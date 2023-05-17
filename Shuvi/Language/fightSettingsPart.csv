@@ -5,14 +5,14 @@ embed/use/heavyAttack;;Использовать тяжёлую атаку: {0}
 embed/use/dodge;;Использовать уклонение: {0}
 embed/use/defense;;Использовать защиту: {0}
 embed/use/spell;;Использовать заклинание: {0}
-embed/use/skill;;Использовать способность: {0}
+embed/use/skill;;Использовать умение: {0}
 select/action/name;;Выберите действие.
 select/action/option/lightAttack;;Лёгкая атака
 select/action/option/heavyAttack;;Тяжёлая атака
 select/action/option/dodge;;Уклонение
 select/action/option/defense;;Защита
 select/action/option/spell;;Заклинание
-select/action/option/skill;;Способность
+select/action/option/skill;;Умение
 select/rate/name;;Выберите частоту использования.
 select/rate/desc;;Коэффициент использования: x{0}
 rate/0;;Никогда

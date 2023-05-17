@@ -3,20 +3,26 @@ embed/action/heavyAttack;;Тяжёлая атака: {0}
 embed/action/dodge;;Уклонение: {0}
 embed/action/defense;;Защита: {0}
 embed/action/spell;;Заклинание: {0}
-embed/action/skill;;Способность: {0}
+embed/action/skill;;Умение: {0}
 rate/0;;Никогда
 rate/1;;Редко
 rate/2;;Иногда
 rate/3;;Часто
 rate/4;;Очень часто
 embed/main/rank;;**Ранг:** {0}
-embed/main/ratingGet;;**Получаемый рейтинг:*** {0}
+embed/main/ratingGet;;**Получаемый рейтинг:** {0}
 embed/main/killsCount;;**Вы убили:** {0}
 embed/characteristics/name;;Характеристики:
 embed/abilities/name;;Способности:
-embed/abilities/spell/name;;**Заклинание:** {0}
+embed/abilities/spell/name;;Заклинание: {0}
 embed/abilities/spell/desc;;**Описание:**\n{0}
-embed/abilities/spell/magicType;;**Тип:** {0}
+embed/abilities/spell/magicType;;Тип: {0}
 embed/drop/name;;Дроп:
 embed/action/name;;Тактика боя:
-;;
+select/info/option/characteristics;;Характеристики
+select/info/option/abilites;;Способности
+select/info/option/drop;;Дроп
+select/info/option/actions;;Тактика боя
+btn/back;;Назад
+select/info/name;;Выберите информацию для просмотра.
+select/info/noFound;;Информация не найдена.
