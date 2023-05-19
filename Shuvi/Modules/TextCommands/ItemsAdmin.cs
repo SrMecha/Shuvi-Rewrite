@@ -19,6 +19,7 @@ namespace Shuvi.Modules.TextCommands
         {
             _client = provider.GetRequiredService<DiscordShardedClient>();
         }
+
         [Command("GiveItem", true)]
         public async Task GiveItemCommandAsync(
                 [Summary("user")] IUser paramUser,
