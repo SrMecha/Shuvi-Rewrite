@@ -1,6 +1,7 @@
 ﻿using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
+using Shuvi.Classes.Factories.Magic;
 using Shuvi.Enums.User;
 
 namespace Shuvi.Classes.Factories.User
@@ -25,6 +26,7 @@ namespace Shuvi.Classes.Factories.User
                 Id = id,
                 Race = race,
                 Subrace = GenerateRandomUserSubrace(race),
+                MagicType = MagicFactory.GetRandomRaceMagic(race),
                 ManaRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
                 HealthRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),
                 EnergyRegenTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds(),

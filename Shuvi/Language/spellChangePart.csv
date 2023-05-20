@@ -1,0 +1,11 @@
+embed/select/author;;Выбор заклинания
+embed/select/currentSpell;;Текущее заклинание: {0}
+embed/select/empty;;Нету доступных заклинаний.
+embed/select/magicType;;Тип магии: {0}
+select/spell/name;;Выберите заклинание.
+btn/equip;;Экипировать
+btn/back;;Назад
+btn/info;;Инфо
+btn/unequip;;Снять заклинание
+embed/dontHave;;Нету
+embed/select/availableSpells;;**Доступные заклинания:**

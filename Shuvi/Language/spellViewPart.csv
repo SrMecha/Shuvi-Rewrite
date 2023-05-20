@@ -1,0 +1,6 @@
+embed/view/author;;Просмотр заклинания
+embed/view/magicType;;**Тип магии:** {0}
+embed/view/spellName;;**Название:** {0}
+embed/view/requirements;;Требования:
+btn/back;;Назад
+embed/view/desc;;**Описание:**\n{0}

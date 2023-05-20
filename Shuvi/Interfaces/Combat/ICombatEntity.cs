@@ -26,6 +26,7 @@ namespace Shuvi.Interfaces.Combat
         public IActionResult CastSpell(ICombatEntity target, Language lang);
         public IActionResult DealLightDamage(ICombatEntity target, Language lang);
         public IActionResult DealHeavyDamage(ICombatEntity target, Language lang);
+        public float CalculateMagicDamage();
         public float CalculateLightDamage();
         public float CalculateHeavyDamage();
         public int BlockDamage(float damage);

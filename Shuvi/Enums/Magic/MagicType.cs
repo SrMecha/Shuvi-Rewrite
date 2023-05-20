@@ -6,6 +6,7 @@
         Fire,
         Water,
         Wind,
-        Earth
+        Earth,
+        Losen
     }
 }

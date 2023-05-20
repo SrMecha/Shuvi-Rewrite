@@ -1,4 +1,5 @@
 ﻿using Shuvi.Classes.Types.Localization;
+using Shuvi.Classes.Types.Magic;
 using Shuvi.Classes.Types.Requirements;
 using Shuvi.Classes.Types.Status;
 using Shuvi.Enums.Localization;
@@ -14,15 +15,15 @@ namespace Shuvi.Classes.Types.Spell.SpellList
 {
     public class SpellBase : ISpell
     {
-
-        public ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells", "none");
-        public MagicType MagicType { get; } = MagicType.None;
-        public IBaseRequirements Requirements { get; } = new BaseRequirements();
-        public int Cost { get; } = 0;
+        public virtual string SpellName { get; } = "SpellBase";
+        public virtual ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells", "none");
+        public virtual MagicType MagicType { get; } = MagicType.None;
+        public virtual IBaseRequirements Requirements { get; } = new BaseRequirements();
+        public virtual int Cost { get; } = 0;
 
         public virtual bool CanCast(ICombatEntity player)
         {
-            return Cost >= player.Characteristics.Mana.Now;
+            return Cost <= player.Characteristics.Mana.Now;
         }
         public virtual IActionResult OnCast(ICombatEntity player, ICombatEntity target, Language lang)
         {

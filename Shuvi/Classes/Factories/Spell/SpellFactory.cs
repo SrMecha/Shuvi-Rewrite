@@ -1,5 +1,4 @@
-﻿using Discord;
-using Shuvi.Classes.Types.Spell.SpellList;
+﻿using Shuvi.Classes.Types.Spell.SpellList;
 using Shuvi.Enums.Magic;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.User;

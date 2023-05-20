@@ -8,6 +8,7 @@ namespace Shuvi.Interfaces.Skill
 {
     public interface ISkill
     {
+        public string SkillName { get; }
         public ILocalizedInfo Info { get; }
         public IBaseRequirements Requirements { get; }
         public int UsesLeft { get; }

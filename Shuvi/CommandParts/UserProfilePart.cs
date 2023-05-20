@@ -84,7 +84,11 @@ namespace Shuvi.CommandParts
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/upgrade"), "upgrade"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/customization"), "customization"),
                         new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/fightSettings"), "fightSettings"),
-                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/premium"), "premium")
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/spell"), "spell"),
+                        dbUser.Profession == UserProfession.NoProfession ?
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/chooseProfession"), "chooseProfession") :
+                        new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/skill"), "skill")
+                        // new SelectMenuOptionBuilder(profileLocalization.Get("select/edit/option/premium"), "premium")
                     };
                     components = new ComponentBuilder()
                         .WithSelectMenu("view", viewOptions, profileLocalization.Get("select/view/name"))
@@ -159,6 +163,13 @@ namespace Shuvi.CommandParts
                                 await FightSettingsPart.Start(context, dbUser);
                                 break;
                             case "premium":
+                                break;
+                            case "spell":
+                                await SpellChangePart.Start(context, dbUser);
+                                break;
+                            case "skill":
+                                break;
+                            case "chooseProfession":
                                 break;
                         }
                         break;

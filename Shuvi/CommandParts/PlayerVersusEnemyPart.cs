@@ -41,8 +41,8 @@ namespace Shuvi.CommandParts
                     .WithButton(battleLocalization.Get("btn/heavyAttack"), "heavyAttack", ButtonStyle.Danger, row: 0)
                     .WithButton(battleLocalization.Get("btn/dodge"), "dodge", ButtonStyle.Success, row: 1)
                     .WithButton(battleLocalization.Get("btn/defense"), "defense", ButtonStyle.Success, row: 1)
-                    .WithButton(player.Skill.Info.GetName(context.Language), "spell", ButtonStyle.Primary, disabled: !player.Skill.CanUse(player), row: 2)
-                    .WithButton(player.Spell.Info.GetName(context.Language), "skill", ButtonStyle.Primary, disabled: !player.Spell.CanCast(player), row: 2)
+                    .WithButton(player.Skill.Info.GetName(context.Language), "skill", ButtonStyle.Primary, disabled: !player.Skill.CanUse(player), row: 2)
+                    .WithButton(player.Spell.Info.GetName(context.Language), "spell", ButtonStyle.Primary, disabled: !player.Spell.CanCast(player), row: 2)
                     .Build();
                 status.Clear();
                 if (isAfk)
@@ -126,9 +126,9 @@ namespace Shuvi.CommandParts
                 $"{player.Characteristics.Mana.Max.WithBonus(player.EffectBonuses.Mana)}",
                 true)
                 .AddField(battleLocalization.Get("embed/battle/info"),
-                $"{battleLocalization.Get("embed/battle/spell").Format(enemy.Spell.Info.GetName(context.Language))}\n" +
+                $"{battleLocalization.Get("embed/battle/spell").Format(player.Spell.Info.GetName(context.Language))}\n" +
                 $"{(player.Spell.HaveSpell() ? $"{battleLocalization.Get("embed/battle/spellCost")
-                .Format(enemy.Spell.Cost, EmojiService.Get("magicFull"))}\n" : "")}" +
+                .Format(player.Spell.Cost, EmojiService.Get("magicFull"))}\n" : "")}" +
                 $"{battleLocalization.Get("embed/battle/skill").Format(player.Skill.Info.GetName(context.Language))}\n" +
                 $"{(player.Skill.HaveSkill() ? battleLocalization.Get("embed/battle/skillUsesLeft")
                 .Format(player.Skill.UsesLeft) : "")}",
@@ -147,7 +147,7 @@ namespace Shuvi.CommandParts
                 true)
                 .AddField(battleLocalization.Get("embed/battle/info"),
                 $"{battleLocalization.Get("embed/battle/spell").Format(enemy.Spell.Info.GetName(context.Language))}\n" +
-                $"{(player.Spell.HaveSpell() ? $"{battleLocalization.Get("embed/battle/spellCost")
+                $"{(enemy.Spell.HaveSpell() ? $"{battleLocalization.Get("embed/battle/spellCost")
                 .Format(enemy.Spell.Cost, EmojiService.Get("magicFull"))}\n" : "")}",
                 true)
                 .Build();

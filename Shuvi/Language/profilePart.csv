@@ -18,3 +18,6 @@ select/edit/option/upgrade;;Улучшение
 select/edit/option/customization;;Кастомизация
 select/edit/option/fightSettings;;Настройки сражения
 select/edit/option/premium;;Премиум
+select/edit/option/spell;;Заклинание
+select/edit/option/skill;;Умение
+select/edit/option/chooseProfession;;Выбрать профессию

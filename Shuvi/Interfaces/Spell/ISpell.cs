@@ -9,6 +9,7 @@ namespace Shuvi.Interfaces.Spell
 {
     public interface ISpell
     {
+        public string SpellName { get; }
         public ILocalizedInfo Info { get; }
         public MagicType MagicType { get; }
         public IBaseRequirements Requirements { get; }

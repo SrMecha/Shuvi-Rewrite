@@ -58,6 +58,10 @@ namespace Shuvi.Classes.Types.Combat
                 outDamage = 0;
             return outDamage;
         }
+        public float CalculateMagicDamage()
+        {
+            return (Characteristics.Intellect + EffectBonuses.Intellect) * _random.Next(120, 131) / 100.0f + FightSettings.DamageBonus;
+        }
         public float CalculateHeavyDamage()
         {
             return (Characteristics.Strength + EffectBonuses.Strength) * _random.Next(120, 131) / 100.0f + FightSettings.DamageBonus;

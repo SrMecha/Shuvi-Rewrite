@@ -73,7 +73,7 @@ namespace Shuvi.Services.Сonfigurator
                 if (!validType.IsAssignableFrom(definedType) || !definedType.IsClass) continue;
 
                 var resolver = (definedType.DeclaredConstructors.First().Invoke(Array.Empty<object>()) as ISpell)!;
-                result[nameof(resolver)] = resolver;
+                result[resolver.SpellName] = resolver;
             }
             SpellFactory.SetDictionary(new ReadOnlyDictionary<string, ISpell>(result));
         }
@@ -86,7 +86,7 @@ namespace Shuvi.Services.Сonfigurator
                 if (!validType.IsAssignableFrom(definedType) || !definedType.IsClass) continue;
 
                 var resolver = (definedType.DeclaredConstructors.First().Invoke(Array.Empty<object>()) as ISkill)!;
-                result[nameof(resolver)] = resolver;
+                result[resolver.SkillName] = resolver;
             }
             SkillFactory.SetDictionary(new ReadOnlyDictionary<string, ISkill>(result));
         }

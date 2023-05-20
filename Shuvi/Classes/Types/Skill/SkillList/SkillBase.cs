@@ -13,6 +13,7 @@ namespace Shuvi.Classes.Types.Skill.SkillList
 {
     public class SkillBase : ISkill
     {
+        public virtual string SkillName { get; } = "SkillBase";
         public ILocalizedInfo Info { get; } = new CachedLocalizedInfo("skills", "none");
         public IBaseRequirements Requirements { get; } = new BaseRequirements();
         public int UsesLeft { get; protected set; } = 0;
