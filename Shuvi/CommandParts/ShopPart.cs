@@ -7,6 +7,7 @@ using Shuvi.Enums.Image;
 using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.Shop;
 using Shuvi.Interfaces.Shop.Products;
+using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
 using Shuvi.Services.StaticServices.Emoji;
@@ -490,7 +491,10 @@ namespace Shuvi.CommandParts
             foreach (var id in shopsId)
             {
                 var shop = ShopDatabase.GetReadonlyShop(id);
-                result.Add(new(shop.Info.GetName(lang), id.ToString(), shop.Info.GetDescription(lang)));
+                var description = shop.Info.GetDescription(lang);
+                if (description.Length > 70)
+                    description = $"{description[..70]}...";
+                result.Add(new(shop.Info.GetName(lang), id.ToString(), description));
             }
             return result;
         }
