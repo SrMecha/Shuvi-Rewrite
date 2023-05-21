@@ -15,10 +15,14 @@ namespace Shuvi.Classes.Types.Characteristics.Dynamic
             Now += amount;
             if (Now > Max)
                 Now = Max;
+            if (Now < 0)
+                Now = 0;
         }
         public void Reduce(int amount)
         {
             Now -= amount;
+            if (Now > Max)
+                Now = Max;
             if (Now < 0)
                 Now = 0;
         }
