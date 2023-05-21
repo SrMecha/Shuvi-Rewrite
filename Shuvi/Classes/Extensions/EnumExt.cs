@@ -97,6 +97,7 @@ namespace Shuvi.Classes.Extensions
                 MagicType.Wind => "wind",
                 MagicType.Earth => "earth",
                 MagicType.Losen => "losen",
+                MagicType.Ice => "ice",
                 _ => "none"
             };
         }

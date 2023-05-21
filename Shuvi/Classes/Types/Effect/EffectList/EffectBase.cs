@@ -23,8 +23,8 @@ namespace Shuvi.Classes.Types.Effect.EffectList
         }
         public void Update(ICombatEntity target)
         {
-            target.Characteristics.Health.Reduce(Bonuses.Health);
-            target.Characteristics.Mana.Reduce(Bonuses.Mana);
+            target.Characteristics.Health.Add(Bonuses.Health);
+            target.Characteristics.Mana.Add(Bonuses.Mana);
             OnUpdate(target);
             TimeLeft--;
         }

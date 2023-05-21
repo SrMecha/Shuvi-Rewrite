@@ -7,6 +7,7 @@
         Water,
         Wind,
         Earth,
-        Losen
+        Losen,
+        Ice
     }
 }
