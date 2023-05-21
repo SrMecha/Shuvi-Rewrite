@@ -11,7 +11,7 @@ namespace Shuvi.Services.StaticServices.Localization
         public static void Init()
         {
 #if DEBUG
-            var directory = new DirectoryInfo(Path.GetFullPath("../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language");
+            var directory = new DirectoryInfo(Path.GetFullPath("../../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language");
 #else
             var directory = new DirectoryInfo(Path.GetFullPath("../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language");
 #endif
@@ -28,7 +28,7 @@ namespace Shuvi.Services.StaticServices.Localization
                 Delimiter = ";"
             };
 #if DEBUG
-            using (var reader = new StreamReader(Path.GetFullPath("../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language/{fileName}"))
+            using (var reader = new StreamReader(Path.GetFullPath("../../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language/{fileName}"))
 #else
             using (var reader = new StreamReader(Path.GetFullPath("../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language/{fileName}"))
 #endif
