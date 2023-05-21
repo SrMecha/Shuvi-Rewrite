@@ -4,6 +4,7 @@
     {
         NoProfession,
         Prufer,
-        Kampfer
+        Kampfer,
+        Hunter
     }
 }

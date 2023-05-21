@@ -1,4 +1,5 @@
 ﻿using Shuvi.Enums.Localization;
+using Shuvi.Enums.User;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Requirements;
@@ -11,6 +12,7 @@ namespace Shuvi.Interfaces.Skill
         public string SkillName { get; }
         public ILocalizedInfo Info { get; }
         public IBaseRequirements Requirements { get; }
+        public UserProfession Profession { get; }
         public int UsesLeft { get; }
 
         public bool CanUse(ICombatEntity owner);

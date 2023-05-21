@@ -17,7 +17,7 @@ namespace Shuvi.Classes.Types.Interaction
         {
             LastInteraction = interaction;
             CurrentMessage = null;
-            Language = interaction.UserLocale.AsLanguage();
+            Language = Language.Ru; // interaction.UserLocale.AsLanguage();
         }
         public async Task<SocketMessageComponent?> WaitForButton(IUserMessage? message = null, ulong? userId = null)
         {

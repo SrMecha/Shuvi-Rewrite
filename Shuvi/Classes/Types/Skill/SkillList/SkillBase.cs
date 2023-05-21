@@ -2,6 +2,7 @@
 using Shuvi.Classes.Types.Requirements;
 using Shuvi.Classes.Types.Status;
 using Shuvi.Enums.Localization;
+using Shuvi.Enums.User;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Requirements;
@@ -14,9 +15,10 @@ namespace Shuvi.Classes.Types.Skill.SkillList
     public class SkillBase : ISkill
     {
         public virtual string SkillName { get; } = "SkillBase";
-        public ILocalizedInfo Info { get; } = new CachedLocalizedInfo("skills", "none");
-        public IBaseRequirements Requirements { get; } = new BaseRequirements();
-        public int UsesLeft { get; protected set; } = 0;
+        public virtual ILocalizedInfo Info { get; } = new CachedLocalizedInfo("skills", "none");
+        public virtual IBaseRequirements Requirements { get; } = new BaseRequirements();
+        public virtual UserProfession Profession { get; } = UserProfession.NoProfession;
+        public virtual int UsesLeft { get; protected set; } = 0;
 
         public virtual bool CanUse(ICombatEntity owner)
         {

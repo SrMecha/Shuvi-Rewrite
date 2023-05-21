@@ -10,7 +10,11 @@ namespace Shuvi.Services.StaticServices.Localization
 
         public static void Init()
         {
+#if DEBUG
             var directory = new DirectoryInfo(Path.GetFullPath("../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language");
+#else
+            var directory = new DirectoryInfo(Path.GetFullPath("../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language");
+#endif
             foreach (var file in directory.GetFiles("*.csv"))
             {
                 InitFile(file.Name, file.Name[..^4]);
@@ -23,7 +27,11 @@ namespace Shuvi.Services.StaticServices.Localization
                 HasHeaderRecord = false,
                 Delimiter = ";"
             };
+#if DEBUG
             using (var reader = new StreamReader(Path.GetFullPath("../../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language/{fileName}"))
+#else
+            using (var reader = new StreamReader(Path.GetFullPath("../../", AppDomain.CurrentDomain.BaseDirectory) + $"/Language/{fileName}"))
+#endif
             using (var csv = new CsvReader(reader, config))
             {
                 string key;

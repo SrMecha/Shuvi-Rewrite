@@ -30,7 +30,7 @@ namespace Shuvi.Services.Сonfigurator
 #if DEBUG
         private const string _databaseName = "ShuviTest";
 #else
-        private const string _databaseName = "Shuvi";
+        private const string _databaseName = "ShuviTest";
 #endif
         public static void Configure()
         {

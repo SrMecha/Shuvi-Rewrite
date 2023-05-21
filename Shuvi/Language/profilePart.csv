@@ -4,6 +4,7 @@ embed/profile/rating;**Rating:** {0};**Рейтинг:** {0}
 embed/profile/race;**Race:** {0};**Раса:** {0}
 embed/profile/profession;**Profession:** {0};**Профессия:** {0}
 embed/profile/subrace;**Subrace:** {0};**Подраса:** {0}
+embed/profile/magicType;**Magic type:** {0};**Тип магии:** {0}
 embed/profile/characteristics;Characteristics:;Характеристики:
 embed/profile/recover;Recover;Востановится
 select/view/name;;Просмотр профиля.
@@ -18,6 +19,6 @@ select/edit/option/upgrade;;Улучшение
 select/edit/option/customization;;Кастомизация
 select/edit/option/fightSettings;;Настройки сражения
 select/edit/option/premium;;Премиум
-select/edit/option/spell;;Заклинание
-select/edit/option/skill;;Умение
+select/edit/option/spell;;Заклинания
+select/edit/option/skill;;Умения
 select/edit/option/chooseProfession;;Выбрать профессию

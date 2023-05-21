@@ -17,7 +17,8 @@ subrace/none;None;Нету
 subrace/werewolf;Warewolf;Оборотень
 profession/none;None;Нету
 profession/prufer;Prüfer;Разведчик
-profession/kampfer;Kämpfer;Боевик
+profession/kampfer;Kämpfer;Комбатант
+profession/hunter;Hunter;Охотник
 itemType/simple;;Предмет
 itemType/weapon;;Оружие
 itemType/helmet;;Шлем

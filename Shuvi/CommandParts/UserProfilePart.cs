@@ -35,6 +35,7 @@ namespace Shuvi.CommandParts
                     $"{(dbUser.Subrace == UserSubrace.NoSubrace ? "" : $"{profileLocalization.Get("embed/profile/subrace")
                     .Format(namesLocalization.Get($"subrace/{dbUser.Subrace.GetLowerName()}"))}\n")}" +
                     $"{profileLocalization.Get("embed/profile/profession").Format(namesLocalization.Get($"profession/{dbUser.Profession.GetLowerName()}"))}\n" +
+                    $"{profileLocalization.Get("embed/profile/magicType").Format(dbUser.MagicInfo.Info.GetName(context.Language))}\n" +
                     $"**{namesLocalization.Get("gold")}:** {dbUser.Wallet.Gold} {EmojiService.Get("gold")}\n" +
                     $"**{namesLocalization.Get("dispoints")}:** {dbUser.Wallet.Dispoints} {EmojiService.Get("dispoints")}",
                     true)
@@ -168,8 +169,10 @@ namespace Shuvi.CommandParts
                                 await SpellChangePart.Start(context, dbUser);
                                 break;
                             case "skill":
+                                await SkillChangePart.Start(context, dbUser);
                                 break;
                             case "chooseProfession":
+                                await ProfessionChoosePart.Start(context, dbUser);
                                 break;
                         }
                         break;

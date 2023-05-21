@@ -1,0 +1,5 @@
+embed/view/author;;Просмотр умения
+embed/view/skillName;;**Название:** {0}
+embed/view/requirements;;Требования:
+btn/back;;Назад
+embed/view/desc;;**Описание:**\n{0}

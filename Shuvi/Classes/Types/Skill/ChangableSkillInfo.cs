@@ -9,7 +9,7 @@ namespace Shuvi.Classes.Types.Skill
         public void SetSkill(string? skillName)
         {
             _skillName = skillName;
-            Info = new CachedLocalizedInfo("spells", skillName);
+            Info = new CachedLocalizedInfo("skills", skillName);
         }
     }
 }

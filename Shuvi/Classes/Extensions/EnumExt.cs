@@ -160,6 +160,7 @@ namespace Shuvi.Classes.Extensions
                 UserProfession.NoProfession => "none",
                 UserProfession.Prufer => "prufer",
                 UserProfession.Kampfer => "kampfer",
+                UserProfession.Hunter => "hunter",
                 _ => "none"
             };
         }

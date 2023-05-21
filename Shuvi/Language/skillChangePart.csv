@@ -1,0 +1,10 @@
+embed/select/author;;Выбор умения
+embed/select/currentSkill;;Текущее умение: {0}
+embed/select/empty;;Нету доступных умений.
+select/skill/name;;Выберите умение.
+btn/equip;;Экипировать
+btn/back;;Назад
+btn/info;;Инфо
+btn/unequip;;Снять умение
+embed/dontHave;;Нету
+embed/select/availableЫSkills;;**Доступные умения:**
