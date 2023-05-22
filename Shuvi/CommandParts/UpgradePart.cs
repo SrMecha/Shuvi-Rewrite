@@ -36,7 +36,7 @@ namespace Shuvi.CommandParts
             var upgradeLocalization = _localizationPart.Get(context.Language);
             var namesLocalization = LocalizationService.Get("names").Get(context.Language);
             var bonuses = new BonusesCharacteristics();
-            var points = dbUser.UpgradePoints.GetPoints();
+            var points = dbUser.UpgradePoints.GetPoints(dbUser);
             var maxPoints = points;
             var characteristicOptions = new List<SelectMenuOptionBuilder>()
             {
