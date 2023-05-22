@@ -77,11 +77,6 @@ namespace Shuvi.Classes.Types.User
             Inventory = new UserInventory(data.Inventory);
             ActionChances = new UserFightActions(data.ActionChances);
             Equipment = new UserEquipment(data.Weapon, data.Helmet, data.Armor, data.Leggings, data.Boots);
-            Characteristics = new UserCharacteristics(
-                new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),
-                new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
-                new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime),
-                data.EnergyRegenTime);
             Statistics = new UserStatistics(data.Statistics);
             Location = new UserLocation(data.RegionId, data.LocationId);
         }
