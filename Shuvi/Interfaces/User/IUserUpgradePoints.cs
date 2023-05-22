@@ -2,7 +2,7 @@
 {
     public interface IUserUpgradePoints
     {
-        public int GetPoints();
+        public int GetPoints(IDatabaseUser dbUser);
 
     }
 }
