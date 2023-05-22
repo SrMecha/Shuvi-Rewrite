@@ -7,23 +7,19 @@ namespace Shuvi.Classes.Types.User
 {
     public class UserUpgradePoints : IUserUpgradePoints
     {
-        private IUserRating Rating { get; init; }
-        private IUserCharacteristics Characteristics { get; init; }
-
-        public UserUpgradePoints(IUserRating rating, IUserCharacteristics characteristics)
+        public UserUpgradePoints()
         {
-            Rating = rating;
-            Characteristics = characteristics;
+
         }
-        public int GetPoints()
+        public int GetPoints(IDatabaseUser dbUser)
         {
             var tempUserData = new UserData();
             var pointsOccupied = 0;
-            pointsOccupied += Characteristics.Strength + Characteristics.Agility +
-                Characteristics.Luck + Characteristics.Endurance + Characteristics.Intellect - 5;
-            pointsOccupied += (Characteristics.Mana.Max - tempUserData.MaxMana) / UserSettings.ManaPerUpPoint;
-            pointsOccupied += (Characteristics.Health.Max - tempUserData.MaxHealth) / UserSettings.HealthPerUpPoint;
-            return (int)Math.Ceiling((float)Rating.Points / UserSettings.RatingPerUpdgradePoint) - pointsOccupied;
+            pointsOccupied += dbUser.Characteristics.Strength + dbUser.Characteristics.Agility +
+                dbUser.Characteristics.Luck + dbUser.Characteristics.Endurance + dbUser.Characteristics.Intellect - 5;
+            pointsOccupied += (dbUser.Characteristics.Mana.Max - tempUserData.MaxMana) / UserSettings.ManaPerUpPoint;
+            pointsOccupied += (dbUser.Characteristics.Health.Max - tempUserData.MaxHealth) / UserSettings.HealthPerUpPoint;
+            return (int)Math.Ceiling((float)dbUser.Rating.Points / UserSettings.RatingPerUpdgradePoint) - pointsOccupied;
         }
     }
 }
