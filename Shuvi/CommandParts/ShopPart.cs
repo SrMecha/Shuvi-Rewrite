@@ -214,7 +214,7 @@ namespace Shuvi.CommandParts
                     .Build();
                 var components = new ComponentBuilder()
                     .WithSelectMenu("category", categoryOptions, shopLocalization.Get("select/category/name"), row: 0)
-                    .WithSelectMenu("item", GetItemOptions(shop.Purchasing.GetProductsInPage(currentPage), context.Language),
+                    .WithSelectMenu("item", GetItemOptions(shop.Selling.GetProductsInPage(currentPage), context.Language),
                     shopLocalization.Get("select/item/name"), row: 1)
                     .WithButton("x1", "1", ButtonStyle.Success,
                     disabled: !shop.Selling.CanSell(dbUser.Inventory, currentPage, arrow, 1), row: 2)
