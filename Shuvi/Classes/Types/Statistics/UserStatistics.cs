@@ -58,6 +58,7 @@ namespace Shuvi.Classes.Types.Statistics
         }
         public void AddEnemyKilled(ObjectId enemyId, int amount = 1)
         {
+            TotalEnemyKilled += amount;
             if (EnemyKills.ContainsKey(enemyId))
                 EnemyKills[enemyId] += amount;
             else

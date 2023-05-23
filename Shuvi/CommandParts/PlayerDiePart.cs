@@ -34,7 +34,6 @@ namespace Shuvi.CommandParts
             dbUser.Characteristics.Health.SetMax(UserSettings.StandartHealth);
             dbUser.Characteristics.Energy.SetMax(UserSettings.StandartEnergy);
             dbUser.Characteristics.Set(1, 1, 1, 1, 1);
-            dbUser.Characteristics.Energy.GetMax(1);
             dbUser.Wallet.Set(MoneyType.Gold, 0);
             dbUser.Inventory.Clear();
             dbUser.Statistics.AddDeathCount(1);
