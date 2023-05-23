@@ -65,7 +65,7 @@ namespace Shuvi.Classes.Types.User
                 new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
                 new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime),
                 data.EnergyRegenTime);
-            UpgradePoints = new UserUpgradePoints();
+            UpgradePoints = new UserUpgradePoints(Rating, Characteristics);
             Wallet = new UserWallet(data.Gold, data.Dispoints);
             MagicInfo = new MagicInfo(data.MagicType);
             Spell = new ChangableSpellInfo(data.Spell);
