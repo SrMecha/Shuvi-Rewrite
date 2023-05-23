@@ -14,11 +14,11 @@ namespace Shuvi.Classes.Types.Rate
         public T GetRandom()
         {
             var now = 0;
-            var need = new Random().Next(0, _items.Values.Sum() + 1);
+            var need = new Random().Next(1, _items.Values.Sum() + 1);
             foreach (var (item, chance) in _items)
             {
                 now += chance;
-                if (now <= need)
+                if (now >= need)
                     return item;
             }
             return _items.Keys.First();
