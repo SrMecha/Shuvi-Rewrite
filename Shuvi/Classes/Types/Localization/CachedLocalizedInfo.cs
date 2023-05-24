@@ -13,7 +13,7 @@ namespace Shuvi.Classes.Types.Localization
         public CachedLocalizedInfo(string part, string? id = null)
         {
             _part = part;
-            _id = id is null ? "none" : id;
+            _id = id is null || id == string.Empty ? "none" : id;
         }
         public string GetName(Language lang)
         {
