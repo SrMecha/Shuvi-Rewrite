@@ -20,7 +20,10 @@ namespace Shuvi.Classes.Types.Spell
         {
             _spellName = spellName;
             Info = new CachedLocalizedInfo("spells", spellName);
-            MagicInfo = new MagicInfo(magicType);
+            if (magicType == MagicType.None)
+                MagicInfo = new MagicInfo(GetSpell().MagicType);
+            else
+                MagicInfo = new MagicInfo(magicType);
         }
         public ISpell GetSpell()
         {
