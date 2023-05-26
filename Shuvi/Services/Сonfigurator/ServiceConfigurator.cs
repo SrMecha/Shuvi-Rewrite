@@ -40,14 +40,14 @@ namespace Shuvi.Services.Сonfigurator
                 Console.WriteLine("Переменные среды не настроены (mongoKey)");
                 return;
             }
+            ConfigureSpells();
+            ConfigureSkills();
             ConfigureDatabases(mongoKey!);
             EmojiService.Init();
             LocalizationService.Init();
             UserCheckService.Init(SettingsDatabase.LoadAdminsData());
             WorldMap.Init(SettingsDatabase.LoadMap());
             BotInfoService.Init(SettingsDatabase.LoadBotInfoData());
-            ConfigureSpells();
-            ConfigureSkills();
         }
         public static async Task ConfigureLogs(DiscordShardedClient client)
         {
