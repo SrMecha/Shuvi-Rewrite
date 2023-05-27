@@ -50,6 +50,7 @@ namespace Shuvi.CommandParts
                         currentPage++;
                         break;
                     case "exit":
+                        await context.Interaction.DeleteOriginalResponseAsync();
                         return;
                 }
             }
