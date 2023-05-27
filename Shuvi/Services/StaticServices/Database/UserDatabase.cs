@@ -72,5 +72,9 @@ namespace Shuvi.Services.StaticServices.Database
                 .Limit(limit)
                 .ToListAsync();
         }
+        public static async Task<long> GetTotalUsers()
+        {
+            return await _collection.Find(new BsonDocument()).CountDocumentsAsync();
+        }
     }
 }

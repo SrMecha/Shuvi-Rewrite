@@ -49,6 +49,7 @@ namespace Shuvi.Services.Сonfigurator
             UserCheckService.Init(SettingsDatabase.LoadAdminsData());
             WorldMap.Init(SettingsDatabase.LoadMap());
             BotInfoService.Init(SettingsDatabase.LoadBotInfoData());
+            BotInfoService.StartUpdateTotalUsers();
         }
         public static void ConfigureAfterBotStart(DiscordShardedClient client)
         {
