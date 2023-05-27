@@ -20,6 +20,7 @@ using Shuvi.Services.StaticServices.Info;
 using Shuvi.Services.StaticServices.Localization;
 using Shuvi.Services.StaticServices.Logs;
 using Shuvi.Services.StaticServices.Map;
+using Shuvi.Services.StaticServices.Top;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -32,7 +33,7 @@ namespace Shuvi.Services.Сonfigurator
 #else
         private const string _databaseName = "ShuviTest";
 #endif
-        public static void Configure()
+        public static void ConfigureBeforeBotStart()
         {
             var mongoKey = GetEnviroment("MongoKey");
             if (mongoKey is null)
@@ -48,6 +49,10 @@ namespace Shuvi.Services.Сonfigurator
             UserCheckService.Init(SettingsDatabase.LoadAdminsData());
             WorldMap.Init(SettingsDatabase.LoadMap());
             BotInfoService.Init(SettingsDatabase.LoadBotInfoData());
+        }
+        public static void ConfigureAfterBotStart(DiscordShardedClient client)
+        {
+            TopService.StartUpdateTop(client);
         }
         public static async Task ConfigureLogs(DiscordShardedClient client)
         {

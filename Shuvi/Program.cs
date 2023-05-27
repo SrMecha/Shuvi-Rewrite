@@ -17,7 +17,7 @@ namespace Shuvi
 
         public static async Task MainAsync()
         {
-            ServiceConfigurator.Configure();
+            ServiceConfigurator.ConfigureBeforeBotStart();
             var botToken = ServiceConfigurator.GetEnviroment("BotToken");
             if (botToken is null)
             {
@@ -33,6 +33,8 @@ namespace Shuvi
 
             var services = BuildServices(config);
             DiscordShardedClient client = services.GetRequiredService<DiscordShardedClient>();
+
+            ServiceConfigurator.ConfigureAfterBotStart(client);
 
             await services.GetRequiredService<InteractionHandlingService>()
                 .InitializeAsync();

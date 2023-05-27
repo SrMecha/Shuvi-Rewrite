@@ -6,6 +6,7 @@ using Shuvi.Enums.Magic;
 using Shuvi.Enums.Money;
 using Shuvi.Enums.Rating;
 using Shuvi.Enums.Requirements;
+using Shuvi.Enums.Top;
 using Shuvi.Enums.User;
 using Shuvi.Services.StaticServices.Emoji;
 using System;
@@ -180,6 +181,16 @@ namespace Shuvi.Classes.Extensions
                 ItemType.Chest => "chest",
                 ItemType.Amulet => "amulet",
                 ItemType.Recipe => "recipe",
+                _ => "none",
+            };
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+        public static string GetLowerName(this UserTopType target)
+        {
+            return target switch
+            {
+                UserTopType.Rating => "rating",
+                UserTopType.Gold => "gold",
                 _ => "none",
             };
         }
