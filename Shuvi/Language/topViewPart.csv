@@ -1,0 +1,7 @@
+embed/view/author;;Топ игроков по {0}
+embed/view/page;;Страница {0}/{1}
+top/rating;;рейтингу
+top/gold;;золоту
+embed/view/empty;;Пусто.
+embed/view/topUpdateTime;;Обновлено <t:{0}:R>
+btn/exit;;Выйти
