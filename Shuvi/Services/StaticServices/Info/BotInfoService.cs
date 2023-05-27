@@ -1,16 +1,38 @@
-﻿using Shuvi.Classes.Data.Settings;
+﻿using MongoDB.Driver;
+using Shuvi.Classes.Data.Settings;
+using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Services.StaticServices.Info
 {
     public static class BotInfoService
     {
-        public static string Version { get; set; } = "VersionNotConfigured";
-        public static string TosLink { get; set; } = string.Empty;
+        public static string Version { get; private set; } = "VersionNotConfigured";
+        public static string TosLink { get; private set; } = string.Empty;
+        public static long PlayerCount { get; private set; } = -1;
 
         public static void Init(BotInfoData data)
         {
             Version = data.Version;
             TosLink = data.TosLink;
+        }
+
+        public static async Task SetVersion(string version)
+        {
+            Version = version;
+            await SettingsDatabase.UpdateBotInfo(new UpdateDefinitionBuilder<BotInfoData>()
+                .Set(x => x.Version, Version));
+        }
+
+        public static void StartUpdateTotalUsers()
+        {
+            _ = Task.Run(async () =>
+            {
+                while (true)
+                {
+                    PlayerCount = await UserDatabase.GetTotalUsers();
+                    await Task.Delay(new TimeSpan(0, 5, 0));
+                }
+            });
         }
     }
 }
