@@ -25,7 +25,13 @@ namespace Shuvi.Services.StaticServices.Emoji
                 { "magicEmpty", "<:magic_empty:1050772733828530218>" },
                 { "lineMiddle", "<:LineMiddle:1062300869808369726>" },
                 { "lineEnd", "<:LineEnd:1062300873113468938>" },
-                { "badgeBugHunter", "<:gold_coins:1066321458441236562>" }
+                { "badgeBugHunter", "<:bug_hunter:1112409224861982850>" },
+                { "badgeAlphaTester", "<:alpha_tester:1112408736057806868>" },
+                { "guildEnter", "<:guild_enter:1112407946899492934>" },
+                { "guildLeave", "<:guild_leave:1112407949709672469>" },
+                { "newPlayer", "<:new_player:1112419534503157901>" },
+                { "playerDead", "<:player_dead:1112407952092053595>" },
+                { "rankUp", "<:rank_up:1112419536143130677>" }
             };
             foreach (var (emoteKey, emoteCode) in emotesBase)
                 if (Emote.TryParse(emoteCode, out var emote))

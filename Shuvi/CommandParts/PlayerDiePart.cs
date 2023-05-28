@@ -10,6 +10,7 @@ using Shuvi.Enums.Money;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
+using Shuvi.Services.StaticServices.Event;
 using Shuvi.Services.StaticServices.Localization;
 
 namespace Shuvi.CommandParts
@@ -20,6 +21,7 @@ namespace Shuvi.CommandParts
 
         public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, string deadReason)
         {
+            EventManager.InvokeOnPlayerDie(dbUser);
             var deadLocalization = _localizationPart.Get(context.Language);
             var embed = new EmbedBuilder()
                 .WithAuthor(deadLocalization.Get("embed/dead/author"))

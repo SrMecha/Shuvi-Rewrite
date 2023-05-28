@@ -4,17 +4,21 @@ using Shuvi.Enums.Localization;
 using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Status;
 using Shuvi.Interfaces.User;
+using Shuvi.Services.StaticServices.Event;
 using Shuvi.Services.StaticServices.Localization;
 
 namespace Shuvi.Classes.Types.User
 {
     public class UserRating : IUserRating
     {
+        private IDatabaseUser _dbUser;
+
         public int Points { get; private set; }
         public Rank Rank { get; private set; }
 
-        public UserRating(int rating)
+        public UserRating(IDatabaseUser dbUser, int rating)
         {
+            _dbUser = dbUser;
             Points = rating;
             Rank = GetRank(rating);
         }
@@ -26,11 +30,14 @@ namespace Shuvi.Classes.Types.User
             var rankBefore = Rank;
             Rank = GetRank(Points);
             if (rankBefore < Rank)
+            {
+                EventManager.InvokeOnPlayerRankUp(_dbUser, rankBefore, Rank);
                 return new RatingResult(
                     rankBefore,
                     Rank,
                     string.Format(LocalizationService.Get("status").Get(lang).Get("rating/earnUp"), amount, Rank.GetName())
                     );
+            }
             return new RatingResult(
                 rankBefore,
                 Rank,
@@ -43,11 +50,14 @@ namespace Shuvi.Classes.Types.User
             var rankBefore = Rank;
             Rank = GetRank(Points);
             if (rankBefore < Rank)
+            {
+                EventManager.InvokeOnPlayerRankUp(_dbUser, rankBefore, Rank);
                 return new RatingResult(
                     rankBefore,
                     Rank,
                     string.Format(LocalizationService.Get("status").Get(lang).Get("rating/earnUp"), amount, Rank.GetName())
                     );
+            }
             return new RatingResult(
                 rankBefore,
                 Rank,

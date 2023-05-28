@@ -3,6 +3,7 @@ using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.Services.StaticServices.Database;
+using Shuvi.Services.StaticServices.Event;
 using Shuvi.Services.StaticServices.Info;
 using Shuvi.Services.StaticServices.Localization;
 
@@ -48,6 +49,7 @@ namespace Shuvi.CommandParts
                 .WithDescription(createLocalization.Get("embed/tosAccepted/desc"))
                 .Build();
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
+            EventManager.InvokeOnAccountCreate(context.User);
         }
     }
 }
