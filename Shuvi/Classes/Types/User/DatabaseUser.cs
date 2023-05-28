@@ -57,7 +57,7 @@ namespace Shuvi.Classes.Types.User
         public DatabaseUser(UserData data)
         {
             Id = data.Id;
-            Rating = new UserRating(data.Rating);
+            Rating = new UserRating(this, data.Rating);
             Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Bages);
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
             Characteristics = new UserCharacteristics(
