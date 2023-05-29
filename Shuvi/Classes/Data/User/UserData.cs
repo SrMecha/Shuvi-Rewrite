@@ -22,7 +22,7 @@ namespace Shuvi.Classes.Data.User
         public uint Color { get; set; } = UserSettings.StandartColor;
         public ObjectId? Avatar { get; set; } = null;
         public ObjectId? Banner { get; set; } = null;
-        public UserBadges Bages { get; set; } = UserBadges.None;
+        public UserBadges Badges { get; set; } = UserBadges.None;
 
         public PremiumAbilities PremiumAbilities { get; set; } = PremiumAbilities.None;
         public long PremiumExpires { get; set; } = 0;
