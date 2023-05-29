@@ -53,7 +53,7 @@ namespace Shuvi.Classes.Types.Customization
         }
         public void RemoveBadge(UserBadges bage)
         {
-            Badges &= bage;
+            Badges ^= bage;
         }
         public void SetImage(ImageType type, ObjectId? id)
         {

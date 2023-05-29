@@ -58,7 +58,7 @@ namespace Shuvi.Classes.Types.User
         {
             Id = data.Id;
             Rating = new UserRating(this, data.Rating);
-            Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Bages);
+            Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Badges);
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
             Characteristics = new UserCharacteristics(
                 new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),

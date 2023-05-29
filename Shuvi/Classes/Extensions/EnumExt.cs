@@ -246,6 +246,8 @@ namespace Shuvi.Classes.Extensions
             return target switch
             {
                 UserBadges.None => null,
+                UserBadges.AlphaTester => EmojiService.Get("badgeAlphaTester"),
+                UserBadges.BetaTester => EmojiService.Get(""),
                 UserBadges.BugHunter => EmojiService.Get("badgeBugHunter"),
                 _ => null
             };
