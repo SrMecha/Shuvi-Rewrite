@@ -82,7 +82,7 @@ namespace Shuvi.CommandParts
                     .WithButton(custLocalization.Get("btn/choose"), "equip", ButtonStyle.Primary, disabled: !haveCustomization, row: 1)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: currentPage >= maxPage, row: 1)
                     .WithButton(custLocalization.Get("btn/back"), "exit", ButtonStyle.Danger, row: 2)
-                    .WithButton(custLocalization.Get("btn/remove/avatar"), "remove", ButtonStyle.Secondary, 
+                    .WithButton(custLocalization.Get("btn/remove/avatar"), "remove", ButtonStyle.Secondary,
                     disabled: dbUser.Customization.Avatar is null, row: 2)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embedBuilder.Build(); msg.Components = components; });
@@ -202,7 +202,7 @@ namespace Shuvi.CommandParts
             var result = new List<string>();
             for (int i = page * 10; i < images.Count && i < page * 10 + 10; i++)
             {
-                result.Add(row == arrow  ? $"{EmojiService.Get("choosePoint")}{images[i].Info.GetName(lang)}" :images[i].Info.GetName(lang));
+                result.Add(row == arrow ? $"{EmojiService.Get("choosePoint")}{images[i].Info.GetName(lang)}" : images[i].Info.GetName(lang));
                 row++;
             }
             return result.Count < 1 ? _localizationPart.Get(lang).Get("list/empty") : string.Join("\n", result);

@@ -1,5 +1,4 @@
-﻿using Shuvi.Enums.Magic;
-using Shuvi.Interfaces.Localization;
+﻿using Shuvi.Interfaces.Localization;
 using Shuvi.Interfaces.Magic;
 
 namespace Shuvi.Interfaces.Spell

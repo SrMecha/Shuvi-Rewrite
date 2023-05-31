@@ -24,7 +24,7 @@ namespace Shuvi.Classes.Types.Spell.SpellList
 
         public override IActionResult OnCast(ICombatEntity player, ICombatEntity target, Language lang)
         {
-            player.Effects.Add(new EffectBase(LocalizationService.Get("effects").Get(lang).Get("stonePlates/name"), 5, 
+            player.Effects.Add(new EffectBase(LocalizationService.Get("effects").Get(lang).Get("stonePlates/name"), 5,
                 new BonusesCharacteristics(endurance: (player.Characteristics.Intellect + player.EffectBonuses.Intellect) / 3 + 1)));
             return new ActionResult(LocalizationService.Get("spells").Get(lang).Get("stonePlates/cast").Format(player.Name));
         }

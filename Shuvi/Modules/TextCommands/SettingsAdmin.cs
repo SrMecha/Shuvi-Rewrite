@@ -1,8 +1,8 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using Shuvi.Services.StaticServices.Info;
 using Shuvi.Classes.Factories.CustomEmbed;
+using Shuvi.Services.StaticServices.Info;
 
 namespace Shuvi.Modules.TextCommands
 {

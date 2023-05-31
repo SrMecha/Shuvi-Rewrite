@@ -1,7 +1,6 @@
 ﻿using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.CommandParts;
 using Shuvi.Enums.Top;

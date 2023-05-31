@@ -28,7 +28,7 @@ namespace Shuvi.Classes.Types.Spell.SpellList
                 return new ActionResult(LocalizationService.Get("spells").Get(lang).Get("fireBall/cast/dodge").Format(player.Name));
             var damage = target.BlockDamage(player.CalculateMagicDamage());
             target.ReduceHealth(damage);
-            target.Effects.Add(new EffectBase(LocalizationService.Get("effects").Get(lang).Get("burn/name"), 2, 
+            target.Effects.Add(new EffectBase(LocalizationService.Get("effects").Get(lang).Get("burn/name"), 2,
                 new BonusesCharacteristics(health: -damage / 5)));
             return new ActionResult(LocalizationService.Get("spells").Get(lang).Get("fireBall/cast/success").Format(player.Name, damage));
         }

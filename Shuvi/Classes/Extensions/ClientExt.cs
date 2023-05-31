@@ -1,6 +1,6 @@
-﻿using Discord.Interactions;
+﻿using Discord;
+using Discord.Interactions;
 using Discord.WebSocket;
-using Discord;
 
 namespace Shuvi.Classes.Extensions
 {

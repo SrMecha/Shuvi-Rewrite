@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-
-namespace Shuvi.Interfaces.Inventory
+﻿namespace Shuvi.Interfaces.Inventory
 {
     public interface IUserInventory : IInventory
     {

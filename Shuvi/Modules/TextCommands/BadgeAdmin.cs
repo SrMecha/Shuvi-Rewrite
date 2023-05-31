@@ -7,10 +7,8 @@ using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Enums.Localization;
-using Shuvi.Enums.Money;
 using Shuvi.Enums.User;
 using Shuvi.Services.StaticServices.Database;
-using static MongoDB.Driver.WriteConcern;
 
 namespace Shuvi.Modules.TextCommands
 {

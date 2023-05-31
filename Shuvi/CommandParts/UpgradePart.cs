@@ -1,5 +1,4 @@
-﻿using Amazon.Runtime.Internal.Transform;
-using Discord;
+﻿using Discord;
 using MongoDB.Driver;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
@@ -19,8 +18,8 @@ namespace Shuvi.CommandParts
     public static class UpgradePart
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("upgradePart");
-        private static readonly IReadOnlyDictionary<string, int> _multipliers = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>() 
-        { 
+        private static readonly IReadOnlyDictionary<string, int> _multipliers = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>()
+        {
             {"0-0", 1 },
             {"0-1", 1 },
             {"0-2", 1 },
@@ -98,7 +97,7 @@ namespace Shuvi.CommandParts
                         switch (codes[0])
                         {
                             case "0":
-                                bonuses.Add((StaticCharacteristic)int.Parse(codes[1]), 
+                                bonuses.Add((StaticCharacteristic)int.Parse(codes[1]),
                                     _multipliers.GetValueOrDefault(arrow, 1) * amount);
                                 break;
                             case "1":
@@ -113,7 +112,8 @@ namespace Shuvi.CommandParts
                             embed = EmbedFactory.CreateUserEmbed(context.User, dbUser, false, false)
                                 .WithAuthor(upgradeLocalization.Get("embed/upgradeEnd/author"))
                                 .Build();
-                            await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                            await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                            {
                                 msg.Embed = embed;
                                 msg.Components = new ComponentBuilder().Build();
                             });
@@ -144,9 +144,10 @@ namespace Shuvi.CommandParts
                                 $"**{namesLocalization.Get("mana")}:** {dbUser.Characteristics.Mana.Max} " +
                                 $"{(bonuses.Mana == 0 ? string.Empty : $"-> {dbUser.Characteristics.Mana.Max + bonuses.Mana}")}")
                             .Build();
-                            await context.Interaction.ModifyOriginalResponseAsync(msg => { 
-                                msg.Embed = embed; 
-                                msg.Components = new ComponentBuilder().Build(); 
+                            await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                            {
+                                msg.Embed = embed;
+                                msg.Components = new ComponentBuilder().Build();
                             });
                         }
                         dbUser.Characteristics.Add(bonuses);

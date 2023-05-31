@@ -39,7 +39,8 @@ namespace Shuvi.Modules.SlashCommands
             }
             if (dbUser.Location.GetLocation().Shops.Count < 1)
             {
-                await Context.Interaction.ModifyOriginalResponseAsync(msg => {
+                await Context.Interaction.ModifyOriginalResponseAsync(msg =>
+                {
                     msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(errorLocalization.Get("dontHaveShops")).Build();
                 });
                 return;

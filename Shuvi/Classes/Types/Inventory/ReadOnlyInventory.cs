@@ -2,7 +2,6 @@
 using Shuvi.Interfaces.Inventory;
 using Shuvi.Interfaces.Items;
 using Shuvi.Services.StaticServices.Database;
-using System.Linq;
 
 namespace Shuvi.Classes.Types.Inventory
 {

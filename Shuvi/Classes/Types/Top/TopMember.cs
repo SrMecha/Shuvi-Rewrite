@@ -28,6 +28,14 @@ namespace Shuvi.Classes.Types.Top
             Place = place;
         }
 
+        public TopMember(ulong id, string name, int amount, int place)
+        {
+            Id = id;
+            Name = name;
+            Amount = amount;
+            Place = place;
+        }
+
         public async Task<IDatabaseUser> GetDatabaseUser()
         {
             return await UserDatabase.GetUser(Id);

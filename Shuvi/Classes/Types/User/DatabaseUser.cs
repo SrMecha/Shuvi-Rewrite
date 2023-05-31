@@ -14,7 +14,6 @@ using Shuvi.Classes.Types.Premium;
 using Shuvi.Classes.Types.Skill;
 using Shuvi.Classes.Types.Spell;
 using Shuvi.Classes.Types.Statistics;
-using Shuvi.Enums.Localization;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;

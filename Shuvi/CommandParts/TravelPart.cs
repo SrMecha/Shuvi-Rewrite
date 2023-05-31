@@ -41,7 +41,7 @@ namespace Shuvi.CommandParts
                     .Build();
                 var components = new ComponentBuilder()
                     .WithSelectMenu("region", regionOptions, travelLocalization.Get("select/chooseRegion/name"), row: 0)
-                    .WithSelectMenu("location", GetLocationOptions(dbUser.Rating.Rank, choosedRegion, context.Language), 
+                    .WithSelectMenu("location", GetLocationOptions(dbUser.Rating.Rank, choosedRegion, context.Language),
                     travelLocalization.Get("select/chooseLocation/name"), row: 1)
                     .WithButton(travelLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 2)
                     .WithButton(travelLocalization.Get("btn/travel"), "travel", ButtonStyle.Success, disabled: energyCosts == 0, row: 2)
@@ -68,7 +68,8 @@ namespace Shuvi.CommandParts
                                 .WithAuthor(travelLocalization.Get("embed/travel/author"))
                                 .WithDescription(travelLocalization.Get("embed/travelCancelled"))
                                 .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
                             msg.Embed = embed;
                             msg.Components = new ComponentBuilder().Build();
                         });
@@ -86,7 +87,8 @@ namespace Shuvi.CommandParts
                                 : string.Empty)}")
                                 .WithImageUrl(WorldMap.GetRegion(choosedRegion).GetLocation(choosedLocation).PictureURL)
                                 .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
                             msg.Embed = embed;
                             msg.Components = new ComponentBuilder().Build();
                         });

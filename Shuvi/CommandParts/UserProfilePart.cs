@@ -185,7 +185,7 @@ namespace Shuvi.CommandParts
         {
             var result = new List<string>();
             IEmote? emote;
-            foreach(var badge in badges.GetFlags())
+            foreach (var badge in badges.GetFlags())
             {
                 emote = badge.GetBadgeEmoji();
                 if (emote is not null)

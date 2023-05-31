@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Interfaces.Statistics;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Shuvi.Classes.Types.Statistics
 {

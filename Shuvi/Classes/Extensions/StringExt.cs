@@ -1,5 +1,4 @@
-﻿using Shuvi.Enums.Characteristic;
-using Shuvi.Enums.Localization;
+﻿using Shuvi.Enums.Localization;
 using System.Runtime.CompilerServices;
 
 namespace Shuvi.Classes.Extensions

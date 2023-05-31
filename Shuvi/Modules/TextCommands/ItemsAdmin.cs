@@ -1,13 +1,13 @@
-﻿using Discord.Commands;
-using Discord;
+﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Shuvi.Classes.Data.User;
-using Shuvi.Services.StaticServices.Database;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Enums.Localization;
+using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Modules.TextCommands
 {

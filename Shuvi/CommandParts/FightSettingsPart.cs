@@ -92,8 +92,8 @@ namespace Shuvi.CommandParts
                         dbUser.ActionChances.Spell = settingsToSave.Spell;
                         dbUser.ActionChances.Skill = settingsToSave.Skill;
                         await UserDatabase.UpdateUser(dbUser.Id, new UpdateDefinitionBuilder<UserData>()
-                            .Set(x => x.ActionChances, new() 
-                            { 
+                            .Set(x => x.ActionChances, new()
+                            {
                                 LightAttack = settingsToSave.LightAttack,
                                 HeavyAttack = settingsToSave.HeavyAttack,
                                 Dodge = settingsToSave.Dodge,

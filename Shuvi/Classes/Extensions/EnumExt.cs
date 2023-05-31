@@ -9,7 +9,6 @@ using Shuvi.Enums.Requirements;
 using Shuvi.Enums.Top;
 using Shuvi.Enums.User;
 using Shuvi.Services.StaticServices.Emoji;
-using System;
 using System.Runtime.CompilerServices;
 
 namespace Shuvi.Classes.Extensions
@@ -234,7 +233,7 @@ namespace Shuvi.Classes.Extensions
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
         public static IEnumerable<TEnum> GetFlags<TEnum>(this TEnum input)
-            where TEnum: Enum
+            where TEnum : Enum
         {
             foreach (TEnum value in Enum.GetValues(input.GetType()))
                 if (input.HasFlag(value))

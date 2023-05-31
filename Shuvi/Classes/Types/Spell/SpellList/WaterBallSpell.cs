@@ -12,7 +12,7 @@ using Shuvi.Services.StaticServices.Localization;
 
 namespace Shuvi.Classes.Types.Spell.SpellList
 {
-    public class WaterBallSpell: SpellBase
+    public class WaterBallSpell : SpellBase
     {
         public override string SpellName { get; } = "waterBall";
         public override ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells", "waterBall");
