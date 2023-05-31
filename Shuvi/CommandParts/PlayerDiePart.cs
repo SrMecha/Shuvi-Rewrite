@@ -1,5 +1,4 @@
 ﻿using Discord;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
@@ -28,7 +27,7 @@ namespace Shuvi.CommandParts
                 .WithDescription($"__{deadReason}__\n{deadLocalization.Get("embed/dead/desc")}")
                 .WithColor(new Color(0, 0, 0))
                 .Build();
-            dbUser.Rating.SetPoints(dbUser.Rating.Points/2, context.Language);
+            dbUser.Rating.SetPoints(dbUser.Rating.Points / 2, context.Language);
             dbUser.Characteristics.Mana.Add(9999);
             dbUser.Characteristics.Energy.Add(9999);
             dbUser.Characteristics.Health.Add(9999);

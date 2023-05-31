@@ -7,7 +7,6 @@ using Shuvi.Classes.Factories.Profession;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.User;
-using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
 using Shuvi.Services.StaticServices.Emoji;

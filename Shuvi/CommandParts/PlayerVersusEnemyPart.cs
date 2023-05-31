@@ -3,9 +3,7 @@ using MongoDB.Driver;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
-using Shuvi.Classes.Types.Characteristics;
 using Shuvi.Classes.Types.Combat;
-using Shuvi.Classes.Types.Effect.EffectList;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.Classes.Types.Status;
 using Shuvi.Interfaces.Combat;
@@ -21,7 +19,7 @@ namespace Shuvi.CommandParts
     public static class PlayerVersusEnemyPart
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("battlePart");
-        private const int MaxHod = 100; 
+        private const int MaxHod = 100;
 
         public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IDatabaseEnemy dbEnemy)
         {
@@ -179,7 +177,7 @@ namespace Shuvi.CommandParts
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
             await context.LastInteraction.TryDeferAsync();
         }
-        public static async Task FightDraw(CustomInteractionContext context, IResultStorage status, int hod, 
+        public static async Task FightDraw(CustomInteractionContext context, IResultStorage status, int hod,
             IDatabaseUser dbUser, ICombatPlayer player, ICombatEnemy enemy)
         {
             var battleLocalization = _localizationPart.Get(context.Language);

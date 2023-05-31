@@ -29,7 +29,7 @@ namespace Shuvi.Classes.Types.Craft
         public int GetMaxCraft(IReadOnlyInventory inventory)
         {
             var max = int.MaxValue;
-            foreach ( var (itemId, amount) in Items.GetItemsDictionary())
+            foreach (var (itemId, amount) in Items.GetItemsDictionary())
             {
                 var currentAmount = inventory.GetItemAmount(itemId) / amount;
                 if (currentAmount < max)

@@ -22,7 +22,13 @@ namespace Shuvi.Services.StaticServices.Top
                 var userData = users[i];
                 var socketUser = client.GetUser(userData.Id);
                 if (socketUser is null)
-                    top.Add(new TopMember(await client.Rest.GetUserAsync(userData.Id), GetAmount(type, userData), i + 1));
+                {
+                    var restUser = await client.Rest.GetUserAsync(userData.Id);
+                    if (restUser is null)
+                        top.Add(new TopMember(userData.Id, userData.Id.ToString(), GetAmount(type, userData), i + 1));
+                    else
+                        top.Add(new TopMember(restUser, GetAmount(type, userData), i + 1));
+                }
                 else
                     top.Add(new TopMember(socketUser, GetAmount(type, userData), i + 1));
                 await Task.Delay(1000);
@@ -51,7 +57,8 @@ namespace Shuvi.Services.StaticServices.Top
 
         public static void StartUpdateTop(DiscordShardedClient client)
         {
-            _ = Task.Run(async () => {
+            _ = Task.Run(async () =>
+            {
                 while (true)
                 {
                     await Task.Delay(new TimeSpan(0, 0, 5));
@@ -90,5 +97,5 @@ namespace Shuvi.Services.StaticServices.Top
         {
             return (_userTop.GetValueOrDefault(type, new()).Count) / 10 < 1 ? 1 : (_userTop.GetValueOrDefault(type, new()).Count + 9) / 10;
         }
-    } 
+    }
 }

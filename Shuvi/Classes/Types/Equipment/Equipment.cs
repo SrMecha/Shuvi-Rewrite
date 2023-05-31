@@ -46,7 +46,7 @@ namespace Shuvi.Classes.Types.Equipment
         }
         public virtual void RemoveAllEquipment()
         {
-            
+
         }
     }
 }

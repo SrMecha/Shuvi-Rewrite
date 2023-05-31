@@ -31,7 +31,7 @@ namespace Shuvi.Services.Сonfigurator
 #if DEBUG
         private const string _databaseName = "ShuviTest";
 #else
-        private const string _databaseName = "ShuviTest";
+        private const string _databaseName = "Shuvi";
 #endif
         public static void ConfigureBeforeBotStart()
         {

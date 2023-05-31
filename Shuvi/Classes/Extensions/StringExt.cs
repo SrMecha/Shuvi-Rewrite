@@ -1,5 +1,4 @@
-﻿using Shuvi.Enums.Characteristic;
-using Shuvi.Enums.Localization;
+﻿using Shuvi.Enums.Localization;
 using System.Runtime.CompilerServices;
 
 namespace Shuvi.Classes.Extensions
@@ -42,7 +41,7 @@ namespace Shuvi.Classes.Extensions
             return string.Format(target, arg0, arg1, arg2, arg3, arg4, arg5, arg6);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string Multiple(this string original, byte repeatCount)
+        public static string Multiple(this string original, int repeatCount)
         {
             if (repeatCount < 1) return string.Empty;
             return string.Create(original.Length * ++repeatCount, original, (span, value) =>

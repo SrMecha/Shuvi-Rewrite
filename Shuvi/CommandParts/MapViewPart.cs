@@ -131,7 +131,7 @@ namespace Shuvi.CommandParts
             }
         }
 
-        public static EmbedBuilder AddCategoryFields(this EmbedBuilder embedBuilder, string category, 
+        public static EmbedBuilder AddCategoryFields(this EmbedBuilder embedBuilder, string category,
             IDatabaseUser dbUser, IMapLocation location, Language lang)
         {
             var localization = _localizationPart.Get(lang);
@@ -156,7 +156,7 @@ namespace Shuvi.CommandParts
         {
             var result = new List<SelectMenuOptionBuilder>();
             var i = 0;
-            foreach(var region in WorldMap.Regions)
+            foreach (var region in WorldMap.Regions)
             {
                 var description = region.Info.GetDescription(lang);
                 if (description.Length > 70)

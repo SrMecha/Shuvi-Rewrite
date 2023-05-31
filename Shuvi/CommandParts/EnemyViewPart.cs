@@ -66,9 +66,9 @@ namespace Shuvi.CommandParts
                 "abilities" => new EmbedFieldBuilder()
                     .WithName(viewLocalization.Get("embed/abilities/name"))
                     .WithValue($"{viewLocalization.Get("embed/abilities/spell/name").Format(enemy.Spell.Info.GetName(lang))}\n" +
-                    $"{(enemy.Spell.HaveSpell() ? 
+                    $"{(enemy.Spell.HaveSpell() ?
                     $"{viewLocalization.Get("embed/abilities/spell/magicType").Format(enemy.Spell.MagicInfo.Info.GetName(lang))}\n" +
-                    $"{viewLocalization.Get("embed/abilities/spell/desc").Format(enemy.Spell.Info.GetDescription(lang))}" 
+                    $"{viewLocalization.Get("embed/abilities/spell/desc").Format(enemy.Spell.Info.GetDescription(lang))}"
                     : string.Empty)}"),
                 "drop" => new EmbedFieldBuilder()
                     .WithName(viewLocalization.Get("embed/drop/name"))

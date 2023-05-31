@@ -1,5 +1,4 @@
-﻿using Discord;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Shuvi.Classes.Data.Item;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;

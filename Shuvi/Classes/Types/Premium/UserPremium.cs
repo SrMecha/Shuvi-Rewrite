@@ -30,7 +30,7 @@ namespace Shuvi.Classes.Types.Premium
         }
         public void RemoveAbility(PremiumAbilities ability)
         {
-            PremiumAbilities &= ability;
+            PremiumAbilities ^= ability;
         }
         public void AddMoneyDonate(int amount)
         {

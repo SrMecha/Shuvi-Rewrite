@@ -1,5 +1,4 @@
 ﻿using Shuvi.Classes.Types.Localization;
-using Shuvi.Classes.Types.Magic;
 using Shuvi.Classes.Types.Requirements;
 using Shuvi.Classes.Types.Status;
 using Shuvi.Enums.Localization;

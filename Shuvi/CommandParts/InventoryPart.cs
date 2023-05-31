@@ -37,8 +37,8 @@ namespace Shuvi.CommandParts
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: pageNow <= 0, row: 0)
                     .WithButton(inventoryLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 0)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: pageNow >= maxPage - 1, row: 0)
-                    .WithSelectMenu("choose", GetItemsSelectMenu(dbUser.Inventory, pageNow, context.Language), 
-                    inventoryLocalization.Get("select/view/name"),disabled: !haveItems)
+                    .WithSelectMenu("choose", GetItemsSelectMenu(dbUser.Inventory, pageNow, context.Language),
+                    inventoryLocalization.Get("select/view/name"), disabled: !haveItems)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();

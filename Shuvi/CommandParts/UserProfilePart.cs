@@ -185,7 +185,7 @@ namespace Shuvi.CommandParts
         {
             var result = new List<string>();
             IEmote? emote;
-            foreach(var badge in badges.GetFlags())
+            foreach (var badge in badges.GetFlags())
             {
                 emote = badge.GetBadgeEmoji();
                 if (emote is not null)
@@ -195,9 +195,9 @@ namespace Shuvi.CommandParts
         }
         private static string GetEmojiBar(IEmote fullEmoji, IEmote emptyEmoji, int current, int max, int displayMax)
         {
-            var fullEmojiCount = (byte)(current / (max / displayMax));
+            var fullEmojiCount = (current / (max / displayMax));
             return $"{fullEmoji.ToString()!.Multiple(fullEmojiCount)}" +
-                $"{emptyEmoji.ToString()!.Multiple((byte)(displayMax - fullEmojiCount))}";
+                $"{emptyEmoji.ToString()!.Multiple((displayMax - fullEmojiCount))}";
         }
     }
 }

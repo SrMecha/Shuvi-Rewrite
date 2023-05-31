@@ -5,7 +5,6 @@ using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Types.Combat;
 using Shuvi.Classes.Types.Interaction;
-using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
 using Shuvi.Services.StaticServices.Info;
@@ -25,7 +24,7 @@ namespace Shuvi.CommandParts
             while (context.LastInteraction is not null)
             {
                 dbUser.Characteristics.Energy.Reduce(HuntEnergyCost);
-                await UserDatabase.UpdateUser(dbUser.Id, 
+                await UserDatabase.UpdateUser(dbUser.Id,
                     new UpdateDefinitionBuilder<UserData>().Set(x => x.EnergyRegenTime, dbUser.Characteristics.Energy.RegenTime));
                 var enemy = EnemyDatabase.GetEnemy(dbUser.Location.GetLocation().Enemies.GetRandom());
                 var combatEnemy = new CombatEnemy(enemy, context.Language);
@@ -34,7 +33,7 @@ namespace Shuvi.CommandParts
                 var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                     .WithAuthor(huntLocalization.Get("embed/search/author"))
                     .WithDescription($"{huntLocalization.Get("embed/search/meet").Format(enemy.Info.GetName(context.Language))}\n" +
-                    $"{huntLocalization.Get("embed/search/energyRemaining").Format(dbUser.Characteristics.Energy.GetCurrent(), 
+                    $"{huntLocalization.Get("embed/search/energyRemaining").Format(dbUser.Characteristics.Energy.GetCurrent(),
                     dbUser.Characteristics.Energy.Max)}")
                     .AddField(enemy.Info.GetName(context.Language),
                     canViewStats ? $"**{namesLocalization.Get("strength")}** {combatEnemy.Characteristics.Strength}\n" +
@@ -48,14 +47,14 @@ namespace Shuvi.CommandParts
                     true)
                     .AddField(huntLocalization.Get("embed/search/info"),
                     $"{huntLocalization.Get("embed/search/rank").Format(enemy.Rank.ToString())}\n" +
-                    $"{(canViewSpell ? huntLocalization.Get("embed/search/spell").Format(enemy.Spell.Info.GetName(context.Language)) : 
+                    $"{(canViewSpell ? huntLocalization.Get("embed/search/spell").Format(enemy.Spell.Info.GetName(context.Language)) :
                     huntLocalization.Get("embed/search/unknown"))}",
                     true)
                     .Build();
                 var components = new ComponentBuilder()
                     .WithButton(huntLocalization.Get("btn/attack"), "attack", ButtonStyle.Danger, row: 0)
                     //.WithButton(huntLocalization.Get("btn/tame"), "tame", ButtonStyle.Success, row: 0)
-                    .WithButton(huntLocalization.Get("btn/retry"), "retry", ButtonStyle.Secondary, 
+                    .WithButton(huntLocalization.Get("btn/retry"), "retry", ButtonStyle.Secondary,
                     disabled: !dbUser.Characteristics.HaveEnergy(HuntEnergyCost), row: 1)
                     .WithButton(huntLocalization.Get("btn/leave"), "leave", ButtonStyle.Secondary, row: 2)
                     .Build();
@@ -80,9 +79,10 @@ namespace Shuvi.CommandParts
                         embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                             .WithDescription(huntLocalization.Get("embed/leave/desc"))
                             .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => { 
-                            msg.Embed = embed; 
-                            msg.Components = new ComponentBuilder().Build(); 
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
+                            msg.Embed = embed;
+                            msg.Components = new ComponentBuilder().Build();
                         });
                         await context.LastInteraction.TryDeferAsync();
                         return;

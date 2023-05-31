@@ -152,7 +152,7 @@ namespace Shuvi.CommandParts
                             continue;
                         }
                         dbUser.Equipment.SetEquipment(item.Type, item.Id);
-                        await UserDatabase.UpdateUser(dbUser.Id, 
+                        await UserDatabase.UpdateUser(dbUser.Id,
                             new UpdateDefinitionBuilder<UserData>().Set(item.Type.GetNameOf(), item.Id));
                         await interaction.SendInfo(viewLocalization.Get("embed/view/itemEquipped"));
                         break;
@@ -320,7 +320,7 @@ namespace Shuvi.CommandParts
                         .WithButton(viewLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
                         .WithButton(viewLocalization.Get("btn/use"), "use", ButtonStyle.Success, disabled: !dbUser.Inventory.HaveItem(item.Id, 1))
                         .Build();
-                
+
                 else
                     components = new ComponentBuilder()
                         .WithButton(viewLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)

@@ -4,7 +4,6 @@ using MongoDB.Bson.Serialization.Options;
 using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
-using Shuvi.Enums.Localization;
 using Shuvi.Enums.Magic;
 using Shuvi.Enums.Premium;
 using Shuvi.Enums.User;

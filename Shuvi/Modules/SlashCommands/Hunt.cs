@@ -44,8 +44,9 @@ namespace Shuvi.Modules.SlashCommands
             }
             if (!dbUser.Location.GetLocation().Enemies.HaveEnemies())
             {
-                await Context.Interaction.ModifyOriginalResponseAsync(msg => { 
-                    msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(errorLocalization.Get("dontHaveEnemies")).Build(); 
+                await Context.Interaction.ModifyOriginalResponseAsync(msg =>
+                {
+                    msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(errorLocalization.Get("dontHaveEnemies")).Build();
                 });
                 return;
             }

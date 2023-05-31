@@ -7,7 +7,6 @@ using Shuvi.Enums.Image;
 using Shuvi.Enums.Localization;
 using Shuvi.Interfaces.Shop;
 using Shuvi.Interfaces.Shop.Products;
-using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
 using Shuvi.Services.StaticServices.Emoji;
@@ -81,7 +80,7 @@ namespace Shuvi.CommandParts
             }
         }
 
-        public static async Task<string> PurchasingPart(CustomInteractionContext context, IDatabaseUser dbUser, 
+        public static async Task<string> PurchasingPart(CustomInteractionContext context, IDatabaseUser dbUser,
             IShop shop, List<SelectMenuOptionBuilder> categoryOptions)
         {
             var shopLocalization = _localizationPart.Get(context.Language);
@@ -111,7 +110,7 @@ namespace Shuvi.CommandParts
                     .WithSelectMenu("category", categoryOptions, shopLocalization.Get("select/category/name"), row: 0)
                     .WithSelectMenu("item", GetItemOptions(shop.Purchasing.GetProductsInPage(currentPage), context.Language),
                     shopLocalization.Get("select/item/name"), row: 1)
-                    .WithButton("x1", "1", ButtonStyle.Success, 
+                    .WithButton("x1", "1", ButtonStyle.Success,
                     disabled: !shop.Purchasing.CanBuy(dbUser.Inventory, dbUser.Wallet, currentPage, arrow, 1), row: 2)
                     .WithButton("x2", "2", ButtonStyle.Success,
                     disabled: !shop.Purchasing.CanBuy(dbUser.Inventory, dbUser.Wallet, currentPage, arrow, 2), row: 2)
@@ -154,7 +153,8 @@ namespace Shuvi.CommandParts
                         embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                             .WithAuthor(shopLocalization.Get("embed/exit/author"))
                             .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
                             msg.Embed = embed;
                             msg.Components = new ComponentBuilder().Build();
                         });
@@ -172,9 +172,10 @@ namespace Shuvi.CommandParts
                             .AddField(shopLocalization.Get("embed/confirm/results"),
                             GetBasketProductsString(shop, context.Language, 20))
                             .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => { 
-                            msg.Embed = embed; 
-                            msg.Components = new ComponentBuilder().Build(); 
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
+                            msg.Embed = embed;
+                            msg.Components = new ComponentBuilder().Build();
                         });
                         await shop.Confirm(dbUser);
                         return "exit";
@@ -261,7 +262,8 @@ namespace Shuvi.CommandParts
                         embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                             .WithAuthor(shopLocalization.Get("embed/exit/author"))
                             .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
                             msg.Embed = embed;
                             msg.Components = new ComponentBuilder().Build();
                         });
@@ -279,7 +281,8 @@ namespace Shuvi.CommandParts
                             .AddField(shopLocalization.Get("embed/confirm/results"),
                             GetBasketProductsString(shop, context.Language, 20))
                             .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
                             msg.Embed = embed;
                             msg.Components = new ComponentBuilder().Build();
                         });
@@ -362,7 +365,8 @@ namespace Shuvi.CommandParts
                         embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
                             .WithAuthor(shopLocalization.Get("embed/exit/author"))
                             .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
                             msg.Embed = embed;
                             msg.Components = new ComponentBuilder().Build();
                         });
@@ -380,7 +384,8 @@ namespace Shuvi.CommandParts
                             .AddField(shopLocalization.Get("embed/confirm/results"),
                             GetBasketProductsString(shop, context.Language, 20))
                             .Build();
-                        await context.Interaction.ModifyOriginalResponseAsync(msg => {
+                        await context.Interaction.ModifyOriginalResponseAsync(msg =>
+                        {
                             msg.Embed = embed;
                             msg.Components = new ComponentBuilder().Build();
                         });
@@ -397,7 +402,7 @@ namespace Shuvi.CommandParts
         {
             var result = new List<SelectMenuOptionBuilder>();
             var row = 0;
-            foreach(var product in products)
+            foreach (var product in products)
             {
                 var item = product.GetItem();
                 var description = item.Info.GetDescription(lang);
@@ -433,7 +438,7 @@ namespace Shuvi.CommandParts
         {
             var result = new List<string>();
             var currentRow = 0;
-            foreach(var product in shop.Purchasing.GetProductsInPage(page))
+            foreach (var product in shop.Purchasing.GetProductsInPage(page))
             {
                 result.Add($"{(currentRow == arrow ? EmojiService.Get("choosePoint") : string.Empty)}" +
                     $"{product.GetItem().Info.GetName(lang)} x{product.Amount} = {product.Price} {EmojiService.Get(product.MoneyType.GetLowerName())}");
