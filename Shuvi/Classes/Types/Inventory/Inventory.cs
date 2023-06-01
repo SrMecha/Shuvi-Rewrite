@@ -12,9 +12,11 @@ namespace Shuvi.Classes.Types.Inventory
         }
         public void AddItem(ObjectId id, int amount = 1)
         {
+            if (amount == 0)
+                return;
             if (amount < 0)
             {
-                RemoveItem(id, +amount * -1);
+                RemoveItem(id, amount * -1);
                 return;
             }
             var max = ItemDatabase.GetItem(id).Max;
@@ -37,6 +39,8 @@ namespace Shuvi.Classes.Types.Inventory
         }
         public void RemoveItem(ObjectId id, int amount = 1)
         {
+            if (amount == 0)
+                return;
             if (amount < 0)
             {
                 AddItem(id, amount * -1);
