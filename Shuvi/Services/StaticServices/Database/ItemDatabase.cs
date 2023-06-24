@@ -12,6 +12,8 @@ namespace Shuvi.Services.StaticServices.Database
         private static IMongoCollection<ItemData>? _collection;
         private static Dictionary<ObjectId, IItem> _cache = new();
 
+        public static List<IItem> Items { get; private set; } = new();
+
         public static void Init(IMongoCollection<ItemData> collection)
         {
             _collection = collection;
@@ -21,6 +23,7 @@ namespace Shuvi.Services.StaticServices.Database
         {
             foreach (var data in _collection.FindSync(new BsonDocument { }).ToEnumerable<ItemData>())
             {
+                Items.Add(ItemFactory.CreateItem(data));
                 _cache.Add(data.Id, ItemFactory.CreateItem(data));
             }
         }

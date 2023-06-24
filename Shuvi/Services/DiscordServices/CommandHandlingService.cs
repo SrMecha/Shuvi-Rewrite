@@ -32,30 +32,33 @@ namespace Shuvi.Services.DiscordServices
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
         }
 
-        public async Task MessageReceivedAsync(SocketMessage rawMessage)
+        public Task MessageReceivedAsync(SocketMessage rawMessage)
         {
-            // Ignore system messages, or messages from other bots
-            if (!(rawMessage is SocketUserMessage message))
-                return;
-            if (message.Source != MessageSource.User)
-                return;
+            _ = Task.Run(async () => {
+                // Ignore system messages, or messages from other bots
+                if (!(rawMessage is SocketUserMessage message))
+                    return;
+                if (message.Source != MessageSource.User)
+                    return;
 
-            // This value holds the offset where the prefix ends
-            var argPos = 0;
-            // Perform prefix check. You may want to replace this with
-            // (!message.HasCharPrefix('!', ref argPos))
-            // for a more traditional command format like !help.
-            if (!message.HasCharPrefix('!', ref argPos))
-                return;
+                // This value holds the offset where the prefix ends
+                var argPos = 0;
+                // Perform prefix check. You may want to replace this with
+                // (!message.HasCharPrefix('!', ref argPos))
+                // for a more traditional command format like !help.
+                if (!message.HasCharPrefix('!', ref argPos))
+                    return;
 
-            var context = new ShardedCommandContext(_discord, message);
-            // Perform the execution of the command. In this method,
-            // the command service will perform precondition and parsing check
-            // then execute the command if one is matched.
-            if (UserCheckService.isAdmin(context.User.Id))
-                await _commands.ExecuteAsync(context, argPos, _services);
-            // Note that normally a result will be returned by this format, but here
-            // we will handle the result in CommandExecutedAsync,
+                var context = new ShardedCommandContext(_discord, message);
+                // Perform the execution of the command. In this method,
+                // the command service will perform precondition and parsing check
+                // then execute the command if one is matched.
+                if (UserCheckService.isAdmin(context.User.Id))
+                    await _commands.ExecuteAsync(context, argPos, _services);
+                // Note that normally a result will be returned by this format, but here
+                // we will handle the result in CommandExecutedAsync,
+            });
+            return Task.CompletedTask;
         }
 
         public async Task CommandExecutedAsync(Optional<CommandInfo> command, ICommandContext context, IResult result)

@@ -80,6 +80,19 @@ namespace Shuvi.Classes.Types.Customization
                     break;
             }
         }
+        public void AddImage(IImage image)
+        {
+            _imagesCache.Add(image.Id);
+            switch (image.Type)
+            {
+                case ImageType.Avatar:
+                    Avatars.Add(image);
+                    break;
+                case ImageType.Banner:
+                    Banners.Add(image);
+                    break;
+            }
+        }
         public void RemoveImage(ImageType type, ObjectId id)
         {
             _imagesCache.Remove(id);
@@ -90,6 +103,19 @@ namespace Shuvi.Classes.Types.Customization
                     break;
                 case ImageType.Banner:
                     Banners.Remove(ImageDatabase.GetImage(id));
+                    break;
+            }
+        }
+        public void RemoveImage(IImage image)
+        {
+            _imagesCache.Remove(image.Id);
+            switch (image.Type)
+            {
+                case ImageType.Avatar:
+                    Avatars.Remove(image);
+                    break;
+                case ImageType.Banner:
+                    Banners.Remove(image);
                     break;
             }
         }
