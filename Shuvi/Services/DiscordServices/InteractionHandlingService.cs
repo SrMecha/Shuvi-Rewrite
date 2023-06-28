@@ -26,9 +26,9 @@ namespace Shuvi.Services.DiscordServices
         }
 
         // Register all modules, and add the commands from these modules to either guild or globally depending on the build state.
-        public async Task InitializeAsync()
+        public async Task<IEnumerable<ModuleInfo>> InitializeAsync()
         {
-            await _service.AddModulesAsync(typeof(InteractionHandlingService).Assembly, _provider);
+            return await _service.AddModulesAsync(typeof(InteractionHandlingService).Assembly, _provider);
         }
 
         private async Task OnInteractionAsync(SocketInteraction interaction)

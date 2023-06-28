@@ -7,67 +7,90 @@ using MongoDB.Driver;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
+using Shuvi.Classes.Types.Customization;
 using Shuvi.Enums.Image;
 using Shuvi.Enums.Localization;
+using Shuvi.Enums.User;
+using Shuvi.Interfaces.Customization;
+using Shuvi.Interfaces.Items;
 using Shuvi.Services.StaticServices.Database;
 using Shuvi.Services.StaticServices.Emoji;
 
 namespace Shuvi.Modules.TextCommands
 {
-    public class ItemsAdminCommandModule : ModuleBase<SocketCommandContext>
+    public class CustomizationAdminCommandModule : ModuleBase<SocketCommandContext>
     {
         private readonly DiscordShardedClient _client;
+        private readonly CommandService _commands;
 
-        public ItemsAdminCommandModule(IServiceProvider provider)
+        public CustomizationAdminCommandModule(IServiceProvider provider)
         {
             _client = provider.GetRequiredService<DiscordShardedClient>();
+            _commands = provider.GetRequiredService<CommandService>();
         }
 
-        [Command("GiveItem", true)]
-        public async Task GiveItemCommandAsync(
-                [Summary("user")] IUser paramUser,
-                [Summary("id")] string id,
-                [Summary("amount")] int amount
-                )
+        [Command("GiveImage", true)]
+        public async Task GiveCustomizationCommandAsync(
+            [Summary("user")] IUser paramUser,
+            [Summary("imageId")] string imageId
+            )
         {
+            var image = ImageDatabase.GetImage(new ObjectId(imageId));
             var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
                 return;
             }
-            var item = ItemDatabase.GetItem(new ObjectId(id));
-            if (item.Id == ObjectId.Empty)
-            {
-                await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Предмет не найден.", Language.Ru));
-                return;
-            }
-            dbUser.Inventory.AddItem(new ObjectId(id), amount);
+            dbUser.Customization.AddImage(image);
             await UserDatabase.UpdateUser(
                 paramUser.Id,
-                new UpdateDefinitionBuilder<UserData>().Set(x => x.Inventory, dbUser.Inventory.GetItemsDictionary()));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {item.Info.GetName(Language.Ru)} x{amount} пользователю {paramUser.Username}.");
+                new UpdateDefinitionBuilder<UserData>().Set(x => x.Images, dbUser.Customization.GetImagesCache()));
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы выдали пользовутелю {paramUser.Username} картинку **{image.Info.GetName(Language.Ru)}**");
             await ReplyAsync(embed: embed);
         }
 
-        [Command("Items", true)]
-        public async Task ItemsCommandAsync()
+        [Command("RemoveImage", true)]
+        public async Task RemoveCustomizationCommandAsync(
+            [Summary("user")] IUser paramUser,
+            [Summary("imageId")] string imageId
+            )
+        {
+            var image = ImageDatabase.GetImage(new ObjectId(imageId));
+            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            if (dbUser is null)
+            {
+                await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
+                return;
+            }
+            dbUser.Customization.RemoveImage(image);
+            await UserDatabase.UpdateUser(
+                paramUser.Id,
+                new UpdateDefinitionBuilder<UserData>().Set(x => x.Images, dbUser.Customization.GetImagesCache()));
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы забрали у пользователя {paramUser.Username} картинку **{image.Info.GetName(Language.Ru)}**");
+            await ReplyAsync(embed: embed);
+        }
+
+        [Command("Images", true)]
+        public async Task CustomizationCommandAsync() 
         {
             var currentPage = 0;
-            var maxPage = ItemDatabase.Items.Count / 10;
+            var maxPage = ImageDatabase.Images.Count / 10;
             var arrow = 0;
             SocketMessageComponent? interaction = null;
             IUserMessage? message = null;
             while (true)
             {
-                var item = ItemDatabase.Items[currentPage * 10 + arrow];
+                var image = ImageDatabase.Images[currentPage * 10 + arrow];
                 var embed = EmbedFactory.CreateUserEmbed(Context.User)
-                    .WithDescription($"ID: {item.Id}\n\n{GetItemsString(currentPage, arrow)}")
+                    .WithDescription($"ID: {image.Id}\n\n{GetCustomizationsString(currentPage, arrow)}")
+                    .WithThumbnailUrl(image.Type == ImageType.Avatar ? image.URL : string.Empty)
+                    .WithImageUrl(image.Type == ImageType.Banner ? image.URL : string.Empty)
                     .WithFooter($"Страница {currentPage + 1}/{maxPage + 1}")
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("select", GetItemsOptions(currentPage, arrow),
-                    "Выберите предмет", row: 0)
+                    .WithSelectMenu("select", GetCustomizationOptions(currentPage, arrow),
+                    "Выберите картинку", row: 0)
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: currentPage < 1, row: 1)
                     .WithButton("Выйти", "exit", ButtonStyle.Danger, row: 1)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: currentPage >= maxPage, row: 1)
@@ -105,27 +128,27 @@ namespace Shuvi.Modules.TextCommands
             }
         }
 
-        private static string GetItemsString(int page, int arrow)
+        private static string GetCustomizationsString(int page, int arrow)
         {
             var row = 0;
             var result = new List<string>();
-            for (int i = page * 10; i < ItemDatabase.Items.Count && i < page * 10 + 10; i++)
+            for (int i = page * 10; i < ImageDatabase.Images.Count && i < page * 10 + 10; i++)
             {
-                var item = ItemDatabase.Items[i];
-                result.Add(row == arrow ? $"{EmojiService.Get("choosePoint")}{item.Info.GetName(Language.Ru)}" : item.Info.GetName(Language.Ru));
+                var image = ImageDatabase.Images[i];
+                result.Add(row == arrow ? $"{EmojiService.Get("choosePoint")}{image.Info.GetName(Language.Ru)}" : image.Info.GetName(Language.Ru));
                 row++;
             }
             return result.Count < 1 ? "Пусто" : string.Join("\n", result);
         }
 
-        private static List<SelectMenuOptionBuilder> GetItemsOptions(int page, int arrow)
+        private static List<SelectMenuOptionBuilder> GetCustomizationOptions(int page, int arrow)
         {
             var result = new List<SelectMenuOptionBuilder>();
             var row = 0;
-            for (int i = page * 10; i < ItemDatabase.Items.Count && i < page * 10 + 10; i++)
+            for (int i = page * 10; i < ImageDatabase.Images.Count && i < page * 10 + 10; i++)
             {
-                var item = ItemDatabase.Items[i];
-                result.Add(new(item.Info.GetName(Language.Ru), row.ToString()));
+                var image = ImageDatabase.Images[i];
+                result.Add(new(image.Info.GetName(Language.Ru), row.ToString()));
                 row++;
             }
             if (result.Count < 1)

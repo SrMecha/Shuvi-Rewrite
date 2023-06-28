@@ -15,9 +15,11 @@ namespace Shuvi.Interfaces.Customization
         public UserBadges Badges { get; }
 
         public void AddImage(ImageType type, ObjectId id);
+        public void AddImage(IImage image);
         public void AddImages(Dictionary<ImageType, ObjectId> images);
         public void AddImages(Dictionary<ImageType, List<ObjectId>> images);
         public void RemoveImage(ImageType type, ObjectId id);
+        public void RemoveImage(IImage image);
         public void SetImage(ImageType type, ObjectId? id);
         public void SetColor(uint hex);
         public void AddBadge(UserBadges bage);

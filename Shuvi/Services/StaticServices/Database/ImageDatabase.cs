@@ -12,6 +12,8 @@ namespace Shuvi.Services.StaticServices.Database
         private static IMongoCollection<ImageData>? _collection;
         private static Dictionary<ObjectId, IImage> _cache = new();
 
+        public static List<IImage> Images { get; private set; } = new();
+
         public static void Init(IMongoCollection<ImageData> collection)
         {
             _collection = collection;
@@ -23,10 +25,11 @@ namespace Shuvi.Services.StaticServices.Database
         }
         private static void LoadImages()
         {
-            _cache = new();
             foreach (var data in _collection.FindSync(new BsonDocument { }).ToEnumerable<ImageData>())
             {
-                _cache.Add(data.Id, ImageFactory.CreateImage(data));
+                var image = ImageFactory.CreateImage(data);
+                _cache.Add(data.Id, image);
+                Images.Add(image);
             }
         }
     }

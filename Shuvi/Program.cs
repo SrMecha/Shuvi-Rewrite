@@ -4,6 +4,7 @@ using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Shuvi.Services.DiscordServices;
+using Shuvi.Services.StaticServices.Info;
 using Shuvi.Services.Сonfigurator;
 
 namespace Shuvi
@@ -36,8 +37,8 @@ namespace Shuvi
 
             ServiceConfigurator.ConfigureAfterBotStart(client);
 
-            await services.GetRequiredService<InteractionHandlingService>()
-                .InitializeAsync();
+            BotInfoService.ConfigureCommandsDescription(await services.GetRequiredService<InteractionHandlingService>()
+                .InitializeAsync());
             await services.GetRequiredService<CommandHandlingService>()
                 .InitializeAsync();
 

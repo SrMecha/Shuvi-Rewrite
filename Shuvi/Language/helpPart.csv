@@ -1,0 +1,4 @@
+embed/commands/author;;Помощь по боту
+embed/commands/desc;;Больше информации о боте вы можете найти на [сайте бота](https://shuvidev.gitbook.io/shuvi/).\nЕсли у вас есть вопросы, то вы можете смело задать их на [сервере поддержки](https://discord.gg/Thq3Bjvn2t)!
+embed/commands/commandList;;Список команд:
+btn/support;;Сервер поддержки

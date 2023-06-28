@@ -93,7 +93,9 @@ namespace Shuvi.CommandParts
                             msg.Components = new ComponentBuilder().Build();
                         });
                         dbUser.Location.SetRegion(choosedRegion, choosedLocation);
+                        dbUser.Characteristics.Energy.Reduce(energyCosts);
                         await UserDatabase.UpdateUser(dbUser.Id, new UpdateDefinitionBuilder<UserData>()
+                            .Set(x => x.EnergyRegenTime, dbUser.Characteristics.Energy.RegenTime)
                             .Set(x => x.RegionId, choosedRegion)
                             .Set(x => x.LocationId, choosedLocation));
                         return;
