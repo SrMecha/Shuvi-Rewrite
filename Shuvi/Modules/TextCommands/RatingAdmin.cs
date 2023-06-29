@@ -22,11 +22,11 @@ namespace Shuvi.Modules.TextCommands
 
         [Command("AddRating", true)]
         public async Task AddRatingCommandAsync(
-                [Summary("user")] IUser paramUser,
+                [Summary("userId")] ulong userId,
                 [Summary("amount")] int amount
                 )
         {
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -34,20 +34,20 @@ namespace Shuvi.Modules.TextCommands
             }
             var results = dbUser.Rating.AddPoints(amount, Language.Ru);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Rating, dbUser.Rating.Points));
             var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {amount} " +
-                $"рейтинга пользователю {paramUser.Username} ({results.RankBefore.GetName()} -> {results.RankAfter.GetName()}).");
+                $"рейтинга пользователю <@{userId}> ({results.RankBefore.GetName()} -> {results.RankAfter.GetName()}).");
             await ReplyAsync(embed: embed);
         }
 
         [Command("RemoveRating", true)]
         public async Task RemoveRatingCommandAsync(
-                [Summary("user")] IUser paramUser,
+                [Summary("userId")] ulong userId,
                 [Summary("amount")] int amount
                 )
         {
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -55,10 +55,10 @@ namespace Shuvi.Modules.TextCommands
             }
             var results = dbUser.Rating.RemovePoints(amount, Language.Ru);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Rating, dbUser.Rating.Points));
             var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно сняли {amount} " +
-                $"рейтинга пользователю {paramUser.Username} ({results.RankBefore.GetName()} -> {results.RankAfter.GetName()}).");
+                $"рейтинга пользователю <@{userId}> ({results.RankBefore.GetName()} -> {results.RankAfter.GetName()}).");
             await ReplyAsync(embed: embed);
         }
     }

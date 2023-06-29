@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using Shuvi.Classes.Data.Map;
 using Shuvi.Classes.Data.Settings;
 
+
 namespace Shuvi.Services.StaticServices.Database
 {
     public sealed class SettingsDatabase
@@ -22,17 +23,17 @@ namespace Shuvi.Services.StaticServices.Database
         {
             return BsonSerializer.Deserialize<AdminsData>(_collection.Find(new BsonDocument { { "_id", "Admins" } }).Single());
         }
-        public static async Task UpdateAdmins(UpdateDefinition<AdminsData> updateConfig)
+        public static async Task UpdateAdmins(UpdateDefinition<BsonDocument> updateConfig)
         {
-            await _collection!.UpdateOneAsync(new BsonDocument { { "_id", "Admins" } }, updateConfig.ToBsonDocument());
+            await _collection!.UpdateOneAsync(new BsonDocument { { "_id", "Admins" } }, updateConfig);
         }
         public static BotInfoData LoadBotInfoData()
         {
             return BsonSerializer.Deserialize<BotInfoData>(_collection.Find(new BsonDocument { { "_id", "Info" } }).Single());
         }
-        public static async Task UpdateBotInfo(UpdateDefinition<BotInfoData> updateConfig)
+        public static async Task UpdateBotInfo(UpdateDefinition<BsonDocument> updateConfig)
         {
-            await _collection!.UpdateOneAsync(new BsonDocument { { "_id", "Info" } }, updateConfig.ToBsonDocument());
+            await _collection!.UpdateOneAsync(new BsonDocument { { "_id", "Info" } }, updateConfig);
         }
         public static WorldMapData LoadMap()
         {

@@ -72,7 +72,10 @@ namespace Shuvi.Services.DiscordServices
                 return;
 
             // the command failed, let's notify the user that something happened.
-            await context.Channel.SendMessageAsync($"error: {result.ErrorReason}");
+            if (result is ExecuteResult execResult)
+                await context.Channel.SendMessageAsync($"error: {execResult.Exception}");
+            else
+                await context.Channel.SendMessageAsync($"error: {result.ErrorReason}");
         }
     }
 }

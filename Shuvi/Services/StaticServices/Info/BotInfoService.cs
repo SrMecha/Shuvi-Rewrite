@@ -1,4 +1,5 @@
 ﻿using Discord.Interactions;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Shuvi.Classes.Data.Settings;
 using Shuvi.Services.StaticServices.Database;
@@ -21,8 +22,8 @@ namespace Shuvi.Services.StaticServices.Info
         public static async Task SetVersion(string version)
         {
             Version = version;
-            await SettingsDatabase.UpdateBotInfo(new UpdateDefinitionBuilder<BotInfoData>()
-                .Set(x => x.Version, Version));
+            await SettingsDatabase.UpdateBotInfo(new UpdateDefinitionBuilder<BsonDocument>()
+                .Set("Version", Version));
         }
 
         public static void StartUpdateTotalUsers()

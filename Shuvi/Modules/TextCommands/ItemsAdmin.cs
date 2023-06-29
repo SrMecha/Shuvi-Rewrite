@@ -25,12 +25,12 @@ namespace Shuvi.Modules.TextCommands
 
         [Command("GiveItem", true)]
         public async Task GiveItemCommandAsync(
-                [Summary("user")] IUser paramUser,
+                [Summary("userId")] ulong userId,
                 [Summary("id")] string id,
                 [Summary("amount")] int amount
                 )
         {
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -44,9 +44,9 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Inventory.AddItem(new ObjectId(id), amount);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Inventory, dbUser.Inventory.GetItemsDictionary()));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {item.Info.GetName(Language.Ru)} x{amount} пользователю {paramUser.Username}.");
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {item.Info.GetName(Language.Ru)} x{amount} пользователю <@{userId}>.");
             await ReplyAsync(embed: embed);
         }
 
