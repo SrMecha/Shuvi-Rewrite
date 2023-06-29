@@ -39,12 +39,12 @@ namespace Shuvi.Modules.TextCommands
 
         [Command("GiveBadge", true)]
         public async Task GiveBadgeCommandAsync(
-            [Summary("user")] IUser paramUser,
+            [Summary("userId")] ulong userId,
             [Summary("badgeIndex")] int badgeIndex
             )
         {
             var badge = (UserBadges)(1 << (badgeIndex - 1));
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -52,20 +52,20 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Customization.AddBadge(badge);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Badges, dbUser.Customization.Badges));
-            var embed = EmbedFactory.CreateInfoEmbed($"{paramUser.Username} + {badge.GetBadgeEmoji()}");
+            var embed = EmbedFactory.CreateInfoEmbed($"<@{userId}> + {badge.GetBadgeEmoji()}");
             await ReplyAsync(embed: embed);
         }
 
         [Command("RemoveBadge", true)]
         public async Task RemoveBadgeCommandAsync(
-            [Summary("user")] IUser paramUser,
+            [Summary("userId")] ulong userId,
             [Summary("badgeIndex")] int badgeIndex
             )
         {
             var badge = (UserBadges)(1 << (badgeIndex - 1));
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -73,9 +73,9 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Customization.RemoveBadge(badge);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Badges, dbUser.Customization.Badges));
-            var embed = EmbedFactory.CreateInfoEmbed($"{paramUser.Username} - {badge.GetBadgeEmoji()}");
+            var embed = EmbedFactory.CreateInfoEmbed($"<@{userId}> - {badge.GetBadgeEmoji()}");
             await ReplyAsync(embed: embed);
         }
     }

@@ -31,12 +31,12 @@ namespace Shuvi.Modules.TextCommands
 
         [Command("GiveImage", true)]
         public async Task GiveCustomizationCommandAsync(
-            [Summary("user")] IUser paramUser,
+            [Summary("userId")] ulong userId,
             [Summary("imageId")] string imageId
             )
         {
             var image = ImageDatabase.GetImage(new ObjectId(imageId));
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -44,20 +44,20 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Customization.AddImage(image);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Images, dbUser.Customization.GetImagesCache()));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы выдали пользовутелю {paramUser.Username} картинку **{image.Info.GetName(Language.Ru)}**");
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы выдали пользовутелю <@{userId}> картинку **{image.Info.GetName(Language.Ru)}**");
             await ReplyAsync(embed: embed);
         }
 
         [Command("RemoveImage", true)]
         public async Task RemoveCustomizationCommandAsync(
-            [Summary("user")] IUser paramUser,
+            [Summary("userId")] ulong userId,
             [Summary("imageId")] string imageId
             )
         {
             var image = ImageDatabase.GetImage(new ObjectId(imageId));
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -65,9 +65,9 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Customization.RemoveImage(image);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Images, dbUser.Customization.GetImagesCache()));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы забрали у пользователя {paramUser.Username} картинку **{image.Info.GetName(Language.Ru)}**");
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы забрали у пользователя <@{userId}> картинку **{image.Info.GetName(Language.Ru)}**");
             await ReplyAsync(embed: embed);
         }
 

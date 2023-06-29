@@ -22,11 +22,11 @@ namespace Shuvi.Modules.TextCommands
 
         [Command("GiveGold", true)]
         public async Task GiveGoldCommandAsync(
-                [Summary("user")] IUser paramUser,
+                [Summary("userId")] ulong userId,
                 [Summary("amount")] int amount
                 )
         {
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -34,19 +34,19 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Wallet.Add(MoneyType.Gold, amount);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Gold, dbUser.Wallet.Gold));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {amount} золота пользователю {paramUser.Username}.");
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {amount} золота пользователю <@{userId}>.");
             await ReplyAsync(embed: embed);
         }
 
         [Command("RemoveGold", true)]
         public async Task RemoveGoldCommandAsync(
-                [Summary("user")] IUser paramUser,
+                [Summary("userId")] ulong userId,
                 [Summary("amount")] int amount
                 )
         {
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -54,19 +54,19 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Wallet.Reduce(MoneyType.Gold, amount);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Gold, dbUser.Wallet.Gold));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно забрали {amount} золота у пользователя {paramUser.Username}.");
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно забрали {amount} золота у пользователя <@{userId}>.");
             await ReplyAsync(embed: embed);
         }
 
         [Command("GiveDispoints", true)]
         public async Task GiveDispointsCommandAsync(
-                [Summary("user")] IUser paramUser,
+                [Summary("userId")] ulong userId,
                 [Summary("amount")] int amount
                 )
         {
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -74,19 +74,19 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Wallet.Add(MoneyType.Dispoints, amount);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Dispoints, dbUser.Wallet.Dispoints));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {amount} диспоинтов пользователю {paramUser.Username}.");
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно выдали {amount} диспоинтов пользователю <@{userId}>.");
             await ReplyAsync(embed: embed);
         }
 
         [Command("RemoveDispoints", true)]
         public async Task RemoveDispointsCommandAsync(
-                [Summary("user")] IUser paramUser,
+                [Summary("userId")] ulong userId,
                 [Summary("amount")] int amount
                 )
         {
-            var dbUser = await UserDatabase.TryGetUser(paramUser.Id);
+            var dbUser = await UserDatabase.TryGetUser(userId);
             if (dbUser is null)
             {
                 await ReplyAsync(embed: EmbedFactory.CreateErrorEmbed("Пользователь еще не создал аккаунт.", Language.Ru));
@@ -94,9 +94,9 @@ namespace Shuvi.Modules.TextCommands
             }
             dbUser.Wallet.Reduce(MoneyType.Dispoints, amount);
             await UserDatabase.UpdateUser(
-                paramUser.Id,
+                userId,
                 new UpdateDefinitionBuilder<UserData>().Set(x => x.Dispoints, dbUser.Wallet.Dispoints));
-            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно забрали {amount} диспоинтов у пользователя {paramUser.Username}.");
+            var embed = EmbedFactory.CreateInfoEmbed($"Вы успешно забрали {amount} диспоинтов у пользователя <@{userId}>.");
             await ReplyAsync(embed: embed);
         }
     }
