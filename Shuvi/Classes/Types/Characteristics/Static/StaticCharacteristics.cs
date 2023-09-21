@@ -1,24 +1,27 @@
-﻿using Shuvi.Enums.Characteristic;
+﻿using Shuvi.Classes.Data.Bonuses;
+using Shuvi.Classes.Settings;
+using Shuvi.Enums.Characteristic;
 using Shuvi.Interfaces.Characteristics.Static;
 
 namespace Shuvi.Classes.Types.Characteristics.Static
 {
     public class StaticCharacteristics : IStaticCharacteristics
     {
-        public int Strength { get; protected set; } = 0;
-        public int Agility { get; protected set; } = 0;
-        public int Luck { get; protected set; } = 0;
-        public int Intellect { get; protected set; } = 0;
-        public int Endurance { get; protected set; } = 0;
+        public int Strength { get; set; } = 0;
+        public int Agility { get; set; } = 0;
+        public int Luck { get; set; } = 0;
+        public int Intellect { get; set; } = 0;
+        public int Endurance { get; set; } = 0;
 
         public StaticCharacteristics() { }
-        public StaticCharacteristics(int strength, int agility, int luck, int intellect, int endurance)
+
+        public StaticCharacteristics(StaticBonusesData data)
         {
-            Strength = strength;
-            Agility = agility;
-            Luck = luck;
-            Intellect = intellect;
-            Endurance = endurance;
+            Strength = data.Strength;
+            Agility = data.Agility;
+            Luck = data.Luck;
+            Intellect = data.Intellect;
+            Endurance = data.Endurance;
         }
         public StaticCharacteristics(IStaticCharacteristics characteristics)
         {
@@ -28,11 +31,43 @@ namespace Shuvi.Classes.Types.Characteristics.Static
             Intellect = characteristics.Intellect;
             Endurance = characteristics.Endurance;
         }
+
         public StaticCharacteristics(Dictionary<StaticCharacteristic, int> characteristics)
         {
             foreach (var (characteristic, amount) in characteristics)
                 Add(characteristic, amount);
         }
+
+        public float GetAbilityPower()
+        {
+            return Intellect * 0.6f + 1;
+        }
+
+        public float GetArmor()
+        {
+            return Endurance * 0.4f;
+        }
+
+        public float GetAttackDamage()
+        {
+            return Strength * 0.8f + 1;
+        }
+
+        public float GetCriticalStrikeChance()
+        {
+            return (FightSettings.StandartCriticalChance * 100 + (float)Math.Sqrt((Luck - 1) * (6.685f + 0.001675f * (Luck - 1)))) * 0.01f;
+        }
+
+        public float GetCriticalStrikeDamageMultiplier()
+        {
+            return FightSettings.StandartCriticalDamageMultiplier;
+        }
+
+        public float GetMagicResistance()
+        {
+            return Intellect * 0.4f;
+        }
+
         public void Add(IStaticCharacteristics characteristics)
         {
             Strength += characteristics.Strength;
@@ -91,13 +126,13 @@ namespace Shuvi.Classes.Types.Characteristics.Static
                     break;
             }
         }
-        public IEnumerator<(StaticCharacteristic, int)> GetEnumerator()
+        public IEnumerable<(string, int)> GetStaticCharacteristics()
         {
-            yield return (StaticCharacteristic.Strength, Strength);
-            yield return (StaticCharacteristic.Agility, Agility);
-            yield return (StaticCharacteristic.Luck, Luck);
-            yield return (StaticCharacteristic.Intellect, Intellect);
-            yield return (StaticCharacteristic.Endurance, Endurance);
+            yield return ("Strength", Strength);
+            yield return ("Agility", Agility);
+            yield return ("Luck", Luck);
+            yield return ("Intellect", Intellect);
+            yield return ("Endurance", Endurance);
         }
         public void Set(int strength, int agility, int luck, int intellect, int endurance)
         {
@@ -106,6 +141,16 @@ namespace Shuvi.Classes.Types.Characteristics.Static
             Luck = luck;
             Intellect = intellect;
             Endurance = endurance;
+        }
+
+        public float GetDodgeChance()
+        {
+            return Agility * 0.5f + FightSettings.StandartDodgeChance;
+        }
+
+        public float GetStrikeChance()
+        {
+            return Agility * 0.5f;
         }
     }
 }

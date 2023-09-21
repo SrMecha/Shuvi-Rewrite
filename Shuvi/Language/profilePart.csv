@@ -1,24 +1,26 @@
-embed/profile/author;{0}`s profile;Профиль {0}
-embed/profile/rank;Rank: {0};Ранг: {0}
-embed/profile/rating;**Rating:** {0};**Рейтинг:** {0}
-embed/profile/race;**Race:** {0};**Раса:** {0}
-embed/profile/profession;**Profession:** {0};**Профессия:** {0}
-embed/profile/subrace;**Subrace:** {0};**Подраса:** {0}
-embed/profile/magicType;**Magic type:** {0};**Тип магии:** {0}
-embed/profile/characteristics;Characteristics:;Характеристики:
-embed/profile/recover;Recover;Востановится
-select/view/name;;Просмотр профиля.
-select/view/option/equipment;;Экипировка
-select/view/option/location;;Местоположение
-select/view/option/statistics;;Статистика
-select/view/option/pet;;Питомец
-error/accountNotFound;;Данный пользователь не имеет персонажа для просмотра.
-select/view/option/inventory;;Инвентарь
-select/edit/name;;Настройки персонажа.
-select/edit/option/upgrade;;Улучшение
-select/edit/option/customization;;Кастомизация
-select/edit/option/fightSettings;;Настройки сражения
-select/edit/option/premium;;Премиум
-select/edit/option/spell;;Заклинания
-select/edit/option/skill;;Умения
-select/edit/option/chooseProfession;;Выбрать профессию
+Embed/Profile/Author;{0}`s profile;Профиль {0}
+Embed/Profile/Rank;Rank: {0};Ранг: {0}
+Embed/Profile/Rating;**Rating:** {0};**Рейтинг:** {0}
+Embed/Profile/Race;**Race:** {0};**Раса:** {0}
+Embed/Profile/Profession;**Profession:** {0};**Профессия:** {0}
+Embed/Profile/Subrace;**Subrace:** {0};**Подраса:** {0}
+Embed/Profile/MagicType;**Magic type:** {0};**Тип магии:** {0}
+Embed/Profile/Characteristics;Characteristics:;Характеристики:
+Embed/Profile/Recover;Recover;Востановится
+Select/View/Name;;Просмотр профиля.
+Select/View/Option/Profile;;Профиль
+Select/View/Option/Characteristics;;Характеристики
+Select/View/Option/Equipment;;Экипировка
+Select/View/Option/Location;;Местоположение
+Select/View/Option/Statistics;;Статистика
+Select/View/Option/Pet;;Питомец
+Error/AccountNotFound;;Данный пользователь не имеет персонажа для просмотра.
+Select/View/Option/Inventory;;Инвентарь
+Select/Edit/Name;;Настройки персонажа.
+Select/Edit/Option/Upgrade;;Улучшение
+Select/Edit/Option/Customization;;Кастомизация
+Select/Edit/Option/FightSettings;;Настройки сражения
+Select/Edit/Option/Premium;;Премиум
+Select/Edit/Option/Spell;;Заклинания
+Select/Edit/Option/Skill;;Умения
+Select/Edit/Option/ChooseProfession;;Выбрать профессию

@@ -25,7 +25,7 @@ namespace Shuvi.Classes.Types.User
         public IRatingResult AddPoints(int amount, Rank rank, Language lang)
         {
             if (Rank > rank)
-                return new RatingResult(Rank, Rank, LocalizationService.Get("status").Get(lang).Get("rating/low"));
+                return new RatingResult(Rank, Rank, LocalizationService.Get("status").Get(lang).Get("Rating/Low"));
             Points += amount;
             var rankBefore = Rank;
             Rank = GetRank(Points);
@@ -35,13 +35,13 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(lang).Get("rating/earnUp"), amount, Rank.GetName())
+                    string.Format(LocalizationService.Get("status").Get(lang).Get("Rating/EarnUp"), amount, Rank.GetName())
                     );
             }
             return new RatingResult(
                 rankBefore,
                 Rank,
-                LocalizationService.Get("status").Get(lang).Get("rating/earn").Format(amount)
+                LocalizationService.Get("status").Get(lang).Get("Rating/Earn").Format(amount)
                 );
         }
         public IRatingResult AddPoints(int amount, Language lang)
@@ -55,13 +55,13 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(lang).Get("rating/earnUp"), amount, Rank.GetName())
+                    string.Format(LocalizationService.Get("status").Get(lang).Get("Rating/EarnUp"), amount, Rank.GetName())
                     );
             }
             return new RatingResult(
                 rankBefore,
                 Rank,
-                string.Format(LocalizationService.Get("status").Get(lang).Get("rating/earn"), amount)
+                string.Format(LocalizationService.Get("status").Get(lang).Get("Rating/Earn"), amount)
                 );
         }
         public Rank GetRank(int rating)
@@ -87,12 +87,12 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(lang).Get("rating/lostDown"), amount, Rank.GetName())
+                    string.Format(LocalizationService.Get("status").Get(lang).Get("Rating/LostDown"), amount, Rank.GetName())
                     );
             return new RatingResult(
                 rankBefore,
                 Rank,
-                string.Format(LocalizationService.Get("status").Get(lang).Get("rating/lost"), amount)
+                string.Format(LocalizationService.Get("status").Get(lang).Get("Rating/Lost"), amount)
                 );
         }
         public IRatingResult SetPoints(int amount, Language lang)
@@ -104,12 +104,12 @@ namespace Shuvi.Classes.Types.User
                 return new RatingResult(
                     rankBefore,
                     Rank,
-                    string.Format(LocalizationService.Get("status").Get(lang).Get("rating/setChange"), amount, Rank.GetName())
+                    string.Format(LocalizationService.Get("status").Get(lang).Get("Rating/SetChange"), amount, Rank.GetName())
                     );
             return new RatingResult(
                 rankBefore,
                 Rank,
-                string.Format(LocalizationService.Get("status").Get(lang).Get("rating/set"), amount)
+                string.Format(LocalizationService.Get("status").Get(lang).Get("Rating/Set"), amount)
                 );
         }
     }

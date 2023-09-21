@@ -2,6 +2,7 @@
 using Shuvi.Classes.Types.Localization;
 using Shuvi.Classes.Types.Requirements;
 using Shuvi.Classes.Types.Status;
+using Shuvi.Enums.Damage;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.Magic;
 using Shuvi.Interfaces.Combat;
@@ -14,8 +15,8 @@ namespace Shuvi.Classes.Types.Spell.SpellList
 {
     public class WaterBallSpell : SpellBase
     {
-        public override string SpellName { get; } = "waterBall";
-        public override ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells", "waterBall");
+        public override string SpellName { get; } = "WaterBall";
+        public override ILocalizedInfo Info { get; } = new CachedLocalizedInfo("spells", "WaterBall");
         public override MagicType MagicType { get; } = MagicType.Water;
         public override IBaseRequirements Requirements { get; } = new BaseRequirements();
         public override int Cost { get; } = 3;
@@ -23,10 +24,10 @@ namespace Shuvi.Classes.Types.Spell.SpellList
         public override IActionResult OnCast(ICombatEntity player, ICombatEntity target, Language lang)
         {
             if (target.IsDodged(player, 0))
-                return new ActionResult(LocalizationService.Get("spells").Get(lang).Get("waterBall/cast/dodge").Format(player.Name));
-            var damage = target.BlockDamage(player.CalculateMagicDamage());
+                return new ActionResult(LocalizationService.Get("spells").Get(lang).Get("WaterBall/Cast/Dodge").Format(player.Name));
+            var damage = (int)target.BlockDamage(player.CalculateMagicDamage(), DamageType.Magic);
             target.ReduceHealth(damage);
-            return new ActionResult(LocalizationService.Get("spells").Get(lang).Get("waterBall/cast/success").Format(player.Name, damage));
+            return new ActionResult(LocalizationService.Get("spells").Get(lang).Get("WaterBall/Cast/Success").Format(player.Name, damage));
         }
     }
 }

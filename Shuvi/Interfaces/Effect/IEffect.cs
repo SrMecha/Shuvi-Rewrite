@@ -1,4 +1,4 @@
-﻿using Shuvi.Interfaces.Characteristics;
+﻿using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Combat;
 
 namespace Shuvi.Interfaces.Effect
@@ -7,7 +7,7 @@ namespace Shuvi.Interfaces.Effect
     {
         public string Name { get; }
         public int TimeLeft { get; }
-        public IBonusesCharacteristics Bonuses { get; }
+        public IAllBonuses Bonuses { get; }
         public void Update(ICombatEntity target);
     }
 }

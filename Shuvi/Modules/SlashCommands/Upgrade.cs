@@ -33,7 +33,7 @@ namespace Shuvi.Modules.SlashCommands
             var errorLocalization = _errorPart.Get(Context.Language);
             if (UserCheckService.IsUseCommand(TrackedCommand.Upgrade, dbUser.Id))
             {
-                await Context.SendError(errorLocalization.Get("alreadyUseCommand"), Context.Language);
+                await Context.SendError(errorLocalization.Get("AlreadyUseCommand"), Context.Language);
                 return;
             }
             try

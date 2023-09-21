@@ -34,14 +34,14 @@ namespace Shuvi.Modules.SlashCommands
             var errorLocalization = _errorPart.Get(Context.Language);
             if (UserCheckService.IsUseCommand(TrackedCommand.Shop, dbUser.Id))
             {
-                await Context.SendError(errorLocalization.Get("alreadyUseCommand"), Context.Language);
+                await Context.SendError(errorLocalization.Get("AlreadyUseCommand"), Context.Language);
                 return;
             }
             if (dbUser.Location.GetLocation().Shops.Count < 1)
             {
                 await Context.Interaction.ModifyOriginalResponseAsync(msg =>
                 {
-                    msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(errorLocalization.Get("dontHaveShops")).Build();
+                    msg.Embed = EmbedFactory.CreateUserEmbed(dbUser).WithDescription(errorLocalization.Get("DontHaveShops")).Build();
                 });
                 return;
             }

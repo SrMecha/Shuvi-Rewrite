@@ -1,8 +1,11 @@
-﻿using Shuvi.Classes.Extensions;
+﻿using Shuvi.Classes.Data.Requirements;
+using Shuvi.Classes.Extensions;
+using Shuvi.Classes.Types.Status;
 using Shuvi.Enums.Localization;
-using Shuvi.Enums.Requirements;
+using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Pet;
 using Shuvi.Interfaces.Requirements;
+using Shuvi.Interfaces.Status;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Emoji;
 using Shuvi.Services.StaticServices.Localization;
@@ -11,80 +14,123 @@ namespace Shuvi.Classes.Types.Requirements
 {
     public class BaseRequirements : IBaseRequirements
     {
-        protected Dictionary<BaseRequirement, int> _requirements = new();
+        public int Strength { get; init; } = 0;
+        public int Agility { get; init; } = 0;
+        public int Luck { get; init; } = 0;
+        public int Intellect { get; init; } = 0;
+        public int Endurance { get; init; } = 0;
+        public int Rank { get; init; } = 0;
 
-        public BaseRequirements(Dictionary<BaseRequirement, int> requirements)
-        {
-            _requirements = requirements;
-        }
         public BaseRequirements() { }
-        public string GetRequirementsInfo(Language lang)
+
+        public BaseRequirements(RequirementsData data)
+        {
+            Strength = data.Strength;
+            Agility = data.Agility;
+            Luck = data.Luck;
+            Intellect = data.Intellect;
+            Endurance = data.Endurance;
+            Rank = data.Rank;
+        }
+
+        public IRequirementResult GetRequirementsInfo(Language lang)
         {
             var result = new List<string>();
-            foreach (var (requirement, amount) in _requirements)
-                result.Add($"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
+            foreach (var (requirement, amount) in GetRequirements())
+            {
+                if (amount == 0)
+                    continue;
+                result.Add($"{LocalizationService.Get("names").Get(lang).Get(requirement)} {FormatRequirement(requirement, amount)}+");
+            }
             if (result.Count < 1)
-                return LocalizationService.Get("names").Get(lang).Get("notHave");
-            return string.Join("\n", result);
+                return new RequirementResult(false, LocalizationService.Get("names").Get(lang).Get("NotHave"));
+            return new RequirementResult(false, string.Join("\n", result));
         }
-        public string GetRequirementsInfo(Language lang, IDatabaseUser user)
+        public IRequirementResult GetRequirementsInfo(Language lang, IDatabaseUser user)
         {
             var result = new List<string>();
-            foreach (var (requirement, amount) in _requirements)
-                result.Add($"{(IsMeetRequirement(requirement, amount, user) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))} " +
-                    $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
-            if (result.Count < 1)
-                return LocalizationService.Get("names").Get(lang).Get("notHave");
-            return string.Join("\n", result);
-        }
-        public string GetRequirementsInfo(Language lang, IDatabasePet pet)
-        {
-            var result = new List<string>();
-            foreach (var (requirement, amount) in _requirements)
-                result.Add($"{(IsMeetRequirement(requirement, amount, pet) ? EmojiService.Get("goodMark") : EmojiService.Get("badMark"))} " +
-                    $"{LocalizationService.Get("names").Get(lang).Get(requirement.GetLowerName())} {requirement.Format(amount)}+");
-            if (result.Count < 1)
-                return LocalizationService.Get("names").Get(lang).Get("notHave");
-            return string.Join("\n", result);
-        }
-        public bool IsMeetRequirements(IDatabaseUser user)
-        {
-            foreach (var (requirement, amount) in _requirements)
+            var isMeetAllRequirements = true;
+            foreach (var (requirement, amount) in GetRequirements())
+            {
+                var isMeetRequirement = true;
+                if (amount == 0)
+                    continue;
                 if (!IsMeetRequirement(requirement, amount, user))
-                    return false;
-            return true;
+                {
+                    isMeetRequirement = false;
+                    isMeetAllRequirements = false;
+                }
+                result.Add($"{(isMeetRequirement ? EmojiService.Get("GoodMark") : EmojiService.Get("badMark"))} " +
+                    $"{LocalizationService.Get("names").Get(lang).Get(requirement)} {FormatRequirement(requirement, amount)}+");
+            }
+            if (result.Count < 1)
+                return new RequirementResult(isMeetAllRequirements, LocalizationService.Get("names").Get(lang).Get("NotHave"));
+            return new RequirementResult(isMeetAllRequirements, string.Join("\n", result));
         }
-        public bool IsMeetRequirements(IDatabasePet pet)
+        public IRequirementResult GetRequirementsInfo(Language lang, IDatabasePet pet)
         {
-            foreach (var (requirement, amount) in _requirements)
+            var result = new List<string>();
+            var isMeetAllRequirements = true;
+            foreach (var (requirement, amount) in GetRequirements())
+            {
+                var isMeetRequirement = true;
+                if (amount == 0)
+                    continue;
                 if (!IsMeetRequirement(requirement, amount, pet))
-                    return false;
-            return true;
+                {
+                    isMeetRequirement = false;
+                    isMeetAllRequirements = false;
+                }
+                result.Add($"{(isMeetRequirement ? EmojiService.Get("GoodMark") : EmojiService.Get("badMark"))} " +
+                    $"{LocalizationService.Get("names").Get(lang).Get(requirement)} {FormatRequirement(requirement, amount)}+");
+            }
+            if (result.Count < 1)
+                return new RequirementResult(isMeetAllRequirements, LocalizationService.Get("names").Get(lang).Get("NotHave"));
+            return new RequirementResult(isMeetAllRequirements, string.Join("\n", result));
         }
-        public static bool IsMeetRequirement(BaseRequirement requirement, int amount, IDatabaseUser user)
+        public bool IsMeetRequirement(string requirement, int amount, IDatabaseUser user)
         {
             return requirement switch
             {
-                BaseRequirement.Strength => user.Characteristics.Strength >= amount,
-                BaseRequirement.Agility => user.Characteristics.Agility >= amount,
-                BaseRequirement.Luck => user.Characteristics.Luck >= amount,
-                BaseRequirement.Intellect => user.Characteristics.Intellect >= amount,
-                BaseRequirement.Endurance => user.Characteristics.Endurance >= amount,
-                BaseRequirement.Rank => (int)user.Rating.Rank >= amount,
+                "Strength" => user.Characteristics.Strength >= amount,
+                "Agility" => user.Characteristics.Agility >= amount,
+                "Luck" => user.Characteristics.Luck >= amount,
+                "Intellect" => user.Characteristics.Intellect >= amount,
+                "Endurance" => user.Characteristics.Endurance >= amount,
+                "Rank" => (int)user.Rating.Rank >= amount,
                 _ => false
             };
         }
-        public static bool IsMeetRequirement(BaseRequirement requirement, int amount, IDatabasePet pet)
+        public bool IsMeetRequirement(string requirement, int amount, IDatabasePet pet)
         {
             return requirement switch
             {
-                BaseRequirement.Strength => pet.Characteristics.Strength >= amount,
-                BaseRequirement.Agility => pet.Characteristics.Agility >= amount,
-                BaseRequirement.Luck => pet.Characteristics.Luck >= amount,
-                BaseRequirement.Intellect => pet.Characteristics.Intellect >= amount,
-                BaseRequirement.Endurance => pet.Characteristics.Endurance >= amount,
-                BaseRequirement.Rank => (int)pet.Rank >= amount,
+                "Strength" => pet.Characteristics.Strength >= amount,
+                "Agility" => pet.Characteristics.Agility >= amount,
+                "Luck" => pet.Characteristics.Luck >= amount,
+                "Intellect" => pet.Characteristics.Intellect >= amount,
+                "Endurance" => pet.Characteristics.Endurance >= amount,
+                "Rank" => (int)pet.Rank >= amount,
                 _ => false
+            };
+        }
+
+        public IEnumerable<(string, int)> GetRequirements()
+        {
+            yield return ("Strength", Strength);
+            yield return ("Agility", Agility);
+            yield return ("Luck", Luck);
+            yield return ("Intellect", Intellect);
+            yield return ("Endurance", Endurance);
+            yield return ("Rank", Rank);
+        }
+
+        private static string FormatRequirement(string requirement, int amount)
+        {
+            return requirement switch
+            {
+                "Rank" => ((Rank)amount).GetName(),
+                _ => amount.ToString()
             };
         }
     }

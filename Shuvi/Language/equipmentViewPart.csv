@@ -1,5 +1,6 @@
-embed/view/equipment;;Экипировка {0}
-embed/view/notHave;;Нету
-select/view/name;;Снять экипировку.
-btn/exit;;Выйти
-embed/view/itemUnequipped;;Предмет был успешно снят.
+Embed/View/Equipment;;Экипировка {0}
+Embed/View/NotHave;;Нету
+Select/View/Name;;Снять экипировку.
+Select/View/DontHaveEquipment;;На вас нету экипировки.
+Btn/Exit;;Выйти
+Embed/View/ItemUnequipped;;Предмет был успешно снят.

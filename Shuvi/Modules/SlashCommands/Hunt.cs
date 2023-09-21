@@ -46,7 +46,7 @@ namespace Shuvi.Modules.SlashCommands
             {
                 await Context.Interaction.ModifyOriginalResponseAsync(msg =>
                 {
-                    msg.Embed = EmbedFactory.CreateUserEmbed(Context.User, dbUser).WithDescription(errorLocalization.Get("dontHaveEnemies")).Build();
+                    msg.Embed = EmbedFactory.CreateUserEmbed(dbUser).WithDescription(errorLocalization.Get("dontHaveEnemies")).Build();
                 });
                 return;
             }

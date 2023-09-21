@@ -32,7 +32,7 @@ namespace Shuvi.Modules.SlashCommands
             }
             if (!TopService.IsDataSet(topType))
             {
-                await Context.SendError(_errorPart.Get(Context.Language).Get("topNotLoaded"), Context.Language);
+                await Context.SendError(_errorPart.Get(Context.Language).Get("TopNotLoaded"), Context.Language);
                 return;
             }
             await TopViewPart.Start(Context, dbUser, topType);

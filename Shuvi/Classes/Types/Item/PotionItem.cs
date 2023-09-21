@@ -2,8 +2,10 @@
 using Shuvi.Classes.Data.Item;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
 using Shuvi.Enums.Characteristic;
 using Shuvi.Enums.Localization;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Items;
 using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
@@ -13,26 +15,26 @@ namespace Shuvi.Classes.Types.Item
 {
     public class PotionItem : SimpleItem, IPotionItem
     {
-        public Dictionary<DynamicCharacteristic, int> PotionRecover { get; init; }
+        public IDynamicBonuses PotionRecover { get; init; }
 
         public PotionItem(ItemData data) : base(data)
         {
-            PotionRecover = data.PotionRecover ?? new();
+            PotionRecover = new DynamicBonuses(data.PotionRecover ?? new());
         }
         public string GetRecoverInfo(Language lang)
         {
             var result = new List<string>();
-            foreach (var (characteristic, amount) in PotionRecover)
-                result.Add($"{LocalizationService.Get("names").Get(lang).Get(characteristic.GetLowerName())} {(amount > 0 ? $"+{amount}" : amount)}");
+            foreach (var (characteristic, amount) in PotionRecover.GetDynamicBonuses())
+                result.Add($"{LocalizationService.Get("names").Get(lang).Get(characteristic)} {amount.WithSign()}");
             if (result.Count < 1)
-                return LocalizationService.Get("names").Get(lang).Get("notHave");
+                return LocalizationService.Get("names").Get(lang).Get("NotHave");
             return string.Join("\n", result);
         }
         public async Task Use(IDatabaseUser dbUser)
         {
-            dbUser.Characteristics.Energy.Add(PotionRecover.GetValueOrDefault(DynamicCharacteristic.Energy, 0));
-            dbUser.Characteristics.Mana.Add(PotionRecover.GetValueOrDefault(DynamicCharacteristic.Mana, 0));
-            dbUser.Characteristics.Health.Add(PotionRecover.GetValueOrDefault(DynamicCharacteristic.Health, 0));
+            dbUser.Characteristics.Energy.Add(PotionRecover.Energy);
+            dbUser.Characteristics.Mana.Add(PotionRecover.Mana);
+            dbUser.Characteristics.Health.Add(PotionRecover.Health);
             await UserDatabase.UpdateUser(dbUser.Id, new UpdateDefinitionBuilder<UserData>()
                 .Set(x => x.EnergyRegenTime, dbUser.Characteristics.Energy.RegenTime)
                 .Set(x => x.ManaRegenTime, dbUser.Characteristics.Mana.RegenTime)

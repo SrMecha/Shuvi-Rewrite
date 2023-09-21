@@ -1,7 +1,9 @@
-﻿using Shuvi.Enums.Localization;
+﻿using Shuvi.Enums.Damage;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Effect;
 using Shuvi.Interfaces.Spell;
@@ -16,7 +18,8 @@ namespace Shuvi.Interfaces.Combat
         public IEntityCharacteristics<INotRestorableCharacteristic> Characteristics { get; }
         public ISpell Spell { get; }
         public bool IsDead { get; }
-        public IBonusesCharacteristics EffectBonuses { get; }
+        public IAllBonuses EffectBonuses { get; }
+        public IFightBonuses AllCharacteristics { get; }
         public IEffects Effects { get; }
         public IFightActions Actions { get; }
 
@@ -26,11 +29,11 @@ namespace Shuvi.Interfaces.Combat
         public IActionResult CastSpell(ICombatEntity target, Language lang);
         public IActionResult DealLightDamage(ICombatEntity target, Language lang);
         public IActionResult DealHeavyDamage(ICombatEntity target, Language lang);
-        public float CalculateMagicDamage();
-        public float CalculateLightDamage();
-        public float CalculateHeavyDamage();
-        public int BlockDamage(float damage);
-        public bool IsDodged(ICombatEntity assaulter, int hitBonusChance);
+        public float CalculateMagicDamage(float bonus = 0f, float multiplier = 0f);
+        public float CalculateLightDamage(float bonus = 0f, float multiplier = 0f);
+        public float CalculateHeavyDamage(float bonus = 0f, float multiplier = 0f);
+        public float BlockDamage(float damage, DamageType damageType = DamageType.Physic);
+        public bool IsDodged(ICombatEntity assaulter, float bonusDodgeChance);
         public bool IsCritical(ICombatEntity target);
         public void RestoreHealth(int amount);
         public void ReduceHealth(int amount);

@@ -16,7 +16,7 @@ namespace Shuvi.Classes.Types.Magic
         public MagicInfo(MagicType magicType)
         {
             MagicType = magicType;
-            Info = new CachedLocalizedInfo("magicTypes", magicType.GetLowerName());
+            Info = new CachedLocalizedInfo("magicTypes", magicType.GetName());
         }
         public List<ISpell> GetAllSpells()
         {

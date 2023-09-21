@@ -35,10 +35,10 @@ namespace Shuvi.CommandParts
                 hod++;
                 var embed = CreateFightEmbed(context, status, hod, player, enemy);
                 var components = new ComponentBuilder()
-                    .WithButton(battleLocalization.Get("btn/lightAttack"), "lightAttack", ButtonStyle.Danger, row: 0)
-                    .WithButton(battleLocalization.Get("btn/heavyAttack"), "heavyAttack", ButtonStyle.Danger, row: 0)
-                    .WithButton(battleLocalization.Get("btn/dodge"), "dodge", ButtonStyle.Success, row: 1)
-                    .WithButton(battleLocalization.Get("btn/defense"), "defense", ButtonStyle.Success, row: 1)
+                    .WithButton(battleLocalization.Get("Btn/LightAttack"), "lightAttack", ButtonStyle.Danger, row: 0)
+                    .WithButton(battleLocalization.Get("Btn/HeavyAttack"), "heavyAttack", ButtonStyle.Danger, row: 0)
+                    .WithButton(battleLocalization.Get("Btn/Dodge"), "dodge", ButtonStyle.Success, row: 1)
+                    .WithButton(battleLocalization.Get("Btn/Defense"), "defense", ButtonStyle.Success, row: 1)
                     .WithButton(player.Skill.Info.GetName(context.Language), "skill", ButtonStyle.Primary, disabled: !player.Skill.CanUse(player), row: 2)
                     .WithButton(player.Spell.Info.GetName(context.Language), "spell", ButtonStyle.Primary, disabled: !player.Spell.CanCast(player), row: 2)
                     .Build();
@@ -109,44 +109,68 @@ namespace Shuvi.CommandParts
         {
             var battleLocalization = _localizationPart.Get(context.Language);
             var namesLocalization = LocalizationService.Get("names").Get(context.Language);
-            return EmbedFactory.CreateUserEmbed(context.User)
-                .WithAuthor(battleLocalization.Get("embed/battle/author/singlePVE").Format(hod))
+            return EmbedFactory.CreateEmbed()
+                .WithAuthor(battleLocalization.Get("Embed/Battle/Author/SinglePVE").Format(hod))
                 .WithDescription(status.GetDescriptions())
                 .AddField(player.Name,
-                $"**{namesLocalization.Get("strength")}** {player.Characteristics.Strength.WithBonus(player.EffectBonuses.Strength)}\n" +
-                $"**{namesLocalization.Get("agility")}:** {player.Characteristics.Agility.WithBonus(player.EffectBonuses.Agility)}\n" +
-                $"**{namesLocalization.Get("luck")}:** {player.Characteristics.Luck.WithBonus(player.EffectBonuses.Luck)}\n" +
-                $"**{namesLocalization.Get("intellect")}:** {player.Characteristics.Intellect.WithBonus(player.EffectBonuses.Intellect)}\n" +
-                $"**{namesLocalization.Get("endurance")}:** {player.Characteristics.Endurance.WithBonus(player.EffectBonuses.Endurance)}\n" +
-                $"**{namesLocalization.Get("health")}:** {player.Characteristics.Health.Now}/" +
+                $"**{namesLocalization.Get("AttackDamage")}:** {player.AllCharacteristics.GetFullAttackDamage()
+                .WithBonus(player.EffectBonuses.GetFullAttackDamage())}\n" +
+                $"**{namesLocalization.Get("AbilityPower")}:** {player.AllCharacteristics.GetFullAbilityPower()
+                .WithBonus(player.EffectBonuses.GetFullAbilityPower())}\n" +
+                $"**{namesLocalization.Get("Armor")}:** {player.AllCharacteristics.GetFullArmor()
+                .WithBonus(player.EffectBonuses.GetFullArmor())}\n" +
+                $"**{namesLocalization.Get("MagicResistance")}:** {player.AllCharacteristics.GetFullMagicResistance()
+                .WithBonus(player.EffectBonuses.GetFullMagicResistance())}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeChance")}:** {player.AllCharacteristics.GetFullCriticalStrikeChance()
+                .WithBonus(player.EffectBonuses.CriticalStrikeChance)}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {player.AllCharacteristics.GetFullCriticalStrikeDamageMultiplier()
+                .WithBonus(player.EffectBonuses.CriticalStrikeDamageMultiplier)}\n" +
+                $"**{namesLocalization.Get("DodgeChance")}:** {$"{player.AllCharacteristics.GetFullDodgeChance() - enemy.AllCharacteristics.GetFullStrikeChance()}%"
+                .WithBonus(player.AllCharacteristics.GetFullDodgeChance() - player.Characteristics.GetDodgeChance())}\n" +
+                $"**{namesLocalization.Get("StrikeChance")}:** " +
+                $"{(100f - (enemy.AllCharacteristics.GetFullDodgeChance() - player.AllCharacteristics.GetFullStrikeChance()))
+                .WithBonus(player.AllCharacteristics.GetFullStrikeChance() - player.Characteristics.GetStrikeChance())}\n" +
+                $"**{namesLocalization.Get("Health")}:** {player.Characteristics.Health.Now}/" +
                 $"{player.Characteristics.Health.Max.WithBonus(player.EffectBonuses.Health)}\n" +
-                $"**{namesLocalization.Get("mana")}:** {player.Characteristics.Mana.Now}/" +
+                $"**{namesLocalization.Get("Mana")}:** {player.Characteristics.Mana.Now}/" +
                 $"{player.Characteristics.Mana.Max.WithBonus(player.EffectBonuses.Mana)}",
                 true)
-                .AddField(battleLocalization.Get("embed/battle/info"),
-                $"{battleLocalization.Get("embed/battle/spell").Format(player.Spell.Info.GetName(context.Language))}\n" +
-                $"{(player.Spell.HaveSpell() ? $"{battleLocalization.Get("embed/battle/spellCost")
-                .Format(player.Spell.Cost, EmojiService.Get("magicFull"))}\n" : "")}" +
-                $"{battleLocalization.Get("embed/battle/skill").Format(player.Skill.Info.GetName(context.Language))}\n" +
-                $"{(player.Skill.HaveSkill() ? battleLocalization.Get("embed/battle/skillUsesLeft")
+                .AddField(battleLocalization.Get("Embed/Battle/Info"),
+                $"{battleLocalization.Get("Embed/Battle/Spell").Format(player.Spell.Info.GetName(context.Language))}\n" +
+                $"{(player.Spell.HaveSpell() ? $"{battleLocalization.Get("Embed/Battle/SpellCost")
+                .Format(player.Spell.Cost, EmojiService.Get("MagicFull"))}\n" : "")}" +
+                $"{battleLocalization.Get("Embed/Battle/Skill").Format(player.Skill.Info.GetName(context.Language))}\n" +
+                $"{(player.Skill.HaveSkill() ? battleLocalization.Get("Embed/Battle/SkillUsesLeft")
                 .Format(player.Skill.UsesLeft) : "")}",
                 true)
                 .AddField(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - -", "** **", false)
                 .AddField(enemy.Name,
-                $"**{namesLocalization.Get("strength")}** {enemy.Characteristics.Strength.WithBonus(enemy.EffectBonuses.Strength)}\n" +
-                $"**{namesLocalization.Get("agility")}:** {enemy.Characteristics.Agility.WithBonus(enemy.EffectBonuses.Agility)}\n" +
-                $"**{namesLocalization.Get("luck")}:** {enemy.Characteristics.Luck.WithBonus(enemy.EffectBonuses.Luck)}\n" +
-                $"**{namesLocalization.Get("intellect")}:** {enemy.Characteristics.Intellect.WithBonus(enemy.EffectBonuses.Intellect)}\n" +
-                $"**{namesLocalization.Get("endurance")}:** {enemy.Characteristics.Endurance.WithBonus(enemy.EffectBonuses.Endurance)}\n" +
-                $"**{namesLocalization.Get("health")}:** {enemy.Characteristics.Health.Now}/" +
+                $"**{namesLocalization.Get("AttackDamage")}:** {enemy.AllCharacteristics.GetFullAttackDamage()
+                .WithBonus(enemy.EffectBonuses.GetFullAttackDamage())}\n" +
+                $"**{namesLocalization.Get("AbilityPower")}:** {enemy.AllCharacteristics.GetFullAbilityPower()
+                .WithBonus(enemy.EffectBonuses.GetFullAbilityPower())}\n" +
+                $"**{namesLocalization.Get("Armor")}:** {enemy.AllCharacteristics.GetFullArmor()
+                .WithBonus(enemy.EffectBonuses.GetFullArmor())}\n" +
+                $"**{namesLocalization.Get("MagicResistance")}:** {enemy.AllCharacteristics.GetFullMagicResistance()
+                .WithBonus(enemy.EffectBonuses.GetFullMagicResistance())}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeChance")}:** {enemy.AllCharacteristics.GetFullCriticalStrikeChance()
+                .WithBonus(enemy.EffectBonuses.CriticalStrikeChance)}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {enemy.AllCharacteristics.GetFullCriticalStrikeDamageMultiplier()
+                .WithBonus(enemy.EffectBonuses.CriticalStrikeDamageMultiplier)}\n" +
+                $"**{namesLocalization.Get("DodgeChance")}:** {(enemy.AllCharacteristics.GetFullDodgeChance() - player.AllCharacteristics.GetFullStrikeChance())
+                .WithBonus(enemy.AllCharacteristics.GetFullDodgeChance() - enemy.Characteristics.GetDodgeChance())}\n" +
+                $"**{namesLocalization.Get("StrikeChance")}:** " +
+                $"{(100f - (player.AllCharacteristics.GetFullDodgeChance() - enemy.AllCharacteristics.GetFullStrikeChance()))
+                .WithBonus(enemy.AllCharacteristics.GetFullStrikeChance() - enemy.Characteristics.GetStrikeChance())}\n" +
+                $"**{namesLocalization.Get("Health")}:** {enemy.Characteristics.Health.Now}/" +
                 $"{enemy.Characteristics.Health.Max.WithBonus(enemy.EffectBonuses.Health)}\n" +
-                $"**{namesLocalization.Get("mana")}:** {enemy.Characteristics.Mana.Now}/" +
+                $"**{namesLocalization.Get("Mana")}:** {enemy.Characteristics.Mana.Now}/" +
                 $"{enemy.Characteristics.Mana.Max.WithBonus(enemy.EffectBonuses.Mana)}",
                 true)
-                .AddField(battleLocalization.Get("embed/battle/info"),
-                $"{battleLocalization.Get("embed/battle/spell").Format(enemy.Spell.Info.GetName(context.Language))}\n" +
-                $"{(enemy.Spell.HaveSpell() ? $"{battleLocalization.Get("embed/battle/spellCost")
-                .Format(enemy.Spell.Cost, EmojiService.Get("magicFull"))}\n" : "")}",
+                .AddField(battleLocalization.Get("Embed/Battle/Info"),
+                $"{battleLocalization.Get("Embed/Battle/Spell").Format(enemy.Spell.Info.GetName(context.Language))}\n" +
+                $"{(enemy.Spell.HaveSpell() ? $"{battleLocalization.Get("Embed/Battle/SpellCost")
+                .Format(enemy.Spell.Cost, EmojiService.Get("MagicFull"))}\n" : "")}",
                 true)
                 .Build();
         }
@@ -161,7 +185,7 @@ namespace Shuvi.CommandParts
             dbUser.Statistics.AddEnemyKilled(dbEnemy.Id, 1);
             status.Add(dbUser.Rating.AddPoints(enemy.RatingGet, enemy.Rank, context.Language));
             dbUser.Statistics.UpdateMaxRating(dbUser.Rating.Points);
-            status.Add(new ActionResult(battleLocalization.Get("status/battleWin")));
+            status.Add(new ActionResult(battleLocalization.Get("Status/BattleWin")));
             status.Add(new ActionResult(drop.GetDropInfo(context.Language)));
             await UserDatabase.UpdateUser(dbUser.Id, new UpdateDefinitionBuilder<UserData>()
                 .Set(x => x.HealthRegenTime, dbUser.Characteristics.Health.RegenTime)
@@ -171,7 +195,7 @@ namespace Shuvi.CommandParts
                 .Set(x => x.Statistics.MaxRating, dbUser.Statistics.MaxRating)
                 .Set(x => x.Inventory, dbUser.Inventory.GetItemsDictionary()));
             var embed = CreateFightEmbed(context, status, hod, player, enemy).ToEmbedBuilder()
-                .WithAuthor(battleLocalization.Get("embed/battle/author/singlePVE/win").Format(hod))
+                .WithAuthor(battleLocalization.Get("Embed/Battle/Author/SinglePVE/Win").Format(hod))
                 .WithColor(Color.Green)
                 .Build();
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
@@ -183,12 +207,12 @@ namespace Shuvi.CommandParts
             var battleLocalization = _localizationPart.Get(context.Language);
             dbUser.Characteristics.Health.Reduce(dbUser.Characteristics.Health.GetCurrent() - player.Characteristics.Health.Now);
             dbUser.Characteristics.Mana.Reduce(dbUser.Characteristics.Mana.GetCurrent() - player.Characteristics.Mana.Now);
-            status.Add(new ActionResult(battleLocalization.Get("status/battleDraw")));
+            status.Add(new ActionResult(battleLocalization.Get("Status/BattleDraw")));
             await UserDatabase.UpdateUser(dbUser.Id, new UpdateDefinitionBuilder<UserData>()
                 .Set(x => x.HealthRegenTime, dbUser.Characteristics.Health.RegenTime)
                 .Set(x => x.ManaRegenTime, dbUser.Characteristics.Mana.RegenTime));
             var embed = CreateFightEmbed(context, status, hod, player, enemy).ToEmbedBuilder()
-                .WithAuthor(battleLocalization.Get("embed/battle/author/singlePVE/draw").Format(hod))
+                .WithAuthor(battleLocalization.Get("Embed/Battle/Author/SinglePVE/Draw").Format(hod))
                 .WithColor(Color.LighterGrey)
                 .Build();
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
@@ -199,12 +223,12 @@ namespace Shuvi.CommandParts
         {
             var battleLocalization = _localizationPart.Get(context.Language);
             var embed = CreateFightEmbed(context, status, hod, player, enemy).ToEmbedBuilder()
-                .WithAuthor(battleLocalization.Get("embed/battle/author/singlePVE/loose").Format(hod))
+                .WithAuthor(battleLocalization.Get("Embed/Battle/Author/SinglePVE/Loose").Format(hod))
                 .WithColor(new Color(0, 0, 0))
                 .Build();
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
             await context.LastInteraction.TryDeferAsync();
-            await PlayerDiePart.Start(context, dbUser, battleLocalization.Get("status/battleLoose").Format(enemy.Name));
+            await PlayerDiePart.Start(context, dbUser, battleLocalization.Get("Status/BattleLoose").Format(enemy.Name));
         }
     }
 }

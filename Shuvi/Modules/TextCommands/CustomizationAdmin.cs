@@ -82,7 +82,7 @@ namespace Shuvi.Modules.TextCommands
             while (true)
             {
                 var image = ImageDatabase.Images[currentPage * 10 + arrow];
-                var embed = EmbedFactory.CreateUserEmbed(Context.User)
+                var embed = EmbedFactory.CreateEmbed()
                     .WithDescription($"ID: {image.Id}\n\n{GetCustomizationsString(currentPage, arrow)}")
                     .WithThumbnailUrl(image.Type == ImageType.Avatar ? image.URL : string.Empty)
                     .WithImageUrl(image.Type == ImageType.Banner ? image.URL : string.Empty)

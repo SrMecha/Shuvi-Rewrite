@@ -1,9 +1,9 @@
-embed/selectLang/desc;Select your preferred language.;Выберите ваш язык.
-select/selectLang/name;Select a language.;Выберите язык
-select/selectLang/option;English.;Русский
-embed/tos/author;Terms of Service;Условия обслуживания
-embed/tos/desc;Before using this bot, you must agree to the terms of service. You can get acquainted with them at this link: {0};Перед использованием данного бота, вы должны согласиться с условиями обслуживания. Ознакомится с ними можно по этой ссылке: {0}
-btn/tos/accept;Accept;Принять
-btn/tos/exit;Exit;Выйти
-embed/tosAccepted/author;Welcome!;Добро пожаловать!
-embed/tosAccepted/desc;Your character has been successfully created!;Ваш персонаж был успешно создан! 
+Embed/SelectLang/Desc;Select your preferred language.;Выберите ваш язык.
+Select/SelectLang/Name;Select a language.;Выберите язык
+Select/SelectLang/Option;English.;Русский
+Embed/Tos/Author;Terms of Service;Условия обслуживания
+Embed/Tos/Desc;Before using this bot, you must agree to the terms of service. You can get acquainted with them at this link: {0};Перед использованием данного бота, вы должны согласиться с условиями обслуживания. Ознакомится с ними можно по этой ссылке: {0}
+Btn/Tos/Accept;Accept;Принять
+Btn/Tos/Exit;Exit;Выйти
+Embed/TosAccepted/Author;Welcome!;Добро пожаловать!
+Embed/TosAccepted/Desc;Your character has been successfully created!;Ваш персонаж был успешно создан! 

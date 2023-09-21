@@ -1,5 +1,5 @@
-﻿using Shuvi.Classes.Types.Characteristics;
-using Shuvi.Interfaces.Characteristics;
+﻿using Shuvi.Classes.Types.Characteristics.Bonuses;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Effect;
 
@@ -13,9 +13,9 @@ namespace Shuvi.Classes.Types.Effect
         {
             All = new();
         }
-        public IBonusesCharacteristics UpdateAll(ICombatEntity target)
+        public IAllBonuses UpdateAll(ICombatEntity target)
         {
-            var result = new BonusesCharacteristics();
+            var result = new AllBonuses();
             for (int i = All.Count - 1; i >= 0; i--)
             {
                 All[i].Update(target);

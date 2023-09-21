@@ -1,18 +1,18 @@
-embed/author/single;;Кастомизация
-category/banner;;Баннер
-category/avatar;;Аватар
-list/empty;;Пусто.
-embed/page;;Страница {0}/{1}
-select/name/avatar;;Выберите аватар.
-select/name/banner;;Выберите баннер.
-btn/choose;;Выбрать
-btn/remove/avatar;;Убрать аватар
-btn/exit;;Выйти
-btn/remove/banner;;Убрать баннер
-embed/desc/avatar;;Выберите желаемый аватар.\nТекущий: {0}
-embed/desc/banner;;Выберите желаемый баннер.\nТекущий: {0}
-embed/dontHave;;Нету
-btn/back;;Назад
-embed/author/withUser;;Кастомизация {0}
-embed/current/avatar;;Текущий аватар: {0}
-embed/current/banner;;Текущий баннер: {0}
+Embed/Author/Single;;Кастомизация
+Category/Banner;;Баннер
+Category/Avatar;;Аватар
+List/Empty;;Пусто.
+Embed/Page;;Страница {0}/{1}
+Select/Name/Avatar;;Выберите аватар.
+Select/Name/Banner;;Выберите баннер.
+Btn/Choose;;Выбрать
+Btn/Remove/Avatar;;Убрать аватар
+Btn/Exit;;Выйти
+Btn/Remove/Banner;;Убрать баннер
+Embed/Desc/Avatar;;Выберите желаемый аватар.\nТекущий: {0}
+Embed/Desc/Banner;;Выберите желаемый баннер.\nТекущий: {0}
+Embed/DontHave;;Нету
+Btn/Back;;Назад
+Embed/Author/WithUser;;Кастомизация {0}
+Embed/Current/Avatar;;Текущий аватар: {0}
+Embed/Current/Banner;;Текущий баннер: {0}

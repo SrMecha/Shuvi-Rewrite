@@ -21,16 +21,16 @@ namespace Shuvi.CommandParts
             var maxPage = TopService.GetTotalPages(topType);
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(topLocalization.Get("embed/view/author").Format(topLocalization.Get($"top/{topType.GetLowerName()}")))
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(topLocalization.Get("Embed/View/Author").Format(topLocalization.Get($"Top/{topType.GetName()}")))
                     .WithDescription($"{GetTopString(topType, currentPage, context.Language)}\n\n" +
-                    $"{topLocalization.Get("embed/view/topUpdateTime").Format(TopService.GetUpdateTime(topType))}")
+                    $"{topLocalization.Get("Embed/View/TopUpdateTime").Format(TopService.GetUpdateTime(topType))}")
                     .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{topLocalization.Get("embed/view/page").Format(currentPage + 1, maxPage)}")
+                    $"{topLocalization.Get("Embed/View/Page").Format(currentPage + 1, maxPage)}")
                     .Build();
                 var components = new ComponentBuilder()
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: currentPage < 1, row: 0)
-                    .WithButton(topLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 0)
+                    .WithButton(topLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 0)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: currentPage >= maxPage - 1, row: 0)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
@@ -61,7 +61,7 @@ namespace Shuvi.CommandParts
             var result = new List<string>();
             foreach (var member in TopService.GetTopMembersInPage(topType, page))
                 result.Add($"**#{member.Place}** {member.Name} | {member.Amount}");
-            return result.Count < 1 ? _localizationPart.Get(lang).Get("embed/view/empty") : string.Join("\n", result);
+            return result.Count < 1 ? _localizationPart.Get(lang).Get("Embed/View/Empty") : string.Join("\n", result);
         }
     }
 }

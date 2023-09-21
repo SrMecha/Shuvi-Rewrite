@@ -23,8 +23,8 @@ namespace Shuvi.CommandParts
             EventManager.InvokeOnPlayerDie(dbUser);
             var deadLocalization = _localizationPart.Get(context.Language);
             var embed = new EmbedBuilder()
-                .WithAuthor(deadLocalization.Get("embed/dead/author"))
-                .WithDescription($"__{deadReason}__\n{deadLocalization.Get("embed/dead/desc")}")
+                .WithAuthor(deadLocalization.Get("Embed/Dead/Author"))
+                .WithDescription($"__{deadReason}__\n{deadLocalization.Get("Embed/Dead/Desc")}")
                 .WithColor(new Color(0, 0, 0))
                 .Build();
             dbUser.Rating.SetPoints(dbUser.Rating.Points / 2, context.Language);

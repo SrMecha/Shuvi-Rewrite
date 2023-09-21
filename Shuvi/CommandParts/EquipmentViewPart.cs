@@ -26,20 +26,19 @@ namespace Shuvi.CommandParts
             var namesLocalization = LocalizationService.Get("names").Get(context.Language);
             while (context.LastInteraction is not null)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(equipmentLocalization.Get("embed/view/equipment").Format(user.Username))
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(equipmentLocalization.Get("Embed/View/Equipment").Format(user.Username))
                     .WithDescription(GetEquipmentInfo(dbUser.Equipment, context.Language))
                     .Build();
                 MessageComponent components;
                 if (canEdit)
                     components = new ComponentBuilder()
-                        .WithSelectMenu("takeOff", GetSelectMenuOptions(dbUser.Equipment, context.Language),
-                        equipmentLocalization.Get("select/view/name"))
-                        .WithButton(equipmentLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
+                        .WithSelectMenu(GetSelectMenuBuilder(dbUser.Equipment, context.Language))
+                        .WithButton(equipmentLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger)
                         .Build();
                 else
                     components = new ComponentBuilder()
-                        .WithButton(equipmentLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
+                        .WithButton(equipmentLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger)
                         .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -58,7 +57,7 @@ namespace Shuvi.CommandParts
                         dbUser.Equipment.SetEquipment(type, null);
                         await UserDatabase.UpdateUser(dbUser.Id,
                             new UpdateDefinitionBuilder<UserData>().Set(nameof(type), BsonNull.Value));
-                        await interaction.SendInfo(equipmentLocalization.Get("embed/view/itemUnequipped"));
+                        await interaction.SendInfo(equipmentLocalization.Get("Embed/View/ItemUnequipped"));
                         break;
                 }
 
@@ -70,20 +69,19 @@ namespace Shuvi.CommandParts
             var namesLocalization = LocalizationService.Get("names").Get(context.Language);
             while (context.LastInteraction is not null)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(equipmentLocalization.Get("embed/view/equipment").Format(pet.Name))
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(equipmentLocalization.Get("Embed/View/Equipment").Format(pet.Name))
                     .WithDescription(GetEquipmentInfo(pet.Equipment, context.Language))
                     .Build();
                 MessageComponent components;
                 if (canEdit)
                     components = new ComponentBuilder()
-                        .WithSelectMenu("takeOff", GetSelectMenuOptions(pet.Equipment, context.Language),
-                        equipmentLocalization.Get("select/view/name"))
-                        .WithButton(equipmentLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
+                        .WithSelectMenu(GetSelectMenuBuilder(pet.Equipment, context.Language))
+                        .WithButton(equipmentLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger)
                         .Build();
                 else
                     components = new ComponentBuilder()
-                        .WithButton(equipmentLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
+                        .WithButton(equipmentLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger)
                         .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -102,7 +100,7 @@ namespace Shuvi.CommandParts
                         dbUser.Equipment.SetEquipment(type, null);
                         await PetDatabase.UpdatePet(pet.Id,
                             new UpdateDefinitionBuilder<PetData>().Set(nameof(type), BsonNull.Value));
-                        await interaction.SendInfo(equipmentLocalization.Get("embed/view/itemUnequipped"));
+                        await interaction.SendInfo(equipmentLocalization.Get("Embed/View/ItemUnequipped"));
                         break;
                 }
 
@@ -112,18 +110,32 @@ namespace Shuvi.CommandParts
         {
             var result = new List<string>();
             foreach (var (type, item) in equipment.GetEquipmentsWithType())
-                result.Add($"**{LocalizationService.Get("names").Get(lang).Get($"itemType/{type.GetLowerName()}")}:** " +
-                    $"{(item is null ? _localizationPart.Get(lang).Get("embed/view/notHave") :
+                result.Add($"**{LocalizationService.Get("names").Get(lang).Get($"ItemType/{type.GetName()}")}:** " +
+                    $"{(item is null ? _localizationPart.Get(lang).Get("Embed/View/NotHave") :
                     $"{item.Info.GetName(lang)}\n{item.Bonuses.GetBonusesInfo(lang)}")}");
             return string.Join("\n\n", result);
         }
-        private static List<SelectMenuOptionBuilder> GetSelectMenuOptions(IEquipment equipment, Language lang)
+        private static SelectMenuBuilder GetSelectMenuBuilder(IEquipment equipment, Language lang)
         {
-            var result = new List<SelectMenuOptionBuilder>();
-            foreach (var (type, _) in equipment.GetIdsWithType())
-                result.Add(new SelectMenuOptionBuilder(LocalizationService.Get("names").Get(lang).Get($"itemType/{type.GetLowerName()}"),
-                    ((int)type).ToString()));
-            return result;
+            var options = new List<SelectMenuOptionBuilder>();
+            foreach (var equipmentItem in equipment.GetEquipments())
+                if (equipmentItem is not null)
+                    options.Add(new SelectMenuOptionBuilder($"{LocalizationService.Get("names").Get(lang).Get($"ItemType/{equipmentItem.Type.GetName()}")}: " +
+                        $"{equipmentItem.Info.GetName(lang)}",
+                        ((int)equipmentItem.Type).ToString()));
+            if (options.Count < 1)
+            {
+                options.Add(new SelectMenuOptionBuilder("NOT FOUND", "NOT FOUND"));
+                return new SelectMenuBuilder()
+                    .WithPlaceholder(_localizationPart.Get(lang).Get("Select/View/DontHaveEquipment"))
+                    .WithCustomId("takeOff")
+                    .WithOptions(options)
+                    .WithDisabled(true);
+            }
+            return new SelectMenuBuilder()
+                .WithPlaceholder(_localizationPart.Get(lang).Get("Select/View/Name"))
+                .WithCustomId("takeOff")
+                .WithOptions(options);
         }
     }
 }

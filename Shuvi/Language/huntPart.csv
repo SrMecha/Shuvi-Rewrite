@@ -1,16 +1,17 @@
-embed/search/author;;Охота
-embed/search/meet;;Вы встретили {0}!
-embed/search/energyRemaining;;**Энергии осталось:** {0}/{1}
-embed/search/info;;Информация:
-embed/search/rank;;**Ранг:** 「{0}」
-btn/attack;;Напасть
-btn/leave;;Прекратить охоту
-btn/retry;;Поискать другого противника
-btn/tame;;Приручить
-embed/search/spell;;**Заклинание:** {0}
-embed/search/characteristicsUnknown;;Характеристики противника неизвестны.
-embed/search/unknown;;Неизвестно
-embed/leave/desc;;Вы прекратили охоту.
+Embed/Search/Author;;Охота
+Embed/Search/Meet;;Вы встретили {0}!
+Embed/Search/EnergyRemaining;;**Энергии осталось:** {0}/{1}
+Embed/Search/Info;;Информация:
+Embed/Search/Rank;;**Ранг:** 「{0}」
+Btn/Attack;;Напасть
+Btn/Leave;;Прекратить охоту
+Btn/Retry;;Поискать другого противника
+Btn/Tame;;Приручить
+Embed/Search/Spell;;**Заклинание:** {0}
+Embed/Search/CharacteristicsUnknown;;Характеристики противника неизвестны.
+Embed/Search/Unknown;;Неизвестно
+Embed/Search/SpellUnknown;;Заклинание неизвестно
+Embed/Leave/Desc;;Вы прекратили охоту.
 ;;
 ;;
 ;;

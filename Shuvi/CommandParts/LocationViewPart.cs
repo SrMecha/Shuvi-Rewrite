@@ -12,23 +12,20 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("locationViewPart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user, bool canEdit)
         {
             var locationLocalization = _localizationPart.Get(context.Language);
-            WorldMap.Regions.ElementAt(0);
             while (context.LastInteraction is not null)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(locationLocalization.Get("embed/view/author").Format(user.Username))
-                    .WithDescription($"**{locationLocalization.Get("embed/view/region")}:** " +
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(locationLocalization.Get("Embed/View/Author").Format(user.Username))
+                    .WithDescription($"**{locationLocalization.Get("Embed/View/Region")}:** " +
                     $"{dbUser.Location.GetRegion().Info.GetName(context.Language)}\n" +
-                    $"**{locationLocalization.Get("embed/view/location")}:** " +
+                    $"**{locationLocalization.Get("Embed/View/Location")}:** " +
                     $"{dbUser.Location.GetLocation().Info.GetName(context.Language)}")
                     .WithImageUrl(dbUser.Location.GetLocation().PictureURL)
                     .Build();
-                var components = new ComponentBuilder()
-                    .WithButton(locationLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
-                    .Build();
+                var components = UserProfilePart.GetProfileSelectMenus(context.Language, dbUser, canEdit);
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
                 var interaction = await context.WaitForButton();
@@ -39,8 +36,6 @@ namespace Shuvi.CommandParts
                 }
                 switch (interaction.Data.CustomId)
                 {
-                    case "exit":
-                        return;
                     default:
                         return;
                 }

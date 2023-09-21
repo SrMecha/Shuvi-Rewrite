@@ -17,9 +17,16 @@ namespace Shuvi.Classes.Types.Combat
         {
             Name = enemy.Info.GetName(lang);
             Rank = enemy.Rank;
-            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>(enemy.Characteristics,
-                new NotRestorableCharacteristic(enemy.Characteristics.Health, enemy.Characteristics.Health),
-                new NotRestorableCharacteristic(enemy.Characteristics.Mana, enemy.Characteristics.Mana));
+            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>() 
+            {
+                Strength = enemy.Characteristics.Strength,
+                Agility = enemy.Characteristics.Agility,
+                Luck = enemy.Characteristics.Luck,
+                Intellect = enemy.Characteristics.Intellect,
+                Endurance = enemy.Characteristics.Endurance,
+                Health = new NotRestorableCharacteristic(enemy.Characteristics.Health, enemy.Characteristics.Health),
+                Mana = new NotRestorableCharacteristic(enemy.Characteristics.Mana, enemy.Characteristics.Mana)
+            };
             Spell = enemy.Spell.GetSpell();
             Actions = enemy.ActionChances;
             RatingGet = enemy.RatingGet;

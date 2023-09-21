@@ -23,14 +23,14 @@ namespace Shuvi.CommandParts
             var regionOptions = GetRegionOptions(context.Language);
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(mapLocalization.Get("embed/world/author"))
-                    .WithDescription($"{mapLocalization.Get("embed/world/region").Format(dbUser.Location.GetRegion().Info.GetName(context.Language))}\n" +
-                    $"{mapLocalization.Get("embed/world/location").Format(dbUser.Location.GetLocation().Info.GetName(context.Language))}")
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(mapLocalization.Get("Embed/World/Author"))
+                    .WithDescription($"{mapLocalization.Get("Embed/World/Region").Format(dbUser.Location.GetRegion().Info.GetName(context.Language))}\n" +
+                    $"{mapLocalization.Get("Embed/World/Location").Format(dbUser.Location.GetLocation().Info.GetName(context.Language))}")
                     .WithImageUrl(WorldMap.Settings.PictureURL)
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("region", regionOptions, mapLocalization.Get("select/region/name"))
+                    .WithSelectMenu("region", regionOptions, mapLocalization.Get("Select/Region/Name"))
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -50,18 +50,18 @@ namespace Shuvi.CommandParts
             var locationOptions = GetLocationOptions(region, context.Language);
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor($"{mapLocalization.Get("world/name")} | {region.Info.GetName(context.Language)}")
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor($"{mapLocalization.Get("World/Name")} | {region.Info.GetName(context.Language)}")
                     .WithDescription($"{region.Info.GetDescription(context.Language)}\n" +
-                    $"{mapLocalization.Get("embed/region/requiredRank").Format(region.NeededRank.GetName())}\n" +
-                    $"{mapLocalization.Get("embed/recommendedRank").Format(region.RecomendedRank.GetName())}")
-                    .AddField(mapLocalization.Get("embed/region/locations"),
+                    $"{mapLocalization.Get("Embed/Region/RequiredRank").Format(region.NeededRank.GetName())}\n" +
+                    $"{mapLocalization.Get("Embed/RecommendedRank").Format(region.RecomendedRank.GetName())}")
+                    .AddField(mapLocalization.Get("Embed/Region/Locations"),
                     $"```{GetLocationsString(region, context.Language)}```")
                     .WithImageUrl(region.PictureURL)
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("location", locationOptions, mapLocalization.Get("select/location/name"), row: 0)
-                    .WithButton(mapLocalization.Get("btn/back"), "back", ButtonStyle.Danger, row: 1)
+                    .WithSelectMenu("location", locationOptions, mapLocalization.Get("Select/Location/Name"), row: 0)
+                    .WithButton(mapLocalization.Get("Btn/Back"), "back", ButtonStyle.Danger, row: 1)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -92,23 +92,23 @@ namespace Shuvi.CommandParts
             var category = "main";
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
                     .WithAuthor($"{region.Info.GetName(context.Language)} | {location.Info.GetName(context.Language)}")
                     .WithDescription($"{location.Info.GetDescription(context.Language)}\n" +
-                    $"{mapLocalization.Get("embed/recommendedRank").Format(location.RecomendedRank.GetName())}")
+                    $"{mapLocalization.Get("Embed/RecommendedRank").Format(location.RecomendedRank.GetName())}")
                     .AddCategoryFields(category, dbUser, location, context.Language)
                     .WithImageUrl(location.PictureURL)
                     .Build();
                 var componentBuilder = new ComponentBuilder()
-                    .WithButton(mapLocalization.Get("btn/main"), "main", ButtonStyle.Success, disabled: category == "main", row: 0)
-                    .WithButton(mapLocalization.Get("btn/enemies"), "enemies", ButtonStyle.Success, disabled: category == "enemies", row: 0)
-                    .WithButton(mapLocalization.Get("btn/resources"), "resources", ButtonStyle.Success, disabled: category == "resources", row: 0);
+                    .WithButton(mapLocalization.Get("Btn/Main"), "main", ButtonStyle.Success, disabled: category == "main", row: 0)
+                    .WithButton(mapLocalization.Get("Btn/Enemies"), "enemies", ButtonStyle.Success, disabled: category == "enemies", row: 0)
+                    .WithButton(mapLocalization.Get("Btn/Resources"), "resources", ButtonStyle.Success, disabled: category == "resources", row: 0);
                 if (category == "enemies" && canViewEnemies)
                 {
-                    componentBuilder.WithSelectMenu("select", options, mapLocalization.Get("select/enemies/name"), row: 1);
+                    componentBuilder.WithSelectMenu("select", options, mapLocalization.Get("Select/Enemies/Name"), row: 1);
                 }
 
-                componentBuilder.WithButton(mapLocalization.Get("btn/back"), "back", ButtonStyle.Danger, row: 2);
+                componentBuilder.WithButton(mapLocalization.Get("Btn/Back"), "back", ButtonStyle.Danger, row: 2);
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = componentBuilder.Build(); });
                 await context.LastInteraction.TryDeferAsync();
                 var interaction = await context.WaitForButton();
@@ -137,15 +137,15 @@ namespace Shuvi.CommandParts
             var localization = _localizationPart.Get(lang);
             return category switch
             {
-                "main" => embedBuilder.AddField(localization.Get("embed/location/shops"),
+                "main" => embedBuilder.AddField(localization.Get("Embed/Location/Shops"),
                     $"```{GetShopsString(location, lang)}```",
-                    true).AddField(localization.Get("embed/location/dungeons"),
+                    true).AddField(localization.Get("Embed/Location/Dungeons"),
                     $"```{GetDungeonsString(location, lang)}```",
                     true),
-                "enemies" => embedBuilder.AddField(localization.Get("embed/location/enemies"),
+                "enemies" => embedBuilder.AddField(localization.Get("Embed/Location/Enemies"),
                     $"```{GetEnemiesString(dbUser, location, lang)}```",
                     true),
-                "resources" => embedBuilder.AddField(localization.Get("embed/location/mine"),
+                "resources" => embedBuilder.AddField(localization.Get("Embed/Location/Mine"),
                     $"```{GetMineString(location, lang)}```",
                     true),
                 _ => embedBuilder
@@ -187,7 +187,7 @@ namespace Shuvi.CommandParts
             var result = new List<string>();
             foreach (var location in region.Locations)
                 result.Add($"· {location.Info.GetName(lang)}「{location.RecomendedRank.GetName()}」");
-            return result.Count < 1 ? _localizationPart.Get(lang).Get("dontHave") : string.Join("\n", result);
+            return result.Count < 1 ? _localizationPart.Get(lang).Get("DontHave") : string.Join("\n", result);
         }
 
         public static string GetShopsString(IMapLocation location, Language lang)
@@ -195,7 +195,7 @@ namespace Shuvi.CommandParts
             var result = new List<string>();
             foreach (var shopId in location.Shops)
                 result.Add($"· {ShopDatabase.GetReadonlyShop(shopId).Info.GetName(lang)}");
-            return result.Count < 1 ? _localizationPart.Get(lang).Get("dontHave") : string.Join("\n", result);
+            return result.Count < 1 ? _localizationPart.Get(lang).Get("DontHave") : string.Join("\n", result);
         }
 
         public static string GetEnemiesString(IDatabaseUser dbUser, IMapLocation location, Language lang)
@@ -203,19 +203,19 @@ namespace Shuvi.CommandParts
             var result = new List<string>();
             foreach (var (enemy, chance) in location.Enemies.GetChances())
             {
-                result.Add($"· {(EnemyInfoService.CanViewEnemy(dbUser, enemy) ? enemy.Info.GetName(lang) : "???")} [{chance.ToString("F2")}%]");
+                result.Add($"· {(EnemyInfoService.CanViewEnemy(dbUser, enemy) ? enemy.Info.GetName(lang) : "???")} [{chance:F2}%]");
             }
-            return result.Count < 1 ? _localizationPart.Get(lang).Get("dontHave") : string.Join("\n", result);
+            return result.Count < 1 ? _localizationPart.Get(lang).Get("DontHave") : string.Join("\n", result);
         }
 
         public static string GetDungeonsString(IMapLocation location, Language lang)
         {
-            return _localizationPart.Get(lang).Get("inDevelopment");
+            return _localizationPart.Get(lang).Get("InDevelopment");
         }
 
         public static string GetMineString(IMapLocation location, Language lang)
         {
-            return _localizationPart.Get(lang).Get("inDevelopment");
+            return _localizationPart.Get(lang).Get("InDevelopment");
         }
 
         public static List<SelectMenuOptionBuilder> GetEnemyOptions(IDatabaseUser dbUser, IMapLocation location, Language lang)

@@ -27,24 +27,24 @@ namespace Shuvi.CommandParts
             while (true)
             {
                 var energyCosts = GetEnergyCosts(dbUser.Location, choosedRegion, choosedLocation);
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(travelLocalization.Get("embed/travel/author"))
-                    .WithDescription($"{travelLocalization.Get("embed/travel/energyLeft")
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(travelLocalization.Get("Embed/Travel/Author"))
+                    .WithDescription($"{travelLocalization.Get("Embed/Travel/EnergyLeft")
                     .Format(dbUser.Characteristics.Energy.GetCurrent(), dbUser.Characteristics.Energy.Max)}\n" +
-                    $"{(energyCosts == 0 ? "\n" : $"{travelLocalization.Get("embed/travel/energyWillTake").Format(energyCosts)}\n\n")}" +
-                    $"{travelLocalization.Get("embed/travel/region")} {dbUser.Location.GetRegion().Info.GetName(context.Language)}" +
+                    $"{(energyCosts == 0 ? "\n" : $"{travelLocalization.Get("Embed/Travel/EnergyWillTake").Format(energyCosts)}\n\n")}" +
+                    $"{travelLocalization.Get("Embed/Travel/Region")} {dbUser.Location.GetRegion().Info.GetName(context.Language)}" +
                     $"{(energyCosts == 2 ? $" -> {WorldMap.GetRegion(choosedRegion).Info.GetName(context.Language)}" : string.Empty)}\n" +
-                    $"{travelLocalization.Get("embed/travel/location")} {dbUser.Location.GetLocation().Info.GetName(context.Language)}" +
+                    $"{travelLocalization.Get("Embed/Travel/Location")} {dbUser.Location.GetLocation().Info.GetName(context.Language)}" +
                     $"{(energyCosts > 0 ? $" -> {WorldMap.GetRegion(choosedRegion).GetLocation(choosedLocation).Info.GetName(context.Language)}"
                     : string.Empty)}")
                     .WithImageUrl(WorldMap.Settings.PictureURL)
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("region", regionOptions, travelLocalization.Get("select/chooseRegion/name"), row: 0)
+                    .WithSelectMenu("region", regionOptions, travelLocalization.Get("Select/ChooseRegion/Name"), row: 0)
                     .WithSelectMenu("location", GetLocationOptions(dbUser.Rating.Rank, choosedRegion, context.Language),
-                    travelLocalization.Get("select/chooseLocation/name"), row: 1)
-                    .WithButton(travelLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 2)
-                    .WithButton(travelLocalization.Get("btn/travel"), "travel", ButtonStyle.Success, disabled: energyCosts == 0, row: 2)
+                    travelLocalization.Get("Select/ChooseLocation/Name"), row: 1)
+                    .WithButton(travelLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 2)
+                    .WithButton(travelLocalization.Get("Btn/Travel"), "travel", ButtonStyle.Success, disabled: energyCosts == 0, row: 2)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -64,9 +64,9 @@ namespace Shuvi.CommandParts
                         choosedLocation = int.Parse(interaction.Data.Values.First());
                         break;
                     case "exit":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser, false, false)
-                                .WithAuthor(travelLocalization.Get("embed/travel/author"))
-                                .WithDescription(travelLocalization.Get("embed/travelCancelled"))
+                        embed = EmbedFactory.CreateUserEmbed(dbUser, false, false)
+                                .WithAuthor(travelLocalization.Get("Embed/Travel/Author"))
+                                .WithDescription(travelLocalization.Get("Embed/TravelCancelled"))
                                 .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
                         {
@@ -75,13 +75,13 @@ namespace Shuvi.CommandParts
                         });
                         return;
                     case "travel":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                                .WithAuthor(travelLocalization.Get("embed/travel/author"))
-                                .WithDescription($"{travelLocalization.Get("embed/travaled/desc")}\n" +
-                                $"{(energyCosts == 2 ? $"{travelLocalization.Get("embed/travel/region")} " +
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                                .WithAuthor(travelLocalization.Get("Embed/Travel/Author"))
+                                .WithDescription($"{travelLocalization.Get("Embed/Travaled/Desc")}\n" +
+                                $"{(energyCosts == 2 ? $"{travelLocalization.Get("Embed/Travel/Region")} " +
                                 $"{dbUser.Location.GetRegion().Info.GetName(context.Language)} -> " +
                                 $"{WorldMap.GetRegion(choosedRegion).Info.GetName(context.Language)}" : string.Empty)}\n" +
-                                $"{(energyCosts > 0 ? $"{travelLocalization.Get("embed/travel/location")} " +
+                                $"{(energyCosts > 0 ? $"{travelLocalization.Get("Embed/Travel/Location")} " +
                                 $"{dbUser.Location.GetLocation().Info.GetName(context.Language)} -> " +
                                 $"{WorldMap.GetRegion(choosedRegion).GetLocation(choosedLocation).Info.GetName(context.Language)}"
                                 : string.Empty)}")

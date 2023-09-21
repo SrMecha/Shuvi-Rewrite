@@ -30,33 +30,33 @@ namespace Shuvi.CommandParts
                 var combatEnemy = new CombatEnemy(enemy, context.Language);
                 var canViewStats = EnemyInfoService.CanViewEnemyCharacteristics(dbUser, enemy);
                 var canViewSpell = EnemyInfoService.CanViewEnemyAbilities(dbUser, enemy);
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(huntLocalization.Get("embed/search/author"))
-                    .WithDescription($"{huntLocalization.Get("embed/search/meet").Format(enemy.Info.GetName(context.Language))}\n" +
-                    $"{huntLocalization.Get("embed/search/energyRemaining").Format(dbUser.Characteristics.Energy.GetCurrent(),
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(huntLocalization.Get("Embed/Search/Author"))
+                    .WithDescription($"{huntLocalization.Get("Embed/Search/Meet").Format(enemy.Info.GetName(context.Language))}\n" +
+                    $"{huntLocalization.Get("Embed/Search/EnergyRemaining").Format(dbUser.Characteristics.Energy.GetCurrent(),
                     dbUser.Characteristics.Energy.Max)}")
                     .AddField(enemy.Info.GetName(context.Language),
-                    canViewStats ? $"**{namesLocalization.Get("strength")}** {combatEnemy.Characteristics.Strength}\n" +
-                    $"**{namesLocalization.Get("agility")}:** {combatEnemy.Characteristics.Agility}\n" +
-                    $"**{namesLocalization.Get("luck")}:** {combatEnemy.Characteristics.Luck}\n" +
-                    $"**{namesLocalization.Get("intellect")}:** {combatEnemy.Characteristics.Intellect}\n" +
-                    $"**{namesLocalization.Get("endurance")}:** {combatEnemy.Characteristics.Endurance}\n" +
-                    $"**{namesLocalization.Get("health")}:** {combatEnemy.Characteristics.Health.Max}/{combatEnemy.Characteristics.Health.Max}\n" +
-                    $"**{namesLocalization.Get("mana")}:** {combatEnemy.Characteristics.Mana.Max}/{combatEnemy.Characteristics.Mana.Max}" :
-                    huntLocalization.Get("embed/search/characteristicsUnknown"),
+                    canViewStats ? $"**{namesLocalization.Get("Strength")}** {combatEnemy.Characteristics.Strength}\n" +
+                    $"**{namesLocalization.Get("Agility")}:** {combatEnemy.Characteristics.Agility}\n" +
+                    $"**{namesLocalization.Get("Luck")}:** {combatEnemy.Characteristics.Luck}\n" +
+                    $"**{namesLocalization.Get("Intellect")}:** {combatEnemy.Characteristics.Intellect}\n" +
+                    $"**{namesLocalization.Get("Endurance")}:** {combatEnemy.Characteristics.Endurance}\n" +
+                    $"**{namesLocalization.Get("Health")}:** {combatEnemy.Characteristics.Health.Max}/{combatEnemy.Characteristics.Health.Max}\n" +
+                    $"**{namesLocalization.Get("Mana")}:** {combatEnemy.Characteristics.Mana.Max}/{combatEnemy.Characteristics.Mana.Max}" :
+                    huntLocalization.Get("Embed/Search/CharacteristicsUnknown"),
                     true)
-                    .AddField(huntLocalization.Get("embed/search/info"),
-                    $"{huntLocalization.Get("embed/search/rank").Format(enemy.Rank.ToString())}\n" +
-                    $"{(canViewSpell ? huntLocalization.Get("embed/search/spell").Format(enemy.Spell.Info.GetName(context.Language)) :
-                    huntLocalization.Get("embed/search/unknown"))}",
+                    .AddField(huntLocalization.Get("Embed/Search/Info"),
+                    $"{huntLocalization.Get("Embed/Search/Rank").Format(enemy.Rank.ToString())}\n" +
+                    $"{(canViewSpell ? huntLocalization.Get("Embed/Search/Spell").Format(enemy.Spell.Info.GetName(context.Language)) :
+                    huntLocalization.Get("Embed/Search/SpellUnknown"))}",
                     true)
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithButton(huntLocalization.Get("btn/attack"), "attack", ButtonStyle.Danger, row: 0)
-                    //.WithButton(huntLocalization.Get("btn/tame"), "tame", ButtonStyle.Success, row: 0)
-                    .WithButton(huntLocalization.Get("btn/retry"), "retry", ButtonStyle.Secondary,
+                    .WithButton(huntLocalization.Get("Btn/Attack"), "attack", ButtonStyle.Danger, row: 0)
+                    //.WithButton(huntLocalization.Get("Btn/Tame"), "tame", ButtonStyle.Success, row: 0)
+                    .WithButton(huntLocalization.Get("Btn/Retry"), "retry", ButtonStyle.Secondary,
                     disabled: !dbUser.Characteristics.HaveEnergy(HuntEnergyCost), row: 1)
-                    .WithButton(huntLocalization.Get("btn/leave"), "leave", ButtonStyle.Secondary, row: 2)
+                    .WithButton(huntLocalization.Get("Btn/Leave"), "leave", ButtonStyle.Secondary, row: 2)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -76,8 +76,8 @@ namespace Shuvi.CommandParts
                     case "retry":
                         break;
                     case "leave":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                            .WithDescription(huntLocalization.Get("embed/leave/desc"))
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                            .WithDescription(huntLocalization.Get("Embed/Leave/Desc"))
                             .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
                         {

@@ -1,4 +1,4 @@
-embed/info/players;;**Игроков:** {0}
-embed/info/guilds;;**Серверов:** {0}
-embed/info/links;;**Полезные ссылки:** [Вики](https://shuvidev.gitbook.io/shuvi/) | [Сервер поддержки](https://discord.gg/Thq3Bjvn2t)
-embed/info/version;;Текущая версия: {0}
+Embed/Info/Players;;**Игроков:** {0}
+Embed/Info/Guilds;;**Серверов:** {0}
+Embed/Info/Links;;**Полезные ссылки:** [Вики](https://shuvidev.gitbook.io/shuvi/) | [Сервер поддержки](https://discord.gg/Thq3Bjvn2t)
+Embed/Info/Version;;Текущая версия: {0}

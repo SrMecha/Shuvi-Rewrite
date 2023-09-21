@@ -12,7 +12,7 @@ namespace Shuvi.Classes.Factories.Item
             return itemDocument.Type switch
             {
                 ItemType.Simple => new SimpleItem(itemDocument),
-                ItemType.Weapon => new WeaponItem(itemDocument),
+                ItemType.Weapon => new EquipmentItem(itemDocument),
                 ItemType.Helmet => new EquipmentItem(itemDocument),
                 ItemType.Armor => new EquipmentItem(itemDocument),
                 ItemType.Leggings => new EquipmentItem(itemDocument),

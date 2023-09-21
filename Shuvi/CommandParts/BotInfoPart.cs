@@ -14,11 +14,11 @@ namespace Shuvi.CommandParts
         public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser)
         {
             var infoLocalization = _localizationPart.Get(context.Language);
-            var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser, false, false)
-                .WithDescription($"{infoLocalization.Get("embed/info/players").Format(BotInfoService.PlayerCount)}\n" +
-                $"{infoLocalization.Get("embed/info/guilds").Format(context.Client.Guilds.Count)}\n\n" +
-                $"{infoLocalization.Get("embed/info/links")}")
-                .WithFooter(infoLocalization.Get("embed/info/version").Format(BotInfoService.Version))
+            var embed = EmbedFactory.CreateBotOwnerEmbed()
+                .WithDescription($"{infoLocalization.Get("Embed/Info/Players").Format(BotInfoService.PlayerCount)}\n" +
+                $"{infoLocalization.Get("Embed/Info/Guilds").Format(context.Client.Guilds.Count)}\n\n" +
+                $"{infoLocalization.Get("Embed/Info/Links")}")
+                .WithFooter(infoLocalization.Get("Embed/Info/Version").Format(BotInfoService.Version))
                 .Build();
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; });
             await context.LastInteraction.TryDeferAsync();

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
-using Shuvi.Classes.Types.Characteristics.Static;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
 using Shuvi.Enums.Item;
-using Shuvi.Interfaces.Characteristics.Static;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Equipment;
 using Shuvi.Interfaces.Items;
 using Shuvi.Services.StaticServices.Database;
@@ -10,9 +10,9 @@ namespace Shuvi.Classes.Types.Equipment
 {
     public abstract class Equipment : IEquipment
     {
-        public virtual IStaticCharacteristics GetBonuses()
+        public virtual IAllBonuses GetBonuses()
         {
-            var result = new StaticCharacteristics(0, 0, 0, 0, 0);
+            var result = new AllBonuses();
             foreach (var item in GetEquipments())
                 if (item is not null)
                     result.Add(item.Bonuses);

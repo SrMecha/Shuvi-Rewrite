@@ -1,9 +1,9 @@
-embed/view/author;;Статистика {0}
-embed/view/maxRating;;Максимальный рейтинг
-embed/view/enemyKilled;;Всего врагов убито
-btn/exit;;Назад
-embed/view/dungeonComplite;;Всего подземелий пройдено
-embed/view/deaths;;Всего смертей
-embed/view/lastDeath;;Последняя смерть
-embed/view/accountCreate;;Аккаунт создан
-embed/view/tameTime;;Приручен
+Embed/View/Author;;Статистика {0}
+Embed/View/MaxRating;;Максимальный рейтинг
+Embed/View/EnemyKilled;;Всего врагов убито
+Btn/Exit;;Назад
+Embed/View/DungeonComplite;;Всего подземелий пройдено
+Embed/View/Deaths;;Всего смертей
+Embed/View/LastDeath;;Последняя смерть
+Embed/View/AccountCreate;;Аккаунт создан
+Embed/View/TameTime;;Приручен

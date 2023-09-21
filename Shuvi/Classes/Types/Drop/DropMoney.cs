@@ -19,8 +19,8 @@ namespace Shuvi.Classes.Types.Drop
         {
             var result = new List<string>();
             foreach (var (type, amount) in this)
-                result.Add($"{LocalizationService.Get("names").Get(lang).Get(type.GetLowerName())} " +
-                    $"{amount.Min} - {amount.Max}{EmojiService.Get(type.GetLowerName())}");
+                result.Add($"{LocalizationService.Get("names").Get(lang).Get(type.GetName())} " +
+                    $"{amount.Min} - {amount.Max}{EmojiService.Get(type.GetName())}");
             return string.Join("\n", result);
         }
     }

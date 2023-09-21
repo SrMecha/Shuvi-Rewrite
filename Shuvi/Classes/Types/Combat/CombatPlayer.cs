@@ -1,8 +1,11 @@
 ﻿using Shuvi.Classes.Types.Characteristics;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
 using Shuvi.Classes.Types.Characteristics.Dynamic;
+using Shuvi.Classes.Types.Effect.EffectList;
 using Shuvi.Classes.Types.Inventory;
 using Shuvi.Enums.Actions;
 using Shuvi.Enums.Localization;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Inventory;
@@ -21,13 +24,23 @@ namespace Shuvi.Classes.Types.Combat
         {
             Name = name;
             Rank = user.Rating.Rank;
-            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>(user.Characteristics,
-                new NotRestorableCharacteristic(user.Characteristics.Health.GetCurrent(), user.Characteristics.Health.GetCurrent()),
-                new NotRestorableCharacteristic(user.Characteristics.Mana.GetCurrent(), user.Characteristics.Mana.GetCurrent()));
+            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>()
+            {
+                Strength = user.Characteristics.Strength,
+                Agility = user.Characteristics.Agility,
+                Luck = user.Characteristics.Luck,
+                Intellect = user.Characteristics.Intellect,
+                Endurance = user.Characteristics.Endurance,
+                Health = new NotRestorableCharacteristic(user.Characteristics.Health.GetCurrent(), user.Characteristics.Health.GetCurrent()),
+                Mana = new NotRestorableCharacteristic(user.Characteristics.Mana.GetCurrent(), user.Characteristics.Mana.GetCurrent())
+            };
             Spell = user.Spell.GetSpell();
             Skill = user.Skill.GetSkill();
             Actions = user.ActionChances;
             Inventory = new DropInventory();
+            Effects.Add(new EffectBase("Equipment Bonus", 999, user.Equipment.GetBonuses()));
+            EffectBonuses = Effects.UpdateAll(this);
+            AllCharacteristics.Add(EffectBonuses);
         }
         public override IActionResult RandomAction(ICombatEntity target, Language lang)
         {

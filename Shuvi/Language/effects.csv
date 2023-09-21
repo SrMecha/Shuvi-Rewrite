@@ -1,8 +1,8 @@
-burn/name;;Горение
-stonePlates/name;;Каменные пластины
-assessment/name;;Оценка
-combatMode/name;;Боевой режим
-chase/name;;Погоня
-frozen/name;;Заморожен
+Burn/Name;;Горение
+StonePlates/Name;;Каменные пластины
+Assessment/Name;;Оценка
+CombatMode/Name;;Боевой режим
+Chase/Name;;Погоня
+Frozen/Name;;Заморожен
 ;;
 ;;
