@@ -71,8 +71,7 @@ namespace Shuvi.CommandParts
                     .WithDescription($"{custLocalization.Get("Embed/Desc/Avatar").Format(dbUser.Customization.Avatar is null ?
                     custLocalization.Get("Embed/DontHave") : dbUser.Customization.Avatar.Info.GetName(context.Language))}\n\n" +
                     $"{GetCustomizationsString(dbUser.Customization.Avatars, context.Language, currentPage, arrow)}")
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{custLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1)}");
+                    .WithFooter(custLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1));
                 if (haveCustomization)
                     embedBuilder.WithThumbnailUrl(GetCurrentImage(dbUser.Customization.Avatars, currentPage, arrow).URL);
                 var components = new ComponentBuilder()
@@ -138,8 +137,7 @@ namespace Shuvi.CommandParts
                     .WithDescription($"{custLocalization.Get("Embed/Desc/Banner").Format(dbUser.Customization.Banner is null ?
                     custLocalization.Get("Embed/DontHave") : dbUser.Customization.Banner.Info.GetName(context.Language))}\n\n" +
                     $"{GetCustomizationsString(dbUser.Customization.Banners, context.Language, currentPage, arrow)}")
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{custLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1)}");
+                    .WithFooter(custLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1));
                 if (haveCustomization)
                     embedBuilder.WithImageUrl(GetCurrentImage(dbUser.Customization.Banners, currentPage, arrow).URL);
                 var components = new ComponentBuilder()

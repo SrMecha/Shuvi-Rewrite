@@ -31,6 +31,7 @@ namespace Shuvi.Classes.Types.Combat
             Actions = enemy.ActionChances;
             RatingGet = enemy.RatingGet;
             Drop = enemy.Drop;
+            Update(Language.Eng);
         }
     }
 }

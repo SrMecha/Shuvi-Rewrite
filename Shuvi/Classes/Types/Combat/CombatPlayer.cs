@@ -39,8 +39,7 @@ namespace Shuvi.Classes.Types.Combat
             Actions = user.ActionChances;
             Inventory = new DropInventory();
             Effects.Add(new EffectBase("Equipment Bonus", 999, user.Equipment.GetBonuses()));
-            EffectBonuses = Effects.UpdateAll(this);
-            AllCharacteristics.Add(EffectBonuses);
+            Update(Language.Eng);
         }
         public override IActionResult RandomAction(ICombatEntity target, Language lang)
         {

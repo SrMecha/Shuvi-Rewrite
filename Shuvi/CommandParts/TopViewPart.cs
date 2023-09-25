@@ -25,8 +25,7 @@ namespace Shuvi.CommandParts
                     .WithAuthor(topLocalization.Get("Embed/View/Author").Format(topLocalization.Get($"Top/{topType.GetName()}")))
                     .WithDescription($"{GetTopString(topType, currentPage, context.Language)}\n\n" +
                     $"{topLocalization.Get("Embed/View/TopUpdateTime").Format(TopService.GetUpdateTime(topType))}")
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{topLocalization.Get("Embed/View/Page").Format(currentPage + 1, maxPage)}")
+                    .WithFooter(topLocalization.Get("Embed/View/Page").Format(currentPage + 1, maxPage))
                     .Build();
                 var components = new ComponentBuilder()
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: currentPage < 1, row: 0)

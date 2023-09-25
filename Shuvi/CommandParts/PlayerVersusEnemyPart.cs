@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
 using Shuvi.Classes.Types.Combat;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.Classes.Types.Status;
@@ -13,6 +14,7 @@ using Shuvi.Interfaces.User;
 using Shuvi.Services.StaticServices.Database;
 using Shuvi.Services.StaticServices.Emoji;
 using Shuvi.Services.StaticServices.Localization;
+using System.Reflection.PortableExecutable;
 
 namespace Shuvi.CommandParts
 {
@@ -29,7 +31,7 @@ namespace Shuvi.CommandParts
             var isAfk = false;
             var hod = 0;
             var status = new ResultStorage();
-            status.Add(new ActionResult(battleLocalization.Get("status/battleStart")));
+            status.Add(new ActionResult(battleLocalization.Get("Status/BattleStart")));
             while (true)
             {
                 hod++;
@@ -109,27 +111,69 @@ namespace Shuvi.CommandParts
         {
             var battleLocalization = _localizationPart.Get(context.Language);
             var namesLocalization = LocalizationService.Get("names").Get(context.Language);
+            var playerFullChar = new FightBonuses()
+            {
+                AttackDamage = MathF.Round(player.AllCharacteristics.GetFullAttackDamage(), 1),
+                AbilityPower = MathF.Round(player.AllCharacteristics.GetFullAbilityPower(), 1),
+                Armor = MathF.Round(player.AllCharacteristics.GetFullArmor(), 1),
+                MagicResistance = MathF.Round(player.AllCharacteristics.GetFullMagicResistance(), 1),
+                CriticalStrikeChance = MathF.Round(player.AllCharacteristics.GetFullCriticalStrikeChance() * 100, 1),
+                CriticalStrikeDamageMultiplier = MathF.Round(player.AllCharacteristics.GetFullCriticalStrikeDamageMultiplier() * 100, 1),
+                StrikeChance = MathF.Round((1f + player.AllCharacteristics.GetFullStrikeChance() - enemy.AllCharacteristics.GetFullDodgeChance()) * 100, 1),
+                DodgeChance = MathF.Round((player.AllCharacteristics.GetFullDodgeChance() - enemy.AllCharacteristics.GetFullStrikeChance()) * 100, 1)
+            };
+
+            var playerBonuses = new FightBonuses()
+            {
+                AttackDamage = MathF.Round(playerFullChar.AttackDamage- player.Characteristics.GetAttackDamage(), 1),
+                AbilityPower = MathF.Round(playerFullChar.AbilityPower - player.Characteristics.GetAbilityPower(), 1),
+                Armor = MathF.Round(playerFullChar.Armor - player.Characteristics.GetArmor(), 1),
+                MagicResistance = MathF.Round(playerFullChar.MagicResistance - player.Characteristics.GetMagicResistance(), 1),
+                CriticalStrikeChance = MathF.Round(playerFullChar.CriticalStrikeChance - player.Characteristics.GetCriticalStrikeChance() * 100, 1),
+                CriticalStrikeDamageMultiplier =  
+                MathF.Round(playerFullChar.CriticalStrikeDamageMultiplier - player.Characteristics.GetCriticalStrikeDamageMultiplier() * 100, 1),
+                StrikeChance = MathF.Round((player.AllCharacteristics.GetFullStrikeChance() - player.Characteristics.GetStrikeChance()) * 100, 1),
+                DodgeChance = MathF.Round((player.AllCharacteristics.GetFullDodgeChance() - player.Characteristics.GetDodgeChance()) * 100, 1),
+            };
+
+            var enemyFullChar = new FightBonuses()
+            {
+                AttackDamage = MathF.Round(enemy.AllCharacteristics.GetFullAttackDamage(), 1),
+                AbilityPower = MathF.Round(enemy.AllCharacteristics.GetFullAbilityPower(), 1),
+                Armor = MathF.Round(enemy.AllCharacteristics.GetFullArmor(), 1),
+                MagicResistance = MathF.Round(enemy.AllCharacteristics.GetFullMagicResistance(), 1),
+                CriticalStrikeChance = MathF.Round(enemy.AllCharacteristics.GetFullCriticalStrikeChance() * 100, 1),
+                CriticalStrikeDamageMultiplier = MathF.Round(enemy.AllCharacteristics.GetFullCriticalStrikeDamageMultiplier() * 100, 1),
+                StrikeChance = MathF.Round((1f + enemy.AllCharacteristics.GetFullStrikeChance() - player.AllCharacteristics.GetFullDodgeChance()) * 100, 1),
+                DodgeChance = MathF.Round((enemy.AllCharacteristics.GetFullDodgeChance() - player.AllCharacteristics.GetFullStrikeChance()) * 100, 1)
+            };
+
+            var enemyBonuses = new FightBonuses()
+            {
+                AttackDamage = MathF.Round(enemyFullChar.AttackDamage - enemy.Characteristics.GetAttackDamage(), 1),
+                AbilityPower = MathF.Round(enemyFullChar.AbilityPower - enemy.Characteristics.GetAbilityPower(), 1),
+                Armor = MathF.Round(enemyFullChar.Armor - enemy.Characteristics.GetArmor(), 1),
+                MagicResistance = MathF.Round(enemyFullChar.MagicResistance - enemy.Characteristics.GetMagicResistance(), 1),
+                CriticalStrikeChance = MathF.Round(enemyFullChar.CriticalStrikeChance - enemy.Characteristics.GetCriticalStrikeChance() * 100, 1),
+                CriticalStrikeDamageMultiplier = 
+                MathF.Round(enemyFullChar.CriticalStrikeDamageMultiplier - enemy.Characteristics.GetCriticalStrikeDamageMultiplier() * 100, 1),
+                StrikeChance = MathF.Round((enemy.AllCharacteristics.GetFullStrikeChance() - enemy.Characteristics.GetStrikeChance()) * 100, 1),
+                DodgeChance = MathF.Round((enemy.AllCharacteristics.GetFullDodgeChance() - enemy.Characteristics.GetDodgeChance()) * 100, 1),
+            };
+
             return EmbedFactory.CreateEmbed()
                 .WithAuthor(battleLocalization.Get("Embed/Battle/Author/SinglePVE").Format(hod))
                 .WithDescription(status.GetDescriptions())
                 .AddField(player.Name,
-                $"**{namesLocalization.Get("AttackDamage")}:** {player.AllCharacteristics.GetFullAttackDamage()
-                .WithBonus(player.EffectBonuses.GetFullAttackDamage())}\n" +
-                $"**{namesLocalization.Get("AbilityPower")}:** {player.AllCharacteristics.GetFullAbilityPower()
-                .WithBonus(player.EffectBonuses.GetFullAbilityPower())}\n" +
-                $"**{namesLocalization.Get("Armor")}:** {player.AllCharacteristics.GetFullArmor()
-                .WithBonus(player.EffectBonuses.GetFullArmor())}\n" +
-                $"**{namesLocalization.Get("MagicResistance")}:** {player.AllCharacteristics.GetFullMagicResistance()
-                .WithBonus(player.EffectBonuses.GetFullMagicResistance())}\n" +
-                $"**{namesLocalization.Get("CriticalStrikeChance")}:** {player.AllCharacteristics.GetFullCriticalStrikeChance()
-                .WithBonus(player.EffectBonuses.CriticalStrikeChance)}\n" +
-                $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {player.AllCharacteristics.GetFullCriticalStrikeDamageMultiplier()
-                .WithBonus(player.EffectBonuses.CriticalStrikeDamageMultiplier)}\n" +
-                $"**{namesLocalization.Get("DodgeChance")}:** {$"{player.AllCharacteristics.GetFullDodgeChance() - enemy.AllCharacteristics.GetFullStrikeChance()}%"
-                .WithBonus(player.AllCharacteristics.GetFullDodgeChance() - player.Characteristics.GetDodgeChance())}\n" +
-                $"**{namesLocalization.Get("StrikeChance")}:** " +
-                $"{(100f - (enemy.AllCharacteristics.GetFullDodgeChance() - player.AllCharacteristics.GetFullStrikeChance()))
-                .WithBonus(player.AllCharacteristics.GetFullStrikeChance() - player.Characteristics.GetStrikeChance())}\n" +
+                $"**{namesLocalization.Get("AttackDamage")}:** {playerFullChar.AttackDamage.WithBonus(playerBonuses.AttackDamage)}\n" +
+                $"**{namesLocalization.Get("AbilityPower")}:** {playerFullChar.AbilityPower.WithBonus(playerBonuses.AbilityPower)}\n" +
+                $"**{namesLocalization.Get("Armor")}:** {playerFullChar.Armor.WithBonus(playerBonuses.Armor)}\n" +
+                $"**{namesLocalization.Get("MagicResistance")}:** {playerFullChar.MagicResistance.WithBonus(playerBonuses.MagicResistance)}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeChance")}:** {playerFullChar.CriticalStrikeChance.WithBonusPercent(playerBonuses.CriticalStrikeChance)}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {playerFullChar.CriticalStrikeDamageMultiplier
+                .WithBonusPercent(playerBonuses.CriticalStrikeDamageMultiplier)}\n" +
+                $"**{namesLocalization.Get("DodgeChance")}:** {playerFullChar.DodgeChance.WithBonusPercent(playerBonuses.DodgeChance)}\n" +
+                $"**{namesLocalization.Get("StrikeChance")}:** {playerFullChar.StrikeChance.WithBonusPercent(playerBonuses.StrikeChance)}\n" +
                 $"**{namesLocalization.Get("Health")}:** {player.Characteristics.Health.Now}/" +
                 $"{player.Characteristics.Health.Max.WithBonus(player.EffectBonuses.Health)}\n" +
                 $"**{namesLocalization.Get("Mana")}:** {player.Characteristics.Mana.Now}/" +
@@ -145,23 +189,15 @@ namespace Shuvi.CommandParts
                 true)
                 .AddField(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - -", "** **", false)
                 .AddField(enemy.Name,
-                $"**{namesLocalization.Get("AttackDamage")}:** {enemy.AllCharacteristics.GetFullAttackDamage()
-                .WithBonus(enemy.EffectBonuses.GetFullAttackDamage())}\n" +
-                $"**{namesLocalization.Get("AbilityPower")}:** {enemy.AllCharacteristics.GetFullAbilityPower()
-                .WithBonus(enemy.EffectBonuses.GetFullAbilityPower())}\n" +
-                $"**{namesLocalization.Get("Armor")}:** {enemy.AllCharacteristics.GetFullArmor()
-                .WithBonus(enemy.EffectBonuses.GetFullArmor())}\n" +
-                $"**{namesLocalization.Get("MagicResistance")}:** {enemy.AllCharacteristics.GetFullMagicResistance()
-                .WithBonus(enemy.EffectBonuses.GetFullMagicResistance())}\n" +
-                $"**{namesLocalization.Get("CriticalStrikeChance")}:** {enemy.AllCharacteristics.GetFullCriticalStrikeChance()
-                .WithBonus(enemy.EffectBonuses.CriticalStrikeChance)}\n" +
-                $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {enemy.AllCharacteristics.GetFullCriticalStrikeDamageMultiplier()
-                .WithBonus(enemy.EffectBonuses.CriticalStrikeDamageMultiplier)}\n" +
-                $"**{namesLocalization.Get("DodgeChance")}:** {(enemy.AllCharacteristics.GetFullDodgeChance() - player.AllCharacteristics.GetFullStrikeChance())
-                .WithBonus(enemy.AllCharacteristics.GetFullDodgeChance() - enemy.Characteristics.GetDodgeChance())}\n" +
-                $"**{namesLocalization.Get("StrikeChance")}:** " +
-                $"{(100f - (player.AllCharacteristics.GetFullDodgeChance() - enemy.AllCharacteristics.GetFullStrikeChance()))
-                .WithBonus(enemy.AllCharacteristics.GetFullStrikeChance() - enemy.Characteristics.GetStrikeChance())}\n" +
+                $"**{namesLocalization.Get("AttackDamage")}:** {enemyFullChar.AttackDamage.WithBonus(enemyBonuses.AttackDamage)}\n" +
+                $"**{namesLocalization.Get("AbilityPower")}:** {enemyFullChar.AbilityPower.WithBonus(enemyBonuses.AbilityPower)}\n" +
+                $"**{namesLocalization.Get("Armor")}:** {enemyFullChar.Armor.WithBonus(enemyBonuses.Armor)}\n" +
+                $"**{namesLocalization.Get("MagicResistance")}:** {enemyFullChar.MagicResistance.WithBonus(enemyBonuses.MagicResistance)}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeChance")}:** {enemyFullChar.CriticalStrikeChance.WithBonusPercent(enemyBonuses.CriticalStrikeChance)}\n" +
+                $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {enemyFullChar.CriticalStrikeDamageMultiplier
+                .WithBonusPercent(enemyBonuses.CriticalStrikeDamageMultiplier)}\n" +
+                $"**{namesLocalization.Get("DodgeChance")}:** {enemyFullChar.DodgeChance.WithBonusPercent(enemyBonuses.DodgeChance)}\n" +
+                $"**{namesLocalization.Get("StrikeChance")}:** {enemyFullChar.StrikeChance.WithBonusPercent(enemyBonuses.StrikeChance)}\n" +
                 $"**{namesLocalization.Get("Health")}:** {enemy.Characteristics.Health.Now}/" +
                 $"{enemy.Characteristics.Health.Max.WithBonus(enemy.EffectBonuses.Health)}\n" +
                 $"**{namesLocalization.Get("Mana")}:** {enemy.Characteristics.Mana.Now}/" +
@@ -174,6 +210,7 @@ namespace Shuvi.CommandParts
                 true)
                 .Build();
         }
+
         public static async Task FightWin(CustomInteractionContext context, IResultStorage status, int hod,
             IDatabaseUser dbUser, ICombatPlayer player, IDatabaseEnemy dbEnemy, ICombatEnemy enemy)
         {
@@ -201,6 +238,7 @@ namespace Shuvi.CommandParts
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
             await context.LastInteraction.TryDeferAsync();
         }
+
         public static async Task FightDraw(CustomInteractionContext context, IResultStorage status, int hod,
             IDatabaseUser dbUser, ICombatPlayer player, ICombatEnemy enemy)
         {
@@ -218,6 +256,7 @@ namespace Shuvi.CommandParts
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
             await context.LastInteraction.TryDeferAsync();
         }
+
         public static async Task FightLoose(CustomInteractionContext context, IResultStorage status, int hod,
             IDatabaseUser dbUser, ICombatPlayer player, ICombatEnemy enemy)
         {

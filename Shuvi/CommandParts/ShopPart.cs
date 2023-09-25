@@ -103,8 +103,7 @@ namespace Shuvi.CommandParts
                     GetBasketProductsString(shop, context.Language),
                     true
                     )
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1)}")
+                    .WithFooter(shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1))
                     .Build();
                 var components = new ComponentBuilder()
                     .WithSelectMenu("category", categoryOptions, shopLocalization.Get("Select/Category/Name"), row: 0)
@@ -210,8 +209,7 @@ namespace Shuvi.CommandParts
                     GetBasketProductsString(shop, context.Language),
                     true
                     )
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{shopLocalization.Get("embed/page").Format(currentPage + 1, maxPage + 1)}")
+                    .WithFooter(shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1))
                     .Build();
                 var components = new ComponentBuilder()
                     .WithSelectMenu("category", categoryOptions, shopLocalization.Get("Select/Category/Name"), row: 0)
@@ -319,8 +317,7 @@ namespace Shuvi.CommandParts
                     GetBasketProductsString(shop, context.Language),
                     true
                     )
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1)}");
+                    .WithFooter(shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1));
                 if (product.Type == ImageType.Avatar)
                     embedBuilder.WithThumbnailUrl(product.URL);
                 else
