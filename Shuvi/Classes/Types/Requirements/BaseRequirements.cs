@@ -60,7 +60,7 @@ namespace Shuvi.Classes.Types.Requirements
                     isMeetRequirement = false;
                     isMeetAllRequirements = false;
                 }
-                result.Add($"{(isMeetRequirement ? EmojiService.Get("GoodMark") : EmojiService.Get("badMark"))} " +
+                result.Add($"{(isMeetRequirement ? EmojiService.Get("GoodMark") : EmojiService.Get("BadMark"))} " +
                     $"{LocalizationService.Get("names").Get(lang).Get(requirement)} {FormatRequirement(requirement, amount)}+");
             }
             if (result.Count < 1)
@@ -81,7 +81,7 @@ namespace Shuvi.Classes.Types.Requirements
                     isMeetRequirement = false;
                     isMeetAllRequirements = false;
                 }
-                result.Add($"{(isMeetRequirement ? EmojiService.Get("GoodMark") : EmojiService.Get("badMark"))} " +
+                result.Add($"{(isMeetRequirement ? EmojiService.Get("GoodMark") : EmojiService.Get("BadMark"))} " +
                     $"{LocalizationService.Get("names").Get(lang).Get(requirement)} {FormatRequirement(requirement, amount)}+");
             }
             if (result.Count < 1)

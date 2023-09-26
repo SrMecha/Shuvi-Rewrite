@@ -180,7 +180,7 @@ namespace Shuvi.CommandParts
 
         private static string IsChoosed(string choosed, string curent)
         {
-            return choosed == curent ? EmojiService.Get("СhoosePoint").ToString()! : string.Empty;
+            return choosed == curent ? EmojiService.Get("ChoosePoint").ToString()! : string.Empty;
         }
     }
 }

@@ -17,6 +17,8 @@ namespace Shuvi.Classes.Data.Bonuses
         public float CriticalStrikeChance { get; set; } = 0;
         [BsonRepresentation(BsonType.Double, AllowTruncation = true)]
         public float DodgeChance { get; set; } = 0;
+        [BsonRepresentation(BsonType.Double, AllowTruncation = true)]
+        public float StrikeChance { get; set; } = 0;
 
         [BsonRepresentation(BsonType.Double, AllowTruncation = true)]
         public float AttackDamageMultiplier { get; set; } = 0f;

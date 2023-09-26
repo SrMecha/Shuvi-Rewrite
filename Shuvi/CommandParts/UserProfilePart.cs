@@ -57,7 +57,7 @@ namespace Shuvi.CommandParts
                             case "upgrade":
                                 if (UserCheckService.IsUseCommand(TrackedCommand.Upgrade, dbUser.Id))
                                 {
-                                    await context.SendError(errorLocalization.Get("alreadyUseCommand"), context.Language);
+                                    await context.SendError(errorLocalization.Get("AlreadyUseCommand"), context.Language);
                                     return;
                                 }
                                 try

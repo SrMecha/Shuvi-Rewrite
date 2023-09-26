@@ -145,12 +145,12 @@ namespace Shuvi.Classes.Types.Characteristics.Static
 
         public float GetDodgeChance()
         {
-            return Agility * 0.5f + FightSettings.StandartDodgeChance;
+            return Agility * 0.01f + FightSettings.StandartDodgeChance;
         }
 
         public float GetStrikeChance()
         {
-            return Agility * 0.5f;
+            return Agility * 0.01f;
         }
     }
 }

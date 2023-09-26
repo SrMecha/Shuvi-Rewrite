@@ -31,6 +31,7 @@ namespace Shuvi.Classes.Types.Characteristics.Bonuses
             MagicResistance += data.MagicResistance;
             CriticalStrikeChance += data.CriticalStrikeChance;
             DodgeChance += data.DodgeChance;
+            StrikeChance += data.StrikeChance;
 
             AttackDamageMultiplier += data.AttackDamageMultiplier;
             AbilityPowerMultiplier += data.AbilityPowerMultiplier;
@@ -61,15 +62,15 @@ namespace Shuvi.Classes.Types.Characteristics.Bonuses
             yield return ("AbilityPower", AbilityPower);
             yield return ("Armor", Armor);
             yield return ("MagicResistance", MagicResistance);
-            yield return ("CriticalStrikeChance", CriticalStrikeChance);
-            yield return ("DodgeChance", DodgeChance);
-            yield return ("StrikeChance", StrikeChance);
+            yield return ("CriticalStrikeChance", CriticalStrikeChance * 100);
+            yield return ("DodgeChance", DodgeChance * 100);
+            yield return ("StrikeChance", StrikeChance * 100);
 
-            yield return ("AttackDamageMultiplier", AttackDamageMultiplier);
-            yield return ("AbilityPowerMultiplier", AbilityPowerMultiplier);
-            yield return ("ArmorMultiplier", ArmorMultiplier);
-            yield return ("MagicResistanceMultiplier", MagicResistanceMultiplier);
-            yield return ("CriticalStrikeDamageMultiplier", CriticalStrikeDamageMultiplier);
+            yield return ("AttackDamageMultiplier", AttackDamageMultiplier * 100);
+            yield return ("AbilityPowerMultiplier", AbilityPowerMultiplier * 100);
+            yield return ("ArmorMultiplier", ArmorMultiplier * 100);
+            yield return ("MagicResistanceMultiplier", MagicResistanceMultiplier * 100);
+            yield return ("CriticalStrikeDamageMultiplier", CriticalStrikeDamageMultiplier * 100);
         }
 
         public float GetFullAttackDamage(float bonus = 0, float multiplier = 0)
