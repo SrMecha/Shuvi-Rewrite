@@ -1,33 +1,50 @@
-strength;Strength;Сила
-agility;Agility;Ловкость
-luck;Luck;Удача
-intellect;Intellect;Интеллект
-endurance;Endurance;Выносливость
-energy;Energy;Энергия
-health;Health;Здоровье
-mana;Mana;Мана
-rank;Rank;Ранг
-gold;Gold;Золото
-dispoints;Dispoints;Диспоинты
-lang/ru;Russian;Русский
-lang/eng;English;Английский
-race/exMachina;Ex-machina;Экс-машина
-race/beastmen;Beastmen;Зверолюд
-subrace/none;None;Нету
-subrace/werewolf;Warewolf;Оборотень
-profession/none;None;Нету
-profession/prufer;Prüfer;Разведчик
-profession/kampfer;Kämpfer;Комбатант
-profession/hunter;Hunter;Охотник
-itemType/simple;;Предмет
-itemType/weapon;;Оружие
-itemType/helmet;;Шлем
-itemType/armor;;Броня
-itemType/leggings;;Поножи
-itemType/boots;;Ботинки
-itemType/potion;;Зелье
-itemType/chest;;Сундук
-itemType/amulet;;Амулет
-itemType/recipe;;Рецепт
-itemType/none;;Не указан
-notHave;;Нету
+AttackDamage;Attack damage;Сила атаки
+AbilityPower;Ability power;Сила умений
+Armor;Armor;Броня
+CriticalStrikeChance;Critical strike chance;Шанс крит. попадания
+CriticalStrikeDamageMultiplier;Critical strike damage;Множитель крит. урона
+MagicResistance;Magic Resistance;Сопротивление магии
+DodgeChance;Dodge Chance;Шанс уворота
+StrikeChance;Strike Chance;Шанс попадания
+AttackDamageMultiplier;Attack Damage Multiplier;Множитель силы атаки
+AbilityPowerMultiplier;Ability Power Multiplier;Множитель силы умений
+ArmorMultiplier;Armor Multiplier;Множитель брони
+MagicResistanceMultiplier;Magic Resistance Multiplier;Множитель сопр. магии
+DodgeChanceMultiplier;Dodge Chance Multiplier;Множитель шанса уворота
+StrikeChanceMultiplier;Strike Chance Multiplier;Множитель шанса попадания
+Strength;Strength;Сила
+Agility;Agility;Ловкость
+Luck;Luck;Удача
+Intellect;Intellect;Интеллект
+Endurance;Endurance;Выносливость
+Energy;Energy;Энергия
+Health;Health;Здоровье
+Mana;Mana;Мана
+Rank;Rank;Ранг
+Gold;Gold;Золото
+Dispoints;Dispoints;Диспоинты
+Lang/ru;Russian;Русский
+Lang/eng;English;Английский
+Race/ExMachina;Ex-machina;Экс-машина
+Race/Beastmen;Beastmen;Зверолюд
+Subrace/None;None;Нету
+Subrace/Werewolf;Warewolf;Оборотень
+Profession/None;None;Нету
+Profession/Prufer;Prüfer;Разведчик
+Profession/Prufer/Desc;Prüfer desc;Разведчик является единицей наблюдения и анализа, в следствии чего вычислительная мощность гораздо выше, чем у других экс-машин.
+Profession/Kampfer;Kämpfer;Комбатант
+Profession/Kampfer/Desc;Kämpfer desc;Комбатант  является боевой единицей. Он хорошо подходит для битвы, однако уступает в вычислительной мощности разведчику.
+Profession/Hunter;Hunter;Охотник
+Profession/Hunter/Desc;Hunter desc;Охотник идеально подходит для сражения с быстрыми врагами. Благодаря своим навыкам ему не составит труда за ними угнаться.
+ItemType/Simple;;Предмет
+ItemType/Weapon;;Оружие
+ItemType/Helmet;;Шлем
+ItemType/Armor;;Броня
+ItemType/Leggings;;Поножи
+ItemType/Boots;;Ботинки
+ItemType/Potion;;Зелье
+ItemType/Chest;;Сундук
+ItemType/Amulet;;Амулет
+ItemType/Recipe;;Рецепт
+ItemType/None;;Не указан
+NotHave;;Нету

@@ -1,5 +1,7 @@
 ﻿using Shuvi.Classes.Types.Spell.SpellList;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.Magic;
+using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.User;
 using System.Collections.ObjectModel;
@@ -39,7 +41,8 @@ namespace Shuvi.Classes.Factories.Spell
             var result = new List<ISpell>();
             foreach (var spell in _spellsByMagic!.GetValueOrDefault(user.MagicInfo.MagicType, new()))
             {
-                if (spell.Requirements.IsMeetRequirements(user))
+                var requirements = spell.Requirements.GetRequirementsInfo(Language.Eng, user);
+                if (requirements.IsMeetRequirements)
                     result.Add(spell);
             }
             return result;

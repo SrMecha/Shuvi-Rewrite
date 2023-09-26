@@ -13,15 +13,15 @@ namespace Shuvi.Classes.Types.Localization
         public CachedLocalizedInfo(string part, string? id = null)
         {
             _part = part;
-            _id = id is null || id == string.Empty ? "none" : id;
+            _id = id is null || id == string.Empty ? "None" : id;
         }
         public string GetName(Language lang)
         {
-            return LocalizationService.Get(_part).Get(lang).Get($"{_id}/name");
+            return LocalizationService.Get(_part).Get(lang).Get($"{_id}/Name");
         }
         public string GetDescription(Language lang)
         {
-            return LocalizationService.Get(_part).Get(lang).Get($"{_id}/description");
+            return LocalizationService.Get(_part).Get(lang).Get($"{_id}/Description");
         }
     }
 }

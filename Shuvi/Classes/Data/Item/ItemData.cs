@@ -1,11 +1,11 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Shuvi.Classes.Data.Bonuses;
 using Shuvi.Classes.Data.Drop;
-using Shuvi.Enums.Characteristic;
+using Shuvi.Classes.Data.Requirements;
 using Shuvi.Enums.Item;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.Rating;
-using Shuvi.Enums.Requirements;
 
 namespace Shuvi.Classes.Data.Item
 {
@@ -21,11 +21,10 @@ namespace Shuvi.Classes.Data.Item
         public bool CanLoose { get; set; } = true;
         public int Max { get; set; } = -1;
 
-        public Dictionary<StaticCharacteristic, int>? Bonuses { get; set; } = null;
-        public Dictionary<BaseRequirement, int>? Needs { get; set; } = null;
-        public Dictionary<DynamicCharacteristic, int>? PotionRecover { get; set; } = null;
+        public AllBonusesData? Bonuses { get; set; } = null;
+        public RequirementsData? Needs { get; set; } = null;
+        public DynamicBonusesData? PotionRecover { get; set; } = null;
         public CraftData? Craft { get; set; } = null;
         public ChestDropData? ChestDrop { get; set; } = null;
-        public WeaponSettingsData? WeaponSettings { get; set; } = null;
     }
 }

@@ -1,28 +1,29 @@
-embed/action/lightAttack;;Лёгкая атака: {0}
-embed/action/heavyAttack;;Тяжёлая атака: {0}
-embed/action/dodge;;Уклонение: {0}
-embed/action/defense;;Защита: {0}
-embed/action/spell;;Заклинание: {0}
-embed/action/skill;;Умение: {0}
-rate/0;;Никогда
-rate/1;;Редко
-rate/2;;Иногда
-rate/3;;Часто
-rate/4;;Очень часто
-embed/main/rank;;**Ранг:** {0}
-embed/main/ratingGet;;**Получаемый рейтинг:** {0}
-embed/main/killsCount;;**Вы убили:** {0}
-embed/characteristics/name;;Характеристики:
-embed/abilities/name;;Способности:
-embed/abilities/spell/name;;Заклинание: {0}
-embed/abilities/spell/desc;;**Описание:**\n{0}
-embed/abilities/spell/magicType;;Тип: {0}
-embed/drop/name;;Дроп:
-embed/action/name;;Тактика боя:
-select/info/option/characteristics;;Характеристики
-select/info/option/abilites;;Способности
-select/info/option/drop;;Дроп
-select/info/option/actions;;Тактика боя
-btn/back;;Назад
-select/info/name;;Выберите информацию для просмотра.
-select/info/noFound;;Информация не найдена.
+Embed/Action/LightAttack;;Лёгкая атака: {0}
+Embed/Action/HeavyAttack;;Тяжёлая атака: {0}
+Embed/Action/Dodge;;Уклонение: {0}
+Embed/Action/Defense;;Защита: {0}
+Embed/Action/Spell;;Заклинание: {0}
+Embed/Action/Skill;;Умение: {0}
+Rate/0;;Никогда
+Rate/1;;Редко
+Rate/2;;Иногда
+Rate/3;;Часто
+Rate/4;;Очень часто
+Embed/Main/Rank;;**Ранг:** {0}
+Embed/Main/RatingGet;;**Получаемый рейтинг:** {0}
+Embed/Main/KillsCount;;**Вы убили:** {0}
+Embed/Characteristics/Name;;Характеристики:
+Embed/Abilities/Name;;Способности:
+Embed/Abilities/Spell/Name;;Заклинание: {0}
+Embed/Abilities/Spell/Desc;;**Описание:**\n{0}
+Embed/Abilities/Spell/MagicType;;Тип: {0}
+Embed/Drop/Name;;Дроп:
+Embed/Action/Name;;Тактика боя:
+Select/Info/Option/Characteristics;;Характеристики
+Select/Info/Option/Abilites;;Способности
+Select/Info/Option/Drop;;Дроп
+Select/Info/Option/Actions;;Тактика боя
+Btn/Back;;Назад
+Select/Info/Name;;Выберите информацию для просмотра.
+Select/Info/NotFound;;Информация не найдена.
+Embed/FightParams/Name;;Параметры:

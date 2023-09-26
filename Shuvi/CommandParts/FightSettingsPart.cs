@@ -24,45 +24,45 @@ namespace Shuvi.CommandParts
             var settingsToSave = new UserFightActions(dbUser.ActionChances);
             List<SelectMenuOptionBuilder> actionOptions = new()
             {
-                new(settingsLocalization.Get("select/action/option/lightAttack"), ((int)FightAction.LightAttack).ToString()),
-                new(settingsLocalization.Get("select/action/option/heavyAttack"), ((int)FightAction.HeavyAttack).ToString()),
-                new(settingsLocalization.Get("select/action/option/dodge"), ((int)FightAction.Dodge).ToString()),
-                new(settingsLocalization.Get("select/action/option/defense"), ((int)FightAction.Defense).ToString()),
-                new(settingsLocalization.Get("select/action/option/spell"), ((int)FightAction.Spell).ToString()),
-                new(settingsLocalization.Get("select/action/option/skill"), ((int)FightAction.Skill).ToString())
+                new(settingsLocalization.Get("Select/Action/Option/LightAttack"), ((int)FightAction.LightAttack).ToString()),
+                new(settingsLocalization.Get("Select/Action/Option/HeavyAttack"), ((int)FightAction.HeavyAttack).ToString()),
+                new(settingsLocalization.Get("Select/Action/Option/Dodge"), ((int)FightAction.Dodge).ToString()),
+                new(settingsLocalization.Get("Select/Action/Option/Defense"), ((int)FightAction.Defense).ToString()),
+                new(settingsLocalization.Get("Select/Action/Option/Spell"), ((int)FightAction.Spell).ToString()),
+                new(settingsLocalization.Get("Select/Action/Option/Skill"), ((int)FightAction.Skill).ToString())
             };
             List<SelectMenuOptionBuilder> rateOptions = new()
             {
-                new(settingsLocalization.Get("rate/0"), "0", settingsLocalization.Get("select/rate/desc").Format(0)),
-                new(settingsLocalization.Get("rate/1"), "1", settingsLocalization.Get("select/rate/desc").Format(1)),
-                new(settingsLocalization.Get("rate/2"), "2", settingsLocalization.Get("select/rate/desc").Format(2)),
-                new(settingsLocalization.Get("rate/3"), "3", settingsLocalization.Get("select/rate/desc").Format(3)),
-                new(settingsLocalization.Get("rate/4"), "4", settingsLocalization.Get("select/rate/desc").Format(4))
+                new(settingsLocalization.Get("Rate/0"), "0", settingsLocalization.Get("Select/Rate/Desc").Format(0)),
+                new(settingsLocalization.Get("Rate/1"), "1", settingsLocalization.Get("Select/Rate/Desc").Format(1)),
+                new(settingsLocalization.Get("Rate/2"), "2", settingsLocalization.Get("Select/Rate/Desc").Format(2)),
+                new(settingsLocalization.Get("Rate/3"), "3", settingsLocalization.Get("Select/Rate/Desc").Format(3)),
+                new(settingsLocalization.Get("Rate/4"), "4", settingsLocalization.Get("Select/Rate/Desc").Format(4))
             };
             while (context.LastInteraction is not null)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(settingsLocalization.Get("embed/settings/author"))
-                    .WithDescription($"{settingsLocalization.Get("embed/settings/desc/user")}\n\n" +
-                    $"{HighlightIfChoosed(settingsLocalization.Get("embed/use/lightAttack")
-                    .Format(settingsLocalization.Get($"rate/{settingsToSave.LightAttack}")), (int)FightAction.LightAttack, currentAction)}\n" +
-                    $"{HighlightIfChoosed(settingsLocalization.Get("embed/use/heavyAttack")
-                    .Format(settingsLocalization.Get($"rate/{settingsToSave.HeavyAttack}")), (int)FightAction.HeavyAttack, currentAction)}\n" +
-                    $"{HighlightIfChoosed(settingsLocalization.Get("embed/use/dodge")
-                    .Format(settingsLocalization.Get($"rate/{settingsToSave.Dodge}")), (int)FightAction.Dodge, currentAction)}\n" +
-                    $"{HighlightIfChoosed(settingsLocalization.Get("embed/use/defense")
-                    .Format(settingsLocalization.Get($"rate/{settingsToSave.Defense}")), (int)FightAction.Defense, currentAction)}\n" +
-                    $"{HighlightIfChoosed(settingsLocalization.Get("embed/use/spell")
-                    .Format(settingsLocalization.Get($"rate/{settingsToSave.Spell}")), (int)FightAction.Spell, currentAction)}\n" +
-                    $"{HighlightIfChoosed(settingsLocalization.Get("embed/use/skill")
-                    .Format(settingsLocalization.Get($"rate/{settingsToSave.Skill}")), (int)FightAction.Skill, currentAction)} \n")
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(settingsLocalization.Get("Embed/Settings/Author"))
+                    .WithDescription($"{settingsLocalization.Get("Embed/Settings/Desc/User")}\n\n" +
+                    $"{HighlightIfChoosed(settingsLocalization.Get("Embed/Use/LightAttack")
+                    .Format(settingsLocalization.Get($"Rate/{settingsToSave.LightAttack}")), (int)FightAction.LightAttack, currentAction)}\n" +
+                    $"{HighlightIfChoosed(settingsLocalization.Get("Embed/Use/HeavyAttack")
+                    .Format(settingsLocalization.Get($"Rate/{settingsToSave.HeavyAttack}")), (int)FightAction.HeavyAttack, currentAction)}\n" +
+                    $"{HighlightIfChoosed(settingsLocalization.Get("Embed/Use/Dodge")
+                    .Format(settingsLocalization.Get($"Rate/{settingsToSave.Dodge}")), (int)FightAction.Dodge, currentAction)}\n" +
+                    $"{HighlightIfChoosed(settingsLocalization.Get("Embed/Use/Defense")
+                    .Format(settingsLocalization.Get($"Rate/{settingsToSave.Defense}")), (int)FightAction.Defense, currentAction)}\n" +
+                    $"{HighlightIfChoosed(settingsLocalization.Get("Embed/Use/Spell")
+                    .Format(settingsLocalization.Get($"Rate/{settingsToSave.Spell}")), (int)FightAction.Spell, currentAction)}\n" +
+                    $"{HighlightIfChoosed(settingsLocalization.Get("Rmbed/Use/Skill")
+                    .Format(settingsLocalization.Get($"Rate/{settingsToSave.Skill}")), (int)FightAction.Skill, currentAction)} \n")
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("action", actionOptions, settingsLocalization.Get("select/action/name"), row: 0)
-                    .WithSelectMenu("rate", rateOptions, settingsLocalization.Get("select/rate/name"), disabled: currentAction is null, row: 1)
-                    .WithButton(settingsLocalization.Get("btn/reset"), "reset", ButtonStyle.Secondary, disabled: currentAction is null, row: 2)
-                    .WithButton(settingsLocalization.Get("btn/save"), "save", ButtonStyle.Success, disabled: currentAction is null, row: 2)
-                    .WithButton(settingsLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 3)
+                    .WithSelectMenu("action", actionOptions, settingsLocalization.Get("Select/Action/Name"), row: 0)
+                    .WithSelectMenu("rate", rateOptions, settingsLocalization.Get("Select/Rate/Name"), disabled: currentAction is null, row: 1)
+                    .WithButton(settingsLocalization.Get("Btn/Reset"), "reset", ButtonStyle.Secondary, disabled: currentAction is null, row: 2)
+                    .WithButton(settingsLocalization.Get("Btn/Save"), "save", ButtonStyle.Success, disabled: currentAction is null, row: 2)
+                    .WithButton(settingsLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 3)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -111,7 +111,7 @@ namespace Shuvi.CommandParts
         }
         private static string HighlightIfChoosed(string str, int current, int? choosed)
         {
-            return current == choosed ? $"{EmojiService.Get("choosePoint")} {str}" : str;
+            return current == choosed ? $"{EmojiService.Get("ChoosePoint")} {str}" : str;
         }
     }
 }

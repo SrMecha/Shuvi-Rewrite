@@ -28,17 +28,17 @@ namespace Shuvi.CommandParts
 
             while (context.LastInteraction is not null)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(inventoryLocalization.Get("embed/view/author").Format(user.Username))
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(inventoryLocalization.Get("Embed/View/Author").Format(user.Username))
                     .WithDescription(GetItemsInfo(dbUser.Inventory, pageNow, context.Language))
-                    .WithFooter(inventoryLocalization.Get("embed/view/page").Format(pageNow + 1, maxPage))
+                    .WithFooter(inventoryLocalization.Get("Embed/View/Page").Format(pageNow + 1, maxPage))
                     .Build();
                 var components = new ComponentBuilder()
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: pageNow <= 0, row: 0)
-                    .WithButton(inventoryLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 0)
+                    .WithButton(inventoryLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 0)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: pageNow >= maxPage - 1, row: 0)
                     .WithSelectMenu("choose", GetItemsSelectMenu(dbUser.Inventory, pageNow, context.Language),
-                    inventoryLocalization.Get("select/view/name"), disabled: !haveItems)
+                    inventoryLocalization.Get("Select/View/Name"), disabled: !haveItems)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -72,7 +72,7 @@ namespace Shuvi.CommandParts
             for (int i = page * 10; i < inventory.Count && i < page * 10 + 10; i++)
                 result.Add($"**#{i + 1}** {inventory.GetItemAt(i).Info.GetName(lang)} x{inventory.GetItemAmountAt(i)}");
             if (result.Count < 1)
-                return _localizationPart.Get(lang).Get("embed/view/void");
+                return _localizationPart.Get(lang).Get("Embed/View/Void");
             return string.Join("\n", result);
         }
         public static List<SelectMenuOptionBuilder> GetItemsSelectMenu(IUserInventory inventory, int page, Language lang)

@@ -53,85 +53,76 @@ namespace Shuvi.Classes.Extensions
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this BaseRequirement target)
+        public static string GetName(this BaseRequirement target)
         {
             return target switch
             {
-                BaseRequirement.Strength => "strength",
-                BaseRequirement.Agility => "agility",
-                BaseRequirement.Luck => "luck",
-                BaseRequirement.Intellect => "intellect",
-                BaseRequirement.Endurance => "endurance",
-                BaseRequirement.Rank => "rank",
+                BaseRequirement.Strength => "Strength",
+                BaseRequirement.Agility => "Agility",
+                BaseRequirement.Luck => "Luck",
+                BaseRequirement.Intellect => "Intellect",
+                BaseRequirement.Endurance => "Endurance",
+                BaseRequirement.Rank => "Rank",
                 _ => string.Empty
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string Format(this BaseRequirement target, int amount)
+        public static string GetName(this DynamicCharacteristic target)
         {
             return target switch
             {
-                BaseRequirement.Rank => ((Rank)amount).GetName(),
-                _ => amount.ToString()
-            };
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this DynamicCharacteristic target)
-        {
-            return target switch
-            {
-                DynamicCharacteristic.Health => "health",
-                DynamicCharacteristic.Energy => "energy",
-                DynamicCharacteristic.Mana => "mana",
+                DynamicCharacteristic.Health => "Health",
+                DynamicCharacteristic.Energy => "Energy",
+                DynamicCharacteristic.Mana => "Mana",
                 _ => string.Empty
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this MagicType target)
+        public static string GetName(this MagicType target)
         {
             return target switch
             {
-                MagicType.None => "none",
-                MagicType.Fire => "fire",
-                MagicType.Water => "water",
-                MagicType.Wind => "wind",
-                MagicType.Earth => "earth",
-                MagicType.Losen => "losen",
-                MagicType.Ice => "ice",
-                _ => "none"
+                MagicType.None => "None",
+                MagicType.Fire => "Fire",
+                MagicType.Water => "Water",
+                MagicType.Wind => "Wind",
+                MagicType.Earth => "Earth",
+                MagicType.Losen => "Losen",
+                MagicType.Ice => "Ice",
+                _ => "None"
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this StaticCharacteristic target)
+        public static string GetName(this StaticCharacteristic target)
         {
             return target switch
             {
-                StaticCharacteristic.Strength => "strength",
-                StaticCharacteristic.Agility => "agility",
-                StaticCharacteristic.Luck => "luck",
-                StaticCharacteristic.Intellect => "intellect",
-                StaticCharacteristic.Endurance => "endurance",
+                StaticCharacteristic.Strength => "Strength",
+                StaticCharacteristic.Agility => "Agility",
+                StaticCharacteristic.Luck => "Luck",
+                StaticCharacteristic.Intellect => "Intellect",
+                StaticCharacteristic.Endurance => "Endurance",
                 _ => string.Empty
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this MoneyType target)
+        public static string GetName(this MoneyType target)
         {
             return target switch
             {
-                MoneyType.Gold => "gold",
-                MoneyType.Dispoints => "dispoints",
+                MoneyType.Gold => "Gold",
+                MoneyType.Dispoints => "Dispoints",
                 _ => string.Empty
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this UserRace target)
+        public static string GetName(this UserRace target)
         {
             return target switch
             {
-                UserRace.ExMachina => "exMachina",
-                UserRace.Beastmen => "beastmen",
-                _ => "none"
+                UserRace.ExMachina => "ExMachina",
+                UserRace.Beastmen => "Beastmen",
+                _ => "None"
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -144,53 +135,53 @@ namespace Shuvi.Classes.Extensions
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this UserSubrace target)
+        public static string GetName(this UserSubrace target)
         {
             return target switch
             {
-                UserSubrace.NoSubrace => "none",
-                UserSubrace.Werewolf => "werewolf",
-                _ => "none"
+                UserSubrace.NoSubrace => "None",
+                UserSubrace.Werewolf => "Werewolf",
+                _ => "None"
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this UserProfession target)
+        public static string GetName(this UserProfession target)
         {
             return target switch
             {
-                UserProfession.NoProfession => "none",
-                UserProfession.Prufer => "prufer",
-                UserProfession.Kampfer => "kampfer",
-                UserProfession.Hunter => "hunter",
-                _ => "none"
+                UserProfession.NoProfession => "None",
+                UserProfession.Prufer => "Prufer",
+                UserProfession.Kampfer => "Kampfer",
+                UserProfession.Hunter => "Hunter",
+                _ => "None"
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this ItemType target)
+        public static string GetName(this ItemType target)
         {
             return target switch
             {
-                ItemType.Simple => "simple",
-                ItemType.Weapon => "weapon",
-                ItemType.Helmet => "helmet",
-                ItemType.Armor => "armor",
-                ItemType.Leggings => "leggings",
-                ItemType.Boots => "boots",
-                ItemType.Potion => "potion",
-                ItemType.Chest => "chest",
-                ItemType.Amulet => "amulet",
-                ItemType.Recipe => "recipe",
-                _ => "none",
+                ItemType.Simple => "Simple",
+                ItemType.Weapon => "Weapon",
+                ItemType.Helmet => "Helmet",
+                ItemType.Armor => "Armor",
+                ItemType.Leggings => "Leggings",
+                ItemType.Boots => "Boots",
+                ItemType.Potion => "Potion",
+                ItemType.Chest => "Chest",
+                ItemType.Amulet => "Amulet",
+                ItemType.Recipe => "Recipe",
+                _ => "None",
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
-        public static string GetLowerName(this UserTopType target)
+        public static string GetName(this UserTopType target)
         {
             return target switch
             {
-                UserTopType.Rating => "rating",
-                UserTopType.Gold => "gold",
-                _ => "none",
+                UserTopType.Rating => "Rating",
+                UserTopType.Gold => "Gold",
+                _ => "None",
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -208,7 +199,7 @@ namespace Shuvi.Classes.Extensions
                 ItemType.Chest => nameof(ItemType.Chest),
                 ItemType.Amulet => nameof(ItemType.Amulet),
                 ItemType.Recipe => nameof(ItemType.Recipe),
-                _ => "none",
+                _ => "None",
             };
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -226,8 +217,8 @@ namespace Shuvi.Classes.Extensions
         {
             return target switch
             {
-                Language.Eng => "eng",
-                Language.Ru => "ru",
+                Language.Eng => "Eng",
+                Language.Ru => "Ru",
                 _ => string.Empty
             };
         }
@@ -245,9 +236,9 @@ namespace Shuvi.Classes.Extensions
             return target switch
             {
                 UserBadges.None => null,
-                UserBadges.AlphaTester => EmojiService.Get("badgeAlphaTester"),
+                UserBadges.AlphaTester => EmojiService.Get("BadgeAlphaTester"),
                 UserBadges.BetaTester => EmojiService.Get(""),
-                UserBadges.BugHunter => EmojiService.Get("badgeBugHunter"),
+                UserBadges.BugHunter => EmojiService.Get("BadgeBugHunter"),
                 _ => null
             };
         }

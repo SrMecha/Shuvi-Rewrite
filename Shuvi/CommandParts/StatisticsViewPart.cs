@@ -12,24 +12,22 @@ namespace Shuvi.CommandParts
     {
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("statisticsViewPart");
 
-        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user)
+        public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser, IUser user, bool canEdit)
         {
             while (context.LastInteraction is not null)
             {
                 var statisticsLocalization = _localizationPart.Get(context.Language);
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(statisticsLocalization.Get("embed/view/author").Format(user.Username))
-                    .WithDescription($"**{statisticsLocalization.Get("embed/view/maxRating")}:** {dbUser.Statistics.MaxRating}\n" +
-                    $"**{statisticsLocalization.Get("embed/view/enemyKilled")}:** {dbUser.Statistics.TotalEnemyKilled}\n" +
-                    $"**{statisticsLocalization.Get("embed/view/dungeonComplite")}:** {dbUser.Statistics.DungeonComplite}\n" +
-                    $"**{statisticsLocalization.Get("embed/view/deaths")}:** {dbUser.Statistics.DeathCount}\n\n" +
-                    $"{(dbUser.Statistics.DeathCount < 1 ? string.Empty : $"**{statisticsLocalization.Get("embed/view/lastDeath")}:** " +
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(statisticsLocalization.Get("Embed/View/Author").Format(user.Username))
+                    .WithDescription($"**{statisticsLocalization.Get("Embed/View/MaxRating")}:** {dbUser.Statistics.MaxRating}\n" +
+                    $"**{statisticsLocalization.Get("Embed/View/EnemyKilled")}:** {dbUser.Statistics.TotalEnemyKilled}\n" +
+                    $"**{statisticsLocalization.Get("Embed/View/DungeonComplite")}:** {dbUser.Statistics.DungeonComplite}\n" +
+                    $"**{statisticsLocalization.Get("Embed/View/Deaths")}:** {dbUser.Statistics.DeathCount}\n\n" +
+                    $"{(dbUser.Statistics.DeathCount < 1 ? string.Empty : $"**{statisticsLocalization.Get("Embed/View/LastDeath")}:** " +
                     $"<t:{dbUser.Statistics.LiveTime}:R>\n\n")}" +
-                    $"**{statisticsLocalization.Get("embed/view/accountCreate")}:** <t:{dbUser.Statistics.CreatedAt}:R>")
+                    $"**{statisticsLocalization.Get("Embed/View/AccountCreate")}:** <t:{dbUser.Statistics.CreatedAt}:R>")
                     .Build();
-                var components = new ComponentBuilder()
-                   .WithButton(statisticsLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
-                   .Build();
+                var components = UserProfilePart.GetProfileSelectMenus(context.Language, dbUser, canEdit);
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
                 var interaction = await context.WaitForButton();
@@ -40,8 +38,6 @@ namespace Shuvi.CommandParts
                 }
                 switch (interaction.Data.CustomId)
                 {
-                    case "exit":
-                        return;
                     default:
                         return;
                 }
@@ -52,12 +48,12 @@ namespace Shuvi.CommandParts
             while (context.LastInteraction is not null)
             {
                 var statisticsLocalization = _localizationPart.Get(context.Language);
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(statisticsLocalization.Get("embed/view/author").Format(pet.Name))
-                    .WithDescription($"**{statisticsLocalization.Get("embed/view/tameTime")}:** <t:{pet.Statistics.TamedAt}:R>")
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(statisticsLocalization.Get("Embed/View/Author").Format(pet.Name))
+                    .WithDescription($"**{statisticsLocalization.Get("Embed/View/TameTime")}:** <t:{pet.Statistics.TamedAt}:R>")
                     .Build();
                 var components = new ComponentBuilder()
-                   .WithButton(statisticsLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
+                   .WithButton(statisticsLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger)
                    .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();

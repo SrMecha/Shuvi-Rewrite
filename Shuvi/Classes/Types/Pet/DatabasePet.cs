@@ -40,10 +40,16 @@ namespace Shuvi.Classes.Types.Pet
             ActionChances = new FightActions(data.ActionChances);
             Master = new PetMasterInfo(data.MasterId);
             Parent = new PetParentInfo(data.ParentId);
-            Characteristics = new EntityCharacteristics<IRestorableCharacteristic>(
-                data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance,
-                new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
-                new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime));
+            Characteristics = new EntityCharacteristics<IRestorableCharacteristic>()
+            {
+                Strength = data.Strength,
+                Agility = data.Agility,
+                Luck = data.Luck,
+                Intellect = data.Intellect,
+                Endurance = data.Endurance,
+                Health = new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
+                Mana = new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime)
+            };
             Equipment = new PetEquipment(data.Amulet);
             Statistics = new PetStatistics(data.Statistics);
         }

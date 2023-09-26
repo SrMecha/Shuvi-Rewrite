@@ -61,7 +61,7 @@ namespace Shuvi.Modules.TextCommands
             while (true)
             {
                 var item = ItemDatabase.Items[currentPage * 10 + arrow];
-                var embed = EmbedFactory.CreateUserEmbed(Context.User)
+                var embed = EmbedFactory.CreateEmbed()
                     .WithDescription($"ID: {item.Id}\n\n{GetItemsString(currentPage, arrow)}")
                     .WithFooter($"Страница {currentPage + 1}/{maxPage + 1}")
                     .Build();

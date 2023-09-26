@@ -1,19 +1,19 @@
-embed/choose/desc;;Выберите магазин, в который желаете зайти.
-select/choose/name;;Выберите магазин.
-btn/exit;;Выйти
-select/category/name;;Выберите раздел.
-category/purchasing;;Покупка
-category/selling;;Продажа
-category/customization;;Кастомизация
-embed/shop;;Магазин:
-embed/basket;;Корзина:
-embed/page;;Страница {0}/{1}
-select/item/name;;Выберите предмет.
-btn/info;;Инфо
-btn/exit;;Выйти
-embed/confirm/results;;Итоги:
-btn/clear;;Сбросить
-btn/confirm;;Подтвердить
-embed/exit/author;;Вы покинули магазин.
-btn/buy;;Купить
-embed/basket/empty;;Пусто.
+Embed/Choose/Desc;;Выберите магазин, в который желаете зайти.
+Select/Choose/Name;;Выберите магазин.
+Btn/Exit;;Выйти
+Select/Category/Name;;Выберите раздел.
+Category/Purchasing;;Покупка
+Category/Selling;;Продажа
+Category/Customization;;Кастомизация
+Embed/Shop;;Магазин:
+Embed/Basket;;Корзина:
+Embed/Page;;Страница {0}/{1}
+Select/Item/Name;;Выберите предмет.
+Btn/Info;;Инфо
+Btn/Exit;;Выйти
+Embed/Confirm/Results;;Итоги:
+Btn/Clear;;Сбросить
+Btn/Confirm;;Подтвердить
+Embed/Exit/Author;;Вы покинули магазин.
+Btn/Buy;;Купить
+Embed/Basket/Empty;;Пусто.

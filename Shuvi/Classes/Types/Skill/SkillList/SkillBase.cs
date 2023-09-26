@@ -15,7 +15,7 @@ namespace Shuvi.Classes.Types.Skill.SkillList
     public class SkillBase : ISkill
     {
         public virtual string SkillName { get; } = "SkillBase";
-        public virtual ILocalizedInfo Info { get; } = new CachedLocalizedInfo("skills", "none");
+        public virtual ILocalizedInfo Info { get; } = new CachedLocalizedInfo("skills", "None");
         public virtual IBaseRequirements Requirements { get; } = new BaseRequirements();
         public virtual UserProfession Profession { get; } = UserProfession.NoProfession;
         public virtual int UsesLeft { get; protected set; } = 0;
@@ -26,7 +26,7 @@ namespace Shuvi.Classes.Types.Skill.SkillList
         }
         protected virtual IActionResult OnSkillUse(ICombatEntity owner, ICombatEntity target, Language lang)
         {
-            return new ActionResult(string.Format(LocalizationService.Get("skills").Get(lang).Get("none/use"), owner.Name));
+            return new ActionResult(string.Format(LocalizationService.Get("skills").Get(lang).Get("None/Use"), owner.Name));
         }
         public IActionResult UseSkill(ICombatEntity owner, ICombatEntity target, Language lang)
         {

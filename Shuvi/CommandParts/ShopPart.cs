@@ -21,12 +21,12 @@ namespace Shuvi.CommandParts
         public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser)
         {
             var shopLocalization = _localizationPart.Get(context.Language);
-            var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                .WithDescription(shopLocalization.Get("embed/choose/desc"))
+            var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                .WithDescription(shopLocalization.Get("Embed/Choose/Desc"))
                 .Build();
             var components = new ComponentBuilder()
-                .WithSelectMenu("select", GetShopOptions(dbUser.Location.GetLocation().Shops, context.Language), shopLocalization.Get("select/choose/name"))
-                .WithButton(shopLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger)
+                .WithSelectMenu("select", GetShopOptions(dbUser.Location.GetLocation().Shops, context.Language), shopLocalization.Get("Select/Choose/Name"))
+                .WithButton(shopLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger)
                 .Build();
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
             await context.LastInteraction.TryDeferAsync();
@@ -53,11 +53,11 @@ namespace Shuvi.CommandParts
             var shop = ShopDatabase.CreateShop(shopId);
             var categoryOptions = new List<SelectMenuOptionBuilder>();
             if (shop.Purchasing.HaveProducts())
-                categoryOptions.Add(new(shopLocalization.Get("category/purchasing"), "purchasing"));
-            if (shop.Selling.HaveProducts())
-                categoryOptions.Add(new(shopLocalization.Get("category/selling"), "selling"));
-            if (shop.Customization.HaveProducts())
-                categoryOptions.Add(new(shopLocalization.Get("category/customization"), "customization"));
+                categoryOptions.Add(new(shopLocalization.Get("Category/Purchasing"), "purchasing"));
+            if (shop.Selling.HaveProducts())                  
+                categoryOptions.Add(new(shopLocalization.Get("Category/Selling"), "selling"));
+            if (shop.Customization.HaveProducts())            
+                categoryOptions.Add(new(shopLocalization.Get("Category/Customization"), "customization"));
             var part = categoryOptions.First().Value;
             while (true)
             {
@@ -90,26 +90,25 @@ namespace Shuvi.CommandParts
             var arrow = 0;
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor($"{shop.Info.GetName(context.Language)} | {shopLocalization.Get("category/purchasing")}")
-                    .WithDescription($"{namesLocalization.Get("gold")}: {dbUser.Wallet.Gold} {shop.ShopBasket.Wallet.Gold.WithSign(true)} " +
-                    $"{EmojiService.Get("gold")}\n" +
-                    $"{namesLocalization.Get("dispoints")}: {dbUser.Wallet.Dispoints} {shop.ShopBasket.Wallet.Dispoints.WithSign(true)} " +
-                    $"{EmojiService.Get("dispoints")}")
-                    .AddField(shopLocalization.Get("embed/shop"),
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor($"{shop.Info.GetName(context.Language)} | {shopLocalization.Get("Category/Purchasing")}")
+                    .WithDescription($"{namesLocalization.Get("Gold")}: {dbUser.Wallet.Gold} {shop.ShopBasket.Wallet.Gold.WithSign(true)} " +
+                    $"{EmojiService.Get("Gold")}\n" +
+                    $"{namesLocalization.Get("Dispoints")}: {dbUser.Wallet.Dispoints} {shop.ShopBasket.Wallet.Dispoints.WithSign(true)} " +
+                    $"{EmojiService.Get("Dispoints")}")
+                    .AddField(shopLocalization.Get("Embed/Shop"),
                     GetPurchasingProductsString(dbUser, shop, currentPage, arrow, context.Language),
                     true)
-                    .AddField(shopLocalization.Get("embed/basket"),
+                    .AddField(shopLocalization.Get("Embed/Basket"),
                     GetBasketProductsString(shop, context.Language),
                     true
                     )
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{shopLocalization.Get("embed/page").Format(currentPage + 1, maxPage + 1)}")
+                    .WithFooter(shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1))
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("category", categoryOptions, shopLocalization.Get("select/category/name"), row: 0)
+                    .WithSelectMenu("category", categoryOptions, shopLocalization.Get("Select/Category/Name"), row: 0)
                     .WithSelectMenu("item", GetItemOptions(shop.Purchasing.GetProductsInPage(currentPage), context.Language),
-                    shopLocalization.Get("select/item/name"), row: 1)
+                    shopLocalization.Get("Select/Item/Name"), row: 1)
                     .WithButton("x1", "1", ButtonStyle.Success,
                     disabled: !shop.Purchasing.CanBuy(dbUser.Inventory, dbUser.Wallet, currentPage, arrow, 1), row: 2)
                     .WithButton("x2", "2", ButtonStyle.Success,
@@ -117,11 +116,11 @@ namespace Shuvi.CommandParts
                     .WithButton("x5", "5", ButtonStyle.Success,
                     disabled: !shop.Purchasing.CanBuy(dbUser.Inventory, dbUser.Wallet, currentPage, arrow, 5), row: 2)
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: !(currentPage > 0), row: 3)
-                    .WithButton(shopLocalization.Get("btn/info"), "info", ButtonStyle.Primary, disabled: currentPage > 0, row: 3)
+                    .WithButton(shopLocalization.Get("Btn/Info"), "info", ButtonStyle.Primary, disabled: currentPage > 0, row: 3)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: !(currentPage < maxPage), row: 3)
-                    .WithButton(shopLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 4)
-                    .WithButton(shopLocalization.Get("btn/clear"), "clear", ButtonStyle.Secondary, row: 4)
-                    .WithButton(shopLocalization.Get("btn/confirm"), "confirm", ButtonStyle.Success, row: 4)
+                    .WithButton(shopLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 4)
+                    .WithButton(shopLocalization.Get("Btn/Clear"), "clear", ButtonStyle.Secondary, row: 4)
+                    .WithButton(shopLocalization.Get("Btn/Confirm"), "confirm", ButtonStyle.Success, row: 4)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -150,8 +149,8 @@ namespace Shuvi.CommandParts
                         currentPage++;
                         break;
                     case "exit":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                            .WithAuthor(shopLocalization.Get("embed/exit/author"))
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                            .WithAuthor(shopLocalization.Get("Embed/Exit/Author"))
                             .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
                         {
@@ -163,13 +162,13 @@ namespace Shuvi.CommandParts
                         shop.ShopBasket.Clear();
                         break;
                     case "confirm":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                            .WithAuthor(shopLocalization.Get("embed/exit/author"))
-                            .WithDescription($"{namesLocalization.Get("gold")}: {dbUser.Wallet.Gold} -> " +
-                            $"{shop.ShopBasket.Wallet.Gold + dbUser.Wallet.Gold} {EmojiService.Get("gold")}\n" +
-                            $"{namesLocalization.Get("dispoints")}: {dbUser.Wallet.Dispoints} -> " +
-                            $"{shop.ShopBasket.Wallet.Dispoints + dbUser.Wallet.Dispoints} {EmojiService.Get("dispoints")}")
-                            .AddField(shopLocalization.Get("embed/confirm/results"),
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                            .WithAuthor(shopLocalization.Get("Embed/Exit/Author"))
+                            .WithDescription($"{namesLocalization.Get("Gold")}: {dbUser.Wallet.Gold} -> " +
+                            $"{shop.ShopBasket.Wallet.Gold + dbUser.Wallet.Gold} {EmojiService.Get("Gold")}\n" +
+                            $"{namesLocalization.Get("Dispoints")}: {dbUser.Wallet.Dispoints} -> " +
+                            $"{shop.ShopBasket.Wallet.Dispoints + dbUser.Wallet.Dispoints} {EmojiService.Get("Dispoints")}")
+                            .AddField(shopLocalization.Get("Embed/Confirm/Results"),
                             GetBasketProductsString(shop, context.Language, 20))
                             .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
@@ -197,26 +196,25 @@ namespace Shuvi.CommandParts
             while (true)
             {
                 var maxCanSell = shop.Selling.GetMaxSell(dbUser.Inventory, currentPage, arrow);
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor($"{shop.Info.GetName(context.Language)} | {shopLocalization.Get("category/selling")}")
-                    .WithDescription($"{namesLocalization.Get("gold")}: {dbUser.Wallet.Gold} {shop.ShopBasket.Wallet.Gold.WithSign(true)} " +
-                    $"{EmojiService.Get("gold")}\n" +
-                    $"{namesLocalization.Get("dispoints")}: {dbUser.Wallet.Dispoints} {shop.ShopBasket.Wallet.Dispoints.WithSign(true)} " +
-                    $"{EmojiService.Get("dispoints")}")
-                    .AddField(shopLocalization.Get("embed/shop"),
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor($"{shop.Info.GetName(context.Language)} | {shopLocalization.Get("Category/Selling")}")
+                    .WithDescription($"{namesLocalization.Get("Gold")}: {dbUser.Wallet.Gold} {shop.ShopBasket.Wallet.Gold.WithSign(true)} " +
+                    $"{EmojiService.Get("Gold")}\n" +
+                    $"{namesLocalization.Get("Dispoints")}: {dbUser.Wallet.Dispoints} {shop.ShopBasket.Wallet.Dispoints.WithSign(true)} " +
+                    $"{EmojiService.Get("Dispoints")}")
+                    .AddField(shopLocalization.Get("Embed/Shop"),
                     GetSellingProductsString(dbUser, shop, currentPage, arrow, context.Language),
                     true)
-                    .AddField(shopLocalization.Get("embed/basket"),
+                    .AddField(shopLocalization.Get("Embed/Basket"),
                     GetBasketProductsString(shop, context.Language),
                     true
                     )
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{shopLocalization.Get("embed/page").Format(currentPage + 1, maxPage + 1)}")
+                    .WithFooter(shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1))
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("category", categoryOptions, shopLocalization.Get("select/category/name"), row: 0)
+                    .WithSelectMenu("category", categoryOptions, shopLocalization.Get("Select/Category/Name"), row: 0)
                     .WithSelectMenu("item", GetItemOptions(shop.Selling.GetProductsInPage(currentPage), context.Language),
-                    shopLocalization.Get("select/item/name"), row: 1)
+                    shopLocalization.Get("Select/Item/Name"), row: 1)
                     .WithButton("x1", "1", ButtonStyle.Success,
                     disabled: !shop.Selling.CanSell(dbUser.Inventory, currentPage, arrow, 1), row: 2)
                     .WithButton("x2", "2", ButtonStyle.Success,
@@ -226,11 +224,11 @@ namespace Shuvi.CommandParts
                     .WithButton($"MAX x{maxCanSell}", $"+{maxCanSell}", ButtonStyle.Success,
                     disabled: !shop.Selling.CanSell(dbUser.Inventory, currentPage, arrow, 1), row: 2)
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: !(currentPage > 0), row: 3)
-                    .WithButton(shopLocalization.Get("btn/info"), "info", ButtonStyle.Primary, disabled: currentPage > 0, row: 3)
+                    .WithButton(shopLocalization.Get("Btn/Info"), "info", ButtonStyle.Primary, disabled: currentPage > 0, row: 3)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: !(currentPage < maxPage), row: 3)
-                    .WithButton(shopLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 4)
-                    .WithButton(shopLocalization.Get("btn/clear"), "clear", ButtonStyle.Secondary, row: 4)
-                    .WithButton(shopLocalization.Get("btn/confirm"), "confirm", ButtonStyle.Success, row: 4)
+                    .WithButton(shopLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 4)
+                    .WithButton(shopLocalization.Get("Btn/Clear"), "clear", ButtonStyle.Secondary, row: 4)
+                    .WithButton(shopLocalization.Get("Btn/Confirm"), "confirm", ButtonStyle.Success, row: 4)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -259,8 +257,8 @@ namespace Shuvi.CommandParts
                         currentPage++;
                         break;
                     case "exit":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                            .WithAuthor(shopLocalization.Get("embed/exit/author"))
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                            .WithAuthor(shopLocalization.Get("Embed/Exit/Author"))
                             .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
                         {
@@ -272,13 +270,13 @@ namespace Shuvi.CommandParts
                         shop.ShopBasket.Clear();
                         break;
                     case "confirm":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                            .WithAuthor(shopLocalization.Get("embed/exit/author"))
-                            .WithDescription($"{namesLocalization.Get("gold")}: {dbUser.Wallet.Gold} -> " +
-                            $"{shop.ShopBasket.Wallet.Gold + dbUser.Wallet.Gold} {EmojiService.Get("gold")}\n" +
-                            $"{namesLocalization.Get("dispoints")}: {dbUser.Wallet.Dispoints} -> " +
-                            $"{shop.ShopBasket.Wallet.Dispoints + dbUser.Wallet.Dispoints} {EmojiService.Get("dispoints")}")
-                            .AddField(shopLocalization.Get("embed/confirm/results"),
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                            .WithAuthor(shopLocalization.Get("Embed/Exit/Author"))
+                            .WithDescription($"{namesLocalization.Get("Gold")}: {dbUser.Wallet.Gold} -> " +
+                            $"{shop.ShopBasket.Wallet.Gold + dbUser.Wallet.Gold} {EmojiService.Get("Gold")}\n" +
+                            $"{namesLocalization.Get("Dispoints")}: {dbUser.Wallet.Dispoints} -> " +
+                            $"{shop.ShopBasket.Wallet.Dispoints + dbUser.Wallet.Dispoints} {EmojiService.Get("Dispoints")}")
+                            .AddField(shopLocalization.Get("Embed/Confirm/Results"),
                             GetBasketProductsString(shop, context.Language, 20))
                             .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
@@ -306,37 +304,36 @@ namespace Shuvi.CommandParts
             while (true)
             {
                 var product = shop.Customization.GetProduct(currentPage, arrow);
-                var embedBuilder = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor($"{shop.Info.GetName(context.Language)} | {shopLocalization.Get("category/customization")}")
-                    .WithDescription($"{namesLocalization.Get("gold")}: {dbUser.Wallet.Gold} {shop.ShopBasket.Wallet.Gold.WithSign(true)} " +
-                    $"{EmojiService.Get("gold")}\n" +
-                    $"{namesLocalization.Get("dispoints")}: {dbUser.Wallet.Dispoints} {shop.ShopBasket.Wallet.Dispoints.WithSign(true)} " +
-                    $"{EmojiService.Get("dispoints")}")
-                    .AddField(shopLocalization.Get("embed/shop"),
+                var embedBuilder = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor($"{shop.Info.GetName(context.Language)} | {shopLocalization.Get("Category/Customization")}")
+                    .WithDescription($"{namesLocalization.Get("Gold")}: {dbUser.Wallet.Gold} {shop.ShopBasket.Wallet.Gold.WithSign(true)} " +
+                    $"{EmojiService.Get("Gold")}\n" +
+                    $"{namesLocalization.Get("Dispoints")}: {dbUser.Wallet.Dispoints} {shop.ShopBasket.Wallet.Dispoints.WithSign(true)} " +
+                    $"{EmojiService.Get("Dispoints")}")
+                    .AddField(shopLocalization.Get("Embed/Shop"),
                     GetCustomizationProductsString(shop, currentPage, arrow, context.Language),
                     true)
-                    .AddField(shopLocalization.Get("embed/basket"),
+                    .AddField(shopLocalization.Get("Embed/Basket"),
                     GetBasketProductsString(shop, context.Language),
                     true
                     )
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{shopLocalization.Get("embed/page").Format(currentPage + 1, maxPage + 1)}");
+                    .WithFooter(shopLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1));
                 if (product.Type == ImageType.Avatar)
                     embedBuilder.WithThumbnailUrl(product.URL);
                 else
                     embedBuilder.WithImageUrl(product.URL);
                 var embed = embedBuilder.Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("category", categoryOptions, shopLocalization.Get("select/category/name"), row: 0)
+                    .WithSelectMenu("category", categoryOptions, shopLocalization.Get("Select/Category/Name"), row: 0)
                     .WithSelectMenu("item", GetImageOptions(shop.Customization.GetProductsInPage(currentPage), context.Language),
-                    shopLocalization.Get("select/item/name"), row: 1)
+                    shopLocalization.Get("Select/Item/Name"), row: 1)
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: !(currentPage > 0), row: 2)
-                    .WithButton(shopLocalization.Get("btn/buy"), "buy", ButtonStyle.Success,
+                    .WithButton(shopLocalization.Get("Btn/Buy"), "buy", ButtonStyle.Success,
                     disabled: !shop.Customization.CanBuy(dbUser.Customization, dbUser.Wallet, currentPage, arrow), row: 2)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: !(currentPage < maxPage), row: 2)
-                    .WithButton(shopLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 3)
-                    .WithButton(shopLocalization.Get("btn/clear"), "clear", ButtonStyle.Secondary, row: 3)
-                    .WithButton(shopLocalization.Get("btn/confirm"), "confirm", ButtonStyle.Success, row: 3)
+                    .WithButton(shopLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 3)
+                    .WithButton(shopLocalization.Get("Btn/Clear"), "clear", ButtonStyle.Secondary, row: 3)
+                    .WithButton(shopLocalization.Get("Btn/Confirm"), "confirm", ButtonStyle.Success, row: 3)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -362,8 +359,8 @@ namespace Shuvi.CommandParts
                         currentPage++;
                         break;
                     case "exit":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                            .WithAuthor(shopLocalization.Get("embed/exit/author"))
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                            .WithAuthor(shopLocalization.Get("Embed/Exit/Author"))
                             .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
                         {
@@ -375,13 +372,13 @@ namespace Shuvi.CommandParts
                         shop.ShopBasket.Clear();
                         break;
                     case "confirm":
-                        embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                            .WithAuthor(shopLocalization.Get("embed/exit/author"))
-                            .WithDescription($"{namesLocalization.Get("gold")}: {dbUser.Wallet.Gold} -> " +
-                            $"{shop.ShopBasket.Wallet.Gold + dbUser.Wallet.Gold} {EmojiService.Get("gold")}\n" +
-                            $"{namesLocalization.Get("dispoints")}: {dbUser.Wallet.Dispoints} -> " +
-                            $"{shop.ShopBasket.Wallet.Dispoints + dbUser.Wallet.Dispoints} {EmojiService.Get("dispoints")}")
-                            .AddField(shopLocalization.Get("embed/confirm/results"),
+                        embed = EmbedFactory.CreateUserEmbed(dbUser)
+                            .WithAuthor(shopLocalization.Get("Embed/Exit/Author"))
+                            .WithDescription($"{namesLocalization.Get("Gold")}: {dbUser.Wallet.Gold} -> " +
+                            $"{shop.ShopBasket.Wallet.Gold + dbUser.Wallet.Gold} {EmojiService.Get("Gold")}\n" +
+                            $"{namesLocalization.Get("Dispoints")}: {dbUser.Wallet.Dispoints} -> " +
+                            $"{shop.ShopBasket.Wallet.Dispoints + dbUser.Wallet.Dispoints} {EmojiService.Get("Dispoints")}")
+                            .AddField(shopLocalization.Get("Embed/Confirm/Results"),
                             GetBasketProductsString(shop, context.Language, 20))
                             .Build();
                         await context.Interaction.ModifyOriginalResponseAsync(msg =>
@@ -440,8 +437,8 @@ namespace Shuvi.CommandParts
             var currentRow = 0;
             foreach (var product in shop.Purchasing.GetProductsInPage(page))
             {
-                result.Add($"{(currentRow == arrow ? EmojiService.Get("choosePoint") : string.Empty)}" +
-                    $"{product.GetItem().Info.GetName(lang)} x{product.Amount} = {product.Price} {EmojiService.Get(product.MoneyType.GetLowerName())}");
+                result.Add($"{(currentRow == arrow ? EmojiService.Get("ChoosePoint") : string.Empty)}" +
+                    $"{product.GetItem().Info.GetName(lang)} x{product.Amount} = {product.Price} {EmojiService.Get(product.MoneyType.GetName())}");
                 currentRow++;
             }
             return string.Join("\n", result);
@@ -453,9 +450,9 @@ namespace Shuvi.CommandParts
             var currentRow = 0;
             foreach (var product in shop.Selling.GetProductsInPage(page))
             {
-                result.Add($"{(currentRow == arrow ? EmojiService.Get("choosePoint") : string.Empty)}" +
+                result.Add($"{(currentRow == arrow ? EmojiService.Get("ChoosePoint") : string.Empty)}" +
                     $"{product.GetItem().Info.GetName(lang)} {dbUser.Inventory.GetItemAmount(product.Id) + shop.ShopBasket.GetItemAmount(product)}" +
-                    $"/{product.Amount} = {product.Price} {EmojiService.Get(product.MoneyType.GetLowerName())}");
+                    $"/{product.Amount} = {product.Price} {EmojiService.Get(product.MoneyType.GetName())}");
                 currentRow++;
             }
             return string.Join("\n", result);
@@ -466,8 +463,8 @@ namespace Shuvi.CommandParts
             var currentRow = 0;
             foreach (var product in shop.Customization.GetProductsInPage(page))
             {
-                result.Add((currentRow == arrow ? EmojiService.Get("choosePoint") : string.Empty) +
-                    $"{product.GetImage().Info.GetName(lang)} = {product.Price} {EmojiService.Get(product.MoneyType.GetLowerName())}");
+                result.Add((currentRow == arrow ? EmojiService.Get("ChoosePoint") : string.Empty) +
+                    $"{product.GetImage().Info.GetName(lang)} = {product.Price} {EmojiService.Get(product.MoneyType.GetName())}");
                 currentRow++;
             }
             return string.Join("\n", result);
@@ -487,7 +484,7 @@ namespace Shuvi.CommandParts
                     break;
                 result.Add(image.Info.GetName(lang));
             }
-            return result.Count > 0 ? string.Join("\n", result) : _localizationPart.Get(lang).Get("embed/basket/empty");
+            return result.Count > 0 ? string.Join("\n", result) : _localizationPart.Get(lang).Get("Embed/Basket/Empty");
         }
 
         private static List<SelectMenuOptionBuilder> GetShopOptions(List<ObjectId> shopsId, Language lang)

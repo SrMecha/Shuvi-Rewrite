@@ -1,6 +1,7 @@
-embed/choose/author;;Выберите профессию
-embed/choose/desc;;__Будьте внимательны!__\nПосле выбора профессии, вы не сможете ее поменять.
-embed/choose/professions;;Доступные профессии:
-btn/back;;Назад
-btn/confirm;;Выбрать
-select/choose/name;;Выберите профессию.
+Embed/Choose/Author;;Выберите профессию
+Embed/Choose/Desc;;__Будьте внимательны!__\nПосле выбора профессии, вы не сможете ее поменять.
+Embed/Choose/Professions;;Доступные профессии:
+Btn/Back;;Назад
+Btn/Info;;Инфо
+Btn/Confirm;;Выбрать
+Select/Choose/Name;;Выберите профессию.

@@ -2,12 +2,13 @@
 using Shuvi.Classes.Data.Enemy;
 using Shuvi.Classes.Types.Actions;
 using Shuvi.Classes.Types.Characteristics;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
 using Shuvi.Classes.Types.Drop;
 using Shuvi.Classes.Types.Localization;
 using Shuvi.Classes.Types.Spell;
 using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Actions;
-using Shuvi.Interfaces.Characteristics;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Drop;
 using Shuvi.Interfaces.Enemy;
 using Shuvi.Interfaces.Localization;
@@ -24,7 +25,7 @@ namespace Shuvi.Classes.Types.Enemy
         public int UpgradePoints { get; private set; }
         public IFightActions ActionChances { get; private set; }
         public ISpellInfo Spell { get; private set; }
-        public IBonusesCharacteristics Characteristics { get; private set; }
+        public ICharacteristicBonuses Characteristics { get; private set; }
         public IItemsDrop Drop { get; private set; }
 
         public DatabaseEnemy(EnemyData data)
@@ -36,8 +37,16 @@ namespace Shuvi.Classes.Types.Enemy
             UpgradePoints = data.UpgradePoints;
             ActionChances = new FightActions(data.ActionChances);
             Spell = new SpellInfo(data.SpellName);
-            Characteristics = new BonusesCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect,
-                data.Endurance, data.Health, data.Mana);
+            Characteristics = new CharacteristicBonuses()
+            {
+                Strength = data.Strength,
+                Agility = data.Agility,
+                Luck = data.Luck,
+                Intellect = data.Intellect,
+                Endurance = data.Endurance,
+                Health = data.Health,
+                Mana = data.Mana
+            };
             Drop = new ItemsDrop(data.Drop);
         }
     }

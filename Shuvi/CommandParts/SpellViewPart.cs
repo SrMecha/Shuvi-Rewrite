@@ -18,16 +18,16 @@ namespace Shuvi.CommandParts
             var viewLocalization = _localizationPart.Get(context.Language);
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(viewLocalization.Get("embed/view/author"))
-                    .WithDescription($"{viewLocalization.Get("embed/view/spellName").Format(spell.Info.GetName(context.Language))}\n" +
-                    $"{viewLocalization.Get("embed/view/magicType").Format(new MagicInfo(spell.MagicType).Info.GetName(context.Language))}\n" +
-                    $"{viewLocalization.Get("embed/view/desc").Format(spell.Info.GetDescription(context.Language))}")
-                    .AddField(viewLocalization.Get("embed/view/requirements"),
-                    spell.Requirements.GetRequirementsInfo(context.Language, dbUser))
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(viewLocalization.Get("Embed/View/Author"))
+                    .WithDescription($"{viewLocalization.Get("Embed/View/SpellName").Format(spell.Info.GetName(context.Language))}\n" +
+                    $"{viewLocalization.Get("Embed/View/MagicType").Format(new MagicInfo(spell.MagicType).Info.GetName(context.Language))}\n" +
+                    $"{viewLocalization.Get("Embed/View/Desc").Format(spell.Info.GetDescription(context.Language))}")
+                    .AddField(viewLocalization.Get("Embed/View/Requirements"),
+                    spell.Requirements.GetRequirementsInfo(context.Language, dbUser).Description)
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithButton(viewLocalization.Get("btn/back"), "back", ButtonStyle.Danger)
+                    .WithButton(viewLocalization.Get("Btn/Back"), "back", ButtonStyle.Danger)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();

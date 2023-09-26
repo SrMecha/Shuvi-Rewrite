@@ -1,11 +1,11 @@
-embed/travel/author;;Путешествие
-embed/travel/energyLeft;;**Энергии осталось:** {0}/{1}
-embed/travel/energyWillTake;;Вы потратите {0} энергии на это путешествие.
-embed/travel/region;;**Регион:**
-embed/travel/location;;**Локация:**
-btn/exit;;Выйти
-btn/travel;;Отправиться
-select/chooseRegion/name;;Выберите регион.
-select/chooseLocation/name;;Выберите локацию.
-embed/travaled/desc;;Вы прибыли в место назначения!
-embed/travelCancelled;;Вы решили задержаться тут...
+Embed/Travel/Author;;Путешествие
+Embed/Travel/EnergyLeft;;**Энергии осталось:** {0}/{1}
+Embed/Travel/EnergyWillTake;;Вы потратите {0} энергии на это путешествие.
+Embed/Travel/Region;;**Регион:**
+Embed/Travel/Location;;**Локация:**
+Btn/Exit;;Выйти
+Btn/Travel;;Отправиться
+Select/ChooseRegion/Name;;Выберите регион.
+Select/ChooseLocation/Name;;Выберите локацию.
+Embed/Travaled/Desc;;Вы прибыли в место назначения!
+Embed/TravelCancelled;;Вы решили задержаться тут...

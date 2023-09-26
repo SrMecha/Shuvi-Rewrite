@@ -29,18 +29,18 @@ namespace Shuvi.CommandParts
             var arrow = 0;
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(changeLocalization.Get("embed/select/author"))
-                    .WithDescription($"{changeLocalization.Get("embed/select/currentSkill").Format(dbUser.Skill.Info.GetName(context.Language))}\n\n" +
-                        $"{(haveSkills ? $"{changeLocalization.Get("embed/select/availableЫSkills")}\n" +
-                        $"{GetSkillsString(skills, arrow, context.Language)}" : changeLocalization.Get("embed/select/empty"))}")
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(changeLocalization.Get("Embed/Select/Author"))
+                    .WithDescription($"{changeLocalization.Get("Embed/Select/CurrentSkill").Format(dbUser.Skill.Info.GetName(context.Language))}\n\n" +
+                        $"{(haveSkills ? $"{changeLocalization.Get("Embed/Select/AvailableSkills")}\n" +
+                        $"{GetSkillsString(skills, arrow, context.Language)}" : changeLocalization.Get("Embed/Select/Empty"))}")
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("choose", skillOptions, changeLocalization.Get("select/skill/name"), disabled: !haveSkills, row: 0)
-                    .WithButton(changeLocalization.Get("btn/equip"), "equip", ButtonStyle.Success, disabled: !haveSkills, row: 1)
-                    .WithButton(changeLocalization.Get("btn/info"), "info", ButtonStyle.Primary, disabled: !haveSkills, row: 1)
-                    .WithButton(changeLocalization.Get("btn/back"), "back", ButtonStyle.Danger, row: 2)
-                    .WithButton(changeLocalization.Get("btn/unequip"), "unequip", ButtonStyle.Secondary, disabled: !dbUser.Skill.HaveSkill(), row: 2)
+                    .WithSelectMenu("choose", skillOptions, changeLocalization.Get("Select/Skill/Name"), disabled: !haveSkills, row: 0)
+                    .WithButton(changeLocalization.Get("Btn/Equip"), "equip", ButtonStyle.Success, disabled: !haveSkills, row: 1)
+                    .WithButton(changeLocalization.Get("Btn/Info"), "info", ButtonStyle.Primary, disabled: !haveSkills, row: 1)
+                    .WithButton(changeLocalization.Get("Btn/Back"), "back", ButtonStyle.Danger, row: 2)
+                    .WithButton(changeLocalization.Get("Btn/Unequip"), "unequip", ButtonStyle.Secondary, disabled: !dbUser.Skill.HaveSkill(), row: 2)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -81,10 +81,10 @@ namespace Shuvi.CommandParts
             var row = 0;
             foreach (var skill in skills)
             {
-                result.Add($"{(row == arrow ? EmojiService.Get("choosePoint") : string.Empty)} {skill.Info.GetName(lang)}");
+                result.Add($"{(row == arrow ? EmojiService.Get("ChoosePoint") : string.Empty)} {skill.Info.GetName(lang)}");
                 row++;
             }
-            return result.Count > 0 ? string.Join("\n", result) : _localizationPart.Get(lang).Get("embed/select/empty");
+            return result.Count > 0 ? string.Join("\n", result) : _localizationPart.Get(lang).Get("Embed/Select/Empty");
         }
 
         public static List<SelectMenuOptionBuilder> GetSkillOptions(List<ISkill> skills, Language lang)

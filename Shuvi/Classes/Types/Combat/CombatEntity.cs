@@ -1,22 +1,26 @@
 ﻿using Shuvi.Classes.Data.Actions;
+using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.Spell;
 using Shuvi.Classes.Settings;
 using Shuvi.Classes.Types.Actions;
 using Shuvi.Classes.Types.Characteristics;
-using Shuvi.Classes.Types.Characteristics.Dynamic;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
 using Shuvi.Classes.Types.Effect;
 using Shuvi.Classes.Types.Status;
 using Shuvi.Enums.Actions;
+using Shuvi.Enums.Damage;
 using Shuvi.Enums.Localization;
 using Shuvi.Enums.Rating;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Effect;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Status;
 using Shuvi.Services.StaticServices.Localization;
+using Shuvi.Services.StaticServices.Math;
 
 namespace Shuvi.Classes.Types.Combat
 {
@@ -26,116 +30,135 @@ namespace Shuvi.Classes.Types.Combat
         protected bool _isPreparingForDodge = false;
         protected readonly Random _random = new();
 
-        public string Name { get; protected set; }
-        public Rank Rank { get; protected set; }
-        public IEntityCharacteristics<INotRestorableCharacteristic> Characteristics { get; protected set; }
-        public ISpell Spell { get; protected set; }
-        public IBonusesCharacteristics EffectBonuses { get; protected set; }
-        public IEffects Effects { get; protected set; }
-        public virtual IFightActions Actions { get; protected set; }
+        public string Name { get; protected set; } = string.Empty;
+        public Rank Rank { get; protected set; } = Rank.E;
+        public IEntityCharacteristics<INotRestorableCharacteristic> Characteristics { get; protected set; } = new EntityCharacteristics<INotRestorableCharacteristic>();
+        public ISpell Spell { get; protected set; } = SpellFactory.GetSpell(string.Empty);
+        public IAllBonuses EffectBonuses { get; protected set; } = new AllBonuses();
+        public IFightBonuses AllCharacteristics { get; protected set; } = new FightBonuses();
+        public IEffects Effects { get; protected set; } = new Effects();
+        public virtual IFightActions Actions { get; protected set; } = new FightActions(new FightActionsData());
 
         public bool IsDead => Characteristics.Health.Now <= 0;
 
-        public CombatEntity()
+        public CombatEntity() { }
+
+        public float BlockDamage(float damage, DamageType damageType = DamageType.Physic)
         {
-            Name = string.Empty;
-            Rank = Rank.E;
-            Characteristics = new EntityCharacteristics<INotRestorableCharacteristic>(1, 1, 1, 1, 1,
-                new NotRestorableCharacteristic(1, 1), new NotRestorableCharacteristic(1, 1));
-            Spell = SpellFactory.GetSpell(string.Empty);
-            EffectBonuses = new BonusesCharacteristics();
-            Effects = new Effects();
-            Actions = new FightActions(new FightActionsData());
+            float outDamage;
+            switch (damageType)
+            {
+                case DamageType.Physic:
+                    outDamage = damage - AllCharacteristics.GetFullArmor(multiplier: _isPreparingForDefense ? FightSettings.PreparingDefenseMultiplier : 0f);
+                    break;
+                case DamageType.Magic:
+                    outDamage = damage - AllCharacteristics.GetFullMagicResistance(multiplier: _isPreparingForDefense ? FightSettings.PreparingDefenseMultiplier : 0f);
+                    break;
+                default:
+                    throw new ArgumentException($"Неопознанный тип урона {damageType.GetType().Name} в BlockDamage(float damage, DamageType damageType).");
+            }
+            return outDamage < 0 ? 0f : damage;
         }
-        public int BlockDamage(float damage)
+
+        public float CalculateMagicDamage(float bonus = 0f, float multiplier = 0f)
         {
-            var blockedDamageBonus = 0.0f;
-            if (_isPreparingForDefense)
-                blockedDamageBonus = (Characteristics.Endurance + EffectBonuses.Endurance) / 2.0f;
-            var outDamage = (int)(damage - ((Characteristics.Endurance + EffectBonuses.Endurance + blockedDamageBonus) / 3.0f) + 0.5f);
-            // 0.5f для округления float в большую сторону.
-            if (outDamage < 0)
-                outDamage = 0;
-            return outDamage;
+            var damage = AllCharacteristics.GetFullAbilityPower(
+                bonus: bonus,
+                multiplier: multiplier + Random.Shared.NextFloat(-FightSettings.DamageSpreadMultiplier, FightSettings.DamageSpreadMultiplier));
+            return damage < 0 ? 0 : damage;
         }
-        public float CalculateMagicDamage()
+
+        public float CalculateHeavyDamage(float bonus = 0f, float multiplier = 0f)
         {
-            return (Characteristics.Intellect + EffectBonuses.Intellect) * _random.Next(120, 131) / 100.0f + FightSettings.DamageBonus;
+            var damage = AllCharacteristics.GetFullAttackDamage(
+                bonus: bonus,
+                multiplier: multiplier + Random.Shared.NextFloat(-FightSettings.DamageSpreadMultiplier, FightSettings.DamageSpreadMultiplier) +
+                FightSettings.HeavyAttackDamageMultiplier
+                );
+            return damage < 0 ? 0 : damage;
         }
-        public float CalculateHeavyDamage()
+
+        public float CalculateLightDamage(float bonus = 0f, float multiplier = 0f)
         {
-            return (Characteristics.Strength + EffectBonuses.Strength) * _random.Next(120, 131) / 100.0f + FightSettings.DamageBonus;
+            var damage = AllCharacteristics.GetFullAttackDamage(
+                bonus: bonus,
+                multiplier: multiplier + Random.Shared.NextFloat(-FightSettings.DamageSpreadMultiplier, FightSettings.DamageSpreadMultiplier) +
+                FightSettings.LightAttackDamageMultiplier
+                );
+            return damage < 0 ? 0 : damage;
         }
-        public float CalculateLightDamage()
-        {
-            return (Characteristics.Strength + EffectBonuses.Strength) * _random.Next(70, 81) / 100.0f + FightSettings.DamageBonus;
-        }
+
         public IActionResult CastSpell(ICombatEntity target, Language lang)
         {
             return Spell.Cast(this, target, lang);
         }
+
         public IActionResult DealHeavyDamage(ICombatEntity target, Language lang)
         {
-            if (target.IsDodged(this, 0))
-                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/attack/heavyMiss"), Name));
+            if (target.IsDodged(this, FightSettings.HeavyAttackDodgeBonus))
+                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Attack/HeavyMiss"), Name));
             int damage;
             if (IsCritical(target))
             {
-                damage = target.BlockDamage(CalculateHeavyDamage()) * 2;
+                damage = (int)target.BlockDamage(MathService.CalculateMultiplier(CalculateHeavyDamage(), AllCharacteristics.GetFullCriticalStrikeDamageMultiplier(), true));
                 target.ReduceHealth(damage);
-                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/attack/critical"), Name, damage));
+                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Attack/Critical"), Name, damage));
             }
-            damage = target.BlockDamage(CalculateHeavyDamage());
+            damage = (int)target.BlockDamage(CalculateHeavyDamage());
             target.ReduceHealth(damage);
-            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/attack/heavyHit"), Name, damage));
+            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Attack/HeavyHit"), Name, damage));
         }
+
         public IActionResult DealLightDamage(ICombatEntity target, Language lang)
         {
-            if (target.IsDodged(this, 30))
-                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/attack/lightMiss"), Name));
+            if (target.IsDodged(this, FightSettings.LightAttackDodgeBonus))
+                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Attack/LightMiss"), Name));
             int damage;
             if (IsCritical(target))
             {
-                damage = target.BlockDamage(CalculateLightDamage()) * 2;
+                damage = (int)target.BlockDamage(MathService.CalculateMultiplier(CalculateLightDamage(), AllCharacteristics.GetFullCriticalStrikeDamageMultiplier(), true));
                 target.ReduceHealth(damage);
-                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/attack/critical"), Name, damage));
+                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Attack/Critical"), Name, damage));
             }
-            damage = target.BlockDamage(CalculateLightDamage());
+            damage = (int)target.BlockDamage(CalculateLightDamage());
             target.ReduceHealth(damage);
-            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/attack/lightHit"), Name, damage));
+            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Attack/LightHit"), Name, damage));
         }
-        public bool IsDodged(ICombatEntity assaulter, int hitBonusChance)
+
+        public bool IsDodged(ICombatEntity assaulter, float bonusDodgeChance = 0f)
         {
-            var dodgeChance = ((_isPreparingForDodge ? FightSettings.PreparingDodgeBonus : FightSettings.StandartDodgeBonus) - hitBonusChance +
-                (Characteristics.Agility + EffectBonuses.Agility - (assaulter.Characteristics.Agility + assaulter.EffectBonuses.Agility))) / 2;
-            return _random.Next(0, 101) <= dodgeChance;
+            return Random.Shared.NextDouble()
+                <=
+                AllCharacteristics.GetFullDodgeChance(bonus: (_isPreparingForDodge ? FightSettings.PreparingDodgeBonus : 0f) + bonusDodgeChance)
+                - assaulter.AllCharacteristics.GetFullStrikeChance();
         }
+
         public bool IsCritical(ICombatEntity target)
         {
-            var criticalChance = (FightSettings.StandartCriticalBonus +
-                Characteristics.Luck + EffectBonuses.Luck - (target.Characteristics.Luck + target.EffectBonuses.Luck)) / 2;
-            return _random.Next(0, 101) <= criticalChance;
+            return Random.Shared.NextDouble() <= AllCharacteristics.GetFullCriticalStrikeChance();
         }
+
         public IActionResult PreparingForDefense(ICombatEntity target, Language lang)
         {
             _isPreparingForDefense = true;
             if (IsInvisiblePreparing(target))
-                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/preparing/unknown"), Name));
-            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/preparing/defense"), Name));
+                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Preparing/Unknown"), Name));
+            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Preparing/Defense"), Name));
         }
+
         public IActionResult PreparingForDodge(ICombatEntity target, Language lang)
         {
             _isPreparingForDodge = true;
             if (IsInvisiblePreparing(target))
-                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/preparing/unknown"), Name));
-            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("fight/preparing/dodge"), Name));
+                return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Preparing/Unknown"), Name));
+            return new ActionResult(string.Format(LocalizationService.Get("status").Get(lang).Get("Fight/Preparing/Dodge"), Name));
         }
+
         private bool IsInvisiblePreparing(ICombatEntity target)
         {
-            var invisiblePreparingChance = (30 +
-                Characteristics.Intellect + EffectBonuses.Intellect - (target.Characteristics.Intellect + target.EffectBonuses.Intellect)) / 2;
-            return _random.Next(0, 101) <= invisiblePreparingChance;
+            return Random.Shared.NextFloat(0, 100) <= 15f + (AllCharacteristics.Intellect - target.AllCharacteristics.Intellect) / 2f;
         }
+
         public virtual IActionResult RandomAction(ICombatEntity target, Language lang)
         {
             return Actions.GetRandomAction() switch
@@ -148,27 +171,35 @@ namespace Shuvi.Classes.Types.Combat
                 _ => DealLightDamage(target, lang),
             };
         }
+
         public void ReduceHealth(int amount)
         {
             Characteristics.Health.Reduce(amount);
         }
+
         public void ReduceMana(int amount)
         {
             Characteristics.Mana.Reduce(amount);
         }
+
         public void RestoreHealth(int amount)
         {
             Characteristics.Health.Add(amount);
         }
+
         public void RestoreMana(int amount)
         {
             Characteristics.Mana.Add(amount);
         }
+
         public virtual IResultStorage Update(Language lang)
         {
             _isPreparingForDefense = false;
             _isPreparingForDodge = false;
             EffectBonuses = Effects.UpdateAll(this);
+            AllCharacteristics = new FightBonuses();
+            AllCharacteristics.Add(EffectBonuses);
+            AllCharacteristics.Add(Characteristics);
             var result = new ResultStorage();
             result.Add(Spell.Update(lang));
             return result;

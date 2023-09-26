@@ -1,5 +1,6 @@
 ﻿using Shuvi.Classes.Types.Characteristics;
-using Shuvi.Interfaces.Characteristics;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
+using Shuvi.Interfaces.Characteristics.Bonuses;
 using Shuvi.Interfaces.Combat;
 using Shuvi.Interfaces.Effect;
 
@@ -9,13 +10,13 @@ namespace Shuvi.Classes.Types.Effect.EffectList
     {
         public string Name { get; protected set; }
         public int TimeLeft { get; protected set; }
-        public IBonusesCharacteristics Bonuses { get; protected set; }
+        public IAllBonuses Bonuses { get; protected set; }
 
-        public EffectBase(string name, int timeLeft, IBonusesCharacteristics? bonuses = null)
+        public EffectBase(string name, int timeLeft, IAllBonuses? bonuses = null)
         {
             Name = name;
             TimeLeft = timeLeft;
-            Bonuses = bonuses ?? new BonusesCharacteristics();
+            Bonuses = bonuses ?? new AllBonuses();
         }
         protected virtual void OnUpdate(ICombatEntity target)
         {

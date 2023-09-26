@@ -13,15 +13,15 @@ public static class HelpPart
     public static async Task Start(CustomInteractionContext context, IDatabaseUser dbUser)
     {
         var helpLocalization = _localizationPart.Get(context.Language);
-        var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-            .WithAuthor(helpLocalization.Get("embed/commands/author"))
-            .WithDescription(helpLocalization.Get("embed/commands/desc"))
-            .AddField(helpLocalization.Get("embed/commands/commandList"),
+        var embed = EmbedFactory.CreateBotOwnerEmbed()
+            .WithAuthor(helpLocalization.Get("Embed/Commands/Author"))
+            .WithDescription(helpLocalization.Get("Embed/Commands/Desc"))
+            .AddField(helpLocalization.Get("Embed/Commands/CommandList"),
             BotInfoService.CommandsDescription,
             true)
             .Build();
         var components = new ComponentBuilder()
-            .WithButton(helpLocalization.Get("btn/support"), style: ButtonStyle.Link, url: "https://discord.gg/Thq3Bjvn2t")
+            .WithButton(helpLocalization.Get("Btn/Support"), style: ButtonStyle.Link, url: "https://discord.gg/Thq3Bjvn2t")
             .Build();
         await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
         await context.LastInteraction.TryDeferAsync();

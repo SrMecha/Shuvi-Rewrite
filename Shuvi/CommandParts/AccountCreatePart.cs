@@ -16,13 +16,13 @@ namespace Shuvi.CommandParts
         public static async Task Start(CustomInteractionContext context)
         {
             var createLocalization = _localizationPart.Get(context.Language);
-            var embed = EmbedFactory.CreateUserEmbed(context.User)
-                .WithAuthor(createLocalization.Get("embed/tos/author"))
-                .WithDescription(string.Format(createLocalization.Get("embed/tos/desc"), BotInfoService.TosLink))
+            var embed = EmbedFactory.CreateBotOwnerEmbed()
+                .WithAuthor(createLocalization.Get("Embed/Tos/Author"))
+                .WithDescription(string.Format(createLocalization.Get("Embed/Tos/Desc"), BotInfoService.TosLink))
                 .Build();
             var components = new ComponentBuilder()
-                .WithButton(createLocalization.Get("btn/tos/accept"), "accept", ButtonStyle.Success)
-                .WithButton(createLocalization.Get("btn/tos/exit"), "exit", ButtonStyle.Danger)
+                .WithButton(createLocalization.Get("Btn/Tos/Accept"), "accept", ButtonStyle.Success)
+                .WithButton(createLocalization.Get("Btn/Tos/Exit"), "exit", ButtonStyle.Danger)
                 .Build();
 
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
@@ -44,9 +44,9 @@ namespace Shuvi.CommandParts
                     return;
             }
             await UserDatabase.AddUser(context.User.Id);
-            embed = EmbedFactory.CreateUserEmbed(context.User)
-                .WithAuthor(createLocalization.Get("embed/tosAccepted/author"))
-                .WithDescription(createLocalization.Get("embed/tosAccepted/desc"))
+            embed = EmbedFactory.CreateEmbed()
+                .WithAuthor(createLocalization.Get("Embed/TosAccepted/Author"))
+                .WithDescription(createLocalization.Get("Embed/TosAccepted/Desc"))
                 .Build();
             await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = new ComponentBuilder().Build(); });
             EventManager.InvokeOnAccountCreate(context.User);

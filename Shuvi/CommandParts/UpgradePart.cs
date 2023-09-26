@@ -4,7 +4,7 @@ using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Classes.Settings;
-using Shuvi.Classes.Types.Characteristics;
+using Shuvi.Classes.Types.Characteristics.Bonuses;
 using Shuvi.Classes.Types.Interaction;
 using Shuvi.Enums.Characteristic;
 using Shuvi.Interfaces.User;
@@ -20,13 +20,13 @@ namespace Shuvi.CommandParts
         private static readonly LocalizationLanguagePart _localizationPart = LocalizationService.Get("upgradePart");
         private static readonly IReadOnlyDictionary<string, int> _multipliers = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>()
         {
-            {"0-0", 1 },
-            {"0-1", 1 },
-            {"0-2", 1 },
-            {"0-3", 1 },
-            {"0-4", 1 },
-            {"1-0", UserSettings.HealthPerUpPoint },
-            {"1-1", UserSettings.ManaPerUpPoint }
+            {"Strength", 1 },
+            {"Agility", 1 },
+            {"Luck", 1 },
+            {"Intellect", 1 },
+            {"Endurance", 1 },
+            {"Health", UserSettings.HealthPerUpPoint },
+            {"Mana", UserSettings.ManaPerUpPoint }
         }
         );
 
@@ -34,48 +34,48 @@ namespace Shuvi.CommandParts
         {
             var upgradeLocalization = _localizationPart.Get(context.Language);
             var namesLocalization = LocalizationService.Get("names").Get(context.Language);
-            var bonuses = new BonusesCharacteristics();
+            var bonuses = new CharacteristicBonuses();
             var points = dbUser.UpgradePoints.GetPoints();
             var maxPoints = points;
             var characteristicOptions = new List<SelectMenuOptionBuilder>()
             {
-                new(namesLocalization.Get("strength"), "0-0"),
-                new(namesLocalization.Get("agility"), "0-1"),
-                new(namesLocalization.Get("luck"), "0-2"),
-                new(namesLocalization.Get("intellect"), "0-3"),
-                new(namesLocalization.Get("endurance"), "0-4"),
-                new(namesLocalization.Get("health"), "1-0"),
-                new(namesLocalization.Get("mana"), "1-1")
+                new(namesLocalization.Get("Strength"), "Strength"),
+                new(namesLocalization.Get("Agility"), "Agility"),
+                new(namesLocalization.Get("Luck"), "Luck"),
+                new(namesLocalization.Get("Intellect"), "Intellect"),
+                new(namesLocalization.Get("Endurance"), "Endurance"),
+                new(namesLocalization.Get("Health"), "Health"),
+                new(namesLocalization.Get("Mana"), "Mana")
             };
             var arrow = characteristicOptions.First().Value;
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(upgradeLocalization.Get("embed/upgrade/author"))
-                    .WithDescription($"{upgradeLocalization.Get("embed/upgrade/desc").Format(points)}\n\n" +
-                    $"{(arrow == "0-0" ? EmojiService.Get("choosePoint") : string.Empty)}**{namesLocalization.Get("strength")}:** " +
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(upgradeLocalization.Get("Embed/Upgrade/Author"))
+                    .WithDescription($"{upgradeLocalization.Get("Embed/Upgrade/Desc").Format(points)}\n\n" +
+                    $"{IsChoosed(arrow, "Strength")}**{namesLocalization.Get("Strength")}:** " +
                     $"{dbUser.Characteristics.Strength.WithBonus(bonuses.Strength)}\n" +
-                    $"{(arrow == "0-1" ? EmojiService.Get("choosePoint") : string.Empty)}**{namesLocalization.Get("agility")}:** " +
+                    $"{IsChoosed(arrow, "Agility")}**{namesLocalization.Get("Agility")}:** " +
                     $"{dbUser.Characteristics.Agility.WithBonus(bonuses.Agility)}\n" +
-                    $"{(arrow == "0-2" ? EmojiService.Get("choosePoint") : string.Empty)}**{namesLocalization.Get("luck")}:** " +
+                    $"{IsChoosed(arrow, "Luck")}**{namesLocalization.Get("Luck")}:** " +
                     $"{dbUser.Characteristics.Luck.WithBonus(bonuses.Luck)}\n" +
-                    $"{(arrow == "0-3" ? EmojiService.Get("choosePoint") : string.Empty)}**{namesLocalization.Get("intellect")}:** " +
+                    $"{IsChoosed(arrow, "Intellect")}**{namesLocalization.Get("Intellect")}:** " +
                     $"{dbUser.Characteristics.Intellect.WithBonus(bonuses.Intellect)}\n" +
-                    $"{(arrow == "0-4" ? EmojiService.Get("choosePoint") : string.Empty)}**{namesLocalization.Get("endurance")}:** " +
+                    $"{IsChoosed(arrow, "Endurance")}**{namesLocalization.Get("Endurance")}:** " +
                     $"{dbUser.Characteristics.Endurance.WithBonus(bonuses.Endurance)}\n" +
-                    $"{(arrow == "1-0" ? EmojiService.Get("choosePoint") : string.Empty)}**{namesLocalization.Get("health")}:** " +
+                    $"{IsChoosed(arrow, "Health")}**{namesLocalization.Get("Health")}:** " +
                     $"{dbUser.Characteristics.Health.Max.WithBonus(bonuses.Health)}\n" +
-                    $"{(arrow == "1-1" ? EmojiService.Get("choosePoint") : string.Empty)}**{namesLocalization.Get("mana")}:** " +
+                    $"{IsChoosed(arrow, "Mana")}**{namesLocalization.Get("Mana")}:** " +
                     $"{dbUser.Characteristics.Mana.Max.WithBonus(bonuses.Mana)}\n")
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("select", characteristicOptions, upgradeLocalization.Get("select/name"), row: 0)
+                    .WithSelectMenu("select", characteristicOptions, upgradeLocalization.Get("Select/Name"), row: 0)
                     .WithButton("+1", "1", ButtonStyle.Success, disabled: points < 1, row: 1)
                     .WithButton("+2", "2", ButtonStyle.Success, disabled: points < 2, row: 1)
                     .WithButton("+5", "5", ButtonStyle.Success, disabled: points < 5, row: 1)
-                    .WithButton(upgradeLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 2)
-                    .WithButton(upgradeLocalization.Get("btn/reset"), "reset", ButtonStyle.Secondary, disabled: points == maxPoints, row: 2)
-                    .WithButton(upgradeLocalization.Get("btn/confirm"), "confirm", ButtonStyle.Success, disabled: points == maxPoints, row: 2)
+                    .WithButton(upgradeLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 2)
+                    .WithButton(upgradeLocalization.Get("Btn/Reset"), "reset", ButtonStyle.Secondary, disabled: points == maxPoints, row: 2)
+                    .WithButton(upgradeLocalization.Get("Btn/Confirm"), "confirm", ButtonStyle.Success, disabled: points == maxPoints, row: 2)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -92,25 +92,39 @@ namespace Shuvi.CommandParts
                         break;
                     case "1" or "2" or "5":
                         var amount = int.Parse(interaction.Data.CustomId);
-                        var codes = arrow.Split("-");
                         points -= amount;
-                        switch (codes[0])
+                        switch (arrow)
                         {
-                            case "0":
-                                bonuses.Add((StaticCharacteristic)int.Parse(codes[1]),
-                                    _multipliers.GetValueOrDefault(arrow, 1) * amount);
+                            case "Strength":
+                                bonuses.Strength += _multipliers.GetValueOrDefault(arrow, 1) * amount;
                                 break;
-                            case "1":
-                                bonuses.Add((DynamicCharacteristic)int.Parse(codes[1]),
-                                    _multipliers.GetValueOrDefault(arrow, 1) * amount);
+                            case "Agility":
+                                bonuses.Agility += _multipliers.GetValueOrDefault(arrow, 1) * amount;
+                                break;
+                            case "Luck":
+                                bonuses.Luck += _multipliers.GetValueOrDefault(arrow, 1) * amount;
+                                break;
+                            case "Intellect":
+                                bonuses.Intellect += _multipliers.GetValueOrDefault(arrow, 1) * amount;
+                                break;
+                            case "Endurance":
+                                bonuses.Endurance += _multipliers.GetValueOrDefault(arrow, 1) * amount;
+                                break;
+                            case "Health":
+                                bonuses.Health += _multipliers.GetValueOrDefault(arrow, 1) * amount;
+                                break;
+                            case "Mana":
+                                bonuses.Mana += _multipliers.GetValueOrDefault(arrow, 1) * amount;
+                                break;
+                            default:
                                 break;
                         }
                         break;
                     case "exit":
                         if (endWithInfo)
                         {
-                            embed = EmbedFactory.CreateUserEmbed(context.User, dbUser, false, false)
-                                .WithAuthor(upgradeLocalization.Get("embed/upgradeEnd/author"))
+                            embed = EmbedFactory.CreateUserEmbed(dbUser, false, false)
+                                .WithAuthor(upgradeLocalization.Get("Embed/UpgradeEnd/Author"))
                                 .Build();
                             await context.Interaction.ModifyOriginalResponseAsync(msg =>
                             {
@@ -121,27 +135,27 @@ namespace Shuvi.CommandParts
                         return;
                     case "reset":
                         points = maxPoints;
-                        bonuses = new BonusesCharacteristics();
+                        bonuses = new CharacteristicBonuses();
                         break;
                     case "confirm":
 
                         if (endWithInfo)
                         {
-                            embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                                .WithAuthor(upgradeLocalization.Get("embed/upgradeEnd/author"))
-                                .WithDescription($"**{namesLocalization.Get("strength")}:** {dbUser.Characteristics.Strength} " +
+                            embed = EmbedFactory.CreateUserEmbed(dbUser)
+                                .WithAuthor(upgradeLocalization.Get("Embed/UpgradeEnd/Author"))
+                                .WithDescription($"**{namesLocalization.Get("Strength")}:** {dbUser.Characteristics.Strength} " +
                                 $"{(bonuses.Strength == 0 ? string.Empty : $"-> {dbUser.Characteristics.Strength + bonuses.Strength}")}\n" +
-                                $"**{namesLocalization.Get("agility")}:** {dbUser.Characteristics.Agility} " +
+                                $"**{namesLocalization.Get("Agility")}:** {dbUser.Characteristics.Agility} " +
                                 $"{(bonuses.Agility == 0 ? string.Empty : $"-> {dbUser.Characteristics.Agility + bonuses.Agility}")}\n" +
-                                $"**{namesLocalization.Get("luck")}:** {dbUser.Characteristics.Luck} " +
+                                $"**{namesLocalization.Get("Luck")}:** {dbUser.Characteristics.Luck} " +
                                 $"{(bonuses.Luck == 0 ? string.Empty : $"-> {dbUser.Characteristics.Luck + bonuses.Luck}")}\n" +
-                                $"**{namesLocalization.Get("intellect")}:** {dbUser.Characteristics.Intellect} " +
+                                $"**{namesLocalization.Get("Intellect")}:** {dbUser.Characteristics.Intellect} " +
                                 $"{(bonuses.Intellect == 0 ? string.Empty : $"-> {dbUser.Characteristics.Intellect + bonuses.Intellect}")}\n" +
-                                $"**{namesLocalization.Get("endurance")}:** {dbUser.Characteristics.Endurance} " +
+                                $"**{namesLocalization.Get("Endurance")}:** {dbUser.Characteristics.Endurance} " +
                                 $"{(bonuses.Endurance == 0 ? string.Empty : $"-> {dbUser.Characteristics.Endurance + bonuses.Endurance}")}\n" +
-                                $"**{namesLocalization.Get("health")}:** {dbUser.Characteristics.Health.Max} " +
+                                $"**{namesLocalization.Get("Health")}:** {dbUser.Characteristics.Health.Max} " +
                                 $"{(bonuses.Health == 0 ? string.Empty : $"-> {dbUser.Characteristics.Health.Max + bonuses.Health}")}\n" +
-                                $"**{namesLocalization.Get("mana")}:** {dbUser.Characteristics.Mana.Max} " +
+                                $"**{namesLocalization.Get("Mana")}:** {dbUser.Characteristics.Mana.Max} " +
                                 $"{(bonuses.Mana == 0 ? string.Empty : $"-> {dbUser.Characteristics.Mana.Max + bonuses.Mana}")}")
                             .Build();
                             await context.Interaction.ModifyOriginalResponseAsync(msg =>
@@ -162,6 +176,11 @@ namespace Shuvi.CommandParts
                         return;
                 }
             }
+        }
+
+        private static string IsChoosed(string choosed, string curent)
+        {
+            return choosed == curent ? EmojiService.Get("ChoosePoint").ToString()! : string.Empty;
         }
     }
 }

@@ -1,5 +1,5 @@
-embed/view/author;;Инвентарь {0}:
-embed/view/page;;Страница {0}/{1}
-btn/exit;;Выйти
-select/view/name;;Выберите предмет для просмотра.
-embed/view/void;;Пусто.
+Embed/View/Author;;Инвентарь {0}:
+Embed/View/Page;;Страница {0}/{1}
+Btn/Exit;;Выйти
+Select/View/Name;;Выберите предмет для просмотра.
+Embed/View/Void;;Пусто.

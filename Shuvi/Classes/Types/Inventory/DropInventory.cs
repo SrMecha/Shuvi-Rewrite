@@ -37,7 +37,7 @@ namespace Shuvi.Classes.Types.Inventory
         {
             var result = new List<string>();
             foreach (var (moneyType, amount) in _money)
-                result.Add($"+ {amount} {EmojiService.Get(moneyType.GetLowerName())}");
+                result.Add($"+ {amount} {EmojiService.Get(moneyType.GetName())}");
             foreach (var (item, amount) in GetItems())
                 result.Add($"+{amount} {item.Info.GetName(lang)}");
             return string.Join("\n", result);

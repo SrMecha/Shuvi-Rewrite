@@ -23,17 +23,17 @@ namespace Shuvi.CommandParts
             var custLocalization = _localizationPart.Get(context.Language);
             while (context.LastInteraction is not null)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor($"{custLocalization.Get("embed/author/withUser").Format(context.User.Username)}")
-                    .WithDescription($"{custLocalization.Get("embed/current/avatar").Format(dbUser.Customization.Avatar is null ?
-                    custLocalization.Get("embed/dontHave") : dbUser.Customization.Avatar.Info.GetName(context.Language))}\n" +
-                    $"{custLocalization.Get("embed/current/banner").Format(dbUser.Customization.Banner is null ?
-                    custLocalization.Get("embed/dontHave") : dbUser.Customization.Banner.Info.GetName(context.Language))}")
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor($"{custLocalization.Get("Embed/Author/WithUser").Format(context.User.Username)}")
+                    .WithDescription($"{custLocalization.Get("Embed/Current/Avatar").Format(dbUser.Customization.Avatar is null ?
+                    custLocalization.Get("Embed/DontHave") : dbUser.Customization.Avatar.Info.GetName(context.Language))}\n" +
+                    $"{custLocalization.Get("Embed/Current/Banner").Format(dbUser.Customization.Banner is null ?
+                    custLocalization.Get("Embed/DontHave") : dbUser.Customization.Banner.Info.GetName(context.Language))}")
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithButton(custLocalization.Get("category/avatar"), "avatar", ButtonStyle.Primary, row: 0)
-                    .WithButton(custLocalization.Get("category/banner"), "banner", ButtonStyle.Primary, row: 0)
-                    .WithButton(custLocalization.Get("btn/exit"), "exit", ButtonStyle.Danger, row: 1)
+                    .WithButton(custLocalization.Get("Category/Avatar"), "avatar", ButtonStyle.Primary, row: 0)
+                    .WithButton(custLocalization.Get("Category/Banner"), "banner", ButtonStyle.Primary, row: 0)
+                    .WithButton(custLocalization.Get("Btn/Exit"), "exit", ButtonStyle.Danger, row: 1)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -66,23 +66,22 @@ namespace Shuvi.CommandParts
             while (context.LastInteraction is not null)
             {
                 var haveCustomization = HaveCustomization(dbUser.Customization.Avatars);
-                var embedBuilder = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor($"{custLocalization.Get("embed/author/single")} | {custLocalization.Get("category/avatar")}")
-                    .WithDescription($"{custLocalization.Get("embed/desc/avatar").Format(dbUser.Customization.Avatar is null ?
-                    custLocalization.Get("embed/dontHave") : dbUser.Customization.Avatar.Info.GetName(context.Language))}\n\n" +
+                var embedBuilder = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor($"{custLocalization.Get("Embed/Author/Single")} | {custLocalization.Get("Category/Avatar")}")
+                    .WithDescription($"{custLocalization.Get("Embed/Desc/Avatar").Format(dbUser.Customization.Avatar is null ?
+                    custLocalization.Get("Embed/DontHave") : dbUser.Customization.Avatar.Info.GetName(context.Language))}\n\n" +
                     $"{GetCustomizationsString(dbUser.Customization.Avatars, context.Language, currentPage, arrow)}")
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{custLocalization.Get("embed/page").Format(currentPage + 1, maxPage + 1)}");
+                    .WithFooter(custLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1));
                 if (haveCustomization)
                     embedBuilder.WithThumbnailUrl(GetCurrentImage(dbUser.Customization.Avatars, currentPage, arrow).URL);
                 var components = new ComponentBuilder()
                     .WithSelectMenu("select", GetCustomizationOptions(dbUser.Customization.Avatars, context.Language, currentPage, arrow),
-                    custLocalization.Get("select/name/avatar"), disabled: !haveCustomization, row: 0)
+                    custLocalization.Get("Select/Name/Avatar"), disabled: !haveCustomization, row: 0)
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: currentPage < 1, row: 1)
-                    .WithButton(custLocalization.Get("btn/choose"), "equip", ButtonStyle.Primary, disabled: !haveCustomization, row: 1)
+                    .WithButton(custLocalization.Get("Btn/Choose"), "equip", ButtonStyle.Primary, disabled: !haveCustomization, row: 1)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: currentPage >= maxPage, row: 1)
-                    .WithButton(custLocalization.Get("btn/back"), "exit", ButtonStyle.Danger, row: 2)
-                    .WithButton(custLocalization.Get("btn/remove/avatar"), "remove", ButtonStyle.Secondary,
+                    .WithButton(custLocalization.Get("Btn/Back"), "exit", ButtonStyle.Danger, row: 2)
+                    .WithButton(custLocalization.Get("Btn/Remove/Avatar"), "remove", ButtonStyle.Secondary,
                     disabled: dbUser.Customization.Avatar is null, row: 2)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embedBuilder.Build(); msg.Components = components; });
@@ -133,23 +132,22 @@ namespace Shuvi.CommandParts
             while (context.LastInteraction is not null)
             {
                 var haveCustomization = HaveCustomization(dbUser.Customization.Banners);
-                var embedBuilder = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor($"{custLocalization.Get("embed/author/single")} | {custLocalization.Get("category/banner")}")
-                    .WithDescription($"{custLocalization.Get("embed/desc/banner").Format(dbUser.Customization.Banner is null ?
-                    custLocalization.Get("embed/dontHave") : dbUser.Customization.Banner.Info.GetName(context.Language))}\n\n" +
+                var embedBuilder = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor($"{custLocalization.Get("Embed/Author/Single")} | {custLocalization.Get("Category/Banner")}")
+                    .WithDescription($"{custLocalization.Get("Embed/Desc/Banner").Format(dbUser.Customization.Banner is null ?
+                    custLocalization.Get("Embed/DontHave") : dbUser.Customization.Banner.Info.GetName(context.Language))}\n\n" +
                     $"{GetCustomizationsString(dbUser.Customization.Banners, context.Language, currentPage, arrow)}")
-                    .WithFooter($"{context.User.Username}#{context.User.Discriminator} | " +
-                    $"{custLocalization.Get("embed/page").Format(currentPage + 1, maxPage + 1)}");
+                    .WithFooter(custLocalization.Get("Embed/Page").Format(currentPage + 1, maxPage + 1));
                 if (haveCustomization)
                     embedBuilder.WithImageUrl(GetCurrentImage(dbUser.Customization.Banners, currentPage, arrow).URL);
                 var components = new ComponentBuilder()
                     .WithSelectMenu("select", GetCustomizationOptions(dbUser.Customization.Banners, context.Language, currentPage, arrow),
-                    custLocalization.Get("select/name/banner"), disabled: !haveCustomization, row: 0)
+                    custLocalization.Get("Select/Name/Banner"), disabled: !haveCustomization, row: 0)
                     .WithButton("<", "<", ButtonStyle.Primary, disabled: currentPage < 1, row: 1)
-                    .WithButton(custLocalization.Get("btn/choose"), "equip", ButtonStyle.Primary, disabled: !haveCustomization, row: 1)
+                    .WithButton(custLocalization.Get("Btn/Choose"), "equip", ButtonStyle.Primary, disabled: !haveCustomization, row: 1)
                     .WithButton(">", ">", ButtonStyle.Primary, disabled: currentPage >= maxPage, row: 1)
-                    .WithButton(custLocalization.Get("btn/back"), "exit", ButtonStyle.Danger, row: 2)
-                    .WithButton(custLocalization.Get("btn/remove/banner"), "remove", ButtonStyle.Secondary,
+                    .WithButton(custLocalization.Get("Btn/Back"), "exit", ButtonStyle.Danger, row: 2)
+                    .WithButton(custLocalization.Get("Btn/Remove/banner"), "remove", ButtonStyle.Secondary,
                     disabled: dbUser.Customization.Banner is null, row: 2)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embedBuilder.Build(); msg.Components = components; });
@@ -202,10 +200,10 @@ namespace Shuvi.CommandParts
             var result = new List<string>();
             for (int i = page * 10; i < images.Count && i < page * 10 + 10; i++)
             {
-                result.Add(row == arrow ? $"{EmojiService.Get("choosePoint")}{images[i].Info.GetName(lang)}" : images[i].Info.GetName(lang));
+                result.Add(row == arrow ? $"{EmojiService.Get("ChoosePoint")}{images[i].Info.GetName(lang)}" : images[i].Info.GetName(lang));
                 row++;
             }
-            return result.Count < 1 ? _localizationPart.Get(lang).Get("list/empty") : string.Join("\n", result);
+            return result.Count < 1 ? _localizationPart.Get(lang).Get("List/Empty") : string.Join("\n", result);
         }
 
         private static List<SelectMenuOptionBuilder> GetCustomizationOptions(List<IImage> images, Language lang, int page, int arrow)
@@ -218,7 +216,7 @@ namespace Shuvi.CommandParts
                 row++;
             }
             if (result.Count < 1)
-                result.Add(new(_localizationPart.Get(lang).Get("list/empty"), "empty"));
+                result.Add(new(_localizationPart.Get(lang).Get("List/Empty"), "Empty"));
             return result;
         }
 

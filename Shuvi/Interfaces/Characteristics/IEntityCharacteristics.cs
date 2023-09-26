@@ -1,4 +1,5 @@
-﻿using Shuvi.Interfaces.Characteristics.Dynamic;
+﻿using Shuvi.Interfaces.Characteristics.Bonuses;
+using Shuvi.Interfaces.Characteristics.Dynamic;
 using Shuvi.Interfaces.Characteristics.Static;
 
 namespace Shuvi.Interfaces.Characteristics
@@ -9,6 +10,6 @@ namespace Shuvi.Interfaces.Characteristics
         public TDynamic Health { get; }
         public TDynamic Mana { get; }
 
-        public void Add(IBonusesCharacteristics characteristics);
+        public void Add(ICharacteristicBonuses characteristics);
     }
 }

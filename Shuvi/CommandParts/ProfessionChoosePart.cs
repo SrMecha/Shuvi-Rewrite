@@ -26,16 +26,17 @@ namespace Shuvi.CommandParts
             var arrow = 0;
             while (true)
             {
-                var embed = EmbedFactory.CreateUserEmbed(context.User, dbUser)
-                    .WithAuthor(chooseLocalization.Get("embed/choose/author"))
-                    .WithDescription(chooseLocalization.Get("embed/choose/desc"))
-                    .AddField(chooseLocalization.Get("embed/choose/professions"),
+                var embed = EmbedFactory.CreateUserEmbed(dbUser)
+                    .WithAuthor(chooseLocalization.Get("Embed/Choose/Author"))
+                    .WithDescription(chooseLocalization.Get("Embed/Choose/Desc"))
+                    .AddField(chooseLocalization.Get("Embed/Choose/Professions"),
                     GetProfessionsString(professions, arrow, context.Language))
                     .Build();
                 var components = new ComponentBuilder()
-                    .WithSelectMenu("select", options, chooseLocalization.Get("select/choose/name"), row: 0)
-                    .WithButton(chooseLocalization.Get("btn/back"), "back", ButtonStyle.Danger, row: 1)
-                    .WithButton(chooseLocalization.Get("btn/confirm"), "confirm", ButtonStyle.Success, row: 1)
+                    .WithSelectMenu("select", options, chooseLocalization.Get("Select/Choose/Name"), row: 0)
+                    .WithButton(chooseLocalization.Get("Btn/Back"), "back", ButtonStyle.Danger, row: 1)
+                    .WithButton(chooseLocalization.Get("Btn/Info"), "info", ButtonStyle.Primary, row: 1)
+                    .WithButton(chooseLocalization.Get("Btn/Confirm"), "confirm", ButtonStyle.Success, row: 1)
                     .Build();
                 await context.Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = embed; msg.Components = components; });
                 await context.LastInteraction.TryDeferAsync();
@@ -49,6 +50,9 @@ namespace Shuvi.CommandParts
                 {
                     case "select":
                         arrow = int.Parse(interaction.Data.Values.First());
+                        break;
+                    case "info":
+                        await ProfessionViewPart.Start(context, dbUser, professions[arrow]);
                         break;
                     case "confirm":
                         dbUser.SetProfession(professions[arrow]);
@@ -68,8 +72,8 @@ namespace Shuvi.CommandParts
             var row = 0;
             foreach (var profession in professions)
             {
-                result.Add($"{(row == arrow ? EmojiService.Get("choosePoint") : string.Empty)} " +
-                    $"{namesLocalization.Get($"profession/{profession.GetLowerName()}")}");
+                result.Add($"{(row == arrow ? EmojiService.Get("ChoosePoint") : string.Empty)} " +
+                    $"{namesLocalization.Get($"Profession/{profession.GetName()}")}");
                 row++;
             }
             return string.Join("\n", result);
@@ -82,7 +86,7 @@ namespace Shuvi.CommandParts
             var row = 0;
             foreach (var profession in professions)
             {
-                result.Add(new(namesLocalization.Get($"profession/{profession.GetLowerName()}"), row.ToString()));
+                result.Add(new(namesLocalization.Get($"Profession/{profession.GetName()}"), row.ToString()));
                 row++;
             }
             return result;

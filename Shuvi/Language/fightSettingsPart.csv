@@ -1,25 +1,25 @@
-embed/settings/author;;Настройки сражения
-embed/settings/desc/user;;В случае, если Вы будете афк во время боя, то за Вас будет ходить бот, основываясь на настройках ниже.
-embed/use/lightAttack;;Использовать лёгкую атаку: {0}
-embed/use/heavyAttack;;Использовать тяжёлую атаку: {0}
-embed/use/dodge;;Использовать уклонение: {0}
-embed/use/defense;;Использовать защиту: {0}
-embed/use/spell;;Использовать заклинание: {0}
-embed/use/skill;;Использовать умение: {0}
-select/action/name;;Выберите действие.
-select/action/option/lightAttack;;Лёгкая атака
-select/action/option/heavyAttack;;Тяжёлая атака
-select/action/option/dodge;;Уклонение
-select/action/option/defense;;Защита
-select/action/option/spell;;Заклинание
-select/action/option/skill;;Умение
-select/rate/name;;Выберите частоту использования.
-select/rate/desc;;Коэффициент использования: x{0}
-rate/0;;Никогда
-rate/1;;Редко
-rate/2;;Иногда
-rate/3;;Часто
-rate/4;;Очень часто
-btn/save;;Сохранить
-btn/exit;;Выйти
-btn/reset;;Сбросить
+Embed/Settings/Author;;Настройки сражения
+Embed/Settings/Desc/User;;В случае, если Вы будете афк во время боя, то за Вас будет ходить бот, основываясь на настройках ниже.
+Embed/Use/LightAttack;;Использовать лёгкую атаку: {0}
+Embed/Use/HeavyAttack;;Использовать тяжёлую атаку: {0}
+Embed/Use/Dodge;;Использовать уклонение: {0}
+Embed/Use/Defense;;Использовать защиту: {0}
+Embed/Use/Spell;;Использовать заклинание: {0}
+Embed/Use/Skill;;Использовать умение: {0}
+Select/Action/Name;;Выберите действие.
+Select/Action/Option/LightAttack;;Лёгкая атака
+Select/Action/Option/HeavyAttack;;Тяжёлая атака
+Select/Action/Option/Dodge;;Уклонение
+Select/Action/Option/Defense;;Защита
+Select/Action/Option/Spell;;Заклинание
+Select/Action/Option/Skill;;Умение
+Select/Rate/Name;;Выберите частоту использования.
+Select/Rate/Desc;;Коэффициент использования: x{0}
+Rate/0;;Никогда
+Rate/1;;Редко
+Rate/2;;Иногда
+Rate/3;;Часто
+Rate/4;;Очень часто
+Btn/Save;;Сохранить
+Btn/Exit;;Выйти
+Btn/Reset;;Сбросить

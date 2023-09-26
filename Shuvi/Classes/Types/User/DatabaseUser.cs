@@ -59,11 +59,17 @@ namespace Shuvi.Classes.Types.User
             Rating = new UserRating(this, data.Rating);
             Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Badges);
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
-            Characteristics = new UserCharacteristics(
-                new StaticCharacteristics(data.Strength, data.Agility, data.Luck, data.Intellect, data.Endurance),
-                new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
-                new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime),
-                data.EnergyRegenTime);
+            Characteristics = new UserCharacteristics()
+            {
+                Strength = data.Strength,
+                Agility = data.Agility,
+                Luck = data.Luck,
+                Intellect = data.Intellect,
+                Endurance = data.Endurance,
+                Health = new RestorableCharacteristic(data.MaxHealth, data.HealthRegenTime, UserSettings.HealthPointRegenTime),
+                Mana = new RestorableCharacteristic(data.MaxMana, data.ManaRegenTime, UserSettings.ManaPointRegenTime)
+            };
+            ((UserCharacteristics)Characteristics).Energy = new Energy(Characteristics, data.EnergyRegenTime);
             UpgradePoints = new UserUpgradePoints(Rating, Characteristics);
             Wallet = new UserWallet(data.Gold, data.Dispoints);
             MagicInfo = new MagicInfo(data.MagicType);

@@ -1,29 +1,27 @@
-embed/view/author;;Просмотр предмета
-embed/view/name;;**Название:** {0}
-embed/view/type;;**Тип:** {0}
-embed/view/rank;;**Ранг:** {0}
-embed/view/max;;**Максимум в инвентаре:** {0}
-embed/view/have;;**У вас есть:** {0}
-embed/view/description;;**Описание:**
-embed/view/canTrade;;Можно обменять
-embed/view/canNotTrade;;Нельзя обменять
-embed/view/infinity;;бесконечно
-embed/view/canLoose;;Теряется при смерти
-embed/view/canNotLoose;;Не теряется при смерти
-btn/exit;;Выйти
-embed/view/bonuses;;**Бонусы:**
-embed/view/requirements;;**Требования:**
-embed/view/notHave;;Нету.
-btn/equip;;Надеть
-embed/view/equipped;;Надето
-error/notHaveItem;;У вас нету данного предмета.
-embed/view/itemEquipped;;Предмет успешно надет.
-btn/use;;Использовать
-embed/view/potionUsed;;Зелье успешно использовано.
-embed/view/damageMult;;**Множитель урона:** {0}
-embed/view/features;;**Особенности:**
-embed/view/chances;;**Шансы:**
-embed/view/received;;Вы получили:
-embed/view/neededItems;;**Рецепт:**
-btn/viewItem;;Посмотреть предмет
-embed/view/craftedItem;;**Вы получите:** {0}
+Embed/View/Author;;Просмотр предмета
+Embed/View/Name;;**Название:** {0}
+Embed/View/Type;;**Тип:** {0}
+Embed/View/Rank;;**Ранг:** {0}
+Embed/View/Max;;**Максимум в инвентаре:** {0}
+Embed/View/Have;;**У вас есть:** {0}
+Embed/View/Description;;**Описание:**
+Embed/View/CanTrade;;Можно обменять
+Embed/View/CanNotTrade;;Нельзя обменять
+Embed/View/Infinity;;бесконечно
+Embed/View/CanLoose;;Теряется при смерти
+Embed/View/CanNotLoose;;Не теряется при смерти
+Btn/Exit;;Выйти
+Embed/View/Bonuses;;**Бонусы:**
+Embed/View/Requirements;;**Требования:**
+Embed/View/NotHave;;Нету.
+Btn/Equip;;Надеть
+Embed/View/Equipped;;Надето
+Error/NotHaveItem;;У вас нету данного предмета.
+Embed/View/ItemEquipped;;Предмет успешно надет.
+Btn/Use;;Использовать
+Embed/View/PotionUsed;;Зелье успешно использовано.
+Embed/View/Chances;;**Шансы:**
+Embed/View/Received;;Вы получили:
+Embed/View/NeededItems;;**Рецепт:**
+Btn/ViewItem;;Посмотреть предмет
+Embed/View/CraftedItem;;**Вы получите:** {0}

@@ -1,17 +1,17 @@
-status/battleStart;;Сражение началось!
-embed/battle/author/singlePVE;;Охота | Ход №{0}
-embed/battle/info;;Дополнительно
-embed/battle/skill;;**Умение:** {0}
-embed/battle/spell;;**Заклинание:** {0}
-embed/battle/spellCost;;**Стоимость:** {0}{1}
-embed/battle/skillUsesLeft;;**Использований осталось:** {0}
-btn/lightAttack;;Лёгкая атака
-btn/heavyAttack;;Тяжёлая атака
-btn/dodge;;Уворот
-btn/defense;;Защита
-status/battleDraw;;\nВремя на сражение истекло. Ничья.
-status/battleWin;;\n__Победа!__\n**Добыча:**
-embed/battle/author/singlePVE/win;;Охота | Ход №{0} | Победа
-embed/battle/author/singlePVE/loose;;Охота | Ход №{0} | Поражение
-embed/battle/author/singlePVE/draw;;Охота | Ход №{0} | Ничья
-status/battleLoose;;Вы были убиты противником **{0}**.
+Status/BattleStart;;Сражение началось!
+Embed/Battle/Author/SinglePVE;;Охота | Ход №{0}
+Embed/Battle/Info;;Дополнительно
+Embed/Battle/Skill;;**Умение:** {0}
+Embed/Battle/Spell;;**Заклинание:** {0}
+Embed/Battle/SpellCost;;**Стоимость:** {0}{1}
+Embed/Battle/SkillUsesLeft;;**Использований осталось:** {0}
+Btn/LightAttack;;Лёгкая атака
+Btn/HeavyAttack;;Тяжёлая атака
+Btn/Dodge;;Уворот
+Btn/Defense;;Защита
+Status/BattleDraw;;\nВремя на сражение истекло. Ничья.
+Status/BattleWin;;\n__Победа!__\n**Добыча:**
+Embed/Battle/Author/SinglePVE/Win;;Охота | Ход №{0} | Победа
+Embed/Battle/Author/SinglePVE/Loose;;Охота | Ход №{0} | Поражение
+Embed/Battle/Author/SinglePVE/Draw;;Охота | Ход №{0} | Ничья
+Status/BattleLoose;;Вы были убиты противником **{0}**.

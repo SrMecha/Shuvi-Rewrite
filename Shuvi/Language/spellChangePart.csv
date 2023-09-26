@@ -1,11 +1,11 @@
-embed/select/author;;Выбор заклинания
-embed/select/currentSpell;;Текущее заклинание: {0}
-embed/select/empty;;Нету доступных заклинаний.
-embed/select/magicType;;Тип магии: {0}
-select/spell/name;;Выберите заклинание.
-btn/equip;;Экипировать
-btn/back;;Назад
-btn/info;;Инфо
-btn/unequip;;Снять заклинание
-embed/dontHave;;Нету
-embed/select/availableSpells;;**Доступные заклинания:**
+Embed/Select/Author;;Выбор заклинания
+Embed/Select/CurrentSpell;;**Текущее заклинание:** {0}
+Embed/Select/Empty;;Нету доступных заклинаний.
+Embed/Select/MagicType;;**Тип магии:** {0}
+Select/Spell/Name;;Выберите заклинание.
+Btn/Equip;;Экипировать
+Btn/Back;;Назад
+Btn/Info;;Инфо
+Btn/Unequip;;Снять заклинание
+Embed/DontHave;;Нету
+Embed/Select/AvailableSpells;;**Доступные заклинания:**

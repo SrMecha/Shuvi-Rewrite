@@ -1,4 +1,5 @@
 ﻿using Shuvi.Classes.Types.Skill.SkillList;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.User;
@@ -37,12 +38,14 @@ namespace Shuvi.Classes.Factories.Skill
             _skillsByProfession = new ReadOnlyDictionary<UserProfession, List<ISkill>>(result);
         }
 
-        public static List<ISkill> GetAvailableSkills(IDatabaseUser user)
+        public static List<ISkill> GetAvailableSkills(IDatabaseUser user, UserProfession? profession = null)
         {
+            profession ??= user.Profession;
             var result = new List<ISkill>();
-            foreach (var skill in _skillsByProfession!.GetValueOrDefault(user.Profession, new()))
+            foreach (var skill in _skillsByProfession!.GetValueOrDefault((UserProfession)profession, new()))
             {
-                if (skill.Requirements.IsMeetRequirements(user))
+                var requirements = skill.Requirements.GetRequirementsInfo(Language.Eng, user);
+                if (requirements.IsMeetRequirements)
                     result.Add(skill);
             }
             return result;

@@ -1,14 +1,14 @@
-none/name;;Без магии
-none/description;; 
-fire/name;;Магия огня
-fire/description;;
-water/name;;Магия воды
-water/description;;
-wind/name;;Магия ветра
-wind/description;;
-earth/name;;Магия земли
-earth/description;;
-losen/name;;Алгоритм Лосен
-losen/description;;
-ice/name;;Магия льда
-ice/description;;
+None/Name;;Без магии
+None/Description;; 
+Fire/Name;;Магия огня
+Fire/Description;;
+Water/Name;;Магия воды
+Water/Description;;
+Wind/Name;;Магия ветра
+Wind/Description;;
+Earth/Name;;Магия земли
+Earth/Description;;
+Losen/Name;;Алгоритм Лосен
+Losen/Description;;
+Ice/Name;;Магия льда
+Ice/Description;;
