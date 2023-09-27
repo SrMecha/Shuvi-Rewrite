@@ -25,7 +25,8 @@ namespace Shuvi.Classes.Types.Item
         {
             var result = new List<string>();
             foreach (var (characteristic, amount) in PotionRecover.GetDynamicBonuses())
-                result.Add($"{LocalizationService.Get("names").Get(lang).Get(characteristic)} {amount.WithSign()}");
+                if (amount != 0)
+                    result.Add($"{LocalizationService.Get("names").Get(lang).Get(characteristic)} {amount.WithSign()}");
             if (result.Count < 1)
                 return LocalizationService.Get("names").Get(lang).Get("NotHave");
             return string.Join("\n", result);
