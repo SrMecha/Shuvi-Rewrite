@@ -35,7 +35,9 @@ namespace Shuvi.Classes.Types.Item
             dbUser.Characteristics.Energy.Add(PotionRecover.Energy);
             dbUser.Characteristics.Mana.Add(PotionRecover.Mana);
             dbUser.Characteristics.Health.Add(PotionRecover.Health);
+            dbUser.Inventory.RemoveItem(Id);
             await UserDatabase.UpdateUser(dbUser.Id, new UpdateDefinitionBuilder<UserData>()
+                .Set(x => x.Inventory, dbUser.Inventory.GetItemsDictionary())
                 .Set(x => x.EnergyRegenTime, dbUser.Characteristics.Energy.RegenTime)
                 .Set(x => x.ManaRegenTime, dbUser.Characteristics.Mana.RegenTime)
                 .Set(x => x.HealthRegenTime, dbUser.Characteristics.Health.RegenTime));
