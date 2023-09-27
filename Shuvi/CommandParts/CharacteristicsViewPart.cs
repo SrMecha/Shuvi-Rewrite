@@ -77,8 +77,8 @@ namespace Shuvi.CommandParts
                     .WithBonusPercent(fightBonuses.CriticalStrikeChance)}\n" +
                     $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {fullFightCharacteristics.CriticalStrikeDamageMultiplier
                     .WithBonusPercent(fightBonuses.CriticalStrikeDamageMultiplier)}\n" +
-                    $"**{namesLocalization.Get("StrikeChance")}:** {fullFightCharacteristics.StrikeChance.WithBonusPercent(fightBonuses.StrikeChance)}\n" +
-                    $"**{namesLocalization.Get("DodgeChance")}:** {fullFightCharacteristics.DodgeChance.WithBonusPercent(fightBonuses.DodgeChance)}\n" +
+                    $"**{namesLocalization.Get("StrikeChance")}:** {fullFightCharacteristics.StrikeChance.WithBonus(fightBonuses.StrikeChance)}\n" +
+                    $"**{namesLocalization.Get("DodgeChance")}:** {fullFightCharacteristics.DodgeChance.WithBonus(fightBonuses.DodgeChance)}\n" +
                     $"",
                     true)
                     .Build();
