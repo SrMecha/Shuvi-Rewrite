@@ -37,7 +37,7 @@ namespace Shuvi.Services.StaticServices.Logs
                 Console.WriteLine("Логи для пользователей не настроены.");
                 return;
             }
-            await _userLogsChannel.SendMessageAsync($"[{EmojiService.Get("newPlayer")}] {user.Username}#{user.Discriminator}\n`id: {user.Id}`");
+            await _userLogsChannel.SendMessageAsync($"[{EmojiService.Get("NewPlayer")}] {user.Username}#{user.Discriminator}\n`id: {user.Id}`");
         }
 
         private static async ValueTask OnPlayerDie(IDatabaseUser dbUser)
@@ -48,7 +48,7 @@ namespace Shuvi.Services.StaticServices.Logs
                 return;
             }
             var user = _client!.GetUser(dbUser.Id);
-            await _userLogsChannel.SendMessageAsync($"[{EmojiService.Get("playerDead")}] [{dbUser.Rating.Rank.GetName()}]" +
+            await _userLogsChannel.SendMessageAsync($"[{EmojiService.Get("PlayerDead")}] [{dbUser.Rating.Rank.GetName()}]" +
                 $"{user.Username}#{user.Discriminator}\n`id: {user.Id}`");
         }
 
@@ -60,7 +60,7 @@ namespace Shuvi.Services.StaticServices.Logs
                 return;
             }
             var user = _client!.GetUser(dbUser.Id);
-            await _userLogsChannel.SendMessageAsync($"[{EmojiService.Get("rankUp")}] [{rankBefore.GetName()} -> {rankAfter.GetName()}] " +
+            await _userLogsChannel.SendMessageAsync($"[{EmojiService.Get("RankUp")}] [{rankBefore.GetName()} -> {rankAfter.GetName()}] " +
                 $"{user.Username}#{user.Discriminator}\n`id: {user.Id}`");
         }
 
@@ -71,7 +71,7 @@ namespace Shuvi.Services.StaticServices.Logs
                 Console.WriteLine("Логи для серверов не настроены.");
                 return;
             }
-            await _serverLogsChannel.SendMessageAsync($"[{EmojiService.Get("guildEnter")}] {guild.Name} | {guild.MemberCount} Уч.\n" +
+            await _serverLogsChannel.SendMessageAsync($"[{EmojiService.Get("GuildEnter")}] {guild.Name} | {guild.MemberCount} Уч.\n" +
                 $"`id: {guild.Id}`");
         }
 
@@ -82,7 +82,7 @@ namespace Shuvi.Services.StaticServices.Logs
                 Console.WriteLine("Логи для серверов не настроены.");
                 return;
             }
-            await _serverLogsChannel.SendMessageAsync($"[{EmojiService.Get("guildLeave")}] {guild.Name} | {guild.MemberCount} Уч.\n" +
+            await _serverLogsChannel.SendMessageAsync($"[{EmojiService.Get("GuildLeave")}] {guild.Name} | {guild.MemberCount} Уч.\n" +
                 $"`id: {guild.Id}`");
         }
     }

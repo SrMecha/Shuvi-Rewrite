@@ -35,25 +35,26 @@ namespace Shuvi.CommandParts
             };
             var fightCharacteristics = new FightBonuses()
             {
-                AttackDamage = MathF.Round(dbUser.Characteristics.GetAttackDamage(), 1),
-                AbilityPower = MathF.Round(dbUser.Characteristics.GetAbilityPower(), 1),
-                Armor = MathF.Round(dbUser.Characteristics.GetArmor(), 1),
-                MagicResistance = MathF.Round(dbUser.Characteristics.GetMagicResistance(), 1),
-                CriticalStrikeChance = MathF.Round(dbUser.Characteristics.GetCriticalStrikeChance() * 100, 1),
-                CriticalStrikeDamageMultiplier = MathF.Round(dbUser.Characteristics.GetCriticalStrikeDamageMultiplier() * 100, 1),
-                StrikeChance = MathF.Round(dbUser.Characteristics.GetStrikeChance() * 100, 1),
-                DodgeChance = MathF.Round(dbUser.Characteristics.GetDodgeChance() * 100, 1) 
+                AttackDamage = dbUser.Characteristics.GetAttackDamage(),
+                AbilityPower = dbUser.Characteristics.GetAbilityPower(),
+                Armor = dbUser.Characteristics.GetArmor(),
+                MagicResistance = dbUser.Characteristics.GetMagicResistance(),
+                CriticalStrikeChance = dbUser.Characteristics.GetCriticalStrikeChance() * 100,
+                CriticalStrikeDamageMultiplier = dbUser.Characteristics.GetCriticalStrikeDamageMultiplier() * 100,
+                StrikeChance = dbUser.Characteristics.GetStrikeChance() * 100,
+                DodgeChance = dbUser.Characteristics.GetDodgeChance() * 100
             };
             var fightBonuses = new FightBonuses()
             {
-                AttackDamage = fullFightCharacteristics.AttackDamage - fightCharacteristics.AttackDamage,
-                AbilityPower = fullFightCharacteristics.AbilityPower - fightCharacteristics.AbilityPower,
-                Armor = fullFightCharacteristics.Armor - fightCharacteristics.Armor,
-                MagicResistance = fullFightCharacteristics.MagicResistance - fightCharacteristics.MagicResistance,
-                CriticalStrikeChance = fullFightCharacteristics.CriticalStrikeChance - fightCharacteristics.CriticalStrikeChance,
-                CriticalStrikeDamageMultiplier = fullFightCharacteristics.CriticalStrikeDamageMultiplier - fightCharacteristics.CriticalStrikeDamageMultiplier,
-                StrikeChance = fullFightCharacteristics.StrikeChance - fightCharacteristics.StrikeChance,
-                DodgeChance = fullFightCharacteristics.DodgeChance - fightCharacteristics.DodgeChance,
+                AttackDamage = MathF.Round(fullFightCharacteristics.AttackDamage - fightCharacteristics.AttackDamage, 1),
+                AbilityPower = MathF.Round(fullFightCharacteristics.AbilityPower - fightCharacteristics.AbilityPower, 1),
+                Armor = MathF.Round(fullFightCharacteristics.Armor - fightCharacteristics.Armor, 1),
+                MagicResistance = MathF.Round(fullFightCharacteristics.MagicResistance - fightCharacteristics.MagicResistance, 1),
+                CriticalStrikeChance = MathF.Round(fullFightCharacteristics.CriticalStrikeChance - fightCharacteristics.CriticalStrikeChance, 1),
+                CriticalStrikeDamageMultiplier = MathF.Round(fullFightCharacteristics.CriticalStrikeDamageMultiplier 
+                - fightCharacteristics.CriticalStrikeDamageMultiplier, 1),
+                StrikeChance = MathF.Round(fullFightCharacteristics.StrikeChance - fightCharacteristics.StrikeChance, 1),
+                DodgeChance = MathF.Round(fullFightCharacteristics.DodgeChance - fightCharacteristics.DodgeChance, 1),
             };
             while (context.LastInteraction is not null)
             {
@@ -77,8 +78,8 @@ namespace Shuvi.CommandParts
                     .WithBonusPercent(fightBonuses.CriticalStrikeChance)}\n" +
                     $"**{namesLocalization.Get("CriticalStrikeDamageMultiplier")}:** {fullFightCharacteristics.CriticalStrikeDamageMultiplier
                     .WithBonusPercent(fightBonuses.CriticalStrikeDamageMultiplier)}\n" +
-                    $"**{namesLocalization.Get("StrikeChance")}:** {fullFightCharacteristics.StrikeChance.WithBonusPercent(fightBonuses.StrikeChance)}\n" +
-                    $"**{namesLocalization.Get("DodgeChance")}:** {fullFightCharacteristics.DodgeChance.WithBonusPercent(fightBonuses.DodgeChance)}\n" +
+                    $"**{namesLocalization.Get("StrikeChance")}:** {fullFightCharacteristics.StrikeChance.WithBonus(fightBonuses.StrikeChance)}\n" +
+                    $"**{namesLocalization.Get("DodgeChance")}:** {fullFightCharacteristics.DodgeChance.WithBonus(fightBonuses.DodgeChance)}\n" +
                     $"",
                     true)
                     .Build();
