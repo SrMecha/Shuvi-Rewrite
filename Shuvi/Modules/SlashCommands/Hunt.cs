@@ -34,19 +34,19 @@ namespace Shuvi.Modules.SlashCommands
             var errorLocalization = _errorPart.Get(Context.Language);
             if (!dbUser.Characteristics.HaveEnergy(HuntPart.HuntEnergyCost))
             {
-                await Context.SendError(errorLocalization.Get("dontHaveEnergy"), Context.Language);
+                await Context.SendError(errorLocalization.Get("DontHaveEnergy"), Context.Language);
                 return;
             }
             if (UserCheckService.IsUseCommand(TrackedCommand.Hunt, dbUser.Id))
             {
-                await Context.SendError(errorLocalization.Get("alreadyUseCommand"), Context.Language);
+                await Context.SendError(errorLocalization.Get("AlreadyUseCommand"), Context.Language);
                 return;
             }
             if (!dbUser.Location.GetLocation().Enemies.HaveEnemies())
             {
                 await Context.Interaction.ModifyOriginalResponseAsync(msg =>
                 {
-                    msg.Embed = EmbedFactory.CreateUserEmbed(dbUser).WithDescription(errorLocalization.Get("dontHaveEnemies")).Build();
+                    msg.Embed = EmbedFactory.CreateUserEmbed(dbUser).WithDescription(errorLocalization.Get("DontHaveEnemies")).Build();
                 });
                 return;
             }

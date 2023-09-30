@@ -119,7 +119,7 @@ namespace Shuvi.CommandParts
                     $"{(dbUser.Rating.Rank.CanRankUp() ? "/" + (Rank)(dbUser.Rating.Rank + 1).GetNeedRating() : ' ')}")}\n" +
                     $"{profileLocalization.Get("Embed/Profile/Race").Format(namesLocalization.Get($"Race/{dbUser.Race.GetName()}"))}\n" +
                     $"{(dbUser.Subrace == UserSubrace.NoSubrace ? "" : $"{profileLocalization.Get("Embed/Profile/Subrace")
-                    .Format(namesLocalization.Get($"subrace/{dbUser.Subrace.GetName()}"))}\n")}" +
+                    .Format(namesLocalization.Get($"Subrace/{dbUser.Subrace.GetName()}"))}\n")}" +
                     $"{profileLocalization.Get("Embed/Profile/Profession").Format(namesLocalization.Get($"Profession/{dbUser.Profession.GetName()}"))}\n" +
                     $"{profileLocalization.Get("Embed/Profile/MagicType").Format(dbUser.MagicInfo.Info.GetName(context.Language))}\n" +
                     $"**{namesLocalization.Get("Gold")}:** {dbUser.Wallet.Gold} {EmojiService.Get("Gold")}\n" +
