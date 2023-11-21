@@ -30,6 +30,7 @@ namespace Shuvi.Modules.SlashCommands
                 await AccountCreatePart.Start(Context);
                 return;
             }
+            Context.SetLanguage(dbUser);
             if (!TopService.IsDataSet(topType))
             {
                 await Context.SendError(_errorPart.Get(Context.Language).Get("TopNotLoaded"), Context.Language);

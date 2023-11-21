@@ -1,4 +1,5 @@
-﻿using Shuvi.Classes.Data.User;
+﻿using MongoDB.Driver;
+using Shuvi.Classes.Data.User;
 using Shuvi.Classes.Settings;
 using Shuvi.Classes.Types.Actions;
 using Shuvi.Classes.Types.Characteristics;
@@ -14,6 +15,7 @@ using Shuvi.Classes.Types.Premium;
 using Shuvi.Classes.Types.Skill;
 using Shuvi.Classes.Types.Spell;
 using Shuvi.Classes.Types.Statistics;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.User;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
@@ -28,6 +30,7 @@ using Shuvi.Interfaces.Skill;
 using Shuvi.Interfaces.Spell;
 using Shuvi.Interfaces.Statistics;
 using Shuvi.Interfaces.User;
+using Shuvi.Services.StaticServices.Database;
 
 namespace Shuvi.Classes.Types.User
 {
@@ -35,6 +38,7 @@ namespace Shuvi.Classes.Types.User
     {
         public ulong Id { get; init; }
         public IUserRating Rating { get; private set; }
+        public Language Language { get; private set; }
         public IUserCustomization Customization { get; private set; }
         public IUserPremium Premium { get; private set; }
         public IUserUpgradePoints UpgradePoints { get; private set; }
@@ -57,6 +61,7 @@ namespace Shuvi.Classes.Types.User
         {
             Id = data.Id;
             Rating = new UserRating(this, data.Rating);
+            Language = data.Language;
             Customization = new UserCustomization(data.Color, data.Avatar, data.Banner, data.Images, data.Badges);
             Premium = new UserPremium(data.PremiumAbilities, data.PremiumExpires, data.MoneyDonated);
             Characteristics = new UserCharacteristics()
@@ -96,6 +101,12 @@ namespace Shuvi.Classes.Types.User
         public void SetSubrace(UserSubrace subrace)
         {
             Subrace = subrace;
+        }
+
+        public async Task SetAndSaveLanguage(Language lang)
+        {
+            Language = lang;
+            await UserDatabase.UpdateUser(Id, new UpdateDefinitionBuilder<UserData>().Set(x => x.Language, Language));
         }
     }
 }

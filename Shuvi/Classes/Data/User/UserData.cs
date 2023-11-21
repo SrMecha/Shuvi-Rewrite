@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Options;
 using Shuvi.Classes.Data.Actions;
 using Shuvi.Classes.Data.Statistics;
 using Shuvi.Classes.Settings;
+using Shuvi.Enums.Localization;
 using Shuvi.Enums.Magic;
 using Shuvi.Enums.Premium;
 using Shuvi.Enums.User;
@@ -17,6 +18,7 @@ namespace Shuvi.Classes.Data.User
         [BsonId]
         public ulong Id { get; set; } = 0;
         public int Rating { get; set; } = 0;
+        public Language Language { get; set; } = Language.Eng;
 
         public uint Color { get; set; } = UserSettings.StandartColor;
         public ObjectId? Avatar { get; set; } = null;

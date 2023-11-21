@@ -1,4 +1,5 @@
-﻿using Shuvi.Enums.User;
+﻿using Shuvi.Enums.Localization;
+using Shuvi.Enums.User;
 using Shuvi.Interfaces.Actions;
 using Shuvi.Interfaces.Characteristics;
 using Shuvi.Interfaces.Customization;
@@ -18,6 +19,7 @@ namespace Shuvi.Interfaces.User
     {
         public ulong Id { get; init; }
         public IUserRating Rating { get; }
+        public Language Language { get; }
         public IUserCustomization Customization { get; }
         public IUserPremium Premium { get; }
         public IUserUpgradePoints UpgradePoints { get; }

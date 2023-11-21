@@ -28,6 +28,7 @@ namespace Shuvi.Modules.SlashCommands
                 await AccountCreatePart.Start(Context);
                 return;
             }
+            Context.SetLanguage(dbUser);
             await HelpPart.Start(Context, dbUser);
         }
     }

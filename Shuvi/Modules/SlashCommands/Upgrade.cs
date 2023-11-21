@@ -30,6 +30,7 @@ namespace Shuvi.Modules.SlashCommands
                 await AccountCreatePart.Start(Context);
                 return;
             }
+            Context.SetLanguage(dbUser);
             var errorLocalization = _errorPart.Get(Context.Language);
             if (UserCheckService.IsUseCommand(TrackedCommand.Upgrade, dbUser.Id))
             {

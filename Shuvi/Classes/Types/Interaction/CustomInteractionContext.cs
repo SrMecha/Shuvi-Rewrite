@@ -4,6 +4,7 @@ using Discord.WebSocket;
 using Shuvi.Classes.Extensions;
 using Shuvi.Classes.Factories.CustomEmbed;
 using Shuvi.Enums.Localization;
+using Shuvi.Interfaces.User;
 
 namespace Shuvi.Classes.Types.Interaction
 {
@@ -11,13 +12,13 @@ namespace Shuvi.Classes.Types.Interaction
     {
         public SocketInteraction LastInteraction { get; set; }
         public IUserMessage? CurrentMessage { get; set; }
-        public Language Language { get; init; }
+        public Language Language { get; private set; }
 
         public CustomInteractionContext(DiscordShardedClient client, SocketInteraction interaction) : base(client, interaction)
         {
             LastInteraction = interaction;
             CurrentMessage = null;
-            Language = Language.Ru; // interaction.UserLocale.AsLanguage();
+            Language = interaction.UserLocale.AsLanguage();
         }
         public async Task<SocketMessageComponent?> WaitForButton(IUserMessage? message = null, ulong? userId = null)
         {
@@ -39,6 +40,11 @@ namespace Shuvi.Classes.Types.Interaction
                 await LastInteraction.RespondAsync(embed: EmbedFactory.CreateErrorEmbed(description, lang), ephemeral: true);
             else
                 await Interaction.ModifyOriginalResponseAsync(msg => { msg.Embed = EmbedFactory.CreateErrorEmbed(description, lang); });
+        }
+
+        public void SetLanguage(IDatabaseUser user)
+        {
+            Language = user.Language;
         }
     }
 }
