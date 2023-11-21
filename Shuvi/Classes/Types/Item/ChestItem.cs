@@ -7,11 +7,11 @@ namespace Shuvi.Classes.Types.Item
 {
     public class ChestItem : SimpleItem, IChestItem
     {
-        public IChestDrop Drop { get; init; }
+        public IItemsDrop Drop { get; init; }
 
         public ChestItem(ItemData data) : base(data)
         {
-            Drop = new ChestDrop(data.ChestDrop ?? new());
+            Drop = new ItemsDrop(data.ChestDrop ?? new());
         }
     }
 }

@@ -25,6 +25,6 @@ namespace Shuvi.Classes.Data.Item
         public RequirementsData? Needs { get; set; } = null;
         public DynamicBonusesData? PotionRecover { get; set; } = null;
         public CraftData? Craft { get; set; } = null;
-        public ChestDropData? ChestDrop { get; set; } = null;
+        public List<DropItemData>? ChestDrop { get; set; } = null;
     }
 }

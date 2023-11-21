@@ -15,12 +15,15 @@ namespace Shuvi.Classes.Types.Drop
         {
             Items = items;
         }
+
         public ItemsDrop(List<DropItemData> data)
         {
             foreach (var dropData in data)
                 Items.Add(new DropItem(dropData));
         }
+
         public ItemsDrop() { }
+
         public virtual IDropInventory GetDrop(int luck)
         {
             var result = new DropInventory();
@@ -34,6 +37,7 @@ namespace Shuvi.Classes.Types.Drop
             }
             return result;
         }
+
         public virtual string GetChancesInfo(int luck, Language lang)
         {
             var result = new List<string>();
